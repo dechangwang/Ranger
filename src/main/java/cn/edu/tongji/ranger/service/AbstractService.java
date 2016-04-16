@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AbstractService<T, ID extends Serializable> {
 
-    public ReturnWrapper<T> find(ID id);
+    /*public ReturnWrapper<T> find(ID id);
 
     public ReturnWrapper<T> save(T entity);
 
@@ -17,6 +17,6 @@ public interface AbstractService<T, ID extends Serializable> {
 
     public ReturnWrapper<List<T>> list();
 
-    public ReturnWrapper<List<T>> list(int currPageNum, int numPerPage);
+    public ReturnWrapper<List<T>> list(int currPageNum, int numPerPage);*/
 
 }

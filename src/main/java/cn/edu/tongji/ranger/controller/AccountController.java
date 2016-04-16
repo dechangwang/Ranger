@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -17,25 +18,36 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public ReturnWrapper<Account> register(@RequestBody Account account) {
-        return accountService.save(account);
+//    public Map<String, Object> register(@RequestParam(value = "name") String name, @RequestParam(value = "password") String password) {
+    public Map<String, Object> register(@RequestBody Account account) {
+        System.out.println("===================="+ "进行注册" +"==================");
+        Map<String, Object> map = new HashMap<String, Object>();
+        //Account account = new Account();
+        //account.setName(name);
+        //account.setPassword(password);
+        accountService.create(account);
+        map.put("result", "SUCCESS");
+        return map;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> login(@RequestParam(value = "accountId") Long id,
-                     @RequestParam(value = "name") String name,
-                     @RequestParam(value = "password") String password) {
-        ReturnWrapper<Account> accountReturnWrapper = accountService.find(id);
-        Account account = accountReturnWrapper.getData();
+    public Map<String, Object> login(@RequestBody Account account) {
+        System.out.println("===================="+ "进行登录" +"==================");
+        String name = account.getName();
+        String password = account.getPassword();
+        List<Account> accounts = accountService.find(name);
         Map<String, Object> map = new HashMap<String, Object>();
-        if (account.getName().equals(name) && account.getPassword().equals(password)) {
-            map.put("result", "SUCCESS");
-        } else {
-            map.put("result", "FAIL");
+        if (accounts.size() != 0) {
+            System.out.println("..==========db pass: " + accounts.get(0).getPassword() + ";;; front pass: " + password);
+            if (accounts.get(0).getPassword().equals(password)) {
+                map.put("result", "SUCCESS");
+                return map;
+            }
         }
+        map.put("result", "FAIL");
         return map;
     }
 

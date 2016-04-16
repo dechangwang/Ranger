@@ -1,10 +1,12 @@
 package cn.edu.tongji.ranger.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Table(name = "account", catalog = "ranger")
 @Entity
-public class Account {
+@Table(name = "account")
+//public class Account extends BaseModel implements Serializable {
+public class Account implements Serializable {
     private String name;
     private String password;
 

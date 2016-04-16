@@ -8,9 +8,9 @@ import java.io.Serializable;
 
 
 public class BaseDaoImpl<T, ID extends Serializable> extends GenericDAOImpl<T, ID> {
-    @Autowired
+    /*@Autowired
     @Override
     public void setSessionFactory(SessionFactory sessionFactory) {
         super.setSessionFactory(sessionFactory);
-    }
+    }*/
 }
