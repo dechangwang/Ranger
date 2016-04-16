@@ -24,7 +24,9 @@
 
     <properties>
         <spring.version>4.1.4.RELEASE</spring.version>
-        <hibernate.version>4.3.7.Final</hibernate.version>
+        <!--TODO:确定Hibernate版本-->
+        <!--<hibernate.version>4.3.7.Final</hibernate.version>-->
+        <hibernate.version>4.2.1.Final</hibernate.version>
         <mysql.version>5.1.10</mysql.version>
         <junit-version>4.11</junit-version>
         <servlet-api-version>3.1.0</servlet-api-version>
@@ -84,6 +86,30 @@
             <version>${hibernate.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>dao-hibernate</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>search-hibernate</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+
         <!--MYSQL Connector-->
         <dependency>
             <groupId>mysql</groupId>
@@ -132,6 +158,24 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+
+        <!--jackson-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+
 
 
     </dependencies>

@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="rangerApp" ng-controller="testCtrl">
 <head>
     <meta charset="UTF-8">
-    <title>Index Page</title>
+    <title>Ranger</title>
+
 </head>
 <body>
-Index page.
+<div>
+    <input ng-model="person.name">
+    <input ng-model="person.age">
+</div>
+
+<div>
+    <input ng-model="d">
+</div>
+
+<!--<a href="/api/person">=========</a>-->
+<!--<div class="view-container">-->
+    <!--<div ng-view class="view-frame"></div>-->
+<!--</div>-->
+
+<!--jQuery-->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!--Angular-->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<!--App-->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/controller.js"></script>
+
 </body>
 </html>
