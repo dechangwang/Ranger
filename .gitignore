@@ -2,7 +2,6 @@
 
 .idea/workspace.xml
 target/
-web/bower_components/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

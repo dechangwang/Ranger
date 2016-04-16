@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class AbstractServiceImpl<T, ID extends Serializable> implements AbstractService<T, ID> {
-
+/*
     protected GenericDAO<T, ID> dao;
 
     AbstractServiceImpl(GenericDAO<T, ID> dao) {
@@ -73,6 +73,6 @@ public class AbstractServiceImpl<T, ID extends Serializable> implements Abstract
         ret.setTotalItemNum(dao.count(new Search()));
 
         return ret;
-    }
+    }*/
 
 }

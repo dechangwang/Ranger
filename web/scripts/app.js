@@ -1,26 +1,24 @@
 'use strict';
 
-
 /* App Module */
 
-/*var rangerApp = angular.module('rangerApp', [
+var rangerApp = angular.module('rangerApp', [
     'ngRoute',
-    'testController'
+    'RangerControllers'
 ]);
 
-rangerApp.config(['$routeProvider',
-function ($routeProvider) {
-    $routeProvider.when('/',{
-        templateUrl: '../views/vw1.html',
-        controller: 'test1Ctrl'
-    }).
-    when('/test',{
-        templateUrl: '../views/vw2.html',
-        controller: 'test2Ctrl'
-    }).
-    otherwise({
-        redirectTo: '/'
-    });
-}]);*/
-
-
+// rangerApp.config(['$routeProvider',
+//     function($routeProvider) {
+//         $routeProvider.
+//         when('/', {
+//             templateUrl: '../views/home.html',
+//             controller: 'homeCtrl'
+//         }).
+//         when('/phones/:phoneId', {
+//             templateUrl: 'partials/phone-detail.html',
+//             controller: 'PhoneDetailCtrl'
+//         }).
+//         otherwise({
+//             redirectTo: '/Ranger/'
+//         });
+//     }]);
