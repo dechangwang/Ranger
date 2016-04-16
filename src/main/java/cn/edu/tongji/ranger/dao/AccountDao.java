@@ -13,18 +13,6 @@ public interface AccountDao {
     public List<Account> findByName(String name);
 }
 
-/*
-public interface AccountDao extends GenericDAO <Account, Long> {
->>>>>>> e0ac926c0f5b28b46900fe40bf2da332c01c753c
-
-public interface AccountDao {
-    public Integer create(Account account);
-    public Integer update(Account account);
-    public List<Account> findByName(String name);
-
-//    public void
-}
-<<<<<<< HEAD
 /*public interface AccountDao extends GenericDAO <Account, Long> {
 
 }*/
