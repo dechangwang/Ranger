@@ -18,7 +18,7 @@
     <!--读取数据库配置-->
     <context:property-placeholder location="classpath:database.properties"/>
 
-    <!--<bean id="applicationContextProvider" class="cn.edu.tongji.ranger.util.ApplicationContextProvider"/>-->
+    <bean id="applicationContextProvider" class="cn.edu.tongji.ranger.utils.ApplicationContextProvider"/>
 
     <!--数据源-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -53,9 +53,13 @@
                 <prop key="hibernate.hibernate.cache.use_query_cache">${hibernate.hibernate.cache.use_query_cache}</prop>
                 <prop key="hibernate.hibernate.cache.use_second_level_cache">${hibernate.hibernate.cache.use_second_level_cache}</prop>
                 <prop key="hibernate.hibernate.ejb.naming_strategy">${hibernate.hibernate.ejb.naming_strategy}</prop>
+                <prop key="hibernate.connection.url">jdbc:mysql://115.28.177.76:3306/ranger</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
             </props>
         </property>
-        <!--<property name="annotatedClasses">-->
+        <!--<property name="annotatedClasses">
+            <list></list>
+        </property>-->
     </bean>
 
     <!-- 配置事务管理器 -->
@@ -88,6 +92,8 @@
         </tx:attributes>
     </tx:advice>
 
+    <tx:annotation-driven transaction-manager="txManager"/>
+
     <!-- 配置事务异常封装-->
     <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
@@ -96,5 +102,10 @@
     <!--<aop:pointcut id="txPointcut" expression="execution(* cn.edu.tongji.ranger.service.impl..*.*(..))" />-->
     <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>-->
     <!--</aop:config>-->
+
+    <!--JSON-->
+    <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes" value="application/json"/>
+    </bean>
 
 </beans>
