@@ -8,6 +8,12 @@
 .idea/dictionaries
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
+.idea/compiler.xml
+.idea/encoding.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/scopes/scope_settings.xml
+.idea/sqldialects.xml
+Ranger.iml
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
