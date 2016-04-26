@@ -2,6 +2,7 @@ package cn.edu.tongji.ranger.service.impl;
 
 import cn.edu.tongji.ranger.dao.AccountDao;
 import cn.edu.tongji.ranger.model.Account;
+import cn.edu.tongji.ranger.model.Angency;
 import cn.edu.tongji.ranger.service.AccountService;
 import com.googlecode.genericdao.dao.hibernate.GenericDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class AccountServiceImpl implements AccountService {
         accountDao.create(account);
     }
 
+    public void create(Angency angency){
+        accountDao.create(angency);
+    }
     public List<Account> find(String name) {
         return accountDao.findByName(name);
     }

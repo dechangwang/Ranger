@@ -1,11 +1,13 @@
 package cn.edu.tongji.ranger.service;
 
 import cn.edu.tongji.ranger.model.Account;
+import cn.edu.tongji.ranger.model.Angency;
 
 import java.util.List;
 
 public interface AccountService {
     public void create(Account account);
+    public void create(Angency angency);
     public List<Account> find(String name);
 }
 
