@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - ranger@localhost" uuid="da51cf3c-2337-48ab-a93e-e78ceb9b7297">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>ranger.*</schema-pattern>
+      <default-schemas>ranger.*</default-schemas>
+    </data-source>
+  </component>
+</project>
