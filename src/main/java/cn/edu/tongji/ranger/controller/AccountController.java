@@ -50,10 +50,10 @@ public class AccountController {
     public String testGuideAdd(){
 //        Angency angency = new Angency(1,"携程","认证","简介","125125125125","tongji@126.com",
 //                "上海市同济大学曹安公路","D:\\pictruce\\ico.png",12563,"欢迎来到八爪鱼旅游");
-        Guide guide = new Guide("Andy",1,true,"12345678","tongji@162.com","上海市杨浦区同济大学" );
+       // Guide guide = new Guide("Andy",1,true,"12345678","tongji@162.com","上海市杨浦区同济大学" );
         //accountService.create(angency);
        // guide.setAngency(angency);
-        guideService.create(guide);
+       // guideService.create(guide);
 
         return "home";
     }

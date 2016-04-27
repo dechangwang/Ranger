@@ -2,27 +2,58 @@
 
 /* App Module */
 
-/*var rangerApp = angular.module('rangerApp', [
-    'ngRoute',
-    'RangerControllers'
-]);*/
+var rangerApp = angular.module('rangerApp', ['ui.router']);
+rangerApp.config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/home');
+    $stateProvider
+        .state('home', {
+            url: '/home',
+            views: {
+                '': {
+                    templateUrl: 'views/home.html'
+                },
+                'topbar@home': {
+                    templateUrl: 'views/topbar.html'
+                },
+                'main@home': {
+                    templateUrl: 'views/angency_register.html'
+                }
+            }
+        })
+        .state('home.index', {
+            url: '/index',
+            views: {
+                'main@home': {
+                    template: 'this is index page'
+                }
+            }
+        })
+        .state('home.guideregister',{
+            urk:'/guideregister',
+            views:{
+                'main@home': {
+                    template: '导游注册页面'
+                }
+            }
+        })
+});
 
-var rangerApp = angular.module('rangerApp',['ngRoute']);
-rangerApp.config(['$routeProvider',function ($routeProvider) {
-    $routeProvider
-        .when('/list',{
-            templateUrl:'views/route/list.html',
-            controller:'RouteListCtl'
-        })
-        .when('/list/:id',{
-            templateUrl:'views/route/detail.html',
-            controller:'RouteDetailCtl'
-        })
-        .when('/angency_register',{
-            templateUrl:'views/angency_register.html',
-            controller:'angencyController'
-        })
-        .otherwise({
-            redirectTo:'/list'
-        });
-}]);
+/*var rangerApp = angular.module('rangerApp',['ngRoute']);
+ rangerApp.config(['$routeProvider',function ($routeProvider) {
+ $routeProvider
+ .when('/list',{
+ templateUrl:'views/route/list.html',
+ controller:'RouteListCtl'
+ })
+ .when('/list/:id',{
+ templateUrl:'views/route/detail.html',
+ controller:'RouteDetailCtl'
+ })
+ .when('/angency_register',{
+ templateUrl:'views/angency_register.html',
+ controller:'angencyController'
+ })
+ .otherwise({
+ redirectTo:'/list'
+ });
+ }]);*/

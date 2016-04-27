@@ -4,39 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Ranger</title>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <!--Angular-->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <!--<script src="bower_components/angular-route/angular-route.js"></script>-->
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <!--App-->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/controller.js"></script>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
 </head>
 <body>
-hello world
-<div ng-view></div>
-<!--<div>
-
-    <form name="registerForm" ng-controller="registerCtrl"
-          ng-submit="register(account)" novalidate>
-        <label for="name">Username</label><input type="text" id="name" ng-model="account.name">
-        <label for="password">Password</label><input type="text" id="password" ng-model="account.password">
-        <button type="submit">Register</button>
-    </form>
-
-    <form name="loginForm" ng-controller="loginCtrl"
-          ng-submit="login(account2)" novalidate>
-        <label for="name2">Username</label><input type="text" id="name2" ng-model="account2.name">
-        <label for="password2">Password</label><input type="text" id="password2" ng-model="account2.password">
-        <button type="submit">Login</button>
-    </form>
-
-</div>-->
+<div ui-view></div>
 
 
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<!--Angular-->
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/angular-resource/angular-resource.js"></script>
-<!--App-->
-<script src="scripts/app.js"></script>
-<script src="scripts/controllers/controller.js"></script>
-<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 
 </body>
 </html>
