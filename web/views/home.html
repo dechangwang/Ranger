@@ -1,0 +1,16 @@
+<div>
+    <h1>saji</h1>
+    <form name="registerForm" ng-controller="registerCtrl"
+          ng-submit="register(account)" novalidate>
+        <label for="name">Username</label><input type="text" id="name" ng-model="account.name">
+        <label for="password">Password</label><input type="text" id="password" ng-model="account.password">
+        <button type="submit">Register</button>
+    </form>
+
+    <form name="loginForm" ng-controller="loginCtrl"
+          ng-submit="login(account2)" novalidate>
+        <label for="name2">Username</label><input type="text" id="name2" ng-model="account2.name">
+        <label for="password2">Password</label><input type="text" id="password2" ng-model="account2.password">
+        <button type="submit">Login</button>
+    </form>
+</div>
