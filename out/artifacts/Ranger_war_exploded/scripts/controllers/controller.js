@@ -10,6 +10,9 @@ rangerApp.controller('RouteListCtl',function($scope) {
 rangerApp.controller('RouteDetailCtl',function($scope, $routeParams) {
     $scope.id = $routeParams.id;
 });
+rangerApp.controller('angencyRegister',function($scope){
+
+});
 /*rangerControllers.controller('registerCtrl', ['$scope', '$http',
     function($scope, $http) {
         $scope.account = {
@@ -19,7 +22,7 @@ rangerApp.controller('RouteDetailCtl',function($scope, $routeParams) {
         $scope.register = function (account) {
             alert("进行注册");
             $http.post('/Ranger/api/account/register', account).success(function (data) {
-                alert("注册成功  " + data);
+ alert("注册成功  " + data);
             }).error(function (err) {
                 alert("注册失败  " + err);
             })

@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var rangerApp = angular.module('rangerApp', ['ui.router']);
+var rangerApp = angular.module('rangerApp', ['ui.router','ngFileUpload']);
 rangerApp.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
     $stateProvider
@@ -28,11 +28,35 @@ rangerApp.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-        .state('home.guideregister',{
-            urk:'/guideregister',
-            views:{
+        .state('home.guideregister', {
+            url: '/guideregister',
+            views: {
                 'main@home': {
                     template: '导游注册页面'
+                }
+            }
+        })
+        .state('home.order', {
+            url: '/order',
+            views: {
+                'main@home': {
+                    template: '订单页面'
+                }
+            }
+        })
+        .state('home.notification',{
+            url: '/notification',
+            views: {
+                'main@home': {
+                    template: '通知页面'
+                }
+            }
+        })
+        .state('home.account',{
+            url:'/account',
+            views: {
+                'main@home': {
+                    templateUrl: 'views/account.html'
                 }
             }
         })

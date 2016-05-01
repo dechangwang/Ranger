@@ -193,4 +193,21 @@ public class Angency {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "Angency{" +
+                "id=" + id +
+                ", registerName='" + registerName + '\'' +
+                ", registerCertifateType='" + registerCertifateType + '\'' +
+                ", registerBrief='" + registerBrief + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", lincensePicture='" + lincensePicture + '\'' +
+                ", balance=" + balance +
+                ", brief='" + brief + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
