@@ -220,7 +220,7 @@ CREATE TABLE `orderform`(
 )DEFAULT CHARSET=utf8;
 
 -- confirm_list_buyer 购买者发出的确认单的链接(路径)
--- invoice 发票
+-- invoice 发票，deposit 订金
 
 DROP TABLE IF EXISTS `orderform_tourist`;
 CREATE TABLE `orderform_tourist`(
@@ -308,8 +308,15 @@ CREATE TABLE `refund_picture`(
 -- 2014 04 16
 
 ALTER TABLE angency ADD password varchar(45) NOT NULL DEFAULT "";
+ALTER TABLE angency ADD name varchar(45) NOT NULL DEFAULT "";
 
 -- 2014 04 25
+
+alter table notification add receiver_id bigint(20) not null;
+alter table notification add foreign key (receiver_id) references angency(id);
+create index index_receiver_id on notification(receiver_id);
+
+-- 2015 05 02
 
 
 
