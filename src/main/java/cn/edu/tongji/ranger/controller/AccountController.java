@@ -18,6 +18,16 @@ public class AccountController {
     private AccountService accountService;
 */
 
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> re(@RequestParam(value = "name")String name, @RequestParam(value = "password")String pass) {
+        System.out.println(name + " " + pass);
+        Map<String, Object> m = new HashMap<String, Object>();
+        m.put("result","这是结果");
+        return m;
+    }
+
 //    @RequestMapping(value = "/register", method = RequestMethod.POST)
 //    @ResponseBody
 ////    public Map<String, Object> register(@RequestParam(value = "name") String name, @RequestParam(value = "password") String password) {

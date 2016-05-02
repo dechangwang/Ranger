@@ -1,15 +1,13 @@
 package cn.edu.tongji.ranger.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
  * Created by LiaoShanhe on 2016/4/27.
  */
 @Entity
+@Table(name = "notification")
 public class Notification {
     private long id;
     private String content;

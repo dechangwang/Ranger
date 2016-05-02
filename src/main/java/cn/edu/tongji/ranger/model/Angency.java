@@ -1,14 +1,12 @@
 package cn.edu.tongji.ranger.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by LiaoShanhe on 2016/4/27.
  */
 @Entity
+@Table(name = "angency")
 public class Angency {
     private long id;
     private String registerName;
