@@ -13,10 +13,11 @@ rangerApp.controller('UserinfoController', ['$scope', '$http', function ($scope,
         password: '',
         address: '',
         certificate: '',
-        brief: ''
+        brief: '',
+        cname:''
     };
     $scope.registerAngency = function (userInfo) {
-       alert("注册" + userInfo.name);
+       //alert("注册" + userInfo.name);
         //userInfo.
         $http.post('/Ranger/angency/register', userInfo)
             .success(function (data) {

@@ -1,18 +1,15 @@
 package cn.edu.tongji.ranger.controller;
-
-import cn.edu.tongji.ranger.encryption.Keys;
 import cn.edu.tongji.ranger.model.Angency;
-import cn.edu.tongji.ranger.model.Business;
-import cn.edu.tongji.ranger.service.AccountService;
+import cn.edu.tongji.ranger.service.AngencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
-import java.util.Map;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 /**
  * Created by wangdechang on 2016/4/26.
  */
@@ -20,31 +17,32 @@ import java.util.Map;
 @RequestMapping("/angency")
 public class RegisterController {
     @Autowired
-    private AccountService accountService;
-
+    private AngencyService angencyService;
     @RequestMapping(value = "register",method = RequestMethod.POST )
     @ResponseBody
-    public Map<String,String> angencyRegister(@RequestBody Business business){
-//        String brief = angency.getBrief();
-//        String lincensePicture = angency.getLincensePicture();
-//        System.out.println("brief content ->"+brief);
-//        System.out.println("licence ->"+lincensePicture);
-//        System.out.println(angency);
-        System.out.println(business);
-        MultipartFile file = UploadFileController.certificate;
-        System.out.println(file.getOriginalFilename());
+    public Map<String,String> angencyRegister(@RequestBody Angency angency){
 
         Map<String,String> map = new HashMap<String,String>();
+        String fileDir = UploadFileController.getDir();
+        if(fileDir != null || !"".equals(fileDir)){
+            angency.setCertificate(fileDir);
+            System.out.println(angency.getCname());
+            List<Angency> list = angencyService.findExistAngency(angency.getCname());
+            System.out.println(list);
+
+            if(angencyService.findExistAngency(angency.getCname()).size() == 0){
+                angencyService.create(angency);
+            }else {
+                System.out.println("已经注册");
+                map.put("error","已注册");
+                return map;
+            }
+
+        }
+        System.out.println(angency);
         map.put("succ","SUCCEED");
         return map;
     }
-
-    @RequestMapping(value = "/upload",method = RequestMethod.POST)
-    public String uploadPicture(@RequestParam(value = "certificate") MultipartFile certificate,Model nodel){
-        System.out.println(certificate.getOriginalFilename());
-        return "http://localhost:8080/Ranger/#/home";
-    }
-
 
    /* @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String angencyRegister(@RequestParam(value = "name") String name,
@@ -64,8 +62,6 @@ public class RegisterController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return "home";
     }*/
-
 }

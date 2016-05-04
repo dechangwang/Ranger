@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @Repository("AngencyDao")
-public class AngencyDaoImpl implements AngencyDao{
+public class AngencyDaoImpl implements AngencyDao {
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -24,9 +24,8 @@ public class AngencyDaoImpl implements AngencyDao{
         sessionFactory.getCurrentSession().persist(angency);
     }
 
-    public List<Angency> find() {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Angency.class);
-
+    public List<Angency> findByName(String name) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Angency.class).add(Restrictions.eq("cname", name));
         return (List<Angency>) criteria.list();
     }
 }
