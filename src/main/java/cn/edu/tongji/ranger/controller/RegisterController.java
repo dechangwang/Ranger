@@ -41,7 +41,7 @@ public class RegisterController {
             System.out.println(list);
 
             if (angencyService.findExistAngency(angency.getCname()).size() == 0) {
-                // angencyService.create(angency);
+                angencyService.create(angency);
                 System.out.println("可以注册");
             } else {
                 System.out.println("has registered");
@@ -62,15 +62,15 @@ public class RegisterController {
     public Map<String, String> guideRegister(@RequestBody GuideInfo guideInfo) {
         Map<String, String> map = new HashMap<String, String>();
         List<Angency> list = angencyService.findExistAngency(guideInfo.getCname());
-        if(list.size() == 0){
-            map.put("res","the company doesn't exist");
+        if (list.size() == 0) {
+            map.put("res", "the company doesn't exist");
             return map;
         }
         Guide guide = new Guide();
         guide.setName(guideInfo.getName());
-        if("male".equals(guideInfo.getGender())){
+        if ("male".equals(guideInfo.getGender())) {
             guide.setGender(true);
-        }else{
+        } else {
             guide.setGender(false);
         }
         guide.setPhone(guideInfo.getPhone());

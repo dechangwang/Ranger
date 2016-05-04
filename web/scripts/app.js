@@ -60,6 +60,14 @@ rangerApp.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('home.product_release',{
+            url:'/product_release',
+            views:{
+                'main@home':{
+                    templateUrl:'views/product_release.html'
+                }
+            }
+        })
 });
 
 /*var rangerApp = angular.module('rangerApp',['ngRoute']);
