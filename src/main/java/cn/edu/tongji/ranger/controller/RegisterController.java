@@ -1,6 +1,10 @@
 package cn.edu.tongji.ranger.controller;
+
 import cn.edu.tongji.ranger.model.Angency;
+import cn.edu.tongji.ranger.model.Guide;
+import cn.edu.tongji.ranger.model.GuideInfo;
 import cn.edu.tongji.ranger.service.AngencyService;
+import cn.edu.tongji.ranger.service.GuideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * Created by wangdechang on 2016/4/26.
  */
@@ -18,32 +23,66 @@ import java.util.Map;
 public class RegisterController {
     @Autowired
     private AngencyService angencyService;
-    @RequestMapping(value = "register",method = RequestMethod.POST )
-    @ResponseBody
-    public Map<String,String> angencyRegister(@RequestBody Angency angency){
 
-        Map<String,String> map = new HashMap<String,String>();
+    @Autowired
+    private GuideService guideService;
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> angencyRegister(@RequestBody Angency angency) {
+//    public Map<String,String> angencyRegister(@RequestBody Angency angency){
+
+        Map<String, String> map = new HashMap<String, String>();
         String fileDir = UploadFileController.getDir();
-        if(fileDir != null || !"".equals(fileDir)){
+        if (fileDir != null || !"".equals(fileDir)) {
             angency.setCertificate(fileDir);
             System.out.println(angency.getCname());
             List<Angency> list = angencyService.findExistAngency(angency.getCname());
             System.out.println(list);
 
-            if(angencyService.findExistAngency(angency.getCname()).size() == 0){
-                angencyService.create(angency);
-            }else {
-                System.out.println("已经注册");
-                map.put("error","已注册");
+            if (angencyService.findExistAngency(angency.getCname()).size() == 0) {
+                // angencyService.create(angency);
+                System.out.println("可以注册");
+            } else {
+                System.out.println("has registered");
+                map.put("res", "has registered");
                 return map;
             }
-
+            map.put("res", "registered successfully");
+        } else {
+            map.put("res", "no certificate picture ");
         }
         System.out.println(angency);
-        map.put("succ","SUCCEED");
+
         return map;
     }
 
+    @RequestMapping(value = "/guideregister", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> guideRegister(@RequestBody GuideInfo guideInfo) {
+        Map<String, String> map = new HashMap<String, String>();
+        List<Angency> list = angencyService.findExistAngency(guideInfo.getCname());
+        if(list.size() == 0){
+            map.put("res","the company doesn't exist");
+            return map;
+        }
+        Guide guide = new Guide();
+        guide.setName(guideInfo.getName());
+        if("male".equals(guideInfo.getGender())){
+            guide.setGender(true);
+        }else{
+            guide.setGender(false);
+        }
+        guide.setPhone(guideInfo.getPhone());
+        guide.setEmail(guideInfo.getEmail());
+        guide.setAddress(guideInfo.getAddress());
+        guide.setAngency_id(list.get(0).getId());
+        guideService.create(guide);
+        System.out.println(guideInfo);
+
+        map.put("res", "succeed");
+        return map;
+    }
    /* @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String angencyRegister(@RequestParam(value = "name") String name,
                                   @RequestParam(value = "type") String type,

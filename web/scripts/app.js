@@ -24,7 +24,7 @@ rangerApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/index',
             views: {
                 'main@home': {
-                    template: 'this is index page'
+                    template: 'index page'
                 }
             }
         })
@@ -32,7 +32,7 @@ rangerApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/guideregister',
             views: {
                 'main@home': {
-                    template: '导游注册页面'
+                    templateUrl: 'views/guide_register.html'
                 }
             }
         })
