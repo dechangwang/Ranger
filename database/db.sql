@@ -318,7 +318,10 @@ create index index_receiver_id on notification(receiver_id);
 
 -- 2015 05 02
 
-
+ALTER TABLE product ADD postcode varchar(10) NOT NULL DEFAULT "";
+ALTER TABLE product ADD post_receiver varchar(45) NOT NULL DEFAULT "";
+ALTER TABLE product ADD post_address varchar(100) NOT NULL DEFAULT "";
+ALTER TABLE product ADD post_phone varchar(45) NOT NULL DEFAULT "";
 
 
 
