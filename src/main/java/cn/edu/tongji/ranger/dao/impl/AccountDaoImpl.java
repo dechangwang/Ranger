@@ -18,6 +18,7 @@ public class AccountDaoImpl implements AccountDao {
     private SessionFactory sessionFactory;
 
     public void create(Account account) {
+//        System.out.println(sessionFactory);
         sessionFactory.getCurrentSession().persist(account);
     }
 
