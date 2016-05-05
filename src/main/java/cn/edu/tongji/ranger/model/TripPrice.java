@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by 马二爷 on 2016/4/28.
+ * Created by 马二爷 on 2016/5/2.
  */
 @Entity
 @Table(name = "trip_price", schema = "", catalog = "ranger")
 public class TripPrice {
     private long id;
+    private long productId;
+    private long touristTypeId;
     private double price;
     private byte isExpired;
     private Timestamp updateTime;
-    private Product productByProductId;
-    private TouristType touristTypeByTouristTypeId;
 
     @Id
     @Column(name = "id", nullable = false, insertable = true, updatable = true)
@@ -24,6 +24,26 @@ public class TripPrice {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "product_id", nullable = false, insertable = true, updatable = true)
+    public long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(long productId) {
+        this.productId = productId;
+    }
+
+    @Basic
+    @Column(name = "tourist_type_id", nullable = false, insertable = true, updatable = true)
+    public long getTouristTypeId() {
+        return touristTypeId;
+    }
+
+    public void setTouristTypeId(long touristTypeId) {
+        this.touristTypeId = touristTypeId;
     }
 
     @Basic
@@ -66,6 +86,8 @@ public class TripPrice {
         if (id != tripPrice.id) return false;
         if (isExpired != tripPrice.isExpired) return false;
         if (Double.compare(tripPrice.price, price) != 0) return false;
+        if (productId != tripPrice.productId) return false;
+        if (touristTypeId != tripPrice.touristTypeId) return false;
         if (updateTime != null ? !updateTime.equals(tripPrice.updateTime) : tripPrice.updateTime != null) return false;
 
         return true;
@@ -76,30 +98,12 @@ public class TripPrice {
         int result;
         long temp;
         result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (productId ^ (productId >>> 32));
+        result = 31 * result + (int) (touristTypeId ^ (touristTypeId >>> 32));
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (int) isExpired;
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
         return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
-    public Product getProductByProductId() {
-        return productByProductId;
-    }
-
-    public void setProductByProductId(Product productByProductId) {
-        this.productByProductId = productByProductId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "tourist_type_id", referencedColumnName = "id", nullable = false)
-    public TouristType getTouristTypeByTouristTypeId() {
-        return touristTypeByTouristTypeId;
-    }
-
-    public void setTouristTypeByTouristTypeId(TouristType touristTypeByTouristTypeId) {
-        this.touristTypeByTouristTypeId = touristTypeByTouristTypeId;
     }
 }

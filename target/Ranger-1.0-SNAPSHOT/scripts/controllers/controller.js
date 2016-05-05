@@ -1,16 +1,64 @@
 'use strict';
 
+/* Controllers */
 
+var rangerControllers = angular.module('RangerControllers', []);
+
+rangerControllers.controller('registerCtrl', ['$scope', '$http',
+    function($scope, $http) {
+        $scope.account = {
+            name: '',
+            password: ''
+        };
+        $scope.register = function (account) {
+            alert("进行注册");
+            $http.post('/Ranger/api/account/register', account).success(function (data) {
+                alert("注册成功  " + data);
+            }).error(function (err) {
+                alert("注册失败  " + err);
+            })
+        }
+    }]);
+
+rangerControllers.controller('loginCtrl', ['$scope', '$http',
+    function($scope, $http) {
+        $scope.account2 = {
+            name: '',
+            password: ''
+        };
+        $scope.login = function (account2) {
+            alert("进行登录");
+            $http.post('/Ranger/api/account/login', account2).success(function (response) {
+                alert("登录成功  " + response.result);
+            }).error(function (err) {
+                alert("登录失败  " + err);
+            })
+        }
+    }]);
+
+
+/*
+rangerControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone',
+    function($scope, $routeParams, Phone) {
+        $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
+            $scope.mainImageUrl = phone.images[0];
+        });
+
+        $scope.setImage = function(imageUrl) {
+            $scope.mainImageUrl = imageUrl;
+        };
+    }]);*/
+
+/*
 var rangeApp = angular.module('rangerApp', []);
 
 rangeApp.controller('testCtrl', ['$scope', '$http', function($scope, $http) {
-    //$http.get('http://localhost:8080/Ranger/api/person').success(function(data) {
     $http.get('/Ranger/api/person').success(function(data) {
         $scope.person = data;
-        /*$scope.person = {
+        /!*$scope.person = {
             "name": "lsh",
             "age": 99
-        };*/
+        };*!/
         $scope.d = "This is another d.";
     });
     // $http.get('scripts/controllers/a.json').success(function(data) {
@@ -18,24 +66,8 @@ rangeApp.controller('testCtrl', ['$scope', '$http', function($scope, $http) {
     //     $scope.person = data;
     // });
     //scripts/controllers/a.json
-    /*$scope.person = {
+    /!*$scope.person = {
         "name": "lsh",
         "age": 99
-    };*/
-}]);
-
-
-
-
-
-// var testController = angular.module('testController', []);
-//
-// testController.controller('test1Ctrl', ['$scope',
-//     function($scope) {
-//         $scope.property = 'Test_Property_1';
-//     }]);
-//
-// testController.controller('test2Ctrl', ['$scope',
-//     function($scope) {
-//         $scope.property = 'Test_Property_2';
-//     }]);
+    };*!/
+}]);*/

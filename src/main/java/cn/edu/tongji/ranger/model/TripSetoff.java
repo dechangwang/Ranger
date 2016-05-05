@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by 马二爷 on 2016/4/28.
+ * Created by 马二爷 on 2016/5/4.
  */
 @Entity
 @Table(name = "trip_setoff", schema = "", catalog = "ranger")
@@ -14,7 +14,6 @@ public class TripSetoff {
     private long guideId;
     private Timestamp tripSetoffDate;
     private Timestamp updateTime;
-    private Product productByProductId;
 
     @Id
     @Column(name = "id", nullable = false, insertable = true, updatable = true)
@@ -91,15 +90,5 @@ public class TripSetoff {
         result = 31 * result + (tripSetoffDate != null ? tripSetoffDate.hashCode() : 0);
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
         return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
-    public Product getProductByProductId() {
-        return productByProductId;
-    }
-
-    public void setProductByProductId(Product productByProductId) {
-        this.productByProductId = productByProductId;
     }
 }

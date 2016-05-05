@@ -4,21 +4,20 @@
 
 var rangerApp = angular.module('rangerApp', [
     'ngRoute',
-    'RangerControllers'
+    'RangerControllers',
+    'OrderControllers'
 ]);
 
-// rangerApp.config(['$routeProvider',
-//     function($routeProvider) {
-//         $routeProvider.
-//         when('/', {
-//             templateUrl: '../views/home.html',
-//             controller: 'homeCtrl'
-//         }).
-//         when('/phones/:phoneId', {
-//             templateUrl: 'partials/phone-detail.html',
-//             controller: 'PhoneDetailCtrl'
-//         }).
-//         otherwise({
-//             redirectTo: '/Ranger/'
-//         });
-//     }]);
+
+
+rangerApp.config(['$routeProvider',
+     function($routeProvider) {
+         $routeProvider.
+         when('/orderList', {
+             templateUrl: 'views/orderList.html',
+             controller: 'listOrderCtrl'
+         }).
+         otherwise({
+             redirectTo: '/Ranger/'
+         });
+     }]);
