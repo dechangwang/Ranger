@@ -2,6 +2,7 @@ package cn.edu.tongji.ranger.dao.impl;
 
 import cn.edu.tongji.ranger.dao.AccountDao;
 import cn.edu.tongji.ranger.model.Account;
+import cn.edu.tongji.ranger.model.Angency;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -18,8 +19,14 @@ public class AccountDaoImpl implements AccountDao {
     private SessionFactory sessionFactory;
 
     public void create(Account account) {
-//        System.out.println(sessionFactory);
         sessionFactory.getCurrentSession().persist(account);
+    }
+
+    public void create(Angency angency){
+        if(sessionFactory == null){
+            //sessionFactory =
+        }
+        sessionFactory.getCurrentSession().persist(angency);
     }
 
     public List<Account> findByName(String name) {
