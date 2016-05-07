@@ -10,18 +10,18 @@
                     <label class="col-md-2 control-label">产品名称：
                     </label>
                     <div class="col-md-8">
-                        <input type="text" name="name" class="form-control" ng-model="productCtrl.name"
+                        <input type="text" name="name" class="form-control" ng-model="products.name"
                                placeholder="请输入名字" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">产品简介：</label>
                     <div class="col-md-8">
-                        <textarea class="form-control" rows="3" name="brief" ng-model="productCtrl.brief"
+                        <textarea class="form-control" rows="3" name="brief" ng-model="products.brief"
                                   placeholder="请输入产品简介" required></textarea>
                     </div>
                 </div>
-
+                <br>
                 <div class="form-group">
                     <label class="col-md-2 control-label">出发地：</label>
                     <div class="col-md-2">
@@ -34,58 +34,71 @@
                             <option>更多</option>
                         </select>
                     </div>
-                    <label class="col-md-2 control-label">时长：</label>
-                    <div class="col-md-3 form-inline">
-                        <input type="number" name="duration" class="form-control col-md-2" placeholder="请输入天数"
-                               ng-model="productCtrl.duration"
+                    <label class="col-md-2 control-label">目的地：</label>
+                    <div class="col-md-3 ">
+                        <input type="text" name="targetloc" class="form-control col-md-3" placeholder="目的地有多个时以，分隔"
+                               ng-model="products.targetloc"
                                required>
-                        <p class="col-md-1">天</p>
+                       <!-- <p class="col-md-1">天</p>-->
                     </div>
                 </div>
+                <br>
                 <div class="form-group">
                     <div class="col-md-2"></div>
-                    <div class="col-md-4">
-                        <label class="control-label">目的地</label>
-                        <input type="text" class="form-control" name="targetloc" placeholder="目的地有多个时以，分隔"
-                               ng-model="productCtrl.targetloc">
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
+                        <label class="control-label">时长</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" name="duration" placeholder="请输入天数"
+                                                        ng-model="products.duration">
+                            <span class="input-group-addon">天</span>
+                        </div>
+
+
+                    </div><!--   <p class="col-md-1">天</p>-->
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
                         <label class="control-label">出团日期</label>
-                        <input type="date" name="startdate" class="form-control" ng-model="productCtrl.startdate">
+                        <input type="date" name="startdate" class="form-control col-md-3" ng-model="products.startdate">
                     </div>
                 </div>
+                <br>
                 <div class="form-group">
                     <div class="col-md-2"></div>
                     <div class="col-md-4">
                         <label class="control-label">价格</label>
                         <div class="form-group">
                             <label class="control-label col-md-3">成人价</label>
-                            <br>
                             <div class="col-md-6 form-inline">
-                                <input type="number" class="form-control col-md-3" name="adultprice" placeholder="成人价格"
-                                       ng-model="productCtrl.adultprice">
+                                <div class="input-group">
+                                    <input type="number" class="form-control col-md-3" name="adultprice" placeholder="成人价格"
+                                           ng-model="products.adultprice">
+                                    <span class="input-group-addon">元</span>
+                                </div>
+
 
                             </div>
-                            <p class="col-md-2">元</p>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">儿童价</label>
                             <div class="col-md-6 form-inline">
-                                <input type="number" class="form-control col-md-3" name="childprice" placeholder="儿童价格"
-                                       ng-model="productCtrl.childprice">
+                                <div class="input-group">
+                                    <input type="number" class="form-control col-md-3" name="childprice" placeholder="儿童价格"
+                                           ng-model="products.childprice">
+                                    <span class="input-group-addon" id="basic-addon2">元</span>
+                                </div>
+
 
                             </div>
-                            <p class="col-md-2">元</p>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label class="control-label">标签</label>
-                        <input type="text" name="tag" class="form-control" placeholder="标签，如：自由行" ng-model="productCtrl.tag">
+                        <input type="text" name="tag" class="form-control" placeholder="标签，如：自由行" ng-model="products.tag">
 
                     </div>
 
                 </div>
-
+                <br>
                 <div class="form-group">
                     <div class="col-md-2"></div>
                     <div class="col-md-4">
@@ -95,7 +108,7 @@
 
                             <div class="col-md-6 form-inline">
                                 <input type="number" class="form-control col-md-3" name="setoffway" placeholder="出发交通方式"
-                                       ng-model="productCtrl.setoffway">
+                                       ng-model="products.setoffway">
 
                             </div>
 
@@ -104,19 +117,85 @@
                             <label class="control-label col-md-3">返回：</label>
                             <div class="col-md-6 form-inline">
                                 <input type="number" class="form-control col-md-3" name="backway" placeholder="返回交通方式"
-                                       ng-model="productCtrl.backway">
+                                       ng-model="products.backway">
 
                             </div>
 
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label class="control-label">住宿</label>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">住宿</label>
+                            <div class="col-md-8">
+                                <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    添加
+                                </button>
+                                <div class="collapse" id="collapseExample">
+                                    <!--<div class="well">
+                                        ...this
+                                        <h1>hello</h1>
+                                    </div>-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">酒店：
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="hotelname1" class="form-control" ng-model="products.hotelname1"
+                                                   placeholder="酒店名字" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">说明：
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="hoteldesc1" class="form-control" ng-model="products.hoteldesc1"
+                                                   placeholder="酒店说明" required>
+                                        </div>
+                                    </div>
+                                    <!--hotel 2-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">酒店：
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="hotelname2" class="form-control" ng-model="products.hotelname2"
+                                                   placeholder="酒店名字" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">说明：
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="hoteldesc2" class="form-control" ng-model="products.hoteldesc2"
+                                                   placeholder="酒店说明" required>
+                                        </div>
+                                    </div>
+                                    <!--hotel3-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">酒店：
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="hotelname3" class="form-control" ng-model="products.hotelname3"
+                                                   placeholder="酒店名字" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">说明：
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="hoteldesc3" class="form-control" ng-model="products.hoteldesc3"
+                                                   placeholder="酒店说明" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
                         <div class="form-group">
                             <label class="col-md-3 control-label">酒店：
                             </label>
                             <div class="col-md-8">
-                                <input type="text" name="hotelname" class="form-control" ng-model="productCtrl.hotelname"
+                                <input type="text" name="hotelname" class="form-control" ng-model="products.hotelname"
                                        placeholder="酒店名字" required>
                             </div>
                         </div>
@@ -124,7 +203,7 @@
                             <label class="col-md-3 control-label">说明：
                             </label>
                             <div class="col-md-8">
-                                <input type="text" name="hoteldesc" class="form-control" ng-model="productCtrl.hoteldesc"
+                                <input type="text" name="hoteldesc" class="form-control" ng-model="products.hoteldesc"
                                        placeholder="酒店说明" required>
                             </div>
                         </div>
@@ -133,10 +212,42 @@
 
                 </div>
                 <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">邮政编码：</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" rows="3" name="postcode" ng-model="products.postcode"
+                                   placeholder="请输入邮政编码" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">收件人：</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" rows="3" name="receiver" ng-model="products.receiver"
+                                   placeholder="请输入收件人姓名" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">电话：</label>
+                        <div class="col-md-8">
+                            <input type="number" class="form-control" rows="3" name="postphone" ng-model="products.postphone"
+                                   placeholder="请输入收件人电话" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">地址：</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" rows="3" name="postaddress" ng-model="products.postaddress"
+                                   placeholder="请输入收件地址" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <div class="col-md-offset-5 col-md-5">
                         <input type="submit" class="btn btn-default" value="确  &nbsp;   认">
                     </div>
                 </div>
+
             </form>
         </div>
 

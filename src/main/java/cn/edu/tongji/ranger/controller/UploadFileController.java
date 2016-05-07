@@ -41,7 +41,7 @@ public class UploadFileController {
             //store file in storage
             try {
                 FileUtils.writeByteArrayToFile(new File(dir, file.getOriginalFilename()), bytes);
-                dir = dir +"\\"+file.getOriginalFilename();
+                dir = "images" +File.separator+file.getOriginalFilename();
                 hasUpload = true;
                 //FileUtils.copyInputStreamToFile(file.getInputStream(), new File("/web/images/", System.currentTimeMillis() + file.getOriginalFilename()));
             } catch (IOException e) {

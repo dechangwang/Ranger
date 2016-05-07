@@ -6,235 +6,1061 @@
       <identifier-quote-string>`</identifier-quote-string>
     </database-info>
     <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
-    <schema name="" catalog="ranger"/>
-    <table name="angency" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="register_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="register_certifate_type" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="register_brief" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="phone" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="address" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="lincense_picture" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="balance" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8" def="MA=="/>
-      <column name="brief" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="bank_card" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="angency_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="owner" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="card_number" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="bank" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="bank_card_ibfk_1" columns="angency_id" ref-table="angency" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="collection" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="product_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="angency_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="collect_time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="collection_ibfk_1" columns="product_id" ref-table="product" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="collection_ibfk_2" columns="angency_id" ref-table="angency" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="guide" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="angency_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="gender" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="YicxJw=="/>
-      <column name="phone" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="address" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="guide_ibfk_1" columns="angency_id" ref-table="angency" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="location" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="father_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA=="/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="notification" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="orderform_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="content" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
-      <column name="generate_time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <column name="is_viewed" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
-      <column name="receiver_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="notification_ibfk_1" columns="orderform_id" ref-table="orderform" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="notification_ibfk_2" columns="receiver_id" ref-table="angency" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="index_receiver_id" unique="false" columns="receiver_id"/>
-    </table>
-    <table name="orderform" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="buyer_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="trip_setoff_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="booker" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="booker_phone" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="booker_address" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="book_time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <column name="confirm_time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <column name="state" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
-      <column name="cost" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8" def="MA=="/>
-      <column name="deposit" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8" def="MA=="/>
-      <column name="confirm_list_buyer" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="confirm_list_supplier" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="contract_supplier" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="contract_buyer" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="invoice" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="orderform_ibfk_1" columns="buyer_id" ref-table="angency" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="orderform_ibfk_2" columns="trip_setoff_id" ref-table="trip_setoff" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="orderform_tourist" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="orderform_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="tourist_type_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="gender" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7" def="YicwJw=="/>
-      <column name="phone" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="birth_date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <column name="certifate_type" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="certifate_number" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="state" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
-      <column name="remark" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="orderform_tourist_ibfk_1" columns="orderform_id" ref-table="orderform" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="orderform_tourist_ibfk_2" columns="tourist_type_id" ref-table="tourist_type" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="orderform_tourist_picture" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="orderform_tourist_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="picture_path" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="brief" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="orderform_tourist_picture_ibfk_1" columns="orderform_tourist_id" ref-table="orderform_tourist" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="orderform_track" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="orderform_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="track_item" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="update_time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="orderform_track_ibfk_1" columns="orderform_id" ref-table="orderform" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="product" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="summary" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="search_content" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="duration" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MQ=="/>
-      <column name="supplier_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="setoff_location_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="product_ibfk_1" columns="supplier_id" ref-table="angency" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="product_ibfk_2" columns="setoff_location_id" ref-table="location" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="refund" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="orderform_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="message" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="state" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
-      <column name="supplier_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="buyer_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="refund_ibfk_1" columns="orderform_id" ref-table="orderform" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="refund_ibfk_2" columns="supplier_id" ref-table="angency" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="refund_ibfk_3" columns="buyer_id" ref-table="angency" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="refund_picture" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="refund_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="picture_path" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="brief" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="refund_picture_ibfk_1" columns="refund_id" ref-table="refund" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="tourist_type" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="type" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="brief" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="traffic_type" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="type" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="brief" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="trip_accomodation" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="product_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="accomodation_type" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="brief" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="is_expired" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
-      <column name="update_time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="trip_accomodation_ibfk_1" columns="product_id" ref-table="product" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="trip_destination" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="product_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="location_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="brief" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="trip_destination_ibfk_1" columns="product_id" ref-table="product" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="trip_destination_ibfk_2" columns="location_id" ref-table="location" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="trip_detail" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="type" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="content" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
-      <column name="update_time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <column name="product_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="trip_detail_ibfk_1" columns="product_id" ref-table="product" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="trip_picture" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="picture_path" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="brief" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="product_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="trip_picture_ibfk_1" columns="product_id" ref-table="product" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="trip_price" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="product_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="tourist_type_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="price" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8" def="MA=="/>
-      <column name="is_expired" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
-      <column name="update_time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="trip_price_ibfk_1" columns="product_id" ref-table="product" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="trip_price_ibfk_2" columns="tourist_type_id" ref-table="tourist_type" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="trip_setoff" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="product_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="guide_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="trip_setoff_date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <column name="update_time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="trip_setoff_ibfk_1" columns="product_id" ref-table="product" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="trip_setoff_ibfk_2" columns="guide_id" ref-table="guide" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="trip_traffic" schema="" catalog="ranger" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="traffic_type_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="product_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="brief" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="is_expired" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
-      <column name="update_time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="trip_traffic_ibfk_1" columns="traffic_type_id" ref-table="traffic_type" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="trip_traffic_ibfk_2" columns="product_id" ref-table="product" ref-schema="" ref-catalog="ranger" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="ranger"/>
+      <table id="2" parent="1" name="angency"/>
+      <table id="3" parent="1" name="bank_card"/>
+      <table id="4" parent="1" name="collection"/>
+      <table id="5" parent="1" name="guide"/>
+      <table id="6" parent="1" name="location"/>
+      <table id="7" parent="1" name="notification"/>
+      <table id="8" parent="1" name="orderform"/>
+      <table id="9" parent="1" name="orderform_tourist"/>
+      <table id="10" parent="1" name="orderform_tourist_picture"/>
+      <table id="11" parent="1" name="orderform_track"/>
+      <table id="12" parent="1" name="product"/>
+      <table id="13" parent="1" name="refund"/>
+      <table id="14" parent="1" name="refund_picture"/>
+      <table id="15" parent="1" name="tourist_type"/>
+      <table id="16" parent="1" name="traffic_type"/>
+      <table id="17" parent="1" name="trip_accomodation"/>
+      <table id="18" parent="1" name="trip_destination"/>
+      <table id="19" parent="1" name="trip_detail"/>
+      <table id="20" parent="1" name="trip_picture"/>
+      <table id="21" parent="1" name="trip_price"/>
+      <table id="22" parent="1" name="trip_setoff"/>
+      <table id="23" parent="1" name="trip_traffic"/>
+      <column id="24" parent="2" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="25" parent="2" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="26" parent="2" name="register_name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="27" parent="2" name="register_certifate_type">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="28" parent="2" name="regiester_number">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&quot;&quot;&apos;</default-expression>
+      </column>
+      <column id="29" parent="2" name="register_brief">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="30" parent="2" name="phone">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="31" parent="2" name="email">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="32" parent="2" name="address">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="33" parent="2" name="lincense_picture">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="34" parent="2" name="balance">
+        <mandatory>1</mandatory>
+        <data-type>double</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="35" parent="2" name="brief">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="36" parent="2" name="password">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <key id="37" parent="2" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="38" parent="3" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="39" parent="3" name="angency_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="40" parent="3" name="owner">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="41" parent="3" name="card_number">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="42" parent="3" name="bank">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <index id="43" parent="3" name="angency_id">
+        <columns>angency_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="44" parent="3" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="45" parent="3" name="bank_card_ibfk_1">
+        <columns>angency_id</columns>
+        <ref-key>~.angency.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="46" parent="4" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="47" parent="4" name="product_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="48" parent="4" name="angency_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="49" parent="4" name="collect_time">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <index id="50" parent="4" name="angency_id">
+        <columns>angency_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="51" parent="4" name="product_id">
+        <columns>product_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="52" parent="4" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="53" parent="4" name="collection_ibfk_1">
+        <columns>product_id</columns>
+        <ref-key>~.product.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="54" parent="4" name="collection_ibfk_2">
+        <columns>angency_id</columns>
+        <ref-key>~.angency.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="55" parent="5" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="56" parent="5" name="angency_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="57" parent="5" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="58" parent="5" name="gender">
+        <mandatory>1</mandatory>
+        <data-type>bit(1)</data-type>
+        <default-expression>b&apos;1&apos;</default-expression>
+      </column>
+      <column id="59" parent="5" name="phone">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="60" parent="5" name="email">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="61" parent="5" name="address">
+        <mandatory>1</mandatory>
+        <data-type>varchar(200)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <index id="62" parent="5" name="angency_id">
+        <columns>angency_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="63" parent="5" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="64" parent="5" name="guide_ibfk_1">
+        <columns>angency_id</columns>
+        <ref-key>~.angency.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="65" parent="6" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="66" parent="6" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="67" parent="6" name="father_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <key id="68" parent="6" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="69" parent="7" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="70" parent="7" name="orderform_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="71" parent="7" name="content">
+        <data-type>text</data-type>
+      </column>
+      <column id="72" parent="7" name="generate_time">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <column id="73" parent="7" name="is_viewed">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="74" parent="7" name="receiver_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="75" parent="7" name="index_receiver_id">
+        <columns>receiver_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="76" parent="7" name="orderform_id">
+        <columns>orderform_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="77" parent="7" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="78" parent="7" name="notification_ibfk_1">
+        <columns>orderform_id</columns>
+        <ref-key>~.orderform.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="79" parent="7" name="notification_ibfk_2">
+        <columns>receiver_id</columns>
+        <ref-key>~.angency.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="80" parent="8" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="81" parent="8" name="buyer_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="82" parent="8" name="trip_setoff_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="83" parent="8" name="booker">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;wdc&apos;</default-expression>
+      </column>
+      <column id="84" parent="8" name="booker_phone">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;00000000000&apos;</default-expression>
+      </column>
+      <column id="85" parent="8" name="booker_address">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;not set address yet!&apos;</default-expression>
+      </column>
+      <column id="86" parent="8" name="book_time">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <column id="87" parent="8" name="confirm_time">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <column id="88" parent="8" name="state">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="89" parent="8" name="cost">
+        <mandatory>1</mandatory>
+        <data-type>double</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="90" parent="8" name="deposit">
+        <mandatory>1</mandatory>
+        <data-type>double</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="91" parent="8" name="confirm_list_buyer">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;documents\default.pdf&apos;</default-expression>
+      </column>
+      <column id="92" parent="8" name="confirm_list_supplier">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;documents\default.pdf&apos;</default-expression>
+      </column>
+      <column id="93" parent="8" name="contract_supplier">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;documents\default.pdf&apos;</default-expression>
+      </column>
+      <column id="94" parent="8" name="contract_buyer">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;documents\default.pdf&apos;</default-expression>
+      </column>
+      <column id="95" parent="8" name="invoice">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;documents\default.pdf&apos;</default-expression>
+      </column>
+      <index id="96" parent="8" name="buyer_id">
+        <columns>buyer_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="97" parent="8" name="trip_setoff_id">
+        <columns>trip_setoff_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="98" parent="8" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="99" parent="8" name="orderform_ibfk_1">
+        <columns>buyer_id</columns>
+        <ref-key>~.angency.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="100" parent="8" name="orderform_ibfk_2">
+        <columns>trip_setoff_id</columns>
+        <ref-key>~.trip_setoff.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="101" parent="9" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="102" parent="9" name="orderform_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="103" parent="9" name="tourist_type_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="104" parent="9" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="105" parent="9" name="gender">
+        <mandatory>1</mandatory>
+        <data-type>bit(1)</data-type>
+        <default-expression>b&apos;0&apos;</default-expression>
+      </column>
+      <column id="106" parent="9" name="phone">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;00000000000&apos;</default-expression>
+      </column>
+      <column id="107" parent="9" name="email">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;noemail@email.com&apos;</default-expression>
+      </column>
+      <column id="108" parent="9" name="birth_date">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <column id="109" parent="9" name="certifate_type">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;身份证&apos;</default-expression>
+      </column>
+      <column id="110" parent="9" name="certifate_number">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;000000000000000000&apos;</default-expression>
+      </column>
+      <column id="111" parent="9" name="state">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="112" parent="9" name="remark">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <index id="113" parent="9" name="orderform_id">
+        <columns>orderform_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="114" parent="9" name="tourist_type_id">
+        <columns>tourist_type_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="115" parent="9" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="116" parent="9" name="orderform_tourist_ibfk_1">
+        <columns>orderform_id</columns>
+        <ref-key>~.orderform.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="117" parent="9" name="orderform_tourist_ibfk_2">
+        <columns>tourist_type_id</columns>
+        <ref-key>~.tourist_type.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="118" parent="10" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="119" parent="10" name="orderform_tourist_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="120" parent="10" name="picture_path">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;images\default.png&apos;</default-expression>
+      </column>
+      <column id="121" parent="10" name="brief">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <index id="122" parent="10" name="orderform_tourist_id">
+        <columns>orderform_tourist_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="123" parent="10" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="124" parent="10" name="orderform_tourist_picture_ibfk_1">
+        <columns>orderform_tourist_id</columns>
+        <ref-key>~.orderform_tourist.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="125" parent="11" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="126" parent="11" name="orderform_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="127" parent="11" name="track_item">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="128" parent="11" name="update_time">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <index id="129" parent="11" name="orderform_id">
+        <columns>orderform_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="130" parent="11" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="131" parent="11" name="orderform_track_ibfk_1">
+        <columns>orderform_id</columns>
+        <ref-key>~.orderform.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="132" parent="12" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="133" parent="12" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="134" parent="12" name="summary">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="135" parent="12" name="search_content">
+        <mandatory>1</mandatory>
+        <data-type>varchar(300)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="136" parent="12" name="duration">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <column id="137" parent="12" name="supplier_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="138" parent="12" name="setoff_location_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="139" parent="12" name="postcode">
+        <mandatory>1</mandatory>
+        <data-type>varchar(10)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="140" parent="12" name="post_receiver">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="141" parent="12" name="post_address">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="142" parent="12" name="post_phone">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <index id="143" parent="12" name="setoff_location_id">
+        <columns>setoff_location_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="144" parent="12" name="supplier_id">
+        <columns>supplier_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="145" parent="12" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="146" parent="12" name="product_ibfk_1">
+        <columns>supplier_id</columns>
+        <ref-key>~.angency.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="147" parent="12" name="product_ibfk_2">
+        <columns>setoff_location_id</columns>
+        <ref-key>~.location.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="148" parent="13" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="149" parent="13" name="orderform_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="150" parent="13" name="message">
+        <mandatory>1</mandatory>
+        <data-type>varchar(200)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="151" parent="13" name="state">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="152" parent="13" name="supplier_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="153" parent="13" name="buyer_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="154" parent="13" name="buyer_id">
+        <columns>buyer_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="155" parent="13" name="orderform_id">
+        <columns>orderform_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="156" parent="13" name="supplier_id">
+        <columns>supplier_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="157" parent="13" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="158" parent="13" name="refund_ibfk_1">
+        <columns>orderform_id</columns>
+        <ref-key>~.orderform.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="159" parent="13" name="refund_ibfk_2">
+        <columns>supplier_id</columns>
+        <ref-key>~.angency.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="160" parent="13" name="refund_ibfk_3">
+        <columns>buyer_id</columns>
+        <ref-key>~.angency.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="161" parent="14" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="162" parent="14" name="refund_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="163" parent="14" name="picture_path">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;images\default.png&apos;</default-expression>
+      </column>
+      <column id="164" parent="14" name="brief">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <index id="165" parent="14" name="refund_id">
+        <columns>refund_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="166" parent="14" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="167" parent="14" name="refund_picture_ibfk_1">
+        <columns>refund_id</columns>
+        <ref-key>~.refund.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="168" parent="15" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="169" parent="15" name="type">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="170" parent="15" name="brief">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <key id="171" parent="15" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="172" parent="16" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="173" parent="16" name="type">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="174" parent="16" name="brief">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <key id="175" parent="16" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="176" parent="17" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="177" parent="17" name="product_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="178" parent="17" name="accomodation_type">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="179" parent="17" name="brief">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="180" parent="17" name="is_expired">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="181" parent="17" name="update_time">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <index id="182" parent="17" name="product_id">
+        <columns>product_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="183" parent="17" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="184" parent="17" name="trip_accomodation_ibfk_1">
+        <columns>product_id</columns>
+        <ref-key>~.product.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="185" parent="18" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="186" parent="18" name="product_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="187" parent="18" name="location_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="188" parent="18" name="brief">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <index id="189" parent="18" name="location_id">
+        <columns>location_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="190" parent="18" name="product_id">
+        <columns>product_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="191" parent="18" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="192" parent="18" name="trip_destination_ibfk_1">
+        <columns>product_id</columns>
+        <ref-key>~.product.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="193" parent="18" name="trip_destination_ibfk_2">
+        <columns>location_id</columns>
+        <ref-key>~.location.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="194" parent="19" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="195" parent="19" name="type">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="196" parent="19" name="content">
+        <data-type>text</data-type>
+      </column>
+      <column id="197" parent="19" name="update_time">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <column id="198" parent="19" name="product_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="199" parent="19" name="product_id">
+        <columns>product_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="200" parent="19" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="201" parent="19" name="trip_detail_ibfk_1">
+        <columns>product_id</columns>
+        <ref-key>~.product.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="202" parent="20" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="203" parent="20" name="picture_path">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="204" parent="20" name="brief">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="205" parent="20" name="product_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="206" parent="20" name="product_id">
+        <columns>product_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="207" parent="20" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="208" parent="20" name="trip_picture_ibfk_1">
+        <columns>product_id</columns>
+        <ref-key>~.product.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="209" parent="21" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="210" parent="21" name="product_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="211" parent="21" name="tourist_type_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="212" parent="21" name="price">
+        <mandatory>1</mandatory>
+        <data-type>double</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="213" parent="21" name="is_expired">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="214" parent="21" name="update_time">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <index id="215" parent="21" name="product_id">
+        <columns>product_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="216" parent="21" name="tourist_type_id">
+        <columns>tourist_type_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="217" parent="21" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="218" parent="21" name="trip_price_ibfk_1">
+        <columns>product_id</columns>
+        <ref-key>~.product.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="219" parent="21" name="trip_price_ibfk_2">
+        <columns>tourist_type_id</columns>
+        <ref-key>~.tourist_type.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="220" parent="22" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="221" parent="22" name="product_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="222" parent="22" name="guide_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="223" parent="22" name="trip_setoff_date">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <column id="224" parent="22" name="update_time">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <index id="225" parent="22" name="guide_id">
+        <columns>guide_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="226" parent="22" name="product_id">
+        <columns>product_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="227" parent="22" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="228" parent="22" name="trip_setoff_ibfk_1">
+        <columns>product_id</columns>
+        <ref-key>~.product.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="229" parent="22" name="trip_setoff_ibfk_2">
+        <columns>guide_id</columns>
+        <ref-key>~.guide.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="230" parent="23" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="231" parent="23" name="traffic_type_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="232" parent="23" name="product_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="233" parent="23" name="brief">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="234" parent="23" name="is_expired">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="235" parent="23" name="update_time">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <index id="236" parent="23" name="product_id">
+        <columns>product_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="237" parent="23" name="traffic_type_id">
+        <columns>traffic_type_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="238" parent="23" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="239" parent="23" name="trip_traffic_ibfk_1">
+        <columns>traffic_type_id</columns>
+        <ref-key>~.traffic_type.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="240" parent="23" name="trip_traffic_ibfk_2">
+        <columns>product_id</columns>
+        <ref-key>~.product.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+    </database-model>
   </data-source>
   <data-source name="dataSource" uuid="0887fc2c-d6f9-408e-bbe8-1359ca10aeea">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
