@@ -323,6 +323,53 @@ ALTER TABLE product ADD post_receiver varchar(45) NOT NULL DEFAULT "";
 ALTER TABLE product ADD post_address varchar(100) NOT NULL DEFAULT "";
 ALTER TABLE product ADD post_phone varchar(45) NOT NULL DEFAULT "";
 
+-- 2015 05 05
+
+-- delete from location where father_id = 1;
+
+insert into location(name, father_id) values('China', 0);
+
+insert into location(name, father_id) values('United States', 0);
+
+insert into location(name, father_id) values('Beijing', 2);
+
+insert into location(name, father_id) values('HongKong', 2);
+
+insert into location(name, father_id) values('Taiwan', 2);
+
+insert into location(name, father_id) values('Singapore', 1);
+update location set father_id = 0 where id = 7;
+
+insert into location(name, father_id) values('California', 3);
+
+insert into location(name, father_id) values('Macao', 2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
