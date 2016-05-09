@@ -1,5 +1,6 @@
 package cn.edu.tongji.ranger.model;
 
+
 import javax.persistence.*;
 
 /**
@@ -42,6 +43,7 @@ public class Guide {
 
     }
 
+
     public long getId() {
         return id;
     }
@@ -49,6 +51,8 @@ public class Guide {
     public void setId(long id) {
         this.id = id;
     }
+
+
 
     public String getName() {
         return name;
@@ -66,6 +70,8 @@ public class Guide {
         this.gender = gender;
     }
 
+
+
     public String getPhone() {
         return phone;
     }
@@ -73,6 +79,8 @@ public class Guide {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+
 
     public String getEmail() {
         return email;
@@ -82,6 +90,8 @@ public class Guide {
         this.email = email;
     }
 
+
+
     public String getAddress() {
         return address;
     }
@@ -89,6 +99,7 @@ public class Guide {
     public void setAddress(String address) {
         this.address = address;
     }
+
 
     public long getAngency_id() {
         return angency_id;
@@ -109,4 +120,5 @@ public class Guide {
 //    public void setAngency(Angency angency) {
 //        this.angency = angency;
 //    }
+
 }
