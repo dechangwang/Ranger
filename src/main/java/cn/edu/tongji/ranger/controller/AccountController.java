@@ -1,6 +1,7 @@
 package cn.edu.tongji.ranger.controller;
 
 
+import cn.edu.tongji.ranger.model.Angency;
 import cn.edu.tongji.ranger.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class AccountController {
     public void test(){
         Angency angency = new Angency(1,"旅游券","认证","简介","125125125125","tongji@126.com",
                 "上海市同济大学曹安公路","D:\\pictruce\\ico.png",12563,"欢迎来到八爪鱼旅游","thisismypasssword");
-        accountService.create(angency);
+//        accountService.create(angency);
     }
 
     @RequestMapping("/testguide")

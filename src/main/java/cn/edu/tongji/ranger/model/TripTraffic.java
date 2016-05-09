@@ -77,4 +77,14 @@ public class TripTraffic {
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TripTraffic{" +
+                "id=" + id +
+                ", brief='" + brief + '\'' +
+                ", isExpired=" + isExpired +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

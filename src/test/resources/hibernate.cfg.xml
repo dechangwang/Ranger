@@ -16,5 +16,18 @@
         <property name="show_sql">true</property>
 
         <mapping class="cn.edu.tongji.ranger.model.LocationD" />
+        <mapping class="cn.edu.tongji.ranger.model.Angency" />
+        <mapping class="cn.edu.tongji.ranger.model.Location" />
+        <mapping class="cn.edu.tongji.ranger.model.TripAccomodation"/>
+        <mapping class="cn.edu.tongji.ranger.model.TripDestination"/>
+        <mapping class="cn.edu.tongji.ranger.model.TripDetail" />
+        <mapping class="cn.edu.tongji.ranger.model.TripPicture" />
+        <mapping class="cn.edu.tongji.ranger.model.TripPrice" />
+        <mapping class="cn.edu.tongji.ranger.model.TripSetoff" />
+        <mapping class="cn.edu.tongji.ranger.model.TripTraffic" />
+        <mapping class="cn.edu.tongji.ranger.model.BankCard" />
+        <mapping class="cn.edu.tongji.ranger.model.TouristType"/>
+        <mapping class="cn.edu.tongji.ranger.model.TrafficType"/>
+        <mapping package="cn.edu.tongji.ranger.model"/>
     </session-factory>
 </hibernate-configuration>

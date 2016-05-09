@@ -1,14 +1,12 @@
 package cn.edu.tongji.ranger.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by LiaoShanhe on 2016/4/27.
  */
 @Entity
+@Table(name="location")
 public class Location {
     private long id;
     private String name;
@@ -64,5 +62,14 @@ public class Location {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (int) (fatherId ^ (fatherId >>> 32));
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", fatherId=" + fatherId +
+                '}';
     }
 }

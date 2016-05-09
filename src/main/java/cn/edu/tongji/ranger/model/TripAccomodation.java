@@ -91,4 +91,16 @@ public class TripAccomodation {
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TripAccomodation{" +
+                "id=" + id +
+                ", accomodationType='" + accomodationType + '\'' +
+                ", brief='" + brief + '\'' +
+                ", isExpired=" + isExpired +
+                ", updateTime=" + updateTime +
+                '}';
+    }
+
 }

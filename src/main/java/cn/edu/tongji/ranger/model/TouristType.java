@@ -63,4 +63,13 @@ public class TouristType {
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TouristType{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", brief='" + brief + '\'' +
+                '}';
+    }
 }

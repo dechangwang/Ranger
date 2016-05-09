@@ -63,4 +63,13 @@ public class TripPicture {
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TripPicture{" +
+                "id=" + id +
+                ", picturePath='" + picturePath + '\'' +
+                ", brief='" + brief + '\'' +
+                '}';
+    }
 }

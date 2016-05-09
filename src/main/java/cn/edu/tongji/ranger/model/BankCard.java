@@ -76,4 +76,14 @@ public class BankCard {
         result = 31 * result + (bank != null ? bank.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "BankCard{" +
+                "id=" + id +
+                ", owner='" + owner + '\'' +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", bank='" + bank + '\'' +
+                '}';
+    }
 }

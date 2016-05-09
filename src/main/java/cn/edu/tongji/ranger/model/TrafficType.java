@@ -63,4 +63,13 @@ public class TrafficType {
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TrafficType{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", brief='" + brief + '\'' +
+                '}';
+    }
 }

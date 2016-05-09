@@ -11,6 +11,9 @@ public class TripDestination {
     private long id;
     private String brief;
 
+
+    private Location location;
+    
     @Id
     @Column(name = "id")
     public long getId() {
@@ -31,6 +34,18 @@ public class TripDestination {
         this.brief = brief;
     }
 
+
+
+    @ManyToOne
+    @JoinColumn(name="location_id")
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,5 +64,14 @@ public class TripDestination {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TripDestination{" +
+                "id=" + id +
+                ", brief='" + brief + '\'' +
+                ", location=" + location +
+                '}';
     }
 }

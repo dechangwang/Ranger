@@ -16,7 +16,7 @@ public class AccountDaoImplTest {
         account.setName("hello12");
         account.setPassword("111");
         AccountDaoImpl accountDaoImpl = new AccountDaoImpl();
-        accountDaoImpl.create(account);
+//        accountDaoImpl.create(account);
 
     }
 

@@ -1,7 +1,7 @@
 package cn.edu.tongji.ranger.dao.impl;
 
 import cn.edu.tongji.ranger.init.HibernateUtil;
-import cn.edu.tongji.ranger.model.LocationD;
+import cn.edu.tongji.ranger.model.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,8 +44,11 @@ public class SessionPersistenceTest {
 
     @Test
     public void testListAll(){
-        List<LocationD> lds = sp.listAll(LocationD.class);
-        System.out.println(lds);
+        List<TripDestination>  results = sp.listAll(TripDestination.class);
+        System.out.print(results.size());
+        for(TripDestination result : results){
+            System.out.println(result);
+        }
     }
 
 }

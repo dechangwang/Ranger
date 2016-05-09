@@ -77,4 +77,14 @@ public class TripDetail {
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TripDetail{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", content='" + content + '\'' +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

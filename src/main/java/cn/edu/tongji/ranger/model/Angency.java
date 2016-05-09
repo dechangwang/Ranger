@@ -39,6 +39,7 @@ public class Angency {
         this.brief = brief;
         this.password = password;
         this.cname = cname;
+
     }
 
     public Angency(long id, String name, String type, String number, String phone,
@@ -60,6 +61,7 @@ public class Angency {
 
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;
@@ -71,7 +73,6 @@ public class Angency {
 
     @Basic
     @Column(name = "register_name")
-
     public String getName() {
         return name;
     }
@@ -140,7 +141,9 @@ public class Angency {
     }
 
     public void setCertificate(String certificate) {
+        this.certificate = certificate;
     }
+
 
     @Basic
     @Column(name = "balance")
@@ -158,9 +161,11 @@ public class Angency {
         return brief;
     }
 
+
     public void setBrief(String brief) {
         this.brief = brief;
     }
+
 
 
     @Override
