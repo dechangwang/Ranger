@@ -60,6 +60,11 @@ public class UploadFileController {
     public static String getDir() {
         return dir;
     }
+
+    public static void setDir(String dir) {
+        UploadFileController.dir = dir;
+    }
+
     public static void uploadFile() throws IOException {
         if (!certificate.isEmpty()) {
             bytes = certificate.getBytes();

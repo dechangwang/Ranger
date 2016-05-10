@@ -42,6 +42,7 @@ public class RegisterController {
 
             if (angencyService.findExistAngency(angency.getCname()).size() == 0) {
                 angencyService.create(angency);
+                UploadFileController.setDir("");
                 System.out.println("可以注册");
             } else {
                 System.out.println("has registered");

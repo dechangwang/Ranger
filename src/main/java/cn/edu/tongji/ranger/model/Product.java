@@ -19,6 +19,8 @@ public class Product {
     private String postReceiver;
     private String postAddress;
     private String postPhone;
+    private long setoffLocationId;
+    private int clickRate;
 
     @Id
     @Column(name = "id")
@@ -144,5 +146,25 @@ public class Product {
         result = 31 * result + (postAddress != null ? postAddress.hashCode() : 0);
         result = 31 * result + (postPhone != null ? postPhone.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "setoff_location_id")
+    public long getSetoffLocationId() {
+        return setoffLocationId;
+    }
+
+    public void setSetoffLocationId(long setoffLocationId) {
+        this.setoffLocationId = setoffLocationId;
+    }
+
+    @Basic
+    @Column(name = "clickRate")
+    public int getClickRate() {
+        return clickRate;
+    }
+
+    public void setClickRate(int clickRate) {
+        this.clickRate = clickRate;
     }
 }

@@ -12,6 +12,9 @@ public class TripSetoff {
     private long id;
     private Timestamp tripSetoffDate;
     private Timestamp updateTime;
+    private int purchaseCount;
+    private int commentCount;
+    private int avgRemark;
 
     @Id
     @Column(name = "id")
@@ -64,5 +67,35 @@ public class TripSetoff {
         result = 31 * result + (tripSetoffDate != null ? tripSetoffDate.hashCode() : 0);
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "purchase_count")
+    public int getPurchaseCount() {
+        return purchaseCount;
+    }
+
+    public void setPurchaseCount(int purchaseCount) {
+        this.purchaseCount = purchaseCount;
+    }
+
+    @Basic
+    @Column(name = "comment_count")
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    @Basic
+    @Column(name = "avg_remark")
+    public int getAvgRemark() {
+        return avgRemark;
+    }
+
+    public void setAvgRemark(int avgRemark) {
+        this.avgRemark = avgRemark;
     }
 }
