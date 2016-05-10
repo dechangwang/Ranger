@@ -2,10 +2,8 @@ package cn.edu.tongji.ranger.controller;
 
 import cn.edu.tongji.ranger.model.Account;
 import cn.edu.tongji.ranger.model.Angency;
-import cn.edu.tongji.ranger.model.Guide;
-import cn.edu.tongji.ranger.service.AccountService;
+import cn.edu.tongji.ranger.service.AngencyService;
 import cn.edu.tongji.ranger.service.GuideService;
-import cn.edu.tongji.ranger.utils.ReturnWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +17,7 @@ import java.util.Map;
 public class AccountController {
 
     @Autowired
-    private AccountService accountService;
+    private AngencyService accountService;
 
     @Autowired
     private GuideService guideService;

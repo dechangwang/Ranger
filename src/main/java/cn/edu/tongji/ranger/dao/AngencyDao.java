@@ -9,5 +9,6 @@ import java.util.List;
  */
 public interface AngencyDao {
     public void create(Angency angency);
-    public List<Angency> find();
+    public List<Angency> findByName(String name);
+
 }

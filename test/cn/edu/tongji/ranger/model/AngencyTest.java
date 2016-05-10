@@ -1,16 +1,6 @@
 package cn.edu.tongji.ranger.model;
 
-import cn.edu.tongji.ranger.dao.AccountDao;
-import cn.edu.tongji.ranger.dao.impl.AccountDaoImpl;
-import cn.edu.tongji.ranger.service.AccountService;
-import cn.edu.tongji.ranger.service.impl.AccountServiceImpl;
 import junit.framework.TestCase;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 /**
  * Created by wangdechang on 2016/4/25.

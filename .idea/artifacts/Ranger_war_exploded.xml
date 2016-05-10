@@ -31,6 +31,7 @@
           <element id="library" level="project" name="Maven: c3p0:c3p0:0.9.1" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-entitymanager:4.2.1.Final" />
           <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.2.2" />
           <element id="library" level="project" name="Maven: com.googlecode.genericdao:dao-hibernate:1.2.0" />
           <element id="library" level="project" name="Maven: com.googlecode.genericdao:dao:1.2.0" />
           <element id="library" level="project" name="Maven: com.googlecode.genericdao:search-hibernate:1.2.0" />
@@ -39,7 +40,6 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.10" />
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
-          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.2.2" />
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.7.3" />

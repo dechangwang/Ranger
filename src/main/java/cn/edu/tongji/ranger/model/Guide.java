@@ -42,6 +42,8 @@ public class Guide {
 
     }
 
+    @Id
+    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -50,6 +52,8 @@ public class Guide {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -62,10 +66,8 @@ public class Guide {
         return gender;
     }
 
-    public void setGender(boolean gender) {
-        this.gender = gender;
-    }
-
+    @Basic
+    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -74,6 +76,8 @@ public class Guide {
         this.phone = phone;
     }
 
+    @Basic
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -82,6 +86,8 @@ public class Guide {
         this.email = email;
     }
 
+    @Basic
+    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -98,8 +104,42 @@ public class Guide {
         this.angency_id = angency_id;
     }
 
+    @Basic
+    @Column(name = "gender")
     public boolean isGender() {
         return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Guide guide = (Guide) o;
+
+        if (id != guide.id) return false;
+        if (gender != guide.gender) return false;
+        if (name != null ? !name.equals(guide.name) : guide.name != null) return false;
+        if (phone != null ? !phone.equals(guide.phone) : guide.phone != null) return false;
+        if (email != null ? !email.equals(guide.email) : guide.email != null) return false;
+        if (address != null ? !address.equals(guide.address) : guide.address != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (gender ? 1 : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        return result;
     }
 
     //    public Angency getAngency() {
