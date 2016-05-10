@@ -13,7 +13,7 @@ public class TripDestination {
 
 
     private Location location;
-    
+
     @Id
     @Column(name = "id")
     public long getId() {
