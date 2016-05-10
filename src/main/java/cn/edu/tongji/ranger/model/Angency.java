@@ -12,6 +12,7 @@ public class Angency {
     private String name;
     private String type;
     private String number;
+    private String rnumber;
     private String phone;
     private String email;
     private String address;
@@ -26,7 +27,7 @@ public class Angency {
 
     public Angency(long id, String name, String type, String number, String phone,
                    String email, String address, String certificate, double balance,
-                   String brief, String password, String cname) {
+                   String brief, String password, String cname,String rnumber) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -39,7 +40,7 @@ public class Angency {
         this.brief = brief;
         this.password = password;
         this.cname = cname;
-
+        this.rnumber = rnumber;
     }
 
     public Angency(long id, String name, String type, String number, String phone,
@@ -105,6 +106,16 @@ public class Angency {
     }
 
     @Basic
+    @Column(name = "regiester_number")
+    public String getRnumber() {
+        return rnumber;
+    }
+
+    public void setRnumber(String rnumber) {
+        this.rnumber = rnumber;
+    }
+
+    @Basic
     @Column(name = "phone")
     public String getPhone() {
         return phone;
@@ -167,6 +178,26 @@ public class Angency {
     }
 
 
+    @Basic
+    @Column(name = "name")
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+
+    @Basic
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -212,25 +243,6 @@ public class Angency {
         return result;
     }
 
-    @Basic
-    @Column(name = "name")
-    public String getCname() {
-        return cname;
-    }
-
-    public void setCname(String cname) {
-        this.cname = cname;
-    }
-
-    @Basic
-    @Column(name = "password")
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public String toString() {
@@ -240,6 +252,7 @@ public class Angency {
                 ", type='" + type + '\'' +
                 ", number='" + number + '\'' +
                 ", phone='" + phone + '\'' +
+                ", rnumber='"+rnumber+'\''+
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", certificate='" + certificate + '\'' +

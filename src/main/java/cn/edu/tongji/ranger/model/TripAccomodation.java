@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by LiaoShanhe on 2016/4/27.
+
  */
 @Entity
 @Table(name = "trip_accomodation", schema = "ranger", catalog = "")
@@ -92,6 +92,7 @@ public class TripAccomodation {
         return result;
     }
 
+
     @Override
     public String toString() {
         return "TripAccomodation{" +
@@ -102,5 +103,6 @@ public class TripAccomodation {
                 ", updateTime=" + updateTime +
                 '}';
     }
+
 
 }

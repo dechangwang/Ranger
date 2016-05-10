@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by LiaoShanhe on 2016/4/27.
+
  */
 @Entity
 @Table(name = "trip_setoff", schema = "ranger", catalog = "")
@@ -12,6 +12,11 @@ public class TripSetoff {
     private long id;
     private Timestamp tripSetoffDate;
     private Timestamp updateTime;
+
+    private int purchaseCount;
+    private int commentCount;
+    private int avgRemark;
+
 
     @Id
     @Column(name = "id")
@@ -66,12 +71,36 @@ public class TripSetoff {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "TripSetoff{" +
-                "id=" + id +
-                ", tripSetoffDate=" + tripSetoffDate +
-                ", updateTime=" + updateTime +
-                '}';
+
+
+    @Basic
+    @Column(name = "purchase_count")
+    public int getPurchaseCount() {
+        return purchaseCount;
+    }
+
+    public void setPurchaseCount(int purchaseCount) {
+        this.purchaseCount = purchaseCount;
+    }
+
+    @Basic
+    @Column(name = "comment_count")
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    @Basic
+    @Column(name = "avg_remark")
+    public int getAvgRemark() {
+        return avgRemark;
+    }
+
+    public void setAvgRemark(int avgRemark) {
+        this.avgRemark = avgRemark;
+
     }
 }

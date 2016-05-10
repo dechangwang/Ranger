@@ -3,7 +3,7 @@ package cn.edu.tongji.ranger.model;
 import javax.persistence.*;
 
 /**
- * Created by LiaoShanhe on 2016/4/27.
+
  */
 @Entity
 @Table(name = "trip_destination", schema = "ranger", catalog = "")
@@ -12,7 +12,9 @@ public class TripDestination {
     private String brief;
 
 
+
     private Location location;
+
 
     @Id
     @Column(name = "id")
@@ -66,6 +68,7 @@ public class TripDestination {
         return result;
     }
 
+
     @Override
     public String toString() {
         return "TripDestination{" +
@@ -74,4 +77,5 @@ public class TripDestination {
                 ", location=" + location +
                 '}';
     }
+
 }

@@ -1,5 +1,6 @@
 package cn.edu.tongji.ranger.model;
 
+
 import javax.persistence.*;
 
 /**
@@ -72,4 +73,5 @@ public class Location {
                 ", fatherId=" + fatherId +
                 '}';
     }
+
 }

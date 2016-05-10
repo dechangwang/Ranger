@@ -8,6 +8,7 @@ rangerApp.controller('UserinfoController', ['$scope', '$http', function ($scope,
         name: '',
         type: '身份证',
         number: '',
+        rnumber:'',
         phone: '',
         email: '',
         password: '',
@@ -22,7 +23,7 @@ rangerApp.controller('UserinfoController', ['$scope', '$http', function ($scope,
         $http.post('/Ranger/angency/register', userInfo)
             .success(function (data) {
                 console.log(data);
-                alert("注册结果  " + data.res);
+                alert("register result：  " + data.res);
             }).error(function (err) {
                 alert("注册失败  " + err);
             })

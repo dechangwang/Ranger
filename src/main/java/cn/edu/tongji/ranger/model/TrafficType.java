@@ -3,7 +3,11 @@ package cn.edu.tongji.ranger.model;
 import javax.persistence.*;
 
 /**
+<<<<<<< HEAD
  * Created by LiaoShanhe on 2016/4/27.
+=======
+ * Created by wangdechang on 2016/5/7.
+>>>>>>> dev_w
  */
 @Entity
 @Table(name = "traffic_type", schema = "ranger", catalog = "")
@@ -72,4 +76,5 @@ public class TrafficType {
                 ", brief='" + brief + '\'' +
                 '}';
     }
+
 }
