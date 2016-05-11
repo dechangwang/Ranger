@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +23,7 @@ public class ProductsController {
     @Autowired
     private ProductsService productsService;
 
-    @RequestMapping(value = "release",method = RequestMethod.POST)
+    @RequestMapping(value = "/release",method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> releaseProduct(@RequestBody ProductsInfo productsInfo) {
         Location location = new Location();
@@ -31,5 +33,16 @@ public class ProductsController {
 
         System.out.println(productsInfo);
         return null;
+    }
+    @RequestMapping(value = "/lists",method = RequestMethod.GET)
+    @ResponseBody
+    public List<BB> productsList(){
+        List<BB> b = new ArrayList<BB>();
+        b.add(new BB("122","南京旅游","2016-6-1","2016-5-1","成人："+1000.0+"小孩：500","未出行"));
+        b.add(new BB("111","北京旅游","2016-6-1","2016-5-1",""+1000.0,"未出行"));
+        b.add(new BB("123","北京旅游","2016-6-1","2016-5-1",""+1000.0,"未出行"));
+        b.add(new BB("133","北京旅游","2016-6-1","2016-5-1",""+1000.0,"未出行"));
+
+        return b;
     }
 }

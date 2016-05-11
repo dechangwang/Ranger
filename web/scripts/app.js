@@ -3,7 +3,7 @@
 /* App Module */
 
 var rangerApp = angular.module('rangerApp', ['ui.router','ngFileUpload']);
-rangerApp.config(function ($stateProvider, $urlRouterProvider) {
+rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',function ($stateProvider, $urlRouterProvider,$locationProvider) {
     $urlRouterProvider.otherwise('/home');
     $stateProvider
         .state('home', {
@@ -68,7 +68,31 @@ rangerApp.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-});
+        .state('home.my_product',{
+            url:'/my_product',
+            views:{
+                'main@home':{
+                    templateUrl:'views/my_product.html',
+                   /* controller:function ($scope,$http) {
+                        $scope.productList={
+                            name:'',
+                            date:''
+                        };
+                        $http({
+                            url: '/Ranger/products/lists',
+                            method: 'GET'
+                        }).then(function (response) {
+                            $scope.productList = response.data;
+                            console.log(response.data);
+                        }, function (err) {
+                            alert("获取失败  " + err);
+                        });
+                    }*/
+                }
+            }
+        });
+    // $locationProvider.html5Mode(true);
+}]);
 
 /*var rangerApp = angular.module('rangerApp',['ngRoute']);
  rangerApp.config(['$routeProvider',function ($routeProvider) {

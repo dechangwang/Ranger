@@ -22,6 +22,7 @@ public class Product {
     private long setoffLocationId;
     private int clickRate;
 
+
     @Id
     @Column(name = "id")
     public long getId() {
