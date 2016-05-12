@@ -1,29 +1,51 @@
 package cn.edu.tongji.ranger.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
+import java.util.List;
+import java.util.Set;
 
 /**
- * Created by wangdechang on 2016/5/7.
+ * Created by LiaoShanhe on 2016/4/27.
  */
 @Entity
+@Table(name="product")
 public class Product {
     private long id;
     private String name;
     private String summary;
     private String searchContent;
     private int duration;
+
     private String postcode;
     private String postReceiver;
     private String postAddress;
     private String postPhone;
-    private long setoffLocationId;
+//    private long setoffLocationId;
     private int clickRate;
 
 
+    private Location setoffLocation;
+
+    private Angency supplier;
+
+    private Set<TripDestination> tripDestinations;
+    private Set<TripDetail> tripDetails;
+    private Set<TripTraffic> tripTraffics;
+    private Set<TripPrice> tripPrices;
+    private Set<TripPicture> tripPictures;
+    private Set<TripAccomodation> tripAccomodations;
+    private Set<TripSetoff> tripSetoffs;
+
+
+
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;
@@ -73,6 +95,7 @@ public class Product {
         this.duration = duration;
     }
 
+
     @Basic
     @Column(name = "postcode")
     public String getPostcode() {
@@ -113,52 +136,6 @@ public class Product {
         this.postPhone = postPhone;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Product product = (Product) o;
-
-        if (id != product.id) return false;
-        if (duration != product.duration) return false;
-        if (name != null ? !name.equals(product.name) : product.name != null) return false;
-        if (summary != null ? !summary.equals(product.summary) : product.summary != null) return false;
-        if (searchContent != null ? !searchContent.equals(product.searchContent) : product.searchContent != null)
-            return false;
-        if (postcode != null ? !postcode.equals(product.postcode) : product.postcode != null) return false;
-        if (postReceiver != null ? !postReceiver.equals(product.postReceiver) : product.postReceiver != null)
-            return false;
-        if (postAddress != null ? !postAddress.equals(product.postAddress) : product.postAddress != null) return false;
-        if (postPhone != null ? !postPhone.equals(product.postPhone) : product.postPhone != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (summary != null ? summary.hashCode() : 0);
-        result = 31 * result + (searchContent != null ? searchContent.hashCode() : 0);
-        result = 31 * result + duration;
-        result = 31 * result + (postcode != null ? postcode.hashCode() : 0);
-        result = 31 * result + (postReceiver != null ? postReceiver.hashCode() : 0);
-        result = 31 * result + (postAddress != null ? postAddress.hashCode() : 0);
-        result = 31 * result + (postPhone != null ? postPhone.hashCode() : 0);
-        return result;
-    }
-
-    @Basic
-    @Column(name = "setoff_location_id")
-    public long getSetoffLocationId() {
-        return setoffLocationId;
-    }
-
-    public void setSetoffLocationId(long setoffLocationId) {
-        this.setoffLocationId = setoffLocationId;
-    }
-
     @Basic
     @Column(name = "clickRate")
     public int getClickRate() {
@@ -168,4 +145,105 @@ public class Product {
     public void setClickRate(int clickRate) {
         this.clickRate = clickRate;
     }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "setoff_location_id")
+    public Location getSetoffLocation() {
+        return setoffLocation;
+    }
+
+    public void setSetoffLocation(Location setoffLocation) {
+        this.setoffLocation = setoffLocation;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "supplier_id")
+    public Angency getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Angency supplier) {
+        this.supplier = supplier;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripDestination> getTripDestinations() {
+        return tripDestinations;
+    }
+
+    public void setTripDestinations(Set<TripDestination> tripDestinations) {
+        this.tripDestinations = tripDestinations;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripDetail> getTripDetails() {
+        return tripDetails;
+    }
+
+    public void setTripDetails(Set<TripDetail> tripDetails) {
+        this.tripDetails = tripDetails;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripTraffic> getTripTraffics() {
+        return tripTraffics;
+    }
+
+    public void setTripTraffics(Set<TripTraffic> tripTraffics) {
+        this.tripTraffics = tripTraffics;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripPrice> getTripPrices() {
+        return tripPrices;
+    }
+
+    public void setTripPrices(Set<TripPrice> tripPrices) {
+        this.tripPrices = tripPrices;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripPicture> getTripPictures() {
+        return tripPictures;
+    }
+
+    public void setTripPictures(Set<TripPicture> tripPictures) {
+        this.tripPictures = tripPictures;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripAccomodation> getTripAccomodations() {
+        return tripAccomodations;
+    }
+
+    public void setTripAccomodations(Set<TripAccomodation> tripAccomodations) {
+        this.tripAccomodations = tripAccomodations;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripSetoff> getTripSetoffs() {
+        return tripSetoffs;
+    }
+
+    public void setTripSetoffs(Set<TripSetoff> tripSetoffs) {
+        this.tripSetoffs = tripSetoffs;
+    }
+
+    
 }

@@ -2,9 +2,7 @@ package cn.edu.tongji.ranger.model;
 
 import javax.persistence.*;
 
-/**
- * Created by wangdechang on 2016/5/7.
- */
+
 @Entity
 @Table(name = "traffic_type", schema = "ranger", catalog = "")
 public class TrafficType {
@@ -63,4 +61,14 @@ public class TrafficType {
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TrafficType{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", brief='" + brief + '\'' +
+                '}';
+    }
+
 }

@@ -33,7 +33,7 @@ rangerApp.controller('productCtrl', ['$scope', '$http', function ($scope, $http)
     };
     $scope.releaseProduct = function (products) {
         console.log(products);
-        $http.post('/Ranger/angency/productgister', guideInfo)
+        $http.post('/Ranger/products/release', products)
             .success(function (data) {
                 console.log(data);
                 alert("注册结果  " + data.res);

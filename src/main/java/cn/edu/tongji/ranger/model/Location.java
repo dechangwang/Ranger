@@ -1,20 +1,25 @@
 package cn.edu.tongji.ranger.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
+
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
- * Created by wangdechang on 2016/5/7.
+ * Created by LiaoShanhe on 2016/4/27.
  */
 @Entity
+@Table(name="location")
 public class Location {
     private long id;
     private String name;
     private long fatherId;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;
@@ -65,4 +70,14 @@ public class Location {
         result = 31 * result + (int) (fatherId ^ (fatherId >>> 32));
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", fatherId=" + fatherId +
+                '}';
+    }
+
 }

@@ -60,7 +60,9 @@ public class Angency {
     }
 
 
+
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;
@@ -78,6 +80,7 @@ public class Angency {
 
     public void setName(String name) {
         this.name = name;
+
     }
 
     @Basic
@@ -88,6 +91,7 @@ public class Angency {
 
     public void setType(String type) {
         this.type = type;
+
     }
 
     @Basic
@@ -98,6 +102,7 @@ public class Angency {
 
     public void setNumber(String number) {
         this.number = number;
+
     }
 
     @Basic
@@ -150,6 +155,7 @@ public class Angency {
         this.certificate = certificate;
     }
 
+
     @Basic
     @Column(name = "balance")
     public double getBalance() {
@@ -166,9 +172,11 @@ public class Angency {
         return brief;
     }
 
+
     public void setBrief(String brief) {
         this.brief = brief;
     }
+
 
     @Basic
     @Column(name = "name")
@@ -190,6 +198,7 @@ public class Angency {
         this.password = password;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -204,6 +213,7 @@ public class Angency {
         if (type != null ? !type.equals(angency.type) : angency.type != null)
             return false;
         if (number != null ? !number.equals(angency.number) : angency.number != null)
+
             return false;
         if (phone != null ? !phone.equals(angency.phone) : angency.phone != null) return false;
         if (email != null ? !email.equals(angency.email) : angency.email != null) return false;
@@ -252,4 +262,5 @@ public class Angency {
                 ", cname ='"+cname+'\''+
                 '}';
     }
+
 }

@@ -2,16 +2,17 @@ package cn.edu.tongji.ranger.model;
 
 import javax.persistence.*;
 
-/**
- * Created by wangdechang on 2016/5/7.
- */
 @Entity
 @Table(name = "trip_destination", schema = "ranger", catalog = "")
 public class TripDestination {
     private long id;
     private String brief;
+    private Product product;
+    private Location location;
+//    private long productId;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;
@@ -31,23 +32,34 @@ public class TripDestination {
         this.brief = brief;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        TripDestination that = (TripDestination) o;
-
-        if (id != that.id) return false;
-        if (brief != null ? !brief.equals(that.brief) : that.brief != null) return false;
-
-        return true;
+    @ManyToOne
+    @JoinColumn(name="location_id")
+    public Location getLocation() {
+        return location;
     }
 
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (brief != null ? brief.hashCode() : 0);
-        return result;
+    public void setLocation(Location location) {
+        this.location = location;
     }
+
+    @ManyToOne
+    @JoinColumn(name="product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name="product_id")
+//    public Product getProduct() {
+//        return product;
+//    }
+//
+//    public void setProduct(Product product) {
+//        this.product = product;
+//    }
 }

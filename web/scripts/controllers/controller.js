@@ -2,6 +2,7 @@
 
 /* Controllers */
 
+
 /*
 var rangerControllers = angular.module('RangerControllers', []);
 */
@@ -14,6 +15,7 @@ rangerApp.controller('angencyRegister',function($scope){
 
 });
 /*rangerControllers.controller('registerCtrl', ['$scope', '$http',
+
     function($scope, $http) {
         $scope.account = {
             name: '',
@@ -22,7 +24,9 @@ rangerApp.controller('angencyRegister',function($scope){
         $scope.register = function (account) {
             alert("进行注册");
             $http.post('/Ranger/api/account/register', account).success(function (data) {
+
  alert("注册成功  " + data);
+
             }).error(function (err) {
                 alert("注册失败  " + err);
             })
@@ -37,12 +41,24 @@ rangerControllers.controller('loginCtrl', ['$scope', '$http',
         };
         $scope.login = function (account2) {
             alert("进行登录");
-            $http.post('/Ranger/api/account/login', account2).success(function (response) {
+
+            $http({
+                url: '/Ranger/api/account/login',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                transformRequest : function(data) {
+                    return $.param(data);
+                },
+                data: account2
+            }).success(function (response) {
                 alert("登录成功  " + response.result);
             }).error(function (err) {
                 alert("登录失败  " + err);
             })
         }
+
     }]);*/
 
 

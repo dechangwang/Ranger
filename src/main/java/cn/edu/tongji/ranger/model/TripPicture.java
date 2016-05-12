@@ -3,7 +3,7 @@ package cn.edu.tongji.ranger.model;
 import javax.persistence.*;
 
 /**
- * Created by wangdechang on 2016/5/7.
+
  */
 @Entity
 @Table(name = "trip_picture", schema = "ranger", catalog = "")
@@ -11,6 +11,7 @@ public class TripPicture {
     private long id;
     private String picturePath;
     private String brief;
+    private Product product;
 
     @Id
     @Column(name = "id")
@@ -42,6 +43,17 @@ public class TripPicture {
         this.brief = brief;
     }
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,4 +75,15 @@ public class TripPicture {
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
         return result;
     }
+
+
+    @Override
+    public String toString() {
+        return "TripPicture{" +
+                "id=" + id +
+                ", picturePath='" + picturePath + '\'' +
+                ", brief='" + brief + '\'' +
+                '}';
+    }
+
 }

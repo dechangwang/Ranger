@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by wangdechang on 2016/5/7.
+
  */
 @Entity
 @Table(name = "trip_accomodation", schema = "ranger", catalog = "")
@@ -14,6 +14,7 @@ public class TripAccomodation {
     private String brief;
     private byte isExpired;
     private Timestamp updateTime;
+    private Product product;
 
     @Id
     @Column(name = "id")
@@ -65,6 +66,20 @@ public class TripAccomodation {
         this.updateTime = updateTime;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -91,4 +106,18 @@ public class TripAccomodation {
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
         return result;
     }
+
+
+    @Override
+    public String toString() {
+        return "TripAccomodation{" +
+                "id=" + id +
+                ", accomodationType='" + accomodationType + '\'' +
+                ", brief='" + brief + '\'' +
+                ", isExpired=" + isExpired +
+                ", updateTime=" + updateTime +
+                '}';
+    }
+
+
 }

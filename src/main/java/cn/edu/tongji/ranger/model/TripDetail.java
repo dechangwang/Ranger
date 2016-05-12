@@ -3,9 +3,7 @@ package cn.edu.tongji.ranger.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-/**
- * Created by wangdechang on 2016/5/7.
- */
+
 @Entity
 @Table(name = "trip_detail", schema = "ranger", catalog = "")
 public class TripDetail {
@@ -13,8 +11,11 @@ public class TripDetail {
     private String type;
     private String content;
     private Timestamp updateTime;
+//    private long productId;
+    private Product product;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;
@@ -54,6 +55,16 @@ public class TripDetail {
         this.updateTime = updateTime;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,8 +76,8 @@ public class TripDetail {
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
         if (content != null ? !content.equals(that.content) : that.content != null) return false;
         if (updateTime != null ? !updateTime.equals(that.updateTime) : that.updateTime != null) return false;
+        return product != null ? product.equals(that.product) : that.product == null;
 
-        return true;
     }
 
     @Override
@@ -75,6 +86,18 @@ public class TripDetail {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (content != null ? content.hashCode() : 0);
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TripDetail{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", content='" + content + '\'' +
+                ", updateTime=" + updateTime +
+                ", product=" + product +
+                '}';
     }
 }

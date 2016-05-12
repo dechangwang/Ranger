@@ -1,6 +1,5 @@
 package cn.edu.tongji.ranger.service.impl;
 
-import cn.edu.tongji.ranger.dao.AccountDao;
 import cn.edu.tongji.ranger.dao.AngencyDao;
 import cn.edu.tongji.ranger.model.Account;
 import cn.edu.tongji.ranger.model.Angency;
@@ -11,25 +10,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service("AccountService")
+@Service("AngencyService")
 @Transactional
 public class AngencyServiceImpl implements AngencyService {
 
-    @Autowired
-    private AccountDao accountDao;
+//    @Autowired
+//    private AccountDao accountDao;
     @Autowired
     private AngencyDao angencyDao;
 
-    public void create(Account account) {
-        accountDao.create(account);
-    }
-
+//    public void create(Account account) {
+//        accountDao.create(account);
+//    }
+//
     public void create(Angency angency){
-        accountDao.create(angency);
+        angencyDao.create(angency);
     }
-    public List<Account> find(String name) {
-        return accountDao.findByName(name);
-    }
+//    public List<Account> find(String name) {
+//        return accountDao.findByName(name);
+//    }
 
     public List<Angency> findExistAngency(String name) {
         return angencyDao.findByName(name);

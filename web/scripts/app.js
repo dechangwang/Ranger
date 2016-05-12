@@ -122,3 +122,5 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',fun
  redirectTo:'/list'
  });
  }]);*/
+
+
