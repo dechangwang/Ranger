@@ -7,7 +7,7 @@
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">user</property>
-        <property name="hibernate.connection.url">jdbc:mysql://115.28.177.76:3306/ranger</property>
+        <property name="hibernate.connection.url">jdbc:mysql://115.28.177.76:3306/ranger?useUnicode=true&amp;characterEncoding=UTF-8</property>
         <property name="hibernate.connection.username">user</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
