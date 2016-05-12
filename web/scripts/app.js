@@ -4,6 +4,7 @@
 
 var rangerApp = angular.module('rangerApp', ['ui.router','ngFileUpload']);
 rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',function ($stateProvider, $urlRouterProvider,$locationProvider) {
+
     $urlRouterProvider.otherwise('/home');
     $stateProvider
         .state('home', {
@@ -90,7 +91,15 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',fun
                     }*/
                 }
             }
-        });
+        })
+        .state('home.invoice',{
+            url:'/invoice',
+            views:{
+                'main@home':{
+                    templateUrl:'views/invoice.html'
+                }
+            }
+        })
     // $locationProvider.html5Mode(true);
 }]);
 
