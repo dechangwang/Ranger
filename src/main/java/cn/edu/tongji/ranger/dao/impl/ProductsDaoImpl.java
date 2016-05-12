@@ -2,7 +2,9 @@ package cn.edu.tongji.ranger.dao.impl;
 
 import cn.edu.tongji.ranger.dao.ProductsDao;
 import cn.edu.tongji.ranger.model.*;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +15,25 @@ import org.springframework.stereotype.Repository;
 public class ProductsDaoImpl implements ProductsDao {
     @Autowired
     private SessionFactory sessionFactory;
+
     public void create(Product product) {
-        sessionFactory.getCurrentSession().persist(product);
+        Session session = sessionFactory.getCurrentSession();
+//            Transaction trans = session.beginTransaction();
+        session.saveOrUpdate(product);
+//            trans.commit();
+
+
+        //sessionFactory.getCurrentSession().persist(product);
+    }
+
+    public <T> T findById(Long id, Class<T> type) {
+        Session session = sessionFactory.getCurrentSession();
+        T result = null;
+
+        T instance = (T) session.get(type, id);
+        result = instance;
+
+        return result;
     }
 
     public void create(TripPicture tripPicture) {

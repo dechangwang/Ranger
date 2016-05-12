@@ -1,7 +1,6 @@
 package cn.edu.tongji.ranger.controller;
 
-import cn.edu.tongji.ranger.model.Location;
-import cn.edu.tongji.ranger.model.ProductsInfo;
+import cn.edu.tongji.ranger.model.*;
 import cn.edu.tongji.ranger.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wangdechang on 2016/5/7.
@@ -25,14 +22,62 @@ public class ProductsController {
 
     @RequestMapping(value = "/release",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> releaseProduct(@RequestBody ProductsInfo productsInfo) {
+    public Map<String, String> releaseProduct(@RequestBody ProductsInfo productsInfo) {  //发布产品
+        Product product = new Product();
+        product.setName(productsInfo.getName());
+        product.setSummary(productsInfo.getBrief());
+        product.setSearchContent(productsInfo.getDetail());
+        product.setDuration(productsInfo.getDuration());
+        product.setPostcode(productsInfo.getPostcode());
+        product.setPostReceiver(productsInfo.getReceiver());
+        product.setPostPhone(productsInfo.getPostphone());
+        product.setPostAddress(productsInfo.getPostaddress());
+        Angency angency = productsService.findById(7L,Angency.class);
         Location location = new Location();
-        location.setName(productsInfo.getStartloc());
         location.setFatherId(1);
+        location.setName(productsInfo.getStartloc());
+        product.setSupplier(angency);
+        product.setSetoffLocation(location);
+        TripDestination td = new TripDestination();
+        Location lt = productsService.findById(2L,Location.class);
+        td.setLocation(lt);
+        td.setBrief("");
+        Set<TripDestination> locations = new HashSet<TripDestination>();
+        locations.add(td);
+        product.setTripDestinations(locations);
+        productsService.create(product);
 
 
         System.out.println(productsInfo);
-        return null;
+        /* Product product = new Product();
+        product.setName("北京三日游");
+        product.setSummary("北京三日游");
+        product.setDuration(3);
+        product.setSearchContent("北京 三日游");
+        product.setPostcode("201804");
+        product.setPostPhone("12345678");
+        product.setPostAddress("SiPing Road");
+        product.setPostReceiver("wdchang");
+        Angency angency = sp.findById(7L,Angency.class);
+        Location location = new Location();
+        location.setName("Hunan");
+        location.setFatherId(2);
+        product.setSupplier(angency);
+        product.setSetoffLocation(location);
+        TripDestination td = new TripDestination();
+        Location lt = sp.findById(2L, Location.class);
+        td.setLocation(lt);
+//        td.setProduct(product);
+        td.setBrief("");
+        Set<TripDestination> locations = new HashSet<TripDestination>();
+        locations.add(td);
+        product.setTripDestinations(locations);
+        sp.attachDirty(product);*/
+
+
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("res","release product result");
+        return map;
     }
     @RequestMapping(value = "/lists",method = RequestMethod.GET)
     @ResponseBody

@@ -21,6 +21,10 @@ public class ProductsServiceImpl implements ProductsService {
         productsDao.create(product);
     }
 
+    public <T> T findById(Long id, Class<T> type) {
+        return productsDao.findById(id,type);
+    }
+
     public void create(TripPicture tripPicture) {
         productsDao.create(tripPicture);
     }
