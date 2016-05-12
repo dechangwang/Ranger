@@ -1,7 +1,12 @@
 package cn.edu.tongji.ranger.model;
 
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by LiaoShanhe on 2016/4/27.
@@ -14,6 +19,7 @@ public class Location {
     private long fatherId;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;

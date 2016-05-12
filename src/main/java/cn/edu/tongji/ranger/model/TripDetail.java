@@ -3,9 +3,7 @@ package cn.edu.tongji.ranger.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-/**
 
- */
 @Entity
 @Table(name = "trip_detail", schema = "ranger", catalog = "")
 public class TripDetail {
@@ -13,8 +11,10 @@ public class TripDetail {
     private String type;
     private String content;
     private Timestamp updateTime;
+    private long productId;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;
@@ -54,6 +54,16 @@ public class TripDetail {
         this.updateTime = updateTime;
     }
 
+    @Basic
+    @Column(name = "product_id")
+    public long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(long productId) {
+        this.productId = productId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,11 +72,11 @@ public class TripDetail {
         TripDetail that = (TripDetail) o;
 
         if (id != that.id) return false;
+        if (productId != that.productId) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
         if (content != null ? !content.equals(that.content) : that.content != null) return false;
-        if (updateTime != null ? !updateTime.equals(that.updateTime) : that.updateTime != null) return false;
+        return updateTime != null ? updateTime.equals(that.updateTime) : that.updateTime == null;
 
-        return true;
     }
 
     @Override
@@ -75,9 +85,9 @@ public class TripDetail {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (content != null ? content.hashCode() : 0);
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
+        result = 31 * result + (int) (productId ^ (productId >>> 32));
         return result;
     }
-
 
     @Override
     public String toString() {
@@ -86,7 +96,7 @@ public class TripDetail {
                 ", type='" + type + '\'' +
                 ", content='" + content + '\'' +
                 ", updateTime=" + updateTime +
+                ", productId=" + productId +
                 '}';
     }
-
 }

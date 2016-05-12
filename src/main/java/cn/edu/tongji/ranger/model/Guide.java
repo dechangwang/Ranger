@@ -25,25 +25,6 @@ public class Guide {
     @Column(name = "address", nullable = false, length = 200)
     private String address;
 
-//    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "angency_id", referencedColumnName = "ID")
-//    private Angency angency;
-
-    public Guide() {
-    }
-
-    public Guide(String name,long angency_id,boolean gender, String phone,
-                 String email, String address) {
-        this.name = name;
-        this.angency_id = angency_id;
-        this.gender = gender;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-
-    }
-
-
     public long getId() {
         return id;
     }
@@ -51,7 +32,6 @@ public class Guide {
     public void setId(long id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;
@@ -61,16 +41,21 @@ public class Guide {
         this.name = name;
     }
 
-    public boolean getGender() {
+    public long getAngency_id() {
+        return angency_id;
+    }
+
+    public void setAngency_id(long angency_id) {
+        this.angency_id = angency_id;
+    }
+
+    public boolean isGender() {
         return gender;
     }
 
     public void setGender(boolean gender) {
         this.gender = gender;
     }
-
-
-
 
     public String getPhone() {
         return phone;
@@ -80,7 +65,6 @@ public class Guide {
         this.phone = phone;
     }
 
-
     public String getEmail() {
         return email;
     }
@@ -89,31 +73,12 @@ public class Guide {
         this.email = email;
     }
 
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-
-    public long getAngency_id() {
-        return angency_id;
-    }
-
-    public void setAngency_id(long angency_id) {
-        this.angency_id = angency_id;
-    }
-
-    
-    public boolean isGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
     }
 
     @Override
@@ -124,19 +89,20 @@ public class Guide {
         Guide guide = (Guide) o;
 
         if (id != guide.id) return false;
+        if (angency_id != guide.angency_id) return false;
         if (gender != guide.gender) return false;
         if (name != null ? !name.equals(guide.name) : guide.name != null) return false;
         if (phone != null ? !phone.equals(guide.phone) : guide.phone != null) return false;
         if (email != null ? !email.equals(guide.email) : guide.email != null) return false;
-        if (address != null ? !address.equals(guide.address) : guide.address != null) return false;
+        return address != null ? address.equals(guide.address) : guide.address == null;
 
-        return true;
     }
 
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (int) (angency_id ^ (angency_id >>> 32));
         result = 31 * result + (gender ? 1 : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
@@ -144,12 +110,16 @@ public class Guide {
         return result;
     }
 
-    //    public Angency getAngency() {
-//        return angency;
-//    }
-//
-//    public void setAngency(Angency angency) {
-//        this.angency = angency;
-//    }
-
+    @Override
+    public String toString() {
+        return "Guide{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", angency_id=" + angency_id +
+                ", gender=" + gender +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

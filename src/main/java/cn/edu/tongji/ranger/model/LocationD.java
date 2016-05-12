@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+@Deprecated
 @Entity
 @Table(name="location")
 /**

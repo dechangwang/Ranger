@@ -30,6 +30,21 @@ public class SessionPersistence {
 
     }
 
+    public void attachDirty(Object instance) {
+
+        try {
+            Session session = sessionFactory.getCurrentSession();
+            Transaction trans = session.beginTransaction();
+            session.saveOrUpdate(instance);
+            trans.commit();
+
+        } catch (RuntimeException re) {
+
+            throw re;
+        }
+    }
+
+
     public <T>T findById(Long id, Class<T> type){
         Session session = sessionFactory.getCurrentSession();
         Transaction trans = session.beginTransaction();

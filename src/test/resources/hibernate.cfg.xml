@@ -15,6 +15,7 @@
         <property name="current_session_context_class">thread</property>
         <property name="show_sql">true</property>
 
+        <mapping class="cn.edu.tongji.ranger.model.Product" />
         <mapping class="cn.edu.tongji.ranger.model.LocationD" />
         <mapping class="cn.edu.tongji.ranger.model.Angency" />
         <mapping class="cn.edu.tongji.ranger.model.Location" />

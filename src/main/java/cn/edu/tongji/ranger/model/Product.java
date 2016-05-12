@@ -1,6 +1,14 @@
 package cn.edu.tongji.ranger.model;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by LiaoShanhe on 2016/4/27.
@@ -18,11 +26,19 @@ public class Product {
     private String postReceiver;
     private String postAddress;
     private String postPhone;
-    private long setoffLocationId;
+//    private long setoffLocationId;
     private int clickRate;
 
+    private Location setoffLocation;
+
+    private Angency supplier;
+
+    private List<TripDestination> tripDestinations;
+
+    private List<TripDetail> tripDetails;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;
@@ -113,55 +129,6 @@ public class Product {
         this.postPhone = postPhone;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Product product = (Product) o;
-
-        if (id != product.id) return false;
-        if (duration != product.duration) return false;
-        if (name != null ? !name.equals(product.name) : product.name != null) return false;
-        if (summary != null ? !summary.equals(product.summary) : product.summary != null) return false;
-        if (searchContent != null ? !searchContent.equals(product.searchContent) : product.searchContent != null)
-            return false;
-
-        if (postcode != null ? !postcode.equals(product.postcode) : product.postcode != null) return false;
-        if (postReceiver != null ? !postReceiver.equals(product.postReceiver) : product.postReceiver != null)
-            return false;
-        if (postAddress != null ? !postAddress.equals(product.postAddress) : product.postAddress != null) return false;
-        if (postPhone != null ? !postPhone.equals(product.postPhone) : product.postPhone != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (summary != null ? summary.hashCode() : 0);
-        result = 31 * result + (searchContent != null ? searchContent.hashCode() : 0);
-        result = 31 * result + duration;
-
-        result = 31 * result + (postcode != null ? postcode.hashCode() : 0);
-        result = 31 * result + (postReceiver != null ? postReceiver.hashCode() : 0);
-        result = 31 * result + (postAddress != null ? postAddress.hashCode() : 0);
-        result = 31 * result + (postPhone != null ? postPhone.hashCode() : 0);
-        return result;
-    }
-
-    @Basic
-    @Column(name = "setoff_location_id")
-    public long getSetoffLocationId() {
-        return setoffLocationId;
-    }
-
-    public void setSetoffLocationId(long setoffLocationId) {
-        this.setoffLocationId = setoffLocationId;
-    }
-
     @Basic
     @Column(name = "clickRate")
     public int getClickRate() {
@@ -172,4 +139,68 @@ public class Product {
         this.clickRate = clickRate;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "setoff_location_id")
+    public Location getSetoffLocation() {
+        return setoffLocation;
+    }
+
+    public void setSetoffLocation(Location setoffLocation) {
+        this.setoffLocation = setoffLocation;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "supplier_id")
+    public Angency getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Angency supplier) {
+        this.supplier = supplier;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name="product_id")
+    @OrderBy("id")
+    public List<TripDestination> getTripDestinations() {
+        return tripDestinations;
+    }
+
+    public void setTripDestinations(List<TripDestination> tripDestinations) {
+        this.tripDestinations = tripDestinations;
+    }
+
+//    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+//    @Cascade(CascadeType.ALL)
+//    @JoinColumn(name = "product_id")
+//    @OrderBy("id")
+//    public List<TripDetail> getTripDetails() {
+//        return tripDetails;
+//    }
+//
+//    public void setTripDetails(List<TripDetail> tripDetails) {
+//        this.tripDetails = tripDetails;
+//    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", summary='" + summary + '\'' +
+                ", searchContent='" + searchContent + '\'' +
+                ", duration=" + duration +
+                ", postcode='" + postcode + '\'' +
+                ", postReceiver='" + postReceiver + '\'' +
+                ", postAddress='" + postAddress + '\'' +
+                ", postPhone='" + postPhone + '\'' +
+                ", clickRate=" + clickRate +
+                ", setoffLocation=" + setoffLocation +
+                ", supplier=" + supplier +
+                ", tripDestinations=" + tripDestinations +
+                '}';
+    }
 }
