@@ -54,7 +54,7 @@ public class SessionPersistenceTest {
         }
     }
 
-    @Test
+    //@Test
     public void testProductListAll(){
         List<Product> results = sp.listAll(Product.class);
         System.out.println(results.size());
@@ -64,7 +64,7 @@ public class SessionPersistenceTest {
         }
     }
 
-//    @Test
+    @Test
     public void testCreateProduct(){
         Product product = new Product();
         product.setName("北京三日游");
@@ -75,11 +75,11 @@ public class SessionPersistenceTest {
         product.setPostPhone("12345678");
         product.setPostAddress("SiPing Road");
         product.setPostReceiver("wdchang");
-        Angency angency = sp.findById(7L,Angency.class);
+        Angency angency = sp.findById(9L,Angency.class);
         Location location = new Location();
 
         // change place name when repeate test
-        location.setName("Hunan");
+        location.setName("南京");
         location.setFatherId(2);
 
         product.setSupplier(angency);

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -32,19 +33,69 @@ public class ProductsController {
         product.setPostReceiver(productsInfo.getReceiver());
         product.setPostPhone(productsInfo.getPostphone());
         product.setPostAddress(productsInfo.getPostaddress());
+
         Angency angency = productsService.findById(7L,Angency.class);
         Location location = new Location();
         location.setFatherId(1);
         location.setName(productsInfo.getStartloc());
+        //travel angency
         product.setSupplier(angency);
+        //setoff location
         product.setSetoffLocation(location);
+
         TripDestination td = new TripDestination();
         Location lt = productsService.findById(2L,Location.class);
         td.setLocation(lt);
         td.setBrief("");
+        td.setProduct(product);
         Set<TripDestination> locations = new HashSet<TripDestination>();
         locations.add(td);
+        //destination
         product.setTripDestinations(locations);
+
+        //TripDetail
+        Set<TripDetail> tripDetailSet = new HashSet<TripDetail>();
+        TripDetail tripDetail = new TripDetail();
+        tripDetail.setContent(productsInfo.getDetail());
+        tripDetail.setType(productsInfo.getTag());
+        Date now = new Date();
+        Timestamp timestamp = new Timestamp(now.getTime());
+        tripDetail.setUpdateTime(timestamp);
+        tripDetail.setProduct(product);
+        tripDetailSet.add(tripDetail);
+        tripDetail.setProduct(product);
+        product.setTripDetails(tripDetailSet);
+
+        TrafficType trafficType = new TrafficType();
+        trafficType.setType("出发");
+        trafficType.setBrief(productsInfo.getSetoffway());
+
+
+        TrafficType trafficTypeBack = new TrafficType();
+        trafficTypeBack.setType("返程");
+        trafficTypeBack.setBrief(productsInfo.getBackway());
+
+       //TripTraffic
+        Set<TripTraffic> tripTrafficSet = new HashSet<TripTraffic>();
+        TripTraffic tripTraffic = new TripTraffic();
+        tripTraffic.setUpdateTime(timestamp);
+        tripTraffic.setIsExpired((byte)1);
+        tripTraffic.setTrafficType(trafficType);
+        tripTraffic.setBrief("");
+        tripTraffic.setProduct(product);
+        tripTrafficSet.add(tripTraffic);
+
+        TripTraffic tripTrafficBack = new TripTraffic();
+        tripTrafficBack.setBrief("");
+        tripTrafficBack.setUpdateTime(timestamp);
+        tripTrafficBack.setIsExpired((byte)1);
+        tripTrafficBack.setTrafficType(trafficTypeBack);
+        tripTrafficSet.add(tripTrafficBack);
+        tripTrafficBack.setProduct(product);
+        product.setTripTraffics(tripTrafficSet);
+
+        //
+
         productsService.create(product);
 
 
@@ -67,7 +118,7 @@ public class ProductsController {
         TripDestination td = new TripDestination();
         Location lt = sp.findById(2L, Location.class);
         td.setLocation(lt);
-//        td.setProduct(product);
+        td.setProduct(product);
         td.setBrief("");
         Set<TripDestination> locations = new HashSet<TripDestination>();
         locations.add(td);
