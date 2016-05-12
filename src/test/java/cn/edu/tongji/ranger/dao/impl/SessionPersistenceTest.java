@@ -79,7 +79,7 @@ public class SessionPersistenceTest {
         Location location = new Location();
 
         // change place name when repeate test
-        location.setName("HuBei");
+        location.setName("Gansu");
         location.setFatherId(2);
 
         product.setSupplier(angency);
