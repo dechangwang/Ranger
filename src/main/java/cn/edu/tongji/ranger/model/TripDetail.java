@@ -11,7 +11,8 @@ public class TripDetail {
     private String type;
     private String content;
     private Timestamp updateTime;
-    private long productId;
+//    private long productId;
+    private Product product;
 
     @Id
     @GeneratedValue
@@ -54,14 +55,14 @@ public class TripDetail {
         this.updateTime = updateTime;
     }
 
-    @Basic
-    @Column(name = "product_id")
-    public long getProductId() {
-        return productId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
@@ -72,10 +73,10 @@ public class TripDetail {
         TripDetail that = (TripDetail) o;
 
         if (id != that.id) return false;
-        if (productId != that.productId) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
         if (content != null ? !content.equals(that.content) : that.content != null) return false;
-        return updateTime != null ? updateTime.equals(that.updateTime) : that.updateTime == null;
+        if (updateTime != null ? !updateTime.equals(that.updateTime) : that.updateTime != null) return false;
+        return product != null ? product.equals(that.product) : that.product == null;
 
     }
 
@@ -85,7 +86,7 @@ public class TripDetail {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (content != null ? content.hashCode() : 0);
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
-        result = 31 * result + (int) (productId ^ (productId >>> 32));
+        result = 31 * result + (product != null ? product.hashCode() : 0);
         return result;
     }
 
@@ -96,7 +97,7 @@ public class TripDetail {
                 ", type='" + type + '\'' +
                 ", content='" + content + '\'' +
                 ", updateTime=" + updateTime +
-                ", productId=" + productId +
+                ", product=" + product +
                 '}';
     }
 }

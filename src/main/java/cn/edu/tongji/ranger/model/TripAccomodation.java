@@ -14,6 +14,7 @@ public class TripAccomodation {
     private String brief;
     private byte isExpired;
     private Timestamp updateTime;
+    private Product product;
 
     @Id
     @Column(name = "id")
@@ -64,6 +65,20 @@ public class TripAccomodation {
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
     }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -1,9 +1,11 @@
 package cn.edu.tongji.ranger.dao.impl;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Projections;
 
 import java.util.List;
 
@@ -81,6 +83,7 @@ public class SessionPersistence {
         List<T> results = null;
         try{
             results = session.createCriteria(type).list();
+            Criteria criteria = session.createCriteria(type);
             trans.commit();
         }catch(RuntimeException e){
             e.printStackTrace();

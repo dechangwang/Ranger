@@ -6,7 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -45,9 +47,9 @@ public class SessionPersistenceTest {
 
 //    @Test
     public void testListAll(){
-        List<TripDetail>  results = sp.listAll(TripDetail.class);
-        System.out.print(results.size());
-        for(TripDetail result : results){
+        List<TripSetoff>  results = sp.listAll(TripSetoff.class);
+        System.out.println(results.size());
+        for(TripSetoff result : results){
             System.out.println(result);
         }
     }
@@ -55,9 +57,10 @@ public class SessionPersistenceTest {
     @Test
     public void testProductListAll(){
         List<Product> results = sp.listAll(Product.class);
-        System.out.print(results.size());
+        System.out.println(results.size());
         for(Product result : results){
-            System.out.println(result);
+//            System.out.println(result);
+            System.out.println(result.getTripSetoffs().size());
         }
     }
 
@@ -87,11 +90,9 @@ public class SessionPersistenceTest {
         td.setLocation(lt);
 //        td.setProduct(product);
         td.setBrief("");
-        List<TripDestination> locations = new ArrayList<TripDestination>();
+        Set<TripDestination> locations = new HashSet<TripDestination>();
         locations.add(td);
-
         product.setTripDestinations(locations);
-
         sp.attachDirty(product);
 
     }

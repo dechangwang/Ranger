@@ -2,6 +2,7 @@ package cn.edu.tongji.ranger.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 /**
 
@@ -17,6 +18,8 @@ public class TripSetoff {
     private int commentCount;
     private int avgRemark;
 
+    private Product product;
+    private Guide guide;
 
     @Id
     @Column(name = "id")
@@ -48,30 +51,6 @@ public class TripSetoff {
         this.updateTime = updateTime;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TripSetoff that = (TripSetoff) o;
-
-        if (id != that.id) return false;
-        if (tripSetoffDate != null ? !tripSetoffDate.equals(that.tripSetoffDate) : that.tripSetoffDate != null)
-            return false;
-        if (updateTime != null ? !updateTime.equals(that.updateTime) : that.updateTime != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (tripSetoffDate != null ? tripSetoffDate.hashCode() : 0);
-        result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
-        return result;
-    }
-
-
 
     @Basic
     @Column(name = "purchase_count")
@@ -102,5 +81,40 @@ public class TripSetoff {
     public void setAvgRemark(int avgRemark) {
         this.avgRemark = avgRemark;
 
+    }
+
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "guide_id")
+    public Guide getGuide() {
+        return guide;
+    }
+
+    public void setGuide(Guide guide) {
+        this.guide = guide;
+    }
+
+    @Override
+    public String toString() {
+        return "TripSetoff{" +
+                "id=" + id +
+                ", tripSetoffDate=" + tripSetoffDate +
+                ", updateTime=" + updateTime +
+                ", purchaseCount=" + purchaseCount +
+                ", commentCount=" + commentCount +
+                ", avgRemark=" + avgRemark +
+                ", product=" + product +
+                ", guide=" + guide +
+                '}';
     }
 }

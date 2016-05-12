@@ -11,6 +11,7 @@ public class TripPicture {
     private long id;
     private String picturePath;
     private String brief;
+    private Product product;
 
     @Id
     @Column(name = "id")
@@ -40,6 +41,17 @@ public class TripPicture {
 
     public void setBrief(String brief) {
         this.brief = brief;
+    }
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override

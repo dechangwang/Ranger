@@ -1,6 +1,7 @@
 package cn.edu.tongji.ranger.model;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Fetch;
 import java.sql.Timestamp;
 
 /**
@@ -13,6 +14,8 @@ public class TripPrice {
     private double price;
     private byte isExpired;
     private Timestamp updateTime;
+    private Product product;
+    private TouristType touristType;
 
     @Id
     @Column(name = "id")
@@ -52,6 +55,26 @@ public class TripPrice {
 
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tourist_type_id")
+    public TouristType getTouristType() {
+        return touristType;
+    }
+
+    public void setTouristType(TouristType touristType) {
+        this.touristType = touristType;
     }
 
     @Override

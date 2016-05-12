@@ -33,9 +33,14 @@ public class Product {
 
     private Angency supplier;
 
-    private List<TripDestination> tripDestinations;
+    private Set<TripDestination> tripDestinations;
+    private Set<TripDetail> tripDetails;
+    private Set<TripTraffic> tripTraffics;
+    private Set<TripPrice> tripPrices;
+    private Set<TripPicture> tripPictures;
+    private Set<TripAccomodation> tripAccomodations;
+    private Set<TripSetoff> tripSetoffs;
 
-    private List<TripDetail> tripDetails;
 
     @Id
     @GeneratedValue
@@ -161,46 +166,82 @@ public class Product {
         this.supplier = supplier;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER)
     @Cascade(CascadeType.ALL)
-    @JoinColumn(name="product_id")
-    @OrderBy("id")
-    public List<TripDestination> getTripDestinations() {
+    @JoinColumn(name = "product_id")
+    public Set<TripDestination> getTripDestinations() {
         return tripDestinations;
     }
 
-    public void setTripDestinations(List<TripDestination> tripDestinations) {
+    public void setTripDestinations(Set<TripDestination> tripDestinations) {
         this.tripDestinations = tripDestinations;
     }
 
-//    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
-//    @Cascade(CascadeType.ALL)
-//    @JoinColumn(name = "product_id")
-//    @OrderBy("id")
-//    public List<TripDetail> getTripDetails() {
-//        return tripDetails;
-//    }
-//
-//    public void setTripDetails(List<TripDetail> tripDetails) {
-//        this.tripDetails = tripDetails;
-//    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", summary='" + summary + '\'' +
-                ", searchContent='" + searchContent + '\'' +
-                ", duration=" + duration +
-                ", postcode='" + postcode + '\'' +
-                ", postReceiver='" + postReceiver + '\'' +
-                ", postAddress='" + postAddress + '\'' +
-                ", postPhone='" + postPhone + '\'' +
-                ", clickRate=" + clickRate +
-                ", setoffLocation=" + setoffLocation +
-                ", supplier=" + supplier +
-                ", tripDestinations=" + tripDestinations +
-                '}';
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripDetail> getTripDetails() {
+        return tripDetails;
     }
+
+    public void setTripDetails(Set<TripDetail> tripDetails) {
+        this.tripDetails = tripDetails;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripTraffic> getTripTraffics() {
+        return tripTraffics;
+    }
+
+    public void setTripTraffics(Set<TripTraffic> tripTraffics) {
+        this.tripTraffics = tripTraffics;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripPrice> getTripPrices() {
+        return tripPrices;
+    }
+
+    public void setTripPrices(Set<TripPrice> tripPrices) {
+        this.tripPrices = tripPrices;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripPicture> getTripPictures() {
+        return tripPictures;
+    }
+
+    public void setTripPictures(Set<TripPicture> tripPictures) {
+        this.tripPictures = tripPictures;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripAccomodation> getTripAccomodations() {
+        return tripAccomodations;
+    }
+
+    public void setTripAccomodations(Set<TripAccomodation> tripAccomodations) {
+        this.tripAccomodations = tripAccomodations;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    public Set<TripSetoff> getTripSetoffs() {
+        return tripSetoffs;
+    }
+
+    public void setTripSetoffs(Set<TripSetoff> tripSetoffs) {
+        this.tripSetoffs = tripSetoffs;
+    }
+
+    
 }

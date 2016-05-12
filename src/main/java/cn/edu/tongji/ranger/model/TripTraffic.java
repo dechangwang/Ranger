@@ -17,6 +17,8 @@ public class TripTraffic {
     private String brief;
     private byte isExpired;
     private Timestamp updateTime;
+    private TrafficType trafficType;
+    private Product product;
 
     @Id
     @Column(name = "id")
@@ -56,6 +58,26 @@ public class TripTraffic {
 
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "traffic_type_id")
+    public TrafficType getTrafficType() {
+        return trafficType;
+    }
+
+    public void setTrafficType(TrafficType trafficType) {
+        this.trafficType = trafficType;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
