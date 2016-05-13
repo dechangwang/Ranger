@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 /**
  * Created by daidongyang on 5/9/16.
  */
-public class SessionPersistenceTest {
+public class SessionPersistenceTestD {
     SessionPersistence sp;
     @Before
     public void before(){
@@ -45,11 +45,11 @@ public class SessionPersistenceTest {
 
     }
 
-//    @Test
+    @Test
     public void testListAll(){
-        List<TripSetoff>  results = sp.listAll(TripSetoff.class);
+        List<TrafficType>  results = sp.listAll(TrafficType.class);
         System.out.println(results.size());
-        for(TripSetoff result : results){
+        for(TrafficType result : results){
             System.out.println(result);
         }
     }
@@ -57,7 +57,7 @@ public class SessionPersistenceTest {
 
 //    @Test
 
-    //@Test
+//    @Test
 
     public void testProductListAll(){
         List<Product> results = sp.listAll(Product.class);
@@ -68,7 +68,7 @@ public class SessionPersistenceTest {
         }
     }
 
-    @Test
+//    @Test
     public void testCreateProduct(){
         Product product = new Product();
         product.setName("北京三日游");
