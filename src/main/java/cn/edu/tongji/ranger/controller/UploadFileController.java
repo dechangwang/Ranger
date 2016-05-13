@@ -58,7 +58,7 @@ public class UploadFileController {
     }
 
     public static String getDir() {
-        return dir;
+        return dir+"";
     }
 
     public static void setDir(String dir) {

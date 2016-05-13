@@ -24,6 +24,8 @@ public class ProductsController {
     @RequestMapping(value = "/release",method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> releaseProduct(@RequestBody ProductsInfo productsInfo) {  //发布产品
+        System.out.println(productsInfo);
+
         Product product = new Product();
         product.setName(productsInfo.getName());
         product.setSummary(productsInfo.getBrief());
@@ -90,16 +92,70 @@ public class ProductsController {
         tripTrafficBack.setUpdateTime(timestamp);
         tripTrafficBack.setIsExpired((byte)1);
         tripTrafficBack.setTrafficType(trafficTypeBack);
-        tripTrafficSet.add(tripTrafficBack);
+        tripTrafficSet.add(tripTraffic);
         tripTrafficBack.setProduct(product);
         product.setTripTraffics(tripTrafficSet);
 
-        //
+        //TripPicture
+        Set<TripPicture> tripPictureSet = new HashSet<TripPicture>();
+        TripPicture tripPicture = new TripPicture();
+        tripPicture.setBrief("图片");
+        String path = UploadFileController.getDir();
+        tripPicture.setPicturePath(path);
+        tripPicture.setProduct(product);
+        tripPictureSet.add(tripPicture);
+        product.setTripPictures(tripPictureSet);
+
+        //TripAccomodation
+        Set<TripAccomodation> tripAccomodationSet = new HashSet<TripAccomodation>();
+        TripAccomodation tripAccomodation = new TripAccomodation();
+        tripAccomodation.setUpdateTime(timestamp);
+        tripAccomodation.setIsExpired((byte)0);
+        tripAccomodation.setAccomodationType(productsInfo.getHotelname());
+        tripAccomodation.setBrief(productsInfo.getHoteldesc());
+        tripAccomodation.setProduct(product);
+        tripAccomodationSet.add(tripAccomodation);
+        product.setTripAccomodations(tripAccomodationSet);
+
+
+        //TripPrice
+        TouristType touristTypeAdult = productsService.findById(1L,TouristType.class);
+        TouristType touristTypeChild = productsService.findById(2L,TouristType.class);
+
+        Set<TripPrice> tripPriceSet = new HashSet<TripPrice>();
+        TripPrice tripPrice = new TripPrice();
+        tripPrice.setIsExpired((byte)0);
+        tripPrice.setTouristType(touristTypeAdult);
+        tripPrice.setUpdateTime(timestamp);
+        tripPrice.setPrice(productsInfo.getAdultprice());
+        tripPrice.setProduct(product);
+        tripPriceSet.add(tripPrice);
+
+        TripPrice tripPrice2 = new TripPrice();
+        tripPrice2.setIsExpired((byte)0);
+        tripPrice2.setTouristType(touristTypeChild);
+        tripPrice2.setUpdateTime(timestamp);
+        tripPrice2.setPrice(productsInfo.getAdultprice());
+        tripPrice2.setProduct(product);
+        tripPriceSet.add(tripPrice2);
+
+        product.setTripPrices(tripPriceSet);
+
+
+//        //TripSetoff
+//        Set<TripSetoff> tripSetoffSet = new HashSet<TripSetoff>();
+//        TripSetoff tripSetoff = new TripSetoff();
+//        tripSetoff.setUpdateTime(timestamp);
+//        tripSetoff.setAvgRemark(0);
+//        tripSetoff.setCommentCount(0);
+//        tripSetoff.setPurchaseCount(0);
+//        tripSetoff.setTripSetoffDate(new Timestamp(productsInfo.getStartdate()));
+
 
         productsService.create(product);
 
 
-        System.out.println(productsInfo);
+
         /* Product product = new Product();
         product.setName("北京三日游");
         product.setSummary("北京三日游");

@@ -212,9 +212,8 @@ public class Product {
         this.tripPrices = tripPrices;
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "product")
     @Cascade(CascadeType.ALL)
-    @JoinColumn(name = "product_id")
     public Set<TripPicture> getTripPictures() {
         return tripPictures;
     }
