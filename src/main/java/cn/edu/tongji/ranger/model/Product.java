@@ -204,7 +204,8 @@ public class Product {
         this.tripPrices = tripPrices;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
+
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "product")
     @Cascade(CascadeType.ALL)
     public Set<TripPicture> getTripPictures() {
         return tripPictures;

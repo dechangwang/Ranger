@@ -11,6 +11,7 @@ public class TrafficType {
     private String brief;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;

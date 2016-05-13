@@ -17,6 +17,7 @@ public class TripAccomodation {
     private Product product;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;

@@ -18,6 +18,7 @@ public class TripPrice {
     private TouristType touristType;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;

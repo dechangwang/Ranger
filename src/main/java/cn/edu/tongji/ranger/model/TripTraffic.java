@@ -1,6 +1,11 @@
 package cn.edu.tongji.ranger.model;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
 
@@ -15,6 +20,7 @@ public class TripTraffic {
     private Product product;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;
@@ -55,6 +61,7 @@ public class TripTraffic {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "traffic_type_id")
     public TrafficType getTrafficType() {
         return trafficType;
