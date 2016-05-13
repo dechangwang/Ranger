@@ -45,7 +45,7 @@ public class SessionPersistenceTestD {
 
     }
 
-    @Test
+//    @Test
     public void testListAll(){
         List<TrafficType>  results = sp.listAll(TrafficType.class);
         System.out.println(results.size());
@@ -57,8 +57,7 @@ public class SessionPersistenceTestD {
 
 //    @Test
 
-//    @Test
-
+    @Test
     public void testProductListAll(){
         List<Product> results = sp.listAll(Product.class);
         System.out.println(results.size());
@@ -83,8 +82,6 @@ public class SessionPersistenceTestD {
         Location location = new Location();
 
         // change place name when repeate test
-
-
         location.setName("南京");
 
         location.setFatherId(2);
@@ -93,12 +90,18 @@ public class SessionPersistenceTestD {
         product.setSetoffLocation(location);
 
         TripDestination td = new TripDestination();
+        TripDestination td2 = new TripDestination();
         Location lt = sp.findById(2L, Location.class);
+        Location lt2 = sp.findById(3L, Location.class);
         td.setLocation(lt);
         td.setProduct(product);
-        td.setBrief("");
+        td.setBrief("test td1");
+        td2.setLocation(lt2);
+        td2.setProduct(product);
+        td2.setBrief("test td2");
         Set<TripDestination> locations = new HashSet<TripDestination>();
         locations.add(td);
+        locations.add(td2);
         product.setTripDestinations(locations);
         sp.attachDirty(product);
 
