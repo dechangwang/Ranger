@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 /**
  * Created by daidongyang on 5/9/16.
  */
-public class SessionPersistenceTest {
+public class SessionPersistenceTestD {
     SessionPersistence sp;
     @Before
     public void before(){
@@ -47,9 +47,9 @@ public class SessionPersistenceTest {
 
 //    @Test
     public void testListAll(){
-        List<TripSetoff>  results = sp.listAll(TripSetoff.class);
+        List<TrafficType>  results = sp.listAll(TrafficType.class);
         System.out.println(results.size());
-        for(TripSetoff result : results){
+        for(TrafficType result : results){
             System.out.println(result);
         }
     }
@@ -57,8 +57,7 @@ public class SessionPersistenceTest {
 
 //    @Test
 
-    //@Test
-
+    @Test
     public void testProductListAll(){
         List<Product> results = sp.listAll(Product.class);
         System.out.println(results.size());
@@ -68,7 +67,7 @@ public class SessionPersistenceTest {
         }
     }
 
-    @Test
+//    @Test
     public void testCreateProduct(){
         Product product = new Product();
         product.setName("北京三日游");
@@ -83,8 +82,6 @@ public class SessionPersistenceTest {
         Location location = new Location();
 
         // change place name when repeate test
-
-
         location.setName("南京");
 
         location.setFatherId(2);
@@ -93,12 +90,18 @@ public class SessionPersistenceTest {
         product.setSetoffLocation(location);
 
         TripDestination td = new TripDestination();
+        TripDestination td2 = new TripDestination();
         Location lt = sp.findById(2L, Location.class);
+        Location lt2 = sp.findById(3L, Location.class);
         td.setLocation(lt);
         td.setProduct(product);
-        td.setBrief("");
+        td.setBrief("test td1");
+        td2.setLocation(lt2);
+        td2.setProduct(product);
+        td2.setBrief("test td2");
         Set<TripDestination> locations = new HashSet<TripDestination>();
         locations.add(td);
+        locations.add(td2);
         product.setTripDestinations(locations);
         sp.attachDirty(product);
 
