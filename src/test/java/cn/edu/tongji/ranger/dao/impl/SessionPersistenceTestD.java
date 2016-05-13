@@ -57,7 +57,7 @@ public class SessionPersistenceTestD {
 
 //    @Test
 
-    @Test
+//    @Test
     public void testProductListAll(){
         List<Product> results = sp.listAll(Product.class);
         System.out.println(results.size());
@@ -67,7 +67,7 @@ public class SessionPersistenceTestD {
         }
     }
 
-//    @Test
+    @Test
     public void testCreateProduct(){
         Product product = new Product();
         product.setName("北京三日游");
@@ -82,9 +82,9 @@ public class SessionPersistenceTestD {
         Location location = new Location();
 
         // change place name when repeate test
-        location.setName("南京");
+        location.setName("Hubei");
 
-        location.setFatherId(2);
+        location.setFatherId(-1);
 
         product.setSupplier(angency);
         product.setSetoffLocation(location);

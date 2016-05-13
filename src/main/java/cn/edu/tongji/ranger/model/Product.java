@@ -21,17 +21,13 @@ public class Product {
     private String summary;
     private String searchContent;
     private int duration;
-
     private String postcode;
     private String postReceiver;
     private String postAddress;
     private String postPhone;
 //    private long setoffLocationId;
     private int clickRate;
-
-
     private Location setoffLocation;
-
     private Angency supplier;
 
     private Set<TripDestination> tripDestinations;
