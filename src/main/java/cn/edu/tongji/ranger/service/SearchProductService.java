@@ -11,5 +11,5 @@ import java.util.List;
 
 
 public interface SearchProductService {
-    List<Product>  listProducts(String searchStr, long setOffLocationId, int resultSize, SearchProductOrderEnum searchProductOrderEnum);
+    List<Product>  listProducts(String searchStr, long setoffLocationId,int firstResult, int resultSize, SearchProductOrderEnum order);
 }
