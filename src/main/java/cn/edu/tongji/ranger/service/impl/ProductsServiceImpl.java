@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by wangdechang on 2016/5/7.
  */
@@ -23,6 +25,10 @@ public class ProductsServiceImpl implements ProductsService {
 
     public <T> T findById(Long id, Class<T> type) {
         return productsDao.findById(id,type);
+    }
+
+    public List<Product> findBySupplierId(String supplierID) {
+        return productsDao.findBySupplierId(supplierID);
     }
 
     public void create(TripPicture tripPicture) {

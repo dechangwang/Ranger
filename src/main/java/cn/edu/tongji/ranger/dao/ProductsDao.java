@@ -2,13 +2,15 @@ package cn.edu.tongji.ranger.dao;
 
 import cn.edu.tongji.ranger.model.*;
 
+import java.util.List;
+
 /**
  * Created by wangdechang on 2016/5/7.
  */
 public interface ProductsDao {
     public void create(Product product);
     public <T>T findById(Long id, Class<T> type);
-
+    public List<Product> findBySupplierId(String supplierID);
 
     public void create(TripPicture tripPicture);
     public void create(TripDetail tripDetail);

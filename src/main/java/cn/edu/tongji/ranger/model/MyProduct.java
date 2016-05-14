@@ -1,9 +1,9 @@
-package cn.edu.tongji.ranger.controller;
+package cn.edu.tongji.ranger.model;
 
 /**
  * Created by wangdechang on 2016/5/10.
  */
-public class BB {
+public class MyProduct {
     private String product_id;
     private String product_name;
     private String setoff_time;
@@ -11,8 +11,8 @@ public class BB {
     private String price;
     private String state;
 
-    public BB(String product_id, String product_name, String setoff_time,
-              String release_time, String price, String state) {
+    public MyProduct(String product_id, String product_name, String setoff_time,
+                     String release_time, String price, String state) {
         this.product_id = product_id;
         this.product_name = product_name;
         this.setoff_time = setoff_time;

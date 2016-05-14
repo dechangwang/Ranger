@@ -21,14 +21,16 @@ public class ProductsController {
     @Autowired
     private ProductsService productsService;
 
-    @RequestMapping(value = "/release",method = RequestMethod.POST)
+    @RequestMapping(value = "/release", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> releaseProduct(@RequestBody ProductsInfo productsInfo) {  //发布产品
         System.out.println(productsInfo);
 
         Product product = new Product();
         product.setName(productsInfo.getName());
-        product.setSummary(productsInfo.getBrief());
+        product.setSummary(productsInfo.getBrief() + productsInfo.getBackway() + productsInfo.getDetail() + productsInfo.getName() + "" +
+                productsInfo.getHotelname() + productsInfo.getStartloc() + productsInfo.getSetoffway() + productsInfo.getStartdate() +
+                productsInfo.getTag() + productsInfo.getDuration());
         product.setSearchContent(productsInfo.getDetail());
         product.setDuration(productsInfo.getDuration());
         product.setPostcode(productsInfo.getPostcode());
@@ -36,9 +38,9 @@ public class ProductsController {
         product.setPostPhone(productsInfo.getPostphone());
         product.setPostAddress(productsInfo.getPostaddress());
 
-        Angency angency = productsService.findById(7L,Angency.class);
+        Angency angency = productsService.findById(7L, Angency.class);
         Location location = new Location();
-        location.setFatherId(1);
+        location.setFatherId(-1);
         location.setName(productsInfo.getStartloc());
         //travel angency
         product.setSupplier(angency);
@@ -46,7 +48,7 @@ public class ProductsController {
         product.setSetoffLocation(location);
 
         TripDestination td = new TripDestination();
-        Location lt = productsService.findById(2L,Location.class);
+        Location lt = productsService.findById(2L, Location.class);
         td.setLocation(lt);
         td.setBrief("");
         td.setProduct(product);
@@ -77,11 +79,11 @@ public class ProductsController {
         trafficTypeBack.setType("返程");
         trafficTypeBack.setBrief(productsInfo.getBackway());
 
-       //TripTraffic
+        //TripTraffic
         Set<TripTraffic> tripTrafficSet = new HashSet<TripTraffic>();
         TripTraffic tripTraffic = new TripTraffic();
         tripTraffic.setUpdateTime(timestamp);
-        tripTraffic.setIsExpired((byte)1);
+        tripTraffic.setIsExpired((byte) 1);
         tripTraffic.setTrafficType(trafficType);
         tripTraffic.setBrief("");
         tripTraffic.setProduct(product);
@@ -90,9 +92,9 @@ public class ProductsController {
         TripTraffic tripTrafficBack = new TripTraffic();
         tripTrafficBack.setBrief("");
         tripTrafficBack.setUpdateTime(timestamp);
-        tripTrafficBack.setIsExpired((byte)1);
+        tripTrafficBack.setIsExpired((byte) 1);
         tripTrafficBack.setTrafficType(trafficTypeBack);
-        tripTrafficSet.add(tripTraffic);
+        tripTrafficSet.add(tripTrafficBack);
         tripTrafficBack.setProduct(product);
         product.setTripTraffics(tripTrafficSet);
 
@@ -110,7 +112,7 @@ public class ProductsController {
         Set<TripAccomodation> tripAccomodationSet = new HashSet<TripAccomodation>();
         TripAccomodation tripAccomodation = new TripAccomodation();
         tripAccomodation.setUpdateTime(timestamp);
-        tripAccomodation.setIsExpired((byte)0);
+        tripAccomodation.setIsExpired((byte) 0);
         tripAccomodation.setAccomodationType(productsInfo.getHotelname());
         tripAccomodation.setBrief(productsInfo.getHoteldesc());
         tripAccomodation.setProduct(product);
@@ -119,12 +121,12 @@ public class ProductsController {
 
 
         //TripPrice
-        TouristType touristTypeAdult = productsService.findById(1L,TouristType.class);
-        TouristType touristTypeChild = productsService.findById(2L,TouristType.class);
+        TouristType touristTypeAdult = productsService.findById(1L, TouristType.class);
+        TouristType touristTypeChild = productsService.findById(2L, TouristType.class);
 
         Set<TripPrice> tripPriceSet = new HashSet<TripPrice>();
         TripPrice tripPrice = new TripPrice();
-        tripPrice.setIsExpired((byte)0);
+        tripPrice.setIsExpired((byte) 0);
         tripPrice.setTouristType(touristTypeAdult);
         tripPrice.setUpdateTime(timestamp);
         tripPrice.setPrice(productsInfo.getAdultprice());
@@ -132,68 +134,47 @@ public class ProductsController {
         tripPriceSet.add(tripPrice);
 
         TripPrice tripPrice2 = new TripPrice();
-        tripPrice2.setIsExpired((byte)0);
+        tripPrice2.setIsExpired((byte) 0);
         tripPrice2.setTouristType(touristTypeChild);
         tripPrice2.setUpdateTime(timestamp);
-        tripPrice2.setPrice(productsInfo.getAdultprice());
+        tripPrice2.setPrice(productsInfo.getChildprice());
         tripPrice2.setProduct(product);
         tripPriceSet.add(tripPrice2);
 
         product.setTripPrices(tripPriceSet);
 
-
-//        //TripSetoff
-//        Set<TripSetoff> tripSetoffSet = new HashSet<TripSetoff>();
-//        TripSetoff tripSetoff = new TripSetoff();
-//        tripSetoff.setUpdateTime(timestamp);
-//        tripSetoff.setAvgRemark(0);
-//        tripSetoff.setCommentCount(0);
-//        tripSetoff.setPurchaseCount(0);
-//        tripSetoff.setTripSetoffDate(new Timestamp(productsInfo.getStartdate()));
-
+        Guide guide = productsService.findById(2L, Guide.class);
+        //TripSetoff
+        Set<TripSetoff> tripSetoffSet = new HashSet<TripSetoff>();
+        TripSetoff tripSetoff = new TripSetoff();
+        tripSetoff.setUpdateTime(timestamp);
+        tripSetoff.setAvgRemark(0);
+        tripSetoff.setCommentCount(0);
+        tripSetoff.setPurchaseCount(0);
+        StringTokenizer stringTokenizer = new StringTokenizer(productsInfo.getStartdate(), "T");
+        String str = stringTokenizer.nextToken() + " " + stringTokenizer.nextToken().substring(0, 10);
+        Timestamp setOffTime = Timestamp.valueOf(str);
+        tripSetoff.setTripSetoffDate(setOffTime);
+        tripSetoffSet.add(tripSetoff);
+        tripSetoff.setGuide(guide);
+        tripSetoff.setProduct(product);
+        product.setTripSetoffs(tripSetoffSet);
 
         productsService.create(product);
 
-
-
-        /* Product product = new Product();
-        product.setName("北京三日游");
-        product.setSummary("北京三日游");
-        product.setDuration(3);
-        product.setSearchContent("北京 三日游");
-        product.setPostcode("201804");
-        product.setPostPhone("12345678");
-        product.setPostAddress("SiPing Road");
-        product.setPostReceiver("wdchang");
-        Angency angency = sp.findById(7L,Angency.class);
-        Location location = new Location();
-        location.setName("Hunan");
-        location.setFatherId(2);
-        product.setSupplier(angency);
-        product.setSetoffLocation(location);
-        TripDestination td = new TripDestination();
-        Location lt = sp.findById(2L, Location.class);
-        td.setLocation(lt);
-        td.setProduct(product);
-        td.setBrief("");
-        Set<TripDestination> locations = new HashSet<TripDestination>();
-        locations.add(td);
-        product.setTripDestinations(locations);
-        sp.attachDirty(product);*/
-
-
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("res","release product result");
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("res", "release product successfully");
         return map;
     }
-    @RequestMapping(value = "/lists",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/lists", method = RequestMethod.GET)
     @ResponseBody
-    public List<BB> productsList(){
-        List<BB> b = new ArrayList<BB>();
-        b.add(new BB("122","南京旅游","2016-6-1","2016-5-1","成人："+1000.0+"小孩：500","未出行"));
-        b.add(new BB("111","北京旅游","2016-6-1","2016-5-1",""+1000.0,"未出行"));
-        b.add(new BB("123","北京旅游","2016-6-1","2016-5-1",""+1000.0,"未出行"));
-        b.add(new BB("133","北京旅游","2016-6-1","2016-5-1",""+1000.0,"未出行"));
+    public List<MyProduct> productsList() {
+        List<MyProduct> b = new ArrayList<MyProduct>();
+        b.add(new MyProduct("122", "南京旅游", "2016-6-1", "2016-5-1", "成人：" + 1000.0 + "小孩：500", "未出行"));
+        b.add(new MyProduct("111", "北京旅游", "2016-6-1", "2016-5-1", "" + 1000.0, "未出行"));
+        b.add(new MyProduct("123", "北京旅游", "2016-6-1", "2016-5-1", "" + 1000.0, "未出行"));
+        b.add(new MyProduct("133", "北京旅游", "2016-6-1", "2016-5-1", "" + 1000.0, "未出行"));
 
         return b;
     }
