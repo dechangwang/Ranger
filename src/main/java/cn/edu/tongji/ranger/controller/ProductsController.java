@@ -38,7 +38,7 @@ public class ProductsController {
         product.setPostPhone(productsInfo.getPostphone());
         product.setPostAddress(productsInfo.getPostaddress());
 
-        Angency angency = productsService.findById(7L, Angency.class);
+        Angency angency = productsService.findById(9L, Angency.class);
         Location location = new Location();
         location.setFatherId(-1);
         location.setName(productsInfo.getStartloc());
@@ -70,14 +70,17 @@ public class ProductsController {
         tripDetail.setProduct(product);
         product.setTripDetails(tripDetailSet);
 
-        TrafficType trafficType = new TrafficType();
+       /* TrafficType trafficType = new TrafficType();
         trafficType.setType("出发");
         trafficType.setBrief(productsInfo.getSetoffway());
 
 
         TrafficType trafficTypeBack = new TrafficType();
         trafficTypeBack.setType("返程");
-        trafficTypeBack.setBrief(productsInfo.getBackway());
+        trafficTypeBack.setBrief(productsInfo.getBackway());*/
+        TrafficType trafficType = productsService.findById(2L, TrafficType.class);
+
+        TrafficType trafficTypeBack = productsService.findById(1L,TrafficType.class);
 
         //TripTraffic
         Set<TripTraffic> tripTrafficSet = new HashSet<TripTraffic>();
@@ -170,12 +173,13 @@ public class ProductsController {
     @RequestMapping(value = "/lists", method = RequestMethod.GET)
     @ResponseBody
     public List<MyProduct> productsList() {
-        List<MyProduct> b = new ArrayList<MyProduct>();
-        b.add(new MyProduct("122", "南京旅游", "2016-6-1", "2016-5-1", "成人：" + 1000.0 + "小孩：500", "未出行"));
-        b.add(new MyProduct("111", "北京旅游", "2016-6-1", "2016-5-1", "" + 1000.0, "未出行"));
-        b.add(new MyProduct("123", "北京旅游", "2016-6-1", "2016-5-1", "" + 1000.0, "未出行"));
-        b.add(new MyProduct("133", "北京旅游", "2016-6-1", "2016-5-1", "" + 1000.0, "未出行"));
+        List<MyProduct> productList = productsService.findBySupplierId(7L);
+//        b.add(new MyProduct("122", "南京旅游", "2016-6-1", "2016-5-1", "成人：" + 1000.0 + "小孩：500", "未出行"));
+//        b.add(new MyProduct("111", "北京旅游", "2016-6-1", "2016-5-1", "" + 1000.0, "未出行"));
+//        b.add(new MyProduct("123", "北京旅游", "2016-6-1", "2016-5-1", "" + 1000.0, "未出行"));
+//        b.add(new MyProduct("133", "北京旅游", "2016-6-1", "2016-5-1", "" + 1000.0, "未出行"));
+        System.out.println(productList);
 
-        return b;
+        return productList;
     }
 }

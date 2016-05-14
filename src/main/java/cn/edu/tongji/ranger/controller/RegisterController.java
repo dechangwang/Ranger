@@ -5,12 +5,15 @@ import cn.edu.tongji.ranger.model.Guide;
 import cn.edu.tongji.ranger.model.GuideInfo;
 import cn.edu.tongji.ranger.service.AngencyService;
 import cn.edu.tongji.ranger.service.GuideService;
+import com.sun.xml.internal.ws.encoding.HasEncoding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +33,6 @@ public class RegisterController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> angencyRegister(@RequestBody Angency angency) {
-//    public Map<String,String> angencyRegister(@RequestBody Angency angency){
 
         Map<String, String> map = new HashMap<String, String>();
         String fileDir = UploadFileController.getDir();
@@ -55,6 +57,25 @@ public class RegisterController {
         }
         System.out.println(angency);
 
+        return map;
+    }
+
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Angency> angencyInfos(){
+        Angency angency = angencyService.findById(7L);
+        System.out.println(angency);
+        List<Angency> angencyList = new ArrayList<Angency>();
+        angencyList.add(angency);
+        return angencyList;
+    }
+
+    @RequestMapping(value = "/editangency", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,String> updateAngencyInfo(@RequestBody Angency angency){
+        Map<String,String> map = new HashMap<String, String>();
+        angencyService.updateAngency(angency);
+        map.put("res","succeed");
         return map;
     }
 
@@ -84,6 +105,74 @@ public class RegisterController {
         map.put("res", "succeed");
         return map;
     }
+
+    @RequestMapping(value = "/guideinfo",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,String> guideInfo(){
+        Map<String,String> mapGuide = new HashMap<String, String>();
+        Guide guide = guideService.findById(2L);
+        if(guide!= null){
+            angencyService.findById(guide.getAngency_id());
+            mapGuide.put("name",guide.getName());
+            if(guide.isGender()){
+                mapGuide.put("gender","male");
+            }else{
+                mapGuide.put("gender","female");
+            }
+
+            mapGuide.put("email",guide.getEmail());
+            mapGuide.put("id",guide.getId()+"");
+            mapGuide.put("address",guide.getAddress());
+            mapGuide.put("phone",guide.getPhone());
+            Angency angency = angencyService.findById(guide.getAngency_id());
+            mapGuide.put("cname",angency.getName());
+            mapGuide.put("res","ok");
+        }else{
+            mapGuide.put("res","error");
+        }
+        return mapGuide;
+    }
+
+    @RequestMapping(value = "/editguide",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,String> updateGuide(@RequestParam(value = "id") String id,
+                                          @RequestParam(value = "name") String name,
+                                          @RequestParam(value = "gender") String gender,
+                                          @RequestParam(value = "phone") String phone,
+                                          @RequestParam(value = "email") String email,
+                                          @RequestParam(value = "address") String address,
+                                          @RequestParam(value = "cname") String cname,
+                                          Model model){
+
+
+        /*  gender:'',
+        phone:'',
+        email:'',
+        address:'',
+        cname:''*/
+        Map<String,String> guideMap  = new HashMap<String, String>();
+        List<Angency> angencyList =  angencyService.findExistAngency(cname);
+        if(angencyList.size() == 0){
+            guideMap.put("res","no");
+            return guideMap;
+        }
+        Guide guide = new Guide();
+        guide.setName(name);
+        if ("male".equals(gender)) {
+            guide.setGender(true);
+        } else {
+            guide.setGender(false);
+        }
+        guide.setPhone(phone);
+        guide.setEmail(email);
+        guide.setAddress(address);
+        guide.setAngency_id(angencyList.get(0).getId());
+        guide.setId(Long.parseLong(id));
+        guideService.updateGuide(guide);
+        guideMap.put("res","succeed");
+        return  guideMap;
+    }
+
    /* @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String angencyRegister(@RequestParam(value = "name") String name,
                                   @RequestParam(value = "type") String type,

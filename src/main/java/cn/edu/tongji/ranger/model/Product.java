@@ -235,7 +235,7 @@ public class Product {
         this.tripSetoffs = tripSetoffs;
     }
 
-    @Override
+   /* @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -293,5 +293,5 @@ public class Product {
         result = 31 * result + (tripAccomodations != null ? tripAccomodations.hashCode() : 0);
         result = 31 * result + (tripSetoffs != null ? tripSetoffs.hashCode() : 0);
         return result;
-    }
+    }*/
 }

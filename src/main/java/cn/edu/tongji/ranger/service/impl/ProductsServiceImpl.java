@@ -27,7 +27,7 @@ public class ProductsServiceImpl implements ProductsService {
         return productsDao.findById(id,type);
     }
 
-    public List<Product> findBySupplierId(String supplierID) {
+    public List<MyProduct> findBySupplierId(long supplierID) {
         return productsDao.findBySupplierId(supplierID);
     }
 

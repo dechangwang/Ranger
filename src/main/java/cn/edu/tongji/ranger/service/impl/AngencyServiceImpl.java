@@ -14,33 +14,23 @@ import java.util.List;
 @Transactional
 public class AngencyServiceImpl implements AngencyService {
 
-//    @Autowired
-//    private AccountDao accountDao;
     @Autowired
     private AngencyDao angencyDao;
 
-//    public void create(Account account) {
-//        accountDao.create(account);
-//    }
-//
+
     public void create(Angency angency){
         angencyDao.create(angency);
     }
-//    public List<Account> find(String name) {
-//        return accountDao.findByName(name);
-//    }
 
     public List<Angency> findExistAngency(String name) {
         return angencyDao.findByName(name);
     }
-}
 
-/*
-@Service
-public class AccountServiceImpl extends AbstractServiceImpl<Account, Long> implements AccountService {
-    @Autowired
-    AccountServiceImpl(GenericDAO<Account, Long> dao) {
-        super(dao);
+    public Angency findById(long id) {
+        return angencyDao.findById(id);
+    }
+
+    public boolean updateAngency(Angency angency) {
+        return angencyDao.updateAngency(angency);
     }
 }
-*/

@@ -10,4 +10,6 @@ import java.util.List;
 public interface AngencyDao {
     public void create(Angency angency);
     public List<Angency> findByName(String name);
+    public Angency findById(long id);
+    public boolean updateAngency(Angency angency);
 }

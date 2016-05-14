@@ -18,4 +18,12 @@ public class GuideServiceImpl implements GuideService{
     public void create(Guide guide) {
         guideDao.create(guide);
     }
+
+    public boolean updateGuide(Guide guide) {
+        return guideDao.updateGuide(guide);
+    }
+
+    public Guide findById(Long id) {
+        return guideDao.findById(id);
+    }
 }

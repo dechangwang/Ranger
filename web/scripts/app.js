@@ -17,7 +17,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',fun
                     templateUrl: 'views/topbar.html'
                 },
                 'main@home': {
-                    templateUrl: 'views/home.html'
+                    templateUrl: 'views/angency_register.html'
                 }
             }
         })
@@ -92,6 +92,23 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',fun
                 }
             }
         })
+        .state('home.angency_info',{
+            url:'/angency_info',
+            views:{
+                'main@home':{
+                    templateUrl:'views/angency_info.html'
+                }
+            }
+        })
+        .state('home.guide_info',{
+            url:'/guide_info',
+            views:{
+                'main@home':{
+                    templateUrl:'views/guide_info.html'
+                }
+            }
+        })
+
         .state('home.invoice',{
             url:'/invoice',
             views:{

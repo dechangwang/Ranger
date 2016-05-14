@@ -7,5 +7,7 @@ import cn.edu.tongji.ranger.model.Guide;
  */
 public interface GuideService {
     public void create(Guide guide);
+    public boolean updateGuide(Guide guide);
+    public Guide findById(Long id);
 
 }

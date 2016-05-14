@@ -11,6 +11,9 @@ public class MyProduct {
     private String price;
     private String state;
 
+    public MyProduct() {
+    }
+
     public MyProduct(String product_id, String product_name, String setoff_time,
                      String release_time, String price, String state) {
         this.product_id = product_id;
@@ -67,5 +70,17 @@ public class MyProduct {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "MyProduct{" +
+                "product_id='" + product_id + '\'' +
+                ", product_name='" + product_name + '\'' +
+                ", setoff_time='" + setoff_time + '\'' +
+                ", release_time='" + release_time + '\'' +
+                ", price='" + price + '\'' +
+                ", state='" + state + '\'' +
+                '}';
     }
 }

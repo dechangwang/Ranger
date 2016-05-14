@@ -23,12 +23,13 @@ rangerApp.controller('myProductCtrl',['$scope','$http',function ($scope, $http) 
     });
     $scope.editProduct = function (product) {
         layer.open({
-            title: '删除',
-            content: '删除产品',
+            type: 2,
+            title: '编辑',
+            content: 'views/product_release.html',
             btn: ['确定', '取消'],
             area: ['390px', '330px'],
             yes: function(){
-                alert("delete");
+                $(that).click();
             }
         });
         /*layer.open({
@@ -58,4 +59,3 @@ rangerApp.controller('myProductCtrl',['$scope','$http',function ($scope, $http) 
 
 
 }]);
-//rangerApp.controller('productCtrl', ['$scope', '$http', function ($scope, $http){

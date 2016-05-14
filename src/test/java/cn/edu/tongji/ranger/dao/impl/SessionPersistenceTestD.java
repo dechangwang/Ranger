@@ -2,11 +2,9 @@ package cn.edu.tongji.ranger.dao.impl;
 
 import cn.edu.tongji.ranger.init.HibernateUtil;
 import cn.edu.tongji.ranger.model.*;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.ejb.criteria.AbstractNode;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,6 +26,22 @@ public class SessionPersistenceTestD {
 
     }
 
+    @Test
+    public void testUpdate(){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = HibernateUtil.getSession();
+        Transaction trans = session.beginTransaction();
+//        Angency angency  = (Angency) session.get(Angency.class,9L);
+      //  System.out.println(angency);
+        Angency angency1 = new Angency(9L,"LiSi","身份证",
+                "注册人借鉴是什么鬼啊","123123123131","2016512@qq.com","同济大学嘉定校区",
+                "images\\5f.jpg",12,"这是公司简介",
+                "wang","八爪鱼分公司","2323232323233");
+        angency1.setBrief("this is brief");
+        session.saveOrUpdate(angency1);
+        trans.commit();
+    }
+
 //    @Test
     public void queryProduct() {
 //        Criteria criteria = HibernateUtil.getSessionFactory().getCurrentSession().
@@ -38,7 +52,7 @@ public class SessionPersistenceTestD {
 //        System.out.println(products);
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = HibernateUtil.getSession();
-        Product product = (Product) session.get(Product.class,1L);
+        Product product = (Product) session.get(Product.class, 1L);
 
         System.out.println(product.getName());
 //        Query query = session.createQuery("from Product p where p.supplier=:supplier");
@@ -47,30 +61,43 @@ public class SessionPersistenceTestD {
 //            Object[] objects = (Object[]) iterator.next();
 //            System.out.println(objects[1]);
 //        }
-        List list= session.createSQLQuery("select * from product where supplier_id = 7")
+        long id = 7;
+        List list = session.createSQLQuery("select * from product where supplier_id = "+id)
                 .addScalar("id")
                 .addScalar("name")
                 .list();
-        for(Iterator iterator = list.iterator(); iterator.hasNext();){
+        for (Iterator iterator = list.iterator(); iterator.hasNext(); ) {
             Object[] objects = (Object[]) iterator.next();
-            List listSetoff = session.createSQLQuery("select * from trip_setoff where product_id = "+objects[0])
+            List listSetoff = session.createSQLQuery("select * from trip_setoff where product_id = " + objects[0])
                     .addScalar("trip_setoff_date")
                     .addScalar("update_time")
                     .list();
-            if(listSetoff.iterator().hasNext()){
+            if (listSetoff.iterator().hasNext()) {
                 Object[] objectsSetoff = (Object[]) listSetoff.iterator().next();
-                for (int i = 0;i<objectsSetoff.length;i++)
-                System.out.print(objectsSetoff[i]+" ");
+                for (int i = 0; i < objectsSetoff.length; i++)
+                    System.out.print(objectsSetoff[i] + " ");
+                System.out.println();
             }
 
             //query price
-//            for (int i = 0;i<objects.length;i++)
-//                System.out.print(objects[i]);
+            List listPrice = session.createSQLQuery("select * from trip_price where product_id = " + objects[0])
+                    .addScalar("tourist_type_id")
+                    .addScalar("price")
+                    .addScalar("is_expired")
+                    .list();
+            System.out.println(listPrice);
+            Iterator priceIt = listPrice.iterator();
+            while(priceIt.hasNext()){
+                Object[] prices = (Object[]) priceIt.next();
+                for (int i = 0;i<prices.length;i++)
+                    System.out.print(prices[i]+" ");
+                System.out.println();
+            }
             System.out.println();
         }
 
 
-        }
+    }
 
     public void testCreate() {
         LocationD ld = new LocationD();
@@ -115,7 +142,7 @@ public class SessionPersistenceTestD {
         }
     }
 
-    @Test
+    //    @Test
     public void testCreateProduct() {
         Product product = new Product();
         product.setName("北京三日游");
@@ -165,7 +192,7 @@ public class SessionPersistenceTestD {
 
         TrafficType trafficType = sp.findById(2L, TrafficType.class);
 
-        TrafficType trafficTypeBack = sp.findById(1L,TrafficType.class);
+        TrafficType trafficTypeBack = sp.findById(1L, TrafficType.class);
 
 
         //TripTraffic

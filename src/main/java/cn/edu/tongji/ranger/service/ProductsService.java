@@ -10,7 +10,7 @@ import java.util.List;
 public interface  ProductsService {
     public void create(Product product);
     public <T>T findById(Long id, Class<T> type);
-    public List<Product> findBySupplierId(String supplierID);
+    public List<MyProduct> findBySupplierId(long supplierID);
     public void create(TripPicture tripPicture);
     public void create(TripDetail tripDetail);
     public void create(TripAccomodation tripAccomodation);

@@ -10,6 +10,8 @@ public interface AngencyService {
     public void create(Angency angency);
 //    public List<Account> find(String name);
     public List<Angency> findExistAngency(String name);
+    public Angency findById(long id);
+    public boolean updateAngency(Angency angency);
 }
 
 /*

@@ -10,6 +10,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -40,12 +42,98 @@ public class ProductsDaoImpl implements ProductsDao {
         return result;
     }
 
-    public List<Product> findBySupplierId(String supplierID) {
+    public List<MyProduct> findBySupplierId(long supplierID) {
         Session session = sessionFactory.getCurrentSession();
-//        Criteria criteria = session.createCriteria(Product.class).add()
-     /*   Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Angency.class).add(Restrictions.eq("cname", name));
-        return (List<Angency>) criteria.list();*/
-        return null;
+        List<MyProduct> productList = new ArrayList<MyProduct>();
+        List list = session.createSQLQuery("select * from product where supplier_id = " + supplierID)
+                .addScalar("id")
+                .addScalar("name")
+                .list();
+        for (Iterator iterator = list.iterator(); iterator.hasNext(); ) {
+            Object[] objects = (Object[]) iterator.next();
+            MyProduct myProduct = new MyProduct();
+            boolean hasAllData = true;
+            List listSetoff = session.createSQLQuery("select * from trip_setoff where product_id = " + objects[0])
+                    .addScalar("trip_setoff_date")
+                    .addScalar("update_time")
+                    .list();
+            if (listSetoff.iterator().hasNext()) {
+                Object[] objectsSetoff = (Object[]) listSetoff.iterator().next();
+
+                myProduct.setSetoff_time(objectsSetoff[0] + "");
+                myProduct.setRelease_time(objectsSetoff[1] + "");
+            } else {
+                hasAllData = false;
+            }
+
+            //query price
+            List listPrice = session.createSQLQuery("select * from trip_price where product_id = " + objects[0])
+                    .addScalar("tourist_type_id")
+                    .addScalar("price")
+                    .addScalar("is_expired")
+                    .list();
+            if (listPrice.size() == 0) {
+                hasAllData = false;
+            }
+            String priceInfo = "";
+            boolean state = false;
+            Iterator priceIt = listPrice.iterator();
+            while (priceIt.hasNext()) {
+                Object[] prices = (Object[]) priceIt.next();
+
+                priceInfo = priceInfo + " " + prices[1];
+                state = (Boolean) prices[2];
+            }
+            if (hasAllData) {
+                myProduct.setProduct_id(objects[0] + "");
+                myProduct.setProduct_name(objects[1] + "");
+                myProduct.setPrice(priceInfo);
+                if (state) {
+                    myProduct.setState("已过期");
+                } else {
+                    myProduct.setState("未过期");
+                }
+                productList.add(myProduct);
+            }
+
+
+        }
+
+
+        /*List list = session.createSQLQuery("select * from product where supplier_id = "+id)
+                .addScalar("id")
+                .addScalar("name")
+                .list();
+        for (Iterator iterator = list.iterator(); iterator.hasNext(); ) {
+            Object[] objects = (Object[]) iterator.next();
+            List listSetoff = session.createSQLQuery("select * from trip_setoff where product_id = " + objects[0])
+                    .addScalar("trip_setoff_date")
+                    .addScalar("update_time")
+                    .list();
+            if (listSetoff.iterator().hasNext()) {
+                Object[] objectsSetoff = (Object[]) listSetoff.iterator().next();
+                for (int i = 0; i < objectsSetoff.length; i++)
+                    System.out.print(objectsSetoff[i] + " ");
+                System.out.println();
+            }
+
+            //query price
+            List listPrice = session.createSQLQuery("select * from trip_price where product_id = " + objects[0])
+                    .addScalar("tourist_type_id")
+                    .addScalar("price")
+                    .addScalar("is_expired")
+                    .list();
+            System.out.println(listPrice);
+            Iterator priceIt = listPrice.iterator();
+            while(priceIt.hasNext()){
+                Object[] prices = (Object[]) priceIt.next();
+                for (int i = 0;i<prices.length;i++)
+                    System.out.print(prices[i]+" ");
+                System.out.println();
+            }
+            System.out.println();
+        }*/
+        return productList;
     }
 
     public void create(TripPicture tripPicture) {
