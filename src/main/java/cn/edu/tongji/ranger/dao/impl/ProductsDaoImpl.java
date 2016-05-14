@@ -2,11 +2,15 @@ package cn.edu.tongji.ranger.dao.impl;
 
 import cn.edu.tongji.ranger.dao.ProductsDao;
 import cn.edu.tongji.ranger.model.*;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by wangdechang on 2016/5/7.
@@ -34,6 +38,14 @@ public class ProductsDaoImpl implements ProductsDao {
         result = instance;
 
         return result;
+    }
+
+    public List<Product> findBySupplierId(String supplierID) {
+        Session session = sessionFactory.getCurrentSession();
+//        Criteria criteria = session.createCriteria(Product.class).add()
+     /*   Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Angency.class).add(Restrictions.eq("cname", name));
+        return (List<Angency>) criteria.list();*/
+        return null;
     }
 
     public void create(TripPicture tripPicture) {
