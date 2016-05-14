@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class GenericDaoImpl implements GenericDao {
     public void saveOrUpdate(Object obj) {
-        
+
     }
 
     public <T> List<T> findByExample(T instance, Class<T> type) {
