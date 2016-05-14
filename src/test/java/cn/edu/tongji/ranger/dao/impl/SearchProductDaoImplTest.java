@@ -1,32 +1,53 @@
 package cn.edu.tongji.ranger.dao.impl;
 
-import cn.edu.tongji.ranger.dao.SearchProductDao;
+import cn.edu.tongji.ranger.init.HibernateUtil;
 import cn.edu.tongji.ranger.utils.SearchProductOrderEnum;
-import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.transform.Transformers;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
+import static org.junit.Assert.*;
 
 /**
- * Created by daidongyang on 5/14/16.
+ * Created by daidongyang on 5/15/16.
  */
+public class SearchProductDaoImplTest {
+    SessionFactory sessionFactory;
+    Transaction transaction;
 
-@Repository("SearchProductDao")
-public class SearchProductDaoImpl implements SearchProductDao {
+    @Before
+    public void before(){
+        sessionFactory = HibernateUtil.getSessionFactory();
+        transaction = sessionFactory.getCurrentSession().beginTransaction();
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    }
 
-    public List<Long> searchForIds(String[] searchKeys, long setoffLocationId,int firstResult, int resultSize, SearchProductOrderEnum order) {
+    @Test
+    public void searchForIdsTest() throws Exception {
+        String[] searchKeys = {"北京", "三"};
+        long setOffLocationId = 1L;
+        int firstResult = 0;
+        int resultsize = 2;
+        List<Long> results = searchForIds(searchKeys, setOffLocationId, firstResult, resultsize, SearchProductOrderEnum.PRICE_UP);
+        System.out.println(results);
+    }
+
+    @After
+    public void after(){
+        transaction.commit();
+    }
+
+    public List<Long> searchForIds(String[] searchKeys, long setoffLocationId, int firstResult, int resultSize, SearchProductOrderEnum order) {
         List<Long> results = new ArrayList<Long>();
         String select = "select product.id as pid ";
         String from = "from product ";
@@ -74,8 +95,9 @@ public class SearchProductDaoImpl implements SearchProductDao {
 
         }
 
-        String sql = select + from + where + orderBy + groupBy;
+        String sql = select + from + where + groupBy + orderBy;
         Session session = sessionFactory.getCurrentSession();
+        System.out.println(sql);
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         sqlQuery.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         sqlQuery.setFirstResult(firstResult);
@@ -87,18 +109,6 @@ public class SearchProductDaoImpl implements SearchProductDao {
             results.add(pid);
         }
         return results;
-    }
-
-    public List<Long> searchForIds(String[] searchKeys, long setOffLocationId, int firstResult, int resultSize, SearchProductOrderEnum order, int duration) {
-        return null;
-    }
-
-    public List<Long> searchForIds(String[] searchKeys, long setOffLocationId, int firstResult, int resultSize, SearchProductOrderEnum order, double lowerLimit, double upperLimit) {
-        return null;
-    }
-
-    public List<Long> searchForIds(String[] searchKeys, long setOffLocationId, int firstResult, int resultSize, SearchProductOrderEnum order, int duration, double lowerLimit, double upperLimit) {
-        return null;
     }
 
     private String generateWhereStrWithLikes(String[] args){
@@ -113,4 +123,6 @@ public class SearchProductDaoImpl implements SearchProductDao {
         sb.append("%\") ");
         return sb.toString();
     }
+
+
 }
