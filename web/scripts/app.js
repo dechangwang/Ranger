@@ -17,7 +17,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',fun
                     templateUrl: 'views/topbar.html'
                 },
                 'main@home': {
-                    templateUrl: 'views/angency_register.html'
+                    templateUrl: 'views/home.html'
                 }
             }
         })
