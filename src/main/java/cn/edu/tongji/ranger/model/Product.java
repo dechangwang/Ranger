@@ -256,18 +256,7 @@ public class Product {
         if (postPhone != null ? !postPhone.equals(product.postPhone) : product.postPhone != null) return false;
         if (setoffLocation != null ? !setoffLocation.equals(product.setoffLocation) : product.setoffLocation != null)
             return false;
-        if (supplier != null ? !supplier.equals(product.supplier) : product.supplier != null) return false;
-        if (tripDestinations != null ? !tripDestinations.equals(product.tripDestinations) : product.tripDestinations != null)
-            return false;
-        if (tripDetails != null ? !tripDetails.equals(product.tripDetails) : product.tripDetails != null) return false;
-        if (tripTraffics != null ? !tripTraffics.equals(product.tripTraffics) : product.tripTraffics != null)
-            return false;
-        if (tripPrices != null ? !tripPrices.equals(product.tripPrices) : product.tripPrices != null) return false;
-        if (tripPictures != null ? !tripPictures.equals(product.tripPictures) : product.tripPictures != null)
-            return false;
-        if (tripAccomodations != null ? !tripAccomodations.equals(product.tripAccomodations) : product.tripAccomodations != null)
-            return false;
-        return tripSetoffs != null ? tripSetoffs.equals(product.tripSetoffs) : product.tripSetoffs == null;
+        return supplier != null ? supplier.equals(product.supplier) : product.supplier == null;
 
     }
 
@@ -285,13 +274,6 @@ public class Product {
         result = 31 * result + clickRate;
         result = 31 * result + (setoffLocation != null ? setoffLocation.hashCode() : 0);
         result = 31 * result + (supplier != null ? supplier.hashCode() : 0);
-        result = 31 * result + (tripDestinations != null ? tripDestinations.hashCode() : 0);
-        result = 31 * result + (tripDetails != null ? tripDetails.hashCode() : 0);
-        result = 31 * result + (tripTraffics != null ? tripTraffics.hashCode() : 0);
-        result = 31 * result + (tripPrices != null ? tripPrices.hashCode() : 0);
-        result = 31 * result + (tripPictures != null ? tripPictures.hashCode() : 0);
-        result = 31 * result + (tripAccomodations != null ? tripAccomodations.hashCode() : 0);
-        result = 31 * result + (tripSetoffs != null ? tripSetoffs.hashCode() : 0);
         return result;
     }
 }
