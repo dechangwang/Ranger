@@ -105,16 +105,34 @@ public class TripSetoff {
     }
 
     @Override
-    public String toString() {
-        return "TripSetoff{" +
-                "id=" + id +
-                ", tripSetoffDate=" + tripSetoffDate +
-                ", updateTime=" + updateTime +
-                ", purchaseCount=" + purchaseCount +
-                ", commentCount=" + commentCount +
-                ", avgRemark=" + avgRemark +
-                ", product=" + product +
-                ", guide=" + guide +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TripSetoff that = (TripSetoff) o;
+
+        if (id != that.id) return false;
+        if (purchaseCount != that.purchaseCount) return false;
+        if (commentCount != that.commentCount) return false;
+        if (avgRemark != that.avgRemark) return false;
+        if (tripSetoffDate != null ? !tripSetoffDate.equals(that.tripSetoffDate) : that.tripSetoffDate != null)
+            return false;
+        if (updateTime != null ? !updateTime.equals(that.updateTime) : that.updateTime != null) return false;
+        if (product != null ? !product.equals(that.product) : that.product != null) return false;
+        return guide != null ? guide.equals(that.guide) : that.guide == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (tripSetoffDate != null ? tripSetoffDate.hashCode() : 0);
+        result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
+        result = 31 * result + purchaseCount;
+        result = 31 * result + commentCount;
+        result = 31 * result + avgRemark;
+        result = 31 * result + (product != null ? product.hashCode() : 0);
+        result = 31 * result + (guide != null ? guide.hashCode() : 0);
+        return result;
     }
 }

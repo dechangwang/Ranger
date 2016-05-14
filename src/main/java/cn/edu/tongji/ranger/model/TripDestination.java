@@ -62,4 +62,27 @@ public class TripDestination {
 //    public void setProduct(Product product) {
 //        this.product = product;
 //    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TripDestination that = (TripDestination) o;
+
+        if (id != that.id) return false;
+        if (brief != null ? !brief.equals(that.brief) : that.brief != null) return false;
+        if (product != null ? !product.equals(that.product) : that.product != null) return false;
+        return location != null ? location.equals(that.location) : that.location == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (brief != null ? brief.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        return result;
+    }
 }

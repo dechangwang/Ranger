@@ -65,8 +65,8 @@ public class TripPicture {
         if (id != that.id) return false;
         if (picturePath != null ? !picturePath.equals(that.picturePath) : that.picturePath != null) return false;
         if (brief != null ? !brief.equals(that.brief) : that.brief != null) return false;
+        return product != null ? product.equals(that.product) : that.product == null;
 
-        return true;
     }
 
     @Override
@@ -74,9 +74,9 @@ public class TripPicture {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (picturePath != null ? picturePath.hashCode() : 0);
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
         return result;
     }
-
 
     @Override
     public String toString() {

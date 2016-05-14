@@ -28,7 +28,7 @@ public class SessionPersistenceTestD {
 
     }
 
-    @Test
+//    @Test
     public void queryProduct() {
 //        Criteria criteria = HibernateUtil.getSessionFactory().getCurrentSession().
 //                createCriteria(Product.class)
@@ -127,42 +127,46 @@ public class SessionPersistenceTestD {
         product.setPostAddress("SiPing Road");
         product.setPostReceiver("wdchang");
         Angency angency = sp.findById(9L, Angency.class);
-        Location location = new Location();
 
-        // change place name when repeate test
-        location.setName("南京");
-
-        location.setFatherId(2);
-
-        product.setSupplier(angency);
+        Location location = sp.findById(3L, Location.class);
         product.setSetoffLocation(location);
+        product.setSupplier(angency);
+//        Location location = new Location();
+//
+//        // change place name when repeate test
+//        location.setName("南京");
+//
+//        location.setFatherId(2);
+//
+//        product.setSupplier(angency);
+//        product.setSetoffLocation(location);
 
-        TripDestination td = new TripDestination();
-        TripDestination td2 = new TripDestination();
-        Location lt = sp.findById(2L, Location.class);
-        Location lt2 = sp.findById(3L, Location.class);
-        td.setLocation(lt);
-        td.setProduct(product);
-        td.setBrief("test td1333");
-        td2.setLocation(lt2);
-        td2.setProduct(product);
-        td2.setBrief("test td2444");
-        Set<TripDestination> locations = new HashSet<TripDestination>();
-        locations.add(td);
-        locations.add(td2);
-        product.setTripDestinations(locations);
+//        TripDestination td = new TripDestination();
+//        TripDestination td2 = new TripDestination();
+//        Location lt = sp.findById(2L, Location.class);
+//        Location lt2 = sp.findById(3L, Location.class);
+//        td.setLocation(lt);
+//        td.setProduct(product);
+//        td.setBrief("test tdd1");
+//        td2.setLocation(lt2);
+//        td2.setProduct(product);
+//        td2.setBrief("test tdd2");
+//        Set<TripDestination> locations = new HashSet<TripDestination>();
+//        locations.add(td);
+//        locations.add(td2);
+//        product.setTripDestinations(locations);
 
         Date now = new Date();
         Timestamp timestamp = new Timestamp(now.getTime());
 
-        TrafficType trafficType = new TrafficType();
-        trafficType.setType("出发");
-        trafficType.setBrief("出发方式");
+//        TrafficType trafficType = new TrafficType();
+//        trafficType.setType("出发");
+//        trafficType.setBrief("出发方式");
 
+        TrafficType trafficType = sp.findById(2L, TrafficType.class);
 
-        TrafficType trafficTypeBack = new TrafficType();
-        trafficTypeBack.setType("返程");
-        trafficTypeBack.setBrief("返回方式");
+        TrafficType trafficTypeBack = sp.findById(1L,TrafficType.class);
+
 
         //TripTraffic
         Set<TripTraffic> tripTrafficSet = new HashSet<TripTraffic>();
@@ -184,9 +188,12 @@ public class SessionPersistenceTestD {
 
         tripTrafficSet.add(tripTraffic);
         tripTrafficSet.add(tripTrafficBack);
+//        System.out.println(tripTrafficSet);
 
         product.setTripTraffics(tripTrafficSet);
+//        System.out.println(product.getTripTraffics());
         sp.attachDirty(product);
+//        System.out.println(product.getTripTraffics());
 
     }
 

@@ -52,9 +52,8 @@ public class TouristType {
 
         if (id != that.id) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
-        if (brief != null ? !brief.equals(that.brief) : that.brief != null) return false;
+        return brief != null ? brief.equals(that.brief) : that.brief == null;
 
-        return true;
     }
 
     @Override

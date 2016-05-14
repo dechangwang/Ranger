@@ -61,7 +61,6 @@ public class TripTraffic {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "traffic_type_id")
     public TrafficType getTrafficType() {
         return trafficType;
@@ -92,8 +91,9 @@ public class TripTraffic {
         if (isExpired != that.isExpired) return false;
         if (brief != null ? !brief.equals(that.brief) : that.brief != null) return false;
         if (updateTime != null ? !updateTime.equals(that.updateTime) : that.updateTime != null) return false;
+        if (trafficType != null ? !trafficType.equals(that.trafficType) : that.trafficType != null) return false;
+        return product != null ? product.equals(that.product) : that.product == null;
 
-        return true;
     }
 
     @Override
@@ -102,18 +102,8 @@ public class TripTraffic {
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
         result = 31 * result + (int) isExpired;
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
+        result = 31 * result + (trafficType != null ? trafficType.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
         return result;
     }
-
-
-    @Override
-    public String toString() {
-        return "TripTraffic{" +
-                "id=" + id +
-                ", brief='" + brief + '\'' +
-                ", isExpired=" + isExpired +
-                ", updateTime=" + updateTime +
-                '}';
-    }
-
 }

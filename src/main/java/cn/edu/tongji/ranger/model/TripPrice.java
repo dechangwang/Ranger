@@ -89,8 +89,9 @@ public class TripPrice {
         if (Double.compare(tripPrice.price, price) != 0) return false;
         if (isExpired != tripPrice.isExpired) return false;
         if (updateTime != null ? !updateTime.equals(tripPrice.updateTime) : tripPrice.updateTime != null) return false;
+        if (product != null ? !product.equals(tripPrice.product) : tripPrice.product != null) return false;
+        return touristType != null ? touristType.equals(tripPrice.touristType) : tripPrice.touristType == null;
 
-        return true;
     }
 
     @Override
@@ -102,6 +103,8 @@ public class TripPrice {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (int) isExpired;
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
+        result = 31 * result + (touristType != null ? touristType.hashCode() : 0);
         return result;
     }
 
