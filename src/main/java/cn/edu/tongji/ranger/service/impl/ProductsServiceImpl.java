@@ -31,6 +31,10 @@ public class ProductsServiceImpl implements ProductsService {
         return productsDao.findBySupplierId(supplierID);
     }
 
+    public void update(Product product) {
+        productsDao.update(product);
+    }
+
   /*  public Product findById(long id) {
         return productsDao.findById(id);
     }*/

@@ -131,6 +131,11 @@ public class ProductsDaoImpl implements ProductsDao {
         return productList;
     }
 
+    public void update(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(product);
+    }
+
    /* public Product findById(long id) {
         Session session = sessionFactory.getCurrentSession();
         Product product = (Product) session.get(Angency.class,id);

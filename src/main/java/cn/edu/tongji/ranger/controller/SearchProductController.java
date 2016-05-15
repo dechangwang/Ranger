@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by daidongyang on 5/15/16.
@@ -33,8 +35,10 @@ public class SearchProductController {
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     @ResponseBody
-    public String test(@RequestBody SearchCondition searchcondition){
+    public Map<String,String> test(@RequestBody SearchCondition searchcondition){
         System.out.println(searchcondition);
-        return "test";
+        Map<String,String> map = new HashMap<String, String>();
+        map.put("res","test");
+        return map;
     }
 }
