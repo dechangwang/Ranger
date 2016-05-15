@@ -4,10 +4,7 @@ import cn.edu.tongji.ranger.model.*;
 import cn.edu.tongji.ranger.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -181,5 +178,29 @@ public class ProductsController {
         System.out.println(productList);
 
         return productList;
+    }
+
+    @RequestMapping(value = "/info", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,String> productInfo(@RequestParam(value = "id") String product_id){
+        System.out.println(product_id);
+        Long id = Long.parseLong(product_id);
+        Product product = productsService.findById(id,Product.class);
+        System.out.println(product.getName());
+        System.out.println(product.getDuration());
+        System.out.println(product.getPostAddress());
+        System.out.println(product.getTripAccomodations());
+
+        Map<String,String> map = new HashMap<String, String>();
+        map.put("id",product_id);
+        map.put("name",product.getName());
+        map.put("summary",product.getSummary());
+        map.put("duration",product.getDuration()+"");
+        map.put("postcode",product.getPostcode());
+        map.put("post_receiver",product.getPostReceiver());
+        map.put("post_address",product.getPostAddress());
+        map.put("post_phone",product.getPostPhone());
+        return map;
+
     }
 }

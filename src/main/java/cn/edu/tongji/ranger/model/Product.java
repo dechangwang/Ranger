@@ -133,7 +133,7 @@ public class Product {
     }
 
     @Basic
-    @Column(name = "clickRate")
+    @Column(name = "click_rate")
     public int getClickRate() {
         return clickRate;
     }

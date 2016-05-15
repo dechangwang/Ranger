@@ -24,13 +24,8 @@ public class ProductsDaoImpl implements ProductsDao {
 
     public void create(Product product) {
         Session session = sessionFactory.getCurrentSession();
-//            Transaction trans = session.beginTransaction();
-        session.saveOrUpdate(product);
-//            trans.commit();
-
-
-        //sessionFactory.getCurrentSession().persist(product);
-    }
+         session.saveOrUpdate(product);
+     }
 
     public <T> T findById(Long id, Class<T> type) {
         Session session = sessionFactory.getCurrentSession();
@@ -135,6 +130,12 @@ public class ProductsDaoImpl implements ProductsDao {
         }*/
         return productList;
     }
+
+   /* public Product findById(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Product product = (Product) session.get(Angency.class,id);
+        return product;
+    }*/
 
     public void create(TripPicture tripPicture) {
         sessionFactory.getCurrentSession().persist(tripPicture);

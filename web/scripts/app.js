@@ -92,6 +92,15 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',fun
                 }
             }
         })
+        .state('home.my_product.edit',{
+            url:'/edit/:product_id',
+            views:{
+                'main@home':{
+                    templateUrl:'views/edit_product.html',
+                    controller:'editProductCtrl'
+                }
+            }
+        })
         .state('home.angency_info',{
             url:'/angency_info',
             views:{

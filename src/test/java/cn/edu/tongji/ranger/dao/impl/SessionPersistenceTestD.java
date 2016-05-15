@@ -26,23 +26,53 @@ public class SessionPersistenceTestD {
 
     }
 
-    @Test
-    public void testUpdate(){
+    //    @Test
+    public void testUpdate() {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = HibernateUtil.getSession();
         Transaction trans = session.beginTransaction();
 //        Angency angency  = (Angency) session.get(Angency.class,9L);
-      //  System.out.println(angency);
-        Angency angency1 = new Angency(9L,"LiSi","身份证",
-                "注册人借鉴是什么鬼啊","123123123131","2016512@qq.com","同济大学嘉定校区",
-                "images\\5f.jpg",12,"这是公司简介",
-                "wang","八爪鱼分公司","2323232323233");
+        //  System.out.println(angency);
+        Angency angency1 = new Angency(9L, "LiSi", "身份证",
+                "注册人借鉴是什么鬼啊", "123123123131", "2016512@q.com", "同济大学嘉定校区",
+                "images\\5f.jpg", 12, "这是公司简介",
+                "wang", "八爪鱼分公司", "2323232323233");
         angency1.setBrief("this is brief");
         session.saveOrUpdate(angency1);
         trans.commit();
     }
 
-//    @Test
+    @Test
+    public void testQuery() {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = HibernateUtil.getSession();
+        Product product = (Product) session.get(Product.class, 32L);
+        System.out.println(product.getName());
+        System.out.println(product.getDuration());
+        System.out.println(product.getPostAddress());
+        System.out.println(product.getTripAccomodations());
+        Product product1 = new Product();
+        product1.setId(product.getId());
+        product1.setName(product.getName());
+        product1.setSummary(product.getSummary());
+        product1.setPostAddress(product.getPostAddress());
+        product1.setTripSetoffs(product.getTripSetoffs());
+        product1.setClickRate(product.getClickRate());
+        product1.setDuration(product.getDuration());
+        product1.setPostcode(product.getPostcode());
+        product1.setPostPhone(product.getPostPhone());
+        product1.setPostReceiver(product.getPostReceiver());
+        product1.setSearchContent(product.getSearchContent());
+//        product1.getSetoffLocation(product.getSetoffLocation());
+
+        HibernateUtil.getSessionFactory();
+        Session session1 = HibernateUtil.getSession();
+        product.setPostAddress("test addresss !!!");
+        session1.update(product);
+        System.out.println(product);
+    }
+
+    //    @Test
     public void queryProduct() {
 //        Criteria criteria = HibernateUtil.getSessionFactory().getCurrentSession().
 //                createCriteria(Product.class)
@@ -62,7 +92,7 @@ public class SessionPersistenceTestD {
 //            System.out.println(objects[1]);
 //        }
         long id = 7;
-        List list = session.createSQLQuery("select * from product where supplier_id = "+id)
+        List list = session.createSQLQuery("select * from product where supplier_id = " + id)
                 .addScalar("id")
                 .addScalar("name")
                 .list();
@@ -87,10 +117,10 @@ public class SessionPersistenceTestD {
                     .list();
             System.out.println(listPrice);
             Iterator priceIt = listPrice.iterator();
-            while(priceIt.hasNext()){
+            while (priceIt.hasNext()) {
                 Object[] prices = (Object[]) priceIt.next();
-                for (int i = 0;i<prices.length;i++)
-                    System.out.print(prices[i]+" ");
+                for (int i = 0; i < prices.length; i++)
+                    System.out.print(prices[i] + " ");
                 System.out.println();
             }
             System.out.println();
