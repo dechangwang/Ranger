@@ -2,8 +2,8 @@
 
 /* App Module */
 
-var rangerApp = angular.module('rangerApp', ['ui.router','ngFileUpload']);
-rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',function ($stateProvider, $urlRouterProvider,$locationProvider) {
+var rangerApp = angular.module('rangerApp', ['ui.router', 'ngFileUpload']);
+rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $urlRouterProvider.otherwise('/home');
     $stateProvider
@@ -17,7 +17,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',fun
                     templateUrl: 'views/topbar.html'
                 },
                 'main@home': {
-                    templateUrl: 'views/angency_register.html'
+                    templateUrl: 'views/homepage.html'
                 }
             }
         })
@@ -25,7 +25,15 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',fun
             url: '/index',
             views: {
                 'main@home': {
-                    template: 'index page'
+                    templateUrl: 'views/homepage.html'
+                }
+            }
+        })
+        .state('home.angencyregister',{
+            url:'/angencyregister',
+            views:{
+                'main@home':{
+                    templateUrl: 'views/angency_register.html'
                 }
             }
         })
@@ -45,7 +53,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',fun
                 }
             }
         })
-        .state('home.notification',{
+        .state('home.notification', {
             url: '/notification',
             views: {
                 'main@home': {
@@ -53,76 +61,76 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider','$locationProvider',fun
                 }
             }
         })
-        .state('home.account',{
-            url:'/account',
+        .state('home.account', {
+            url: '/account',
             views: {
                 'main@home': {
                     templateUrl: 'views/account.html'
                 }
             }
         })
-        .state('home.product_release',{
-            url:'/product_release',
-            views:{
-                'main@home':{
-                    templateUrl:'views/product_release.html'
+        .state('home.product_release', {
+            url: '/product_release',
+            views: {
+                'main@home': {
+                    templateUrl: 'views/product_release.html'
                 }
             }
         })
-        .state('home.my_product',{
-            url:'/my_product',
-            views:{
-                'main@home':{
-                    templateUrl:'views/my_product.html',
-                   /* controller:function ($scope,$http) {
-                        $scope.productList={
-                            name:'',
-                            date:''
-                        };
-                        $http({
-                            url: '/Ranger/products/lists',
-                            method: 'GET'
-                        }).then(function (response) {
-                            $scope.productList = response.data;
-                            console.log(response.data);
-                        }, function (err) {
-                            alert("获取失败  " + err);
-                        });
-                    }*/
+        .state('home.my_product', {
+            url: '/my_product',
+            views: {
+                'main@home': {
+                    templateUrl: 'views/my_product.html',
+                    /* controller:function ($scope,$http) {
+                     $scope.productList={
+                     name:'',
+                     date:''
+                     };
+                     $http({
+                     url: '/Ranger/products/lists',
+                     method: 'GET'
+                     }).then(function (response) {
+                     $scope.productList = response.data;
+                     console.log(response.data);
+                     }, function (err) {
+                     alert("获取失败  " + err);
+                     });
+                     }*/
                 }
             }
         })
-        .state('home.my_product.edit',{
-            url:'/edit/:product_id',
-            views:{
-                'main@home':{
-                    templateUrl:'views/edit_product.html',
-                    controller:'editProductCtrl'
+        .state('home.my_product.edit', {
+            url: '/edit/:product_id',
+            views: {
+                'main@home': {
+                    templateUrl: 'views/edit_product.html',
+                    controller: 'editProductCtrl'
                 }
             }
         })
-        .state('home.angency_info',{
-            url:'/angency_info',
-            views:{
-                'main@home':{
-                    templateUrl:'views/angency_info.html'
+        .state('home.angency_info', {
+            url: '/angency_info',
+            views: {
+                'main@home': {
+                    templateUrl: 'views/angency_info.html'
                 }
             }
         })
-        .state('home.guide_info',{
-            url:'/guide_info',
-            views:{
-                'main@home':{
-                    templateUrl:'views/guide_info.html'
+        .state('home.guide_info', {
+            url: '/guide_info',
+            views: {
+                'main@home': {
+                    templateUrl: 'views/guide_info.html'
                 }
             }
         })
 
-        .state('home.invoice',{
-            url:'/invoice',
-            views:{
-                'main@home':{
-                    templateUrl:'views/invoice.html'
+        .state('home.invoice', {
+            url: '/invoice',
+            views: {
+                'main@home': {
+                    templateUrl: 'views/invoice.html'
                 }
             }
         })
