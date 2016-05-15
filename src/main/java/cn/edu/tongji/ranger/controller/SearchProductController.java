@@ -1,5 +1,6 @@
 package cn.edu.tongji.ranger.controller;
 
+import cn.edu.tongji.ranger.model.Location;
 import cn.edu.tongji.ranger.model.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +13,24 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/search")
+@RequestMapping("/api/searchproduct")
 public class SearchProductController {
 
+    @RequestMapping(value = "/list")
     @ResponseBody
     public List<Product> searchProduct(){
         return null;
+    }
+
+    @RequestMapping(value = "/setoff")
+    @ResponseBody
+    public List<Location> showLocations(long fatherId){
+        return null;
+    }
+
+    @RequestMapping(value = "/test")
+    @ResponseBody
+    public String test(){
+        return "test";
     }
 }
