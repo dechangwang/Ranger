@@ -4,6 +4,7 @@ import cn.edu.tongji.ranger.init.HibernateUtil;
 import cn.edu.tongji.ranger.model.*;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.ejb.TransactionImpl;
 import org.hibernate.ejb.criteria.AbstractNode;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,6 +45,7 @@ public class SessionPersistenceTestD {
 
     @Test
     public void testQuery() {
+
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = HibernateUtil.getSession();
         Product product = (Product) session.get(Product.class, 32L);
@@ -51,25 +53,31 @@ public class SessionPersistenceTestD {
         System.out.println(product.getDuration());
         System.out.println(product.getPostAddress());
         System.out.println(product.getTripAccomodations());
-        Product product1 = new Product();
-        product1.setId(product.getId());
-        product1.setName(product.getName());
-        product1.setSummary(product.getSummary());
-        product1.setPostAddress(product.getPostAddress());
-        product1.setTripSetoffs(product.getTripSetoffs());
-        product1.setClickRate(product.getClickRate());
-        product1.setDuration(product.getDuration());
-        product1.setPostcode(product.getPostcode());
-        product1.setPostPhone(product.getPostPhone());
-        product1.setPostReceiver(product.getPostReceiver());
-        product1.setSearchContent(product.getSearchContent());
-//        product1.getSetoffLocation(product.getSetoffLocation());
+//        Product product1 = new Product();
+//        product1.setId(product.getId());
+//        product1.setName(product.getName());
+//        product1.setSummary(product.getSummary());
+//        product1.setPostAddress(product.getPostAddress());
+//        product1.setTripSetoffs(product.getTripSetoffs());
+//        product1.setClickRate(product.getClickRate());
+//        product1.setDuration(product.getDuration());
+//        product1.setPostcode(product.getPostcode());
+//        product1.setPostPhone(product.getPostPhone());
+//        product1.setPostReceiver(product.getPostReceiver());
+//        product1.setSearchContent(product.getSearchContent());
+////        product1.getSetoffLocation(product.getSetoffLocation());
+        product.setName("hjhjhjh");
 
-        HibernateUtil.getSessionFactory();
-        Session session1 = HibernateUtil.getSession();
+//        HibernateUtil.getSessionFactory();
+//        Session session1 = HibernateUtil.getSession();
+        session.close();
+        session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
         product.setPostAddress("test addresss !!!");
-        session1.update(product);
+        session.update(product);
         System.out.println(product);
+//        session.close();
+        transaction.commit();
     }
 
     //    @Test

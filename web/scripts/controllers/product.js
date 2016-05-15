@@ -29,7 +29,6 @@ rangerApp.controller('productCtrl', ['$scope', '$http', function ($scope, $http)
         postphone:'',
         postaddress:'',
         
-
     };
     $scope.releaseProduct = function (products) {
         console.log(products);

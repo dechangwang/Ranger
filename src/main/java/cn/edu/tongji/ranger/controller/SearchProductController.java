@@ -2,8 +2,11 @@ package cn.edu.tongji.ranger.controller;
 
 import cn.edu.tongji.ranger.model.Location;
 import cn.edu.tongji.ranger.model.Product;
+import cn.edu.tongji.ranger.utils.SearchCondition;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -16,7 +19,7 @@ import java.util.List;
 @RequestMapping("/api/searchproduct")
 public class SearchProductController {
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
     public List<Product> searchProduct(){
         return null;
@@ -28,9 +31,10 @@ public class SearchProductController {
         return null;
     }
 
-    @RequestMapping(value = "/test")
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
     @ResponseBody
-    public String test(){
+    public String test(@RequestBody SearchCondition searchcondition){
+        System.out.println(searchcondition);
         return "test";
     }
 }

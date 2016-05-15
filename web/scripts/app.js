@@ -134,6 +134,11 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
+
+        .state('search',{
+            url:'/search',
+            templateUrl:'views/search_product.html'
+        })
     // $locationProvider.html5Mode(true);
 }]);
 
