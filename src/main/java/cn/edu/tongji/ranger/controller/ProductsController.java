@@ -171,10 +171,6 @@ public class ProductsController {
     @ResponseBody
     public List<MyProduct> productsList() {
         List<MyProduct> productList = productsService.findBySupplierId(7L);
-//        b.add(new MyProduct("122", "南京旅游", "2016-6-1", "2016-5-1", "成人：" + 1000.0 + "小孩：500", "未出行"));
-//        b.add(new MyProduct("111", "北京旅游", "2016-6-1", "2016-5-1", "" + 1000.0, "未出行"));
-//        b.add(new MyProduct("123", "北京旅游", "2016-6-1", "2016-5-1", "" + 1000.0, "未出行"));
-//        b.add(new MyProduct("133", "北京旅游", "2016-6-1", "2016-5-1", "" + 1000.0, "未出行"));
         System.out.println(productList);
 
         return productList;
@@ -196,11 +192,52 @@ public class ProductsController {
         map.put("name",product.getName());
         map.put("summary",product.getSummary());
         map.put("duration",product.getDuration()+"");
+        Set<TripSetoff> setoffs = product.getTripSetoffs();
+        Timestamp setoff_date = setoffs.iterator().next().getTripSetoffDate();
+        map.put("setoff_date",setoff_date+"");
         map.put("postcode",product.getPostcode());
         map.put("post_receiver",product.getPostReceiver());
         map.put("post_address",product.getPostAddress());
         map.put("post_phone",product.getPostPhone());
         return map;
-
     }
+
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,String> productEdit(@RequestParam(value = "id") String id,
+                                          @RequestParam(value = "name") String name,
+                                          @RequestParam(value = "summary")String summary,
+                                          @RequestParam(value = "duration")String duration,
+                                          @RequestParam(value = "setoff_date")String setoff_date,
+                                          @RequestParam(value = "postcode")String postcode,
+                                          @RequestParam(value = "post_receiver")String post_receiver,
+                                          @RequestParam(value = "post_address")String post_address,
+                                          @RequestParam(value = "post_phone")String post_phone){
+        Long productId = Long.parseLong(id);
+        Product product = productsService.findById(productId,Product.class);
+        product.setName(name);
+        product.setSummary(summary);
+        product.setDuration(Integer.parseInt(duration));
+        product.setPostcode(postcode);
+        product.setPostAddress(post_address);
+        product.setPostReceiver(post_receiver);
+        product.setPostPhone(post_phone);
+        product.getTripSetoffs().iterator().next().setTripSetoffDate(Timestamp.valueOf(setoff_date));
+        product.getTripSetoffs().iterator().next().setUpdateTime(new Timestamp(new Date().getTime()));
+        productsService.update(product);
+        Map<String,String> map = new HashMap<String, String>();
+        map.put("res","success");
+        return map;
+    }
+
+    /* id:product_id+"",
+        supplier_id:'',
+        name:'',
+        summary:'',
+        duration:'',
+        setoff_date:'',
+        postcode:'',
+        post_receiver:'',
+        post_address:'',
+        post_phone:''*/
 }

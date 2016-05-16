@@ -52,7 +52,7 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', function ($scope, $http) 
 
     $scope.test_p = function(search_condition){
         console.log(search_condition);
-        $http.post('/Ranger/api/searchproduct/test', search_condition)
+        $http.post('/Ranger/api/searchproduct/test',$scope.search_condition)
             .success(function(data){
                 console.log(data);
                 alert(data);

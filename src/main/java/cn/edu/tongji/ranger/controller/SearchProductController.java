@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,8 +35,11 @@ public class SearchProductController {
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> test(@RequestBody SearchCondition searchcondition){
+    public Map<String,String> test(@RequestBody SearchCondition searchcondition){
         System.out.println(searchcondition);
-        return null;
+        Map<String,String> map = new HashMap<String, String>();
+        map.put("res","test");
+        return map;
+
     }
 }

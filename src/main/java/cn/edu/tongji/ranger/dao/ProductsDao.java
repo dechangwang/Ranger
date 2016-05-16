@@ -11,6 +11,7 @@ public interface ProductsDao {
     public void create(Product product);
     public <T>T findById(Long id, Class<T> type);
     public List<MyProduct> findBySupplierId(long supplierID);
+    public void update(Product product);
 /*
     public Product findById(long id);
 */

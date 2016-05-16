@@ -68,6 +68,7 @@ rangerApp.controller('editProductCtrl',['$scope','$http','$state','$stateParams'
         name:'',
         summary:'',
         duration:'',
+        setoff_date:'',
         postcode:'',
         post_receiver:'',
         post_address:'',
@@ -92,6 +93,28 @@ rangerApp.controller('editProductCtrl',['$scope','$http','$state','$stateParams'
 
     $scope.editProduct = function (productInfo) {
         console.log(productInfo);
-        alert(productInfo.id);
+        // alert(productInfo.id);
+        $http({
+            url:'/Ranger/products/edit',
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            transformRequest : function(data) {
+                return $.param(data);
+            },
+            data:$scope.productInfo
+
+        }).then(function (response) {
+            if(response.data.res=='success'){
+                alert("修改成功")
+            }else{
+                alert("修改失败")
+            }
+            console.log(response.data);
+        },function (err) {
+            alert(err);
+            console.log(err);
+        })
     }
 }]);
