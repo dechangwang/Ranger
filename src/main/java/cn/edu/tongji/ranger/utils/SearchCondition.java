@@ -2,6 +2,8 @@ package cn.edu.tongji.ranger.utils;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Arrays;
+
 /**
  * Created by daidongyang on 5/15/16.
  */
@@ -24,10 +26,10 @@ public class SearchCondition {
     private SearchProductOrderEnum order = SearchProductOrderEnum.DEFAULT;
 
     @JsonProperty("min_price")
-    private int minPrice = -1;
+    private double minPrice = -1;
 
     @JsonProperty("max_price")
-    private int maxPrice = -1;
+    private double maxPrice = -1;
 
     @JsonProperty("min_duration")
     private int minDuration = -1;
@@ -35,22 +37,8 @@ public class SearchCondition {
     @JsonProperty("max_duration")
     private int maxDuration = -1;
 
-    public SearchCondition() {
-    }
-
-    public SearchCondition(String searchStr, long setoffLoctionId, int firstResult,
-                           int resultSize, SearchProductOrderEnum order,
-                           int minPrice, int maxPrice, int minDuration, int maxDuration) {
-        this.searchStr = searchStr;
-        this.setoffLoctionId = setoffLoctionId;
-        this.firstResult = firstResult;
-        this.resultSize = resultSize;
-        this.order = order;
-        this.minPrice = minPrice;
-        this.maxPrice = maxPrice;
-        this.minDuration = minDuration;
-        this.maxDuration = maxDuration;
-    }
+    @JsonProperty("limits")
+    private String[] limits = null;
 
     public String getSearchStr() {
         return searchStr;
@@ -92,19 +80,19 @@ public class SearchCondition {
         this.order = order;
     }
 
-    public int getMinPrice() {
+    public double getMinPrice() {
         return minPrice;
     }
 
-    public void setMinPrice(int minPrice) {
+    public void setMinPrice(double minPrice) {
         this.minPrice = minPrice;
     }
 
-    public int getMaxPrice() {
+    public double getMaxPrice() {
         return maxPrice;
     }
 
-    public void setMaxPrice(int maxPrice) {
+    public void setMaxPrice(double maxPrice) {
         this.maxPrice = maxPrice;
     }
 
@@ -124,6 +112,14 @@ public class SearchCondition {
         this.maxDuration = maxDuration;
     }
 
+    public String[] getLimits() {
+        return limits;
+    }
+
+    public void setLimits(String[] limits) {
+        this.limits = limits;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -134,26 +130,33 @@ public class SearchCondition {
         if (setoffLoctionId != that.setoffLoctionId) return false;
         if (firstResult != that.firstResult) return false;
         if (resultSize != that.resultSize) return false;
-        if (minPrice != that.minPrice) return false;
-        if (maxPrice != that.maxPrice) return false;
+        if (Double.compare(that.minPrice, minPrice) != 0) return false;
+        if (Double.compare(that.maxPrice, maxPrice) != 0) return false;
         if (minDuration != that.minDuration) return false;
         if (maxDuration != that.maxDuration) return false;
         if (searchStr != null ? !searchStr.equals(that.searchStr) : that.searchStr != null) return false;
-        return order == that.order;
+        if (order != that.order) return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(limits, that.limits);
 
     }
 
     @Override
     public int hashCode() {
-        int result = searchStr != null ? searchStr.hashCode() : 0;
+        int result;
+        long temp;
+        result = searchStr != null ? searchStr.hashCode() : 0;
         result = 31 * result + (int) (setoffLoctionId ^ (setoffLoctionId >>> 32));
         result = 31 * result + firstResult;
         result = 31 * result + resultSize;
         result = 31 * result + (order != null ? order.hashCode() : 0);
-        result = 31 * result + minPrice;
-        result = 31 * result + maxPrice;
+        temp = Double.doubleToLongBits(minPrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(maxPrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + minDuration;
         result = 31 * result + maxDuration;
+        result = 31 * result + Arrays.hashCode(limits);
         return result;
     }
 
@@ -169,6 +172,7 @@ public class SearchCondition {
                 ", maxPrice=" + maxPrice +
                 ", minDuration=" + minDuration +
                 ", maxDuration=" + maxDuration +
+                ", limits=" + Arrays.toString(limits) +
                 '}';
     }
 }

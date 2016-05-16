@@ -106,7 +106,7 @@ public class SearchProductDaoImpl implements SearchProductDao {
         for(int i = 0; i < args.length - 1; i++){
             sb.append("product.search_content like \"%");
             sb.append(args[i]);
-            sb.append("%\" or ");
+            sb.append("%\" and ");
         }
         sb.append("product.search_content like \"%");
         sb.append(args[args.length - 1]);

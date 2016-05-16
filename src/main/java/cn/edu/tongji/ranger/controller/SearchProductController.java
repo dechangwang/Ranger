@@ -40,5 +40,6 @@ public class SearchProductController {
         Map<String,String> map = new HashMap<String, String>();
         map.put("res","test");
         return map;
+
     }
 }

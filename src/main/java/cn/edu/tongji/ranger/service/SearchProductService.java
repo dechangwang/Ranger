@@ -1,6 +1,9 @@
 package cn.edu.tongji.ranger.service;
 
+import cn.edu.tongji.ranger.model.Location;
 import cn.edu.tongji.ranger.model.Product;
+import cn.edu.tongji.ranger.model.SimpleProduct;
+import cn.edu.tongji.ranger.utils.SearchCondition;
 import cn.edu.tongji.ranger.utils.SearchProductOrderEnum;
 
 import java.util.List;
@@ -11,5 +14,7 @@ import java.util.List;
 
 
 public interface SearchProductService {
-    List<Product>  listProducts(String searchStr, long setoffLocationId,int firstResult, int resultSize, SearchProductOrderEnum order);
+    List<SimpleProduct>  listProducts(SearchCondition searchCondition);
+    List<Location> listLocations(long fatherId);
+    Product getProductInfor(long productId);
 }
