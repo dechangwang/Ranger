@@ -8,6 +8,7 @@ import org.hibernate.ejb.TransactionImpl;
 import org.hibernate.ejb.criteria.AbstractNode;
 import org.junit.Before;
 import org.junit.Test;
+import sun.java2d.pipe.SpanShapeRenderer;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -27,6 +28,29 @@ public class SessionPersistenceTestD {
 
     }
 
+//    @Test
+    public void testSimpleProductList(){
+        List<SimpleProduct> products = sp.listAll(SimpleProduct.class);
+        System.out.println(products.size());
+        for(SimpleProduct p : products){
+            System.out.println(p);
+        }
+    }
+
+    @Test
+    public void testSimpleProductFindById(){
+        long id = 1;
+        List<SimpleProduct> simpleProducts = new ArrayList<SimpleProduct>();
+        for(int i = 0; i<200; i++){
+            SimpleProduct simpleProduct = sp.findById(id, SimpleProduct.class);
+            simpleProducts.add(simpleProduct);
+//            System.out.println(simpleProduct);
+        }
+        for(SimpleProduct simpleProduct : simpleProducts){
+            System.out.println(simpleProduct);
+        }
+    }
+
     //    @Test
     public void testUpdate() {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -43,7 +67,7 @@ public class SessionPersistenceTestD {
         trans.commit();
     }
 
-    @Test
+//    @Test
     public void testQuery() {
 
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();

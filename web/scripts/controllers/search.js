@@ -22,10 +22,11 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', function ($scope, $http) 
         'min_price': -1,
         'max_price': -1,
         'min_duration': -1,
-        'max_duration': -1
+        'max_duration': -1,
+        'limits':[]
     };
 
-    $scope.search = function(search_condition){
+    $scope.search_p = function(search_condition){
         console.log(search_condition);
         $http.post('/Ranger/api/searchproduct/list', search_condition)
             .success(function (data) {
@@ -37,7 +38,19 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', function ($scope, $http) 
             });
     };
 
-    $scope.test = function(search_condition){
+    $scope.search =function(){
+        console.log($scope.search_condition);
+        $http.post('/Ranger/api/searchproduct/list', $scope.search_condition)
+            .success(function (data) {
+                $scope.results = data;
+                console.log(data);
+            })
+            .error(function (err) {
+                alert(err);
+            });
+    };
+
+    $scope.test_p = function(search_condition){
         console.log(search_condition);
         $http.post('/Ranger/api/searchproduct/test', search_condition)
             .success(function(data){
@@ -49,8 +62,24 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', function ($scope, $http) 
             });
     };
 
-    $scope.get_locations = function(father_id){
+    $scope.test = function(){
+        console.log($scope.search_condition);
+        $http.post('/Ranger/api/searchproduct/test', $scope.search_condition)
+            .success(function(data){
+                console.log(data);
+                alert(data);
+            })
+            .error(function(err){
+                alert(err);
+            });
+    };
 
-    }
+    $scope.get_locations_p = function(father_id){
+
+    };
+
+
+
+
 
 }]);

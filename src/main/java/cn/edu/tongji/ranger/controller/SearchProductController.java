@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by daidongyang on 5/15/16.
@@ -33,8 +34,8 @@ public class SearchProductController {
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     @ResponseBody
-    public String test(@RequestBody SearchCondition searchcondition){
+    public Map<String, Object> test(@RequestBody SearchCondition searchcondition){
         System.out.println(searchcondition);
-        return "test";
+        return null;
     }
 }
