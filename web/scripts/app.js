@@ -125,7 +125,6 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
-
         .state('home.invoice', {
             url: '/invoice',
             views: {
@@ -134,11 +133,21 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
-
         .state('search',{
             url:'/search',
             templateUrl:'views/search_product.html'
         })
+      /*  .state('list',{
+            url:'/list',
+            templateUrl:'views/route/list.html'
+/!*
+            controller:'RouteListCtl'
+*!/
+        })
+        .state('testlist',{
+            url:'/testlist/:id',
+            templateUrl:'views/route/detail.html',
+        })*/
     // $locationProvider.html5Mode(true);
 }]);
 
