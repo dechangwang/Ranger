@@ -137,17 +137,15 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
             url:'/search',
             templateUrl:'views/search_product.html'
         })
-      /*  .state('list',{
-            url:'/list',
-            templateUrl:'views/route/list.html'
-/!*
-            controller:'RouteListCtl'
-*!/
+        .state('home.recharge',{
+            url:'/recharge',
+            views:{
+                'main@home':{
+                    templateUrl:'views/recharge.html',
+                    controller:'rechargeCtrl'
+                }
+            }
         })
-        .state('testlist',{
-            url:'/testlist/:id',
-            templateUrl:'views/route/detail.html',
-        })*/
     // $locationProvider.html5Mode(true);
 }]);
 
