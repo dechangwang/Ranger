@@ -125,7 +125,6 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
-
         .state('home.invoice', {
             url: '/invoice',
             views: {
@@ -134,11 +133,18 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
-
-        .state('search/',{
+        .state('search',{
             url:'/search',
-            templateUrl:'views/search_product.html',
-            controller:'searchCtrl'
+            templateUrl:'views/search_product.html'
+        })
+        .state('home.recharge',{
+            url:'/recharge',
+            views:{
+                'main@home':{
+                    templateUrl:'views/recharge.html',
+                    controller:'rechargeCtrl'
+                }
+            }
         })
     // $locationProvider.html5Mode(true);
 }]);

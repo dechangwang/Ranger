@@ -2,6 +2,11 @@ package cn.edu.tongji.ranger.dao.impl;
 
 import cn.edu.tongji.ranger.init.HibernateUtil;
 import cn.edu.tongji.ranger.model.*;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,14 +22,15 @@ import static org.junit.Assert.*;
  */
 public class SessionPersistenceTest {
     SessionPersistence sp;
+
     @Before
-    public void before(){
+    public void before() {
         sp = new SessionPersistence();
         sp.setSessionFactory(HibernateUtil.getSessionFactory());
 
     }
 
-    public void testCreate(){
+    public void testCreate() {
         LocationD ld = new LocationD();
         ld.setName("Henan");
         ld.setFatherId(new Long(2));
@@ -32,24 +38,40 @@ public class SessionPersistenceTest {
     }
 
 
-    public void testFindById(){
-        LocationD ld = sp.findById(1L,LocationD.class);
+    @Test
+    public void testBankCard() {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = HibernateUtil.getSession();
+
+        Transaction transaction = session.beginTransaction();
+        Criteria criteria = session
+                .createCriteria(BankCard.class)
+                .add(Restrictions.eq("cardNumber", "888888888888"));
+
+        List<BankCard> list = criteria.list();
+        System.out.println(list);
+        System.out.print(list.size());
+        transaction.commit();
+    }
+
+    public void testFindById() {
+        LocationD ld = sp.findById(1L, LocationD.class);
         System.out.println(ld);
     }
 
 
-    public void testFindByExample(){
+    public void testFindByExample() {
         LocationD ld = new LocationD();
         List<LocationD> lds = sp.findByExample(ld, LocationD.class);
         System.out.println(lds);
 
     }
 
-//    @Test
-    public void testListAll(){
-        List<TripSetoff>  results = sp.listAll(TripSetoff.class);
+    //    @Test
+    public void testListAll() {
+        List<TripSetoff> results = sp.listAll(TripSetoff.class);
         System.out.println(results.size());
-        for(TripSetoff result : results){
+        for (TripSetoff result : results) {
             System.out.println(result);
         }
     }
@@ -59,17 +81,17 @@ public class SessionPersistenceTest {
 
     //@Test
 
-    public void testProductListAll(){
+    public void testProductListAll() {
         List<Product> results = sp.listAll(Product.class);
         System.out.println(results.size());
-        for(Product result : results){
+        for (Product result : results) {
 //            System.out.println(result);
             System.out.println(result.getTripSetoffs().size());
         }
     }
 
-    @Test
-    public void testCreateProduct(){
+    //    @Test
+    public void testCreateProduct() {
         Product product = new Product();
         product.setName("北京三日游");
         product.setSummary("北京三日游");
@@ -79,7 +101,7 @@ public class SessionPersistenceTest {
         product.setPostPhone("12345678");
         product.setPostAddress("SiPing Road");
         product.setPostReceiver("wdchang");
-        Angency angency = sp.findById(9L,Angency.class);
+        Angency angency = sp.findById(9L, Angency.class);
         Location location = new Location();
 
         // change place name when repeate test
