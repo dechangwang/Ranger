@@ -25,10 +25,10 @@ public class ProductsController {
 
         Product product = new Product();
         product.setName(productsInfo.getName());
-        product.setSummary(productsInfo.getBrief() + productsInfo.getBackway() + productsInfo.getDetail() + productsInfo.getName() + "" +
+        product.setSearchContent(productsInfo.getBrief() + productsInfo.getBackway() + productsInfo.getDetail() + productsInfo.getName() + "" +
                 productsInfo.getHotelname() + productsInfo.getStartloc() + productsInfo.getSetoffway() + productsInfo.getStartdate() +
                 productsInfo.getTag() + productsInfo.getDuration());
-        product.setSearchContent(productsInfo.getDetail());
+        product.setSummary(productsInfo.getDetail());
         product.setDuration(productsInfo.getDuration());
         product.setPostcode(productsInfo.getPostcode());
         product.setPostReceiver(productsInfo.getReceiver());
