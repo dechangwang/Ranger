@@ -37,7 +37,15 @@ rangerApp.controller('productCtrl', ['$scope', '$http', function ($scope, $http)
                 console.log(data);
                 alert("注册结果  " + data.res);
             }).error(function (err) {
-            alert("注册失败  " + err);
+            layer.open({
+                title: '注册信息',
+                content: '注册失败',
+                btn: ['确定', '取消'],
+                /*  area: ['390px', '330px'],*/
+                yes: function(){
+                    layer.closeAll();
+                }
+            });
         })
     }
 

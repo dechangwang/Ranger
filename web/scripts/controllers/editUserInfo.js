@@ -80,7 +80,15 @@ rangerApp.controller('guideInfoCtrl', ['$scope', '$http', function ($scope, $htt
             data: guideInfo
         }).then(function (response) {
             if(response.data.res =='succeed'){
-                alert("修改信息成功");
+                layer.open({
+                    title: '信息',
+                    content: '修改信息成功',
+                    btn: ['确定', '取消'],
+                    /*  area: ['390px', '330px'],*/
+                    yes: function(){
+                        layer.closeAll();
+                    }
+                });
             }else if(response.data.res =='no'){
                 alert("所属公司名有误");
             }else{

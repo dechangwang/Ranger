@@ -32,15 +32,32 @@ rangerApp.controller('rechargeCtrl', ['$scope', '$http', '$state',function ($sco
                     content: '充值成功',
                     btn: ['确定', '取消'],
                   /*  area: ['390px', '330px'],*/
-                    yes: function(index, layero){
-                        c
+                    yes: function(){
+                        layer.closeAll();
                         $state.go('home');
                     }
                 });
             }else if (response.data.res =='no'){
-                alert("卡号错误");
+                layer.open({
+                    title: '充值信息',
+                    content: '卡号错误',
+                    btn: ['确定', '取消'],
+                    /*  area: ['390px', '330px'],*/
+                    yes: function(){
+                        layer.closeAll();
+                    }
+                });
             }else{
-                alert("充值失败");
+                layer.open({
+                    title: '充值信息',
+                    content: '充值失败',
+                    btn: ['确定', '取消'],
+                    /*  area: ['390px', '330px'],*/
+                    yes: function(){
+                        layer.closeAll();
+                     
+                    }
+                });
             }
         },function (err) {
             alert(err);

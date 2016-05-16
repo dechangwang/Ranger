@@ -107,9 +107,25 @@ rangerApp.controller('editProductCtrl',['$scope','$http','$state','$stateParams'
 
         }).then(function (response) {
             if(response.data.res=='success'){
-                alert("修改成功")
+                layer.open({
+                    title: '修改产品信息',
+                    content: '修改成功',
+                    btn: ['确定', '取消'],
+                    /*  area: ['390px', '330px'],*/
+                    yes: function(){
+                        layer.closeAll();
+                    }
+                });
             }else{
-                alert("修改失败")
+                layer.open({
+                    title: '修改产品信息',
+                    content: '修改失败',
+                    btn: ['确定', '取消'],
+                    /*  area: ['390px', '330px'],*/
+                    yes: function(){
+                        layer.closeAll();
+                    }
+                });
             }
             console.log(response.data);
         },function (err) {
