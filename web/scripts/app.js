@@ -135,9 +135,10 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
             }
         })
 
-        .state('search',{
+        .state('search/',{
             url:'/search',
-            templateUrl:'views/search_product.html'
+            templateUrl:'views/search_product.html',
+            controller:'searchCtrl'
         })
     // $locationProvider.html5Mode(true);
 }]);

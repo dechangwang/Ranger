@@ -2,13 +2,17 @@ package cn.edu.tongji.ranger.controller;
 
 import cn.edu.tongji.ranger.model.Location;
 import cn.edu.tongji.ranger.model.Product;
+import cn.edu.tongji.ranger.model.SimpleProduct;
+import cn.edu.tongji.ranger.service.SearchProductService;
 import cn.edu.tongji.ranger.utils.SearchCondition;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +25,17 @@ import java.util.Map;
 @RequestMapping("/api/searchproduct")
 public class SearchProductController {
 
+    @Autowired
+    private SearchProductService searchProductService;
+
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
-    public List<Product> searchProduct(){
-        return null;
+    public List<SimpleProduct> searchProduct(@RequestBody SearchCondition searchCondition){
+        System.out.println(searchCondition);
+        List<SimpleProduct> results = searchProductService.listProducts(searchCondition);
+        System.out.println(results.size());
+//        return new ArrayList<SimpleProduct>();
+        return results;
     }
 
     @RequestMapping(value = "/setoff")

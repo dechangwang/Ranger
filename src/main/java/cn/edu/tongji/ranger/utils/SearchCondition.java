@@ -13,7 +13,7 @@ public class SearchCondition {
     @JsonProperty("search_str")
     private String searchStr;
 
-    @JsonProperty("setoff_loction_id")
+    @JsonProperty("setoff_location_id")
     private long setoffLoctionId;
 
     @JsonProperty("first_result")

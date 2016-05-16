@@ -31,6 +31,9 @@
         <mapping class="cn.edu.tongji.ranger.model.TouristType"/>
         <mapping class="cn.edu.tongji.ranger.model.TrafficType"/>
         <mapping class="cn.edu.tongji.ranger.model.SimpleProduct"/>
+        <mapping class="cn.edu.tongji.ranger.model.SimpleTripSetoff"/>
+        <mapping class="cn.edu.tongji.ranger.model.SimpleTripDestination"/>
+        <mapping class="cn.edu.tongji.ranger.model.SimpleTripPrice"/>
         <mapping package="cn.edu.tongji.ranger.model"/>
     </session-factory>
 </hibernate-configuration>

@@ -39,9 +39,9 @@ public class SessionPersistenceTestD {
 
     @Test
     public void testSimpleProductFindById(){
-        long id = 1;
+        long id = 3;
         List<SimpleProduct> simpleProducts = new ArrayList<SimpleProduct>();
-        for(int i = 0; i<200; i++){
+        for(int i = 0; i<10; i++){
             SimpleProduct simpleProduct = sp.findById(id, SimpleProduct.class);
             simpleProducts.add(simpleProduct);
 //            System.out.println(simpleProduct);

@@ -8,13 +8,15 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', function ($scope, $http) 
     $scope.results = [];
 
     $scope.setoff_location = {
-        id : '0',
-        name : 'Shanghai',
-        fatherId : '0'
+        id : 11,
+        name : '上海',
+        fatherId : 2
     };
 
+    $scope.setoff_locations = [];
+
     $scope.search_condition = {
-        'search_str': null,
+        'search_str': '',
         'setoff_location_id': 0,
         'first_result': 0,
         'result_size': 20,
@@ -24,6 +26,16 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', function ($scope, $http) 
         'min_duration': -1,
         'max_duration': -1,
         'limits':[]
+    };
+
+    $scope.get_comments = function(simplep){
+        var comments = 0;
+        var index;
+        var trip_setoffs = simplep.tripSetoffs;
+        for(index = 0; index < trip_setoffs.length; ++index){
+            comments += trip_setoffs[index].commentCount;
+        }
+        return comments;
     };
 
     $scope.search_p = function(search_condition){
@@ -39,7 +51,12 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', function ($scope, $http) 
     };
 
     $scope.search =function(){
-        console.log($scope.search_condition);
+        if($scope.search_condition == ''){
+            return;
+        }
+
+        $scope.search_condition.setoff_location_id = $scope.setoff_location.id;
+
         $http.post('/Ranger/api/searchproduct/list', $scope.search_condition)
             .success(function (data) {
                 $scope.results = data;
@@ -75,11 +92,8 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', function ($scope, $http) 
     };
 
     $scope.get_locations_p = function(father_id){
+        console.log(father_id);
 
     };
-
-
-
-
 
 }]);

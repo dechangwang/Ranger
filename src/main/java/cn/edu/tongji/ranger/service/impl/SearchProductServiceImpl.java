@@ -60,6 +60,7 @@ public class SearchProductServiceImpl implements SearchProductService {
             }
         }
         return simpleProducts;
+
     }
 
     public List<Location> listLocations(long fatherId) {
