@@ -1,4 +1,6 @@
-package cn.edu.tongji.ranger.model;
+package cn.edu.tongji.ranger.model2show;
+
+import cn.edu.tongji.ranger.model.Guide;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -9,7 +11,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "trip_setoff")
-public class SimpleTripSetoff {
+public class TripSetoff2 {
     private long id;
     private Timestamp tripSetoffDate;
     private Timestamp updateTime;
@@ -99,7 +101,7 @@ public class SimpleTripSetoff {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SimpleTripSetoff that = (SimpleTripSetoff) o;
+        TripSetoff2 that = (TripSetoff2) o;
 
         if (id != that.id) return false;
         if (purchaseCount != that.purchaseCount) return false;

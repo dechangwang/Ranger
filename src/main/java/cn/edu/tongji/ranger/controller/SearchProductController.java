@@ -1,8 +1,7 @@
 package cn.edu.tongji.ranger.controller;
 
 import cn.edu.tongji.ranger.model.Location;
-import cn.edu.tongji.ranger.model.Product;
-import cn.edu.tongji.ranger.model.SimpleProduct;
+import cn.edu.tongji.ranger.model2show.SimpleProduct;
 import cn.edu.tongji.ranger.service.SearchProductService;
 import cn.edu.tongji.ranger.utils.SearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,4 +51,6 @@ public class SearchProductController {
         return map;
 
     }
+
+
 }

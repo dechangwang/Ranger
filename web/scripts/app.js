@@ -150,6 +150,24 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
             templateUrl:'views/search_product.html'
         })
 
+        .state('product_detail',{
+            url:'/product_detail/:p_id',
+            views:{
+                '':{
+                    templateUrl:'views/product_detail.html'
+                },
+                'topBar@product_detail':{
+                    templateUrl:'views/topbar.html'
+                },
+                'searchBar@product_detail':{
+                    templateUrl:'views/search_bar.html'
+                },
+                'productTemplate@product_detail':{
+                    templateUrl:'views/product_detail_template.html'
+                }
+            }
+        })
+
         // .state('search_str',{
         //     url:'/search/:search_str',
         //     templateUrl:'views/search_product.html'

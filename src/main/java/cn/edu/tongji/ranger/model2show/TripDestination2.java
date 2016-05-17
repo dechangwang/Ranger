@@ -1,4 +1,6 @@
-package cn.edu.tongji.ranger.model;
+package cn.edu.tongji.ranger.model2show;
+
+import cn.edu.tongji.ranger.model.Location;
 
 import javax.persistence.*;
 
@@ -8,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "trip_destination", schema = "ranger", catalog = "")
-public class SimpleTripDestination {
+public class TripDestination2 {
     private long id;
     private String brief;
     private Location location;
@@ -51,7 +53,7 @@ public class SimpleTripDestination {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SimpleTripDestination that = (SimpleTripDestination) o;
+        TripDestination2 that = (TripDestination2) o;
 
         if (id != that.id) return false;
         if (brief != null ? !brief.equals(that.brief) : that.brief != null) return false;

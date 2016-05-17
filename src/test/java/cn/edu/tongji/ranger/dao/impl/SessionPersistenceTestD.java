@@ -2,18 +2,13 @@ package cn.edu.tongji.ranger.dao.impl;
 
 import cn.edu.tongji.ranger.init.HibernateUtil;
 import cn.edu.tongji.ranger.model.*;
+import cn.edu.tongji.ranger.model2show.SimpleProduct;
 import org.hibernate.*;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.ejb.TransactionImpl;
-import org.hibernate.ejb.criteria.AbstractNode;
 import org.junit.Before;
 import org.junit.Test;
-import sun.java2d.pipe.SpanShapeRenderer;
 
 import java.sql.Timestamp;
 import java.util.*;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by daidongyang on 5/9/16.

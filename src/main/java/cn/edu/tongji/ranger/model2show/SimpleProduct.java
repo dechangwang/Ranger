@@ -1,7 +1,7 @@
-package cn.edu.tongji.ranger.model;
+package cn.edu.tongji.ranger.model2show;
 
+import cn.edu.tongji.ranger.model.*;
 import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -24,10 +24,10 @@ public class SimpleProduct {
     private Location setoffLocation;
     private Angency supplier;
 
-    private Set<SimpleTripDestination> tripDestinations;
-    private Set<SimpleTripPrice> tripPrices;
+    private Set<TripDestination2> tripDestinations;
+    private Set<TripPrice2> tripPrices;
 
-    private Set<SimpleTripSetoff> tripSetoffs;
+    private Set<TripSetoff2> tripSetoffs;
 
 
     @Id
@@ -115,31 +115,31 @@ public class SimpleProduct {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
-    public Set<SimpleTripDestination> getTripDestinations() {
+    public Set<TripDestination2> getTripDestinations() {
         return tripDestinations;
     }
 
-    public void setTripDestinations(Set<SimpleTripDestination> tripDestinations) {
+    public void setTripDestinations(Set<TripDestination2> tripDestinations) {
         this.tripDestinations = tripDestinations;
     }
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
-    public Set<SimpleTripPrice> getTripPrices() {
+    public Set<TripPrice2> getTripPrices() {
         return tripPrices;
     }
 
-    public void setTripPrices(Set<SimpleTripPrice> tripPrices) {
+    public void setTripPrices(Set<TripPrice2> tripPrices) {
         this.tripPrices = tripPrices;
     }
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
-    public Set<SimpleTripSetoff> getTripSetoffs() {
+    public Set<TripSetoff2> getTripSetoffs() {
         return tripSetoffs;
     }
 
-    public void setTripSetoffs(Set<SimpleTripSetoff> tripSetoffs) {
+    public void setTripSetoffs(Set<TripSetoff2> tripSetoffs) {
         this.tripSetoffs = tripSetoffs;
     }
 }

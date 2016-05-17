@@ -4,7 +4,8 @@ import cn.edu.tongji.ranger.dao.GenericDao;
 import cn.edu.tongji.ranger.dao.SearchProductDao;
 import cn.edu.tongji.ranger.model.Location;
 import cn.edu.tongji.ranger.model.Product;
-import cn.edu.tongji.ranger.model.SimpleProduct;
+import cn.edu.tongji.ranger.model2show.Product2;
+import cn.edu.tongji.ranger.model2show.SimpleProduct;
 import cn.edu.tongji.ranger.service.SearchProductService;
 import cn.edu.tongji.ranger.utils.SearchCondition;
 import cn.edu.tongji.ranger.utils.SearchProductOrderEnum;
@@ -70,8 +71,8 @@ public class SearchProductServiceImpl implements SearchProductService {
         return results;
     }
 
-    public Product getProductInfor(long productId) {
-        return genericDao.findById(productId, Product.class);
+    public Product2 getProductInfor(long productId) {
+        return genericDao.findById(productId, Product2.class);
     }
 
 

@@ -1,4 +1,6 @@
-package cn.edu.tongji.ranger.model;
+package cn.edu.tongji.ranger.model2show;
+
+import cn.edu.tongji.ranger.model.TouristType;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -9,7 +11,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "trip_price")
-public class SimpleTripPrice {
+public class TripPrice2 {
     private long id;
     private double price;
     private byte isExpired;
@@ -74,7 +76,7 @@ public class SimpleTripPrice {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SimpleTripPrice that = (SimpleTripPrice) o;
+        TripPrice2 that = (TripPrice2) o;
 
         if (id != that.id) return false;
         if (Double.compare(that.price, price) != 0) return false;
