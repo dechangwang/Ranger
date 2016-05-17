@@ -16,6 +16,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 'topbar@home': {
                     templateUrl: 'views/topbar.html'
                 },
+                
                 'main@home': {
                     templateUrl: 'views/homepage.html'
                 }
@@ -133,10 +134,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
-        .state('search',{
-            url:'/search',
-            templateUrl:'views/search_product.html'
-        })
+
         .state('home.recharge',{
             url:'/recharge',
             views:{
@@ -146,6 +144,16 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
+
+        .state('search',{
+            url:'/search',
+            templateUrl:'views/search_product.html'
+        })
+
+        // .state('search_str',{
+        //     url:'/search/:search_str',
+        //     templateUrl:'views/search_product.html'
+        // })
     // $locationProvider.html5Mode(true);
 }]);
 
