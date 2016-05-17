@@ -31,7 +31,7 @@
 <div class="panel-body">
     <table class="table">
     <tr ng-repeat="simplep in results">
-        <td>{{simplep.name}}</td>
+        <td><a href="#/product_detail/{{simplep.id}}">{{simplep.name}}</a></td>
         <td>{{simplep.summary}}</td>
         <td>{{simplep.supplier.cname}}</td>
         <td>出行时长:{{simplep.duration}}</td>

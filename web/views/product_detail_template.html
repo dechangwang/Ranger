@@ -2,11 +2,11 @@
 <div class="basicDiv row">
     <div class="col-md-1"></div>
     <div class="col-md-1" style="border:1px pink solid;text-align: center;">
-        出境游
+        标签
     </div>
     <div class="col-md-1"></div>
     <div class="col-md-5" style="border: 1px pink solid;text-align: center;">
-        泰国七日双飞游
+        {{product.name}}
     </div>
 </div>
 
@@ -36,11 +36,12 @@
     <div class="col-md-3" >
         <div class="row">
             <!-- 这里需要动态绑定 -->
-            <div class="col-md-6" >出发地：上海</div>
-            <div class="col-md-5" >交通：双飞</div>
+            <div class="col-md-6" >目的地：<ul ng-repeat="destination in product.tripDestinations"><li>{{destination.name}}</li></ul></div>
+            <div class="col-md-5" >交通：<ul ng-repeat="traffic in product.tripTraffics"><li>{{traffic.trafficType.typ}}</li></ul></div>
         </div>
         <div class="row">
-            <div class="col-md-6" >最低价格：3999元</div>
+            <div class="col-md-6" >价格：<ul ng-repeat="price in product.tripPrices">
+                <li>{{price.touristType.type}}:{{price.price}}</li></ul></div>
             <div class="col-md-5" >天数：5</div>
         </div>
         <div >
@@ -176,7 +177,7 @@
     <div class="basicDiv row">
         <div class="col-md-2"></div>
         <div class="col-md-6">
-            adfafsdfhah
+            预定须知
         </div>
     </div>
 </div>
@@ -188,7 +189,7 @@
     <div class="basicDiv row">
         <div class="col-md-2"></div>
         <div class="col-md-6">
-            adfafsdfhah
+            预定须知
         </div>
     </div>
 </div>

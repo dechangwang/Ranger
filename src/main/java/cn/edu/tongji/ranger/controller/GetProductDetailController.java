@@ -30,7 +30,6 @@ public class GetProductDetailController {
 //        System.out.println(id);
         Product2 p =  searchProductService.getProductInfor(id);
 //        System.out.println(p);
-
         return p;
     }
 
