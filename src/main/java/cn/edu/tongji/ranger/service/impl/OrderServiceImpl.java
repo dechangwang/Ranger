@@ -33,12 +33,10 @@ public class OrderServiceImpl implements OrderService{
 
     private List<OrderListItem> allorder= new ArrayList<OrderListItem>();
 
-    @Override
     public boolean addTourist(OrderformTourist tourist) {
         return orderFormTouristDao.createTourist(tourist);
     }
 
-    @Override
     public OrderDetail getOrderDetail(long orderId)
     {
         OrderDetail detail=new OrderDetail();
@@ -97,7 +95,6 @@ public class OrderServiceImpl implements OrderService{
 
 
 
-    @Override
     public List<OrderListItem> getAllListOrder(long buyerid) {
 
         List<OrderListItem> itemlist= new ArrayList<OrderListItem>();
@@ -145,7 +142,6 @@ public class OrderServiceImpl implements OrderService{
         return itemlist;
     }
 
-    @Override
     public List<OrderListItem> getToBeACK(long buyerid) {
         if(allorder.isEmpty())
         allorder=getAllListOrder(buyerid);
@@ -161,7 +157,6 @@ public class OrderServiceImpl implements OrderService{
         return result;
     }
 
-    @Override
     public List<OrderListItem> getToPay(long buyerid) {
         if(allorder.isEmpty())
             allorder=getAllListOrder(buyerid);
@@ -176,7 +171,6 @@ public class OrderServiceImpl implements OrderService{
         return result;
     }
 
-    @Override
     public List<OrderListItem> getHasPaidDeposit(long buyerid) {
         if(allorder.isEmpty())
             allorder=getAllListOrder(buyerid);
@@ -191,7 +185,6 @@ public class OrderServiceImpl implements OrderService{
         return result;
     }
 
-    @Override
     public List<OrderListItem> getHasPaidAll(long buyerid) {
         if(allorder.isEmpty())
             allorder=getAllListOrder(buyerid);
@@ -206,7 +199,6 @@ public class OrderServiceImpl implements OrderService{
         return result;
     }
 
-    @Override
     public List<OrderListItem> getHasFinished(long buyerid) {
         if(allorder.isEmpty())
             allorder=getAllListOrder(buyerid);
@@ -221,7 +213,6 @@ public class OrderServiceImpl implements OrderService{
         return result;
     }
 
-    @Override
     public List<OrderListItem> getHasEvaluate(long buyerid) {
         if(allorder.isEmpty())
             allorder=getAllListOrder(buyerid);
@@ -235,7 +226,7 @@ public class OrderServiceImpl implements OrderService{
         }
         return result;
     }
-    @Override
+
     public List<OrderListItem> getHasCanceled(long buyerid) {
         if(allorder.isEmpty())
             allorder=getAllListOrder(buyerid);
