@@ -1,7 +1,9 @@
 package cn.edu.tongji.ranger.dao;
 
+import cn.edu.tongji.ranger.model.Orderform;
 import cn.edu.tongji.ranger.model.OrderformTourist;
 
+import javax.persistence.criteria.Order;
 import java.util.List;
 
 /**
@@ -9,5 +11,5 @@ import java.util.List;
  */
 public interface OrderFormTouristDao {
    public List<OrderformTourist> getOrderFormTouristByOrderId(long orderId);
-
+    public boolean createTourist(OrderformTourist tourist);
 }

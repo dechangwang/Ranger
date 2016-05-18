@@ -24,6 +24,8 @@ public class TripPriceDaoImpl implements TripPriceDao {
         query.setParameter("pid",productId);
         query.setParameter("tid",touristTypeId);
         TripPrice tp=(TripPrice)query.uniqueResult();
+        if(tp!=null)
         return tp.getPrice();
+        else return 0d;
     }
 }

@@ -28,7 +28,7 @@ public class OrderformDaoImpl implements OrderformDao {
             Query query=session.createQuery(hql);
             query.setParameter("oid",orderId);*/
 
-            return (Orderform)session.load(Orderform.class,orderId);
+            return (Orderform)session.get(Orderform.class,orderId);
     }
 
     public List<Orderform> findByBuyerId(long buyerId) {

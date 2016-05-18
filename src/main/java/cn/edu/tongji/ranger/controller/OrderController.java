@@ -1,17 +1,17 @@
 package cn.edu.tongji.ranger.controller;
 
+import cn.edu.tongji.ranger.model.OrderDetail;
 import cn.edu.tongji.ranger.model.OrderListItem;
 import cn.edu.tongji.ranger.model.Orderform;
+import cn.edu.tongji.ranger.model.OrderformTourist;
 import cn.edu.tongji.ranger.service.OrderService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -19,73 +19,91 @@ import java.util.List;
 /**
  * Created by 马二爷 on 2016/4/28.
  */
-@Controller
+
+@RestController
 @RequestMapping(value = "/order")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
+    @RequestMapping(value = "/submittourist/{oid}",method = RequestMethod.POST)
+    @ResponseBody
+    public void submitTourist(@PathVariable("oid") long oid,@RequestBody OrderformTourist tourist)
+    {
+        tourist.setOrderformId(oid);
+        //插入数据库
+        orderService.addTourist(tourist);
+    }
+
+
+    @RequestMapping(value="/detail/{oid}",method=RequestMethod.GET)
+    @ResponseBody
+    public OrderDetail viewDetail(@PathVariable("oid")long orderId)
+    {
+        OrderDetail detail=orderService.getOrderDetail(orderId);
+        return detail;
+    }
+
     @RequestMapping(value = "/listAll/{bid}",method = RequestMethod.GET)
     public ResponseEntity<List<OrderListItem>> listAll(@PathVariable("bid") long bid)
     {
-        //String buyerid=principal.getName();
-        System.out.println("in backend controller");
         List<OrderListItem> orders=orderService.getAllListOrder(bid);
         if(orders.isEmpty())
         {
-            return new ResponseEntity<List<OrderListItem>>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<List<OrderListItem>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<OrderListItem>>(orders, HttpStatus.OK);
     }
 
-   /* @RequestMapping(value="/list/ToBeAck",method = RequestMethod.GET)
+    @RequestMapping(value="/listToBeAck/{bid}",method = RequestMethod.GET)
     @ResponseBody
-    public List<OrderListItem> listToBeAck(Principal principal)
+    public List<OrderListItem> listToBeAck(@PathVariable("bid") long bid)
     {
-        return orderService.getToBeACK();
+        return orderService.getToBeACK(bid);
     }
-    @RequestMapping(value="/list/ToPay",method = RequestMethod.GET)
+    @RequestMapping(value="/listToPay/{bid}",method = RequestMethod.GET)
     @ResponseBody
-    public List<OrderListItem> listToPay(Principal principal)
+    public List<OrderListItem> listToPay(@PathVariable("bid") long bid)
     {
-        return orderService.getToPay();
-    }
-
-    @RequestMapping(value="/list/HasPaidDeposit",method = RequestMethod.GET)
-    @ResponseBody
-    public List<OrderListItem> listHasPaidDeposit(Principal principal)
-    {
-        return orderService.getHasPaidDeposit();
+        return orderService.getToPay(bid);
     }
 
-    @RequestMapping(value="/list/HasPaidAll",method = RequestMethod.GET)
+    @RequestMapping(value="/listHasPaidDeposit/{bid}",method = RequestMethod.GET)
     @ResponseBody
-    public List<OrderListItem> listHasPaidAll(Principal principal)
+    public List<OrderListItem> listHasPaidDeposit(@PathVariable("bid") long bid)
     {
-        return orderService.getHasPaidAll();
+        return orderService.getHasPaidDeposit(bid);
     }
 
-    @RequestMapping(value="/list/HasFinished",method = RequestMethod.GET)
+    @RequestMapping(value="/listHasPaidAll/{bid}",method = RequestMethod.GET)
     @ResponseBody
-    public List<OrderListItem> listHasFinished(Principal principal)
+    public List<OrderListItem> listHasPaidAll(@PathVariable("bid") long bid)
     {
-        return orderService.getHasFinished();
+        return orderService.getHasPaidAll(bid);
     }
 
-    @RequestMapping(value="/list/HasCanceled",method = RequestMethod.GET)
+    @RequestMapping(value="/listHasFinished/{bid}",method = RequestMethod.GET)
     @ResponseBody
-    public List<OrderListItem> listHasCanceled(Principal principal)
+    public List<OrderListItem> listHasFinished(@PathVariable("bid") long bid)
     {
-        return orderService.getHasCanceled();
+        return orderService.getHasFinished(bid);
     }
 
-    @RequestMapping(value = "/detail/{orderid}",method =RequestMethod.GET)
+    @RequestMapping(value="/listHasEvaluated/{bid}",method = RequestMethod.GET)
     @ResponseBody
-    public Orderform orderDetail(@PathVariable("orderid")long id)
+    public List<OrderListItem> listHasEvaluated(@PathVariable("bid") long bid)
     {
+        return orderService.getHasEvaluate(bid);
+    }
 
-    }*/
+    @RequestMapping(value="/listHasCanceled/{bid}",method = RequestMethod.GET)
+    @ResponseBody
+    public List<OrderListItem> listHasCanceled(@PathVariable("bid") long bid)
+    {
+        return orderService.getHasCanceled(bid);
+    }
+
 
 
 }

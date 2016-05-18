@@ -5,6 +5,7 @@ import cn.edu.tongji.ranger.model.OrderformTourist;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class OrderFormTouristDaoImpl implements OrderFormTouristDao {
     @Autowired
     private SessionFactory sessionFactory;
+
     public List<OrderformTourist> getOrderFormTouristByOrderId(long orderId)
     {
         Session session=sessionFactory.getCurrentSession();
@@ -24,5 +26,21 @@ public class OrderFormTouristDaoImpl implements OrderFormTouristDao {
         Query query=session.createQuery(hql);
         query.setParameter("orderId",orderId);
         return (List<OrderformTourist>)query.list();
+    }
+
+    @Override
+    public boolean createTourist(OrderformTourist tourist) {
+        Session session=sessionFactory.getCurrentSession();
+        Transaction tx=session.beginTransaction();
+        try {
+            session.save(tourist);
+        }catch (Exception e)
+        {
+            return false;
+        }
+        tx.commit();
+        session.close();
+
+        return true;
     }
 }

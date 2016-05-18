@@ -1,7 +1,9 @@
 package cn.edu.tongji.ranger.service;
 
+import cn.edu.tongji.ranger.model.OrderDetail;
 import cn.edu.tongji.ranger.model.OrderListItem;
 import cn.edu.tongji.ranger.model.Orderform;
+import cn.edu.tongji.ranger.model.OrderformTourist;
 
 import java.util.List;
 
@@ -17,4 +19,7 @@ public interface OrderService {
     public List<OrderListItem> getHasPaidAll(long buyerid);
     public List<OrderListItem> getHasFinished(long buyerid);
     public List<OrderListItem> getHasCanceled(long buyerid);
+    public List<OrderListItem> getHasEvaluate(long buyerid);
+    public OrderDetail getOrderDetail(long orderId);
+    public boolean addTourist(OrderformTourist tourist);
 }

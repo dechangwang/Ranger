@@ -17,6 +17,6 @@ public class TripSetOffDaoImpl implements TripSetOffDao {
     @Override
     public TripSetoff getTripSetOffById(long id) {
         Session session=sessionFactory.getCurrentSession();
-       return (TripSetoff)session.load(TripSetoff.class,id);
+       return (TripSetoff)session.get(TripSetoff.class,id);
     }
 }

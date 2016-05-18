@@ -1,0 +1,101 @@
+<div ng-controller="orderDetailCtrl">
+    <div>
+        订单状态：{{orderdetail.orderform.state}}
+        订单编号:{{orderdetail.orderform.id}}
+        出团日期：{{orderdetail.tripSetoff.tripSetoffDate |date: 'yyyy-MM-dd'}}
+        预订产品：{{orderdetail.product.name}}
+        下单日期：{{orderdetail.orderform.bookTime|date: 'yyyy-MM-dd'}}
+        回团日期：{{orderdetail.tripSetoff.tripSetoffDate+orderdetail.product.duration |date: 'yyyy-MM-dd'}}
+        订单金额：{{orderdetail.price.total}}
+        价格明细：成人（{{orderdetail.price.adultPrice }}元）{{orderdetail.price.adultnum}} 人
+        儿童（{{orderdetail.price.childPrice}} 元）{{orderdetail.price.childnum}} 人
+    </div>
+    <h1>订单处理</h1>
+    <div>
+        <div>
+        处理联系人：
+        <div>
+            联系人：{{orderdetail.orderform.booker}}
+            联系电话：{{orderdetail.orderform.bookerPhone}}
+        </div>
+        </div>
+
+        <div>
+            出团通知书&合同
+        </div>
+        <div>
+            签证材料寄送地址
+            <div>
+                联系人：{{orderdetail.orderform.booker}}
+                联系电话：{{orderdetail.orderform.bookerPhone}}
+            </div>
+        </div>
+        <div>
+            处理跟踪
+            <table>
+                <thead>
+                <tr>
+                    <th>时间</th>
+                    <th>操作信息</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="process in orderdetail.orderprocess">
+                    <td>{{process.updateTime |date: 'yyyy-MM-dd'}}</td>
+                    <td>{{process.trackItem}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h1>订单信息</h1>
+    <div>
+         预订信息：
+        <div>
+            联系人：{{orderdetail.orderform.booker}}
+            联系电话：{{orderdetail.orderform.bookerPhone}}
+        </div>
+    </div>
+    <div>
+        产品信息：
+        <div>
+            产品编号:{{orderdetail.product.id}}
+            产品名称：{{orderdetail.product.name}}
+            出发城市：{{}}
+            出游人数：成人{{orderdetail.price.adultnum}} 人
+            儿童{{orderdetail.price.childnum}} 人
+            订单金额：{{orderdetail.price.total}}
+        </div>
+    </div>
+    <div>
+        游客信息；
+        <table>
+            <thead>
+            <tr>
+                <th>姓名</th>
+                <th>手机</th>
+                <th>客户类型</th>
+                <th>证件类型</th>
+                <th>证件号码</th>
+                <th>性别</th>
+                <th>出生日期</th>
+                <th>备注信息</th>
+                <th>状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="tourist in orderdetail.tourists">
+                <td>{{tourist.name}}</td>
+                <td>{{tourist.phone}}</td>
+                <td>{{tourist.touristTypeId}}</td>
+                <td>{{tourist.certifateType}}</td>
+                <td>{{tourist.certifateNumber}}</td>
+                <td>{{tourist.gender}}</td>
+                <td>{{tourist.birthDate|date: 'yyyy-MM-dd'}}</td>
+                <td>{{tourist.remark}}</td>
+                <td>{{tourist.state}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

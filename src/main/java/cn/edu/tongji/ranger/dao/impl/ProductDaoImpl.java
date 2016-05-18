@@ -18,6 +18,6 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product getProductById(long pid) {
     Session session=sessionFactory.getCurrentSession();
-        return (Product)session.load(Product.class,pid);
+        return (Product)session.get(Product.class,pid);
     }
 }

@@ -15,6 +15,7 @@ public class TripSetoff {
     private Timestamp tripSetoffDate;
     private Timestamp updateTime;
 
+
     @Id
     @Column(name = "id", nullable = false, insertable = true, updatable = true)
     public long getId() {

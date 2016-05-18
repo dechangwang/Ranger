@@ -1,14 +1,18 @@
 package cn.edu.tongji.ranger.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
 /**
  * Created by 马二爷 on 2016/4/26.
  */
 @Entity
+@Table(name="orderform")
 public class Orderform {
     private long id;
 
