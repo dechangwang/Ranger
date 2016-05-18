@@ -307,6 +307,10 @@ CREATE TABLE `refund_picture`(
 
 -- 2014 04 16
 
+ALTER TABLE angency ADD password varchar(45) NOT NULL DEFAULT "";
+
+-- 2014 04 25
+
 
 
 

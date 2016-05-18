@@ -17,4 +17,5 @@ public interface AngencyDao extends BaseDao<Angency> {
     public Angency findByPhone(String phone);
 
     public Angency findByEmail(String email);
+     public Angency getAngencyById(long id);
 }

@@ -1,6 +1,7 @@
 package cn.edu.tongji.ranger.dao.impl;
 
 import cn.edu.tongji.ranger.dao.AngencyDao;
+
 import cn.edu.tongji.ranger.model.Account;
 import cn.edu.tongji.ranger.model.Angency;
 import org.hibernate.Criteria;
@@ -36,6 +37,10 @@ public class AngencyDaoImpl extends BaseDaoImpl<Angency> implements AngencyDao {
         Session session = sessionFactory.getCurrentSession();
         session.update(angency);
         return true;
+         @Override
+    public Angency getAngencyById(long id) {
+        Session session=sessionFactory.getCurrentSession();
+        return (Angency)session.get(Angency.class,id);
     }
 
     public Angency findByPhone(String phone) {

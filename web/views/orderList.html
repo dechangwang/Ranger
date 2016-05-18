@@ -1,0 +1,53 @@
+<h1>order list</h1>
+
+<!--
+<style>
+    .div-inline {display: inline}
+</style>
+-->
+
+<div ng-controller="listOrderCtrl">
+
+    <div class="div-inline" style="display: inline-block;margin-top:0px;vertical-align: top">
+        <ul>
+            <li><a href="#/orderList/0">全部订单</a></li>
+            <li><a href="#/orderList/1">待确认订单</a></li>
+            <li><a href="#/orderList/2">代付款订单</a></li>
+            <li><a href="#/orderList/3">已付订金订单</a></li>
+            <li><a href="#/orderList/4">已付款订单</a></li>
+            <li><a href="#/orderList/5">已完成订单</a></li>
+            <li><a href="#/orderList/6">已评价订单</a></li>
+            <li><a href="#/orderList/7">已取消订单</a></li>
+        </ul>
+    </div>
+
+    <div class="div-inline" style="display: inline-block;vertical-align: top">
+        <table>
+        <thead>
+        <tr>
+            <th>订单号</th>
+            <th>产品简介</th>
+            <th>供应商</th>
+            <th>价格</th>
+            <th>出行时间</th>
+            <th>下单时间</th>
+            <th>订单状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="order in orderlist">
+            <td>{{order.orderform.id}}</td>
+            <td>{{order.productName}}</td>
+            <td>{{order.supplierName}}</td>
+            <td>{{order.price}}</td>
+            <td>{{order.setOffDate |date: 'yyyy-MM-dd'}}</td>
+            <td>{{order.orderform.bookTime |date: 'yyyy-MM-dd' }}</td>
+            <td>{{order.orderform.state}}</td>
+            <td><a href="#/orderDetail/{{order.orderform.id}}">查看详情</a></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+</div>

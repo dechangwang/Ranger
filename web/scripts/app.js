@@ -5,10 +5,23 @@
 var rangerApp = angular.module('rangerApp', ['ui.router', 'ngFileUpload','ngResource']);
 rangerApp.value('angency',{id: undefined});
 
+
 rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $urlRouterProvider.otherwise('/home');
-    $stateProvider
+    $stateProvider.
+        state('/orderList/:type', {
+        templateUrl: 'views/orderList.html',
+        controller: 'listOrderCtrl'
+    }).
+        state('/orderDetail/:id',{
+            templateUrl:'views/orderdetail.html',
+            controller:'orderDetailCtrl'
+        }).
+        state('/submitTourist/:orderid',{
+            templateUrl:'views/submitTouristInfo.html',
+            controller:'submitController'
+        })
         .state('home', {
             url: '/home',
             views: {
@@ -199,6 +212,5 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
         // })
     // $locationProvider.html5Mode(true);
 }]);
-
 
 
