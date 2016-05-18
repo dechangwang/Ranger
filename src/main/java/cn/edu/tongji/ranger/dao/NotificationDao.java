@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface NotificationDao extends BaseDao<Notification> {
 
-    public List<Notification> findAllNotifications();
+    public Notification findById(Long id);
+
+    public List findAllNotificationsByAngencyId(Long id);
 
 }

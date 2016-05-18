@@ -27,10 +27,4 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     public void remove(T t) {
         sessionFactory.getCurrentSession().delete(t);
     }
-
-
-
-    public T findById(Long id) {
-        return null;
-    }
 }

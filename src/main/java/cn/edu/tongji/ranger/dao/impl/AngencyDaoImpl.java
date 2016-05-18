@@ -17,13 +17,9 @@ import java.util.List;
  */
 
 @Repository("AngencyDao")
-public class AngencyDaoImpl implements AngencyDao {
+public class AngencyDaoImpl extends BaseDaoImpl<Angency> implements AngencyDao {
     @Autowired
     private SessionFactory sessionFactory;
-
-    public void create(Angency angency) {
-        sessionFactory.getCurrentSession().persist(angency);
-    }
 
     public List<Angency> findByName(String name) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Angency.class).add(Restrictions.eq("cname", name));
@@ -40,5 +36,19 @@ public class AngencyDaoImpl implements AngencyDao {
         Session session = sessionFactory.getCurrentSession();
         session.update(angency);
         return true;
+    }
+
+    public Angency findByPhone(String phone) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Angency.class)
+                .add(Restrictions.eq("phone", phone));
+        List<Angency> list = criteria.list();
+        return list.size() == 0 ? null : list.get(0);
+    }
+
+    public Angency findByEmail(String email) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Angency.class)
+                .add(Restrictions.eq("email", email));
+        List<Angency> list = criteria.list();
+        return list.size() == 0 ? null : list.get(0);
     }
 }

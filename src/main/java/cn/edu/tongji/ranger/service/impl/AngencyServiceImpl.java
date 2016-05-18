@@ -18,8 +18,16 @@ public class AngencyServiceImpl implements AngencyService {
     private AngencyDao angencyDao;
 
 
-    public void create(Angency angency){
-        angencyDao.create(angency);
+    public Long create(Angency angency){
+        return angencyDao.create(angency);
+    }
+
+    public void update(Angency angency) {
+        angencyDao.update(angency);
+    }
+
+    public void remove(Angency angency) {
+        angencyDao.remove(angency);
     }
 
     public List<Angency> findExistAngency(String name) {
@@ -32,5 +40,13 @@ public class AngencyServiceImpl implements AngencyService {
 
     public boolean updateAngency(Angency angency) {
         return angencyDao.updateAngency(angency);
+    }
+
+    public Angency findByPhone(String phone) {
+        return angencyDao.findByPhone(phone);
+    }
+
+    public Angency findByEmail(String email) {
+        return angencyDao.findByEmail(email);
     }
 }

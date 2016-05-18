@@ -3,6 +3,8 @@
 /* App Module */
 
 var rangerApp = angular.module('rangerApp', ['ui.router', 'ngFileUpload','ngResource']);
+rangerApp.value('angency',{id: undefined});
+
 rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $urlRouterProvider.otherwise('/home');
@@ -46,6 +48,15 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
+        .state('home.login', {
+            url: '/login',
+            views: {
+                'main@home': {
+                    templateUrl: 'views/angency_login.html',
+                    controller: 'loginCtrl'
+                }
+            }
+        })
         .state('home.order', {
             url: '/order',
             views: {
@@ -58,10 +69,22 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
             url: '/notification',
             views: {
                 'main@home': {
-                    template: '通知页面'
+                    templateUrl: 'views/notification.html',
+                    controller: 'notificationCtrl'
                 }
             }
         })
+        /*
+         .state('notification', {
+         url: '/notification',
+         views: {
+         'main@home': {
+         templateUrl: 'views/notification.html',
+         controller: 'notificationCtrl'
+         }
+         }
+         });
+        * */
         .state('home.account', {
             url: '/account',
             views: {
@@ -166,7 +189,9 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                     templateUrl:'views/product_detail_template.html'
                 }
             }
-        })
+        });
+        
+
 
         // .state('search_str',{
         //     url:'/search/:search_str',
