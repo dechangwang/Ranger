@@ -19,7 +19,7 @@ public class TripPriceDaoImpl implements TripPriceDao {
     @Override
     public double getProductTouristPrice(long productId, long touristTypeId) {
         Session session=sessionFactory.getCurrentSession();
-        String hql="FROM TripPrice tp WHERE tp.productId=:pid and tp.touristTypeId=:tid and tp.isExpired !=1";
+        String hql="FROM TripPrice tp WHERE tp.product.id=:pid and tp.touristType.id=:tid and tp.isExpired !=1";
         Query query=session.createQuery(hql);
         query.setParameter("pid",productId);
         query.setParameter("tid",touristTypeId);

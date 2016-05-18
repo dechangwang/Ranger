@@ -41,6 +41,7 @@ public class AngencyDaoImpl implements AngencyDao {
         Session session = sessionFactory.getCurrentSession();
         session.update(angency);
         return true;
+    }
          @Override
     public Angency getAngencyById(long id) {
         Session session=sessionFactory.getCurrentSession();

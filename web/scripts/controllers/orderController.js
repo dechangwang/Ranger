@@ -1,9 +1,9 @@
 'use strict';
 
-var orderControllers=angular.module("OrderControllers",[]);
 
-orderControllers.controller("listOrderCtrl",["$scope","$http","$routeParams",function($scope,$http,$routeParams){
-    var type=$routeParams.type;
+
+rangerApp.controller("listOrderCtrl",["$scope","$http","$stateParams",function($scope,$http,$stateParams){
+    var type=$stateParams.type;
     switch (type){
         case '0':
             $http.get("/Ranger/order/listAll/7").then(
@@ -87,9 +87,9 @@ orderControllers.controller("listOrderCtrl",["$scope","$http","$routeParams",fun
     //$scope.orderlist=orderlist;
 }]);
 
-orderControllers.controller("orderDetailCtrl",["$scope","$http","$routeParams",function($scope,$http,$routeParams){
+rangerApp.controller("orderDetailCtrl",["$scope","$http","$stateParams",function($scope,$http,$stateParams){
 
-    $http.get("/Ranger/order/detail/"+$routeParams.id).then(
+    $http.get("/Ranger/order/detail/"+$stateParams.id).then(
         function(response){
             $scope.orderdetail=response.data;
         },function(err)
@@ -99,9 +99,9 @@ orderControllers.controller("orderDetailCtrl",["$scope","$http","$routeParams",f
     );
 }]);
 
-orderControllers.controller("submitController",["$scope","$http","$routeParams",function($scope,$http,$routePatams){
+rangerApp.controller("submitController",["$scope","$http","$stateParams",function($scope,$http,$stateParams){
 
-    var orderid=$routePatams.orderid;
+    var orderid=$stateParams.orderid;
     $http.get("/Ranger/order/detail/"+orderid).then(
         function(response){
             $scope.orderdetail=response.data;

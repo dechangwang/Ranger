@@ -1,33 +1,21 @@
 package cn.edu.tongji.ranger.model;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
 /**
- * Created by LiaoShanhe on 2016/4/27.
+ * Created by 马二爷 on 2016/5/18.
  */
 @Entity
+@Table(name="orderform")
 public class Orderform {
     private long id;
-    private String booker;
-    private String bookerPhone;
-    private String bookerAddress;
-    private Timestamp bookTime;
-    private Timestamp confirmTime;
-    private int state;
-    private double cost;
-    private double deposit;
-    private String confirmListBuyer;
-    private String confirmListSupplier;
-    private String contractSupplier;
-    private String contractBuyer;
-    private String invoice;
 
     @Id
-    @Column(name = "id")
+    @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true)
     public long getId() {
         return id;
     }
@@ -36,8 +24,34 @@ public class Orderform {
         this.id = id;
     }
 
+    private long buyerId;
+
     @Basic
-    @Column(name = "booker")
+    @javax.persistence.Column(name = "buyer_id", nullable = false, insertable = true, updatable = true)
+    public long getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(long buyerId) {
+        this.buyerId = buyerId;
+    }
+
+    private long tripSetoffId;
+
+    @Basic
+    @javax.persistence.Column(name = "trip_setoff_id", nullable = false, insertable = true, updatable = true)
+    public long getTripSetoffId() {
+        return tripSetoffId;
+    }
+
+    public void setTripSetoffId(long tripSetoffId) {
+        this.tripSetoffId = tripSetoffId;
+    }
+
+    private String booker;
+
+    @Basic
+    @javax.persistence.Column(name = "booker", nullable = false, insertable = true, updatable = true, length = 45)
     public String getBooker() {
         return booker;
     }
@@ -46,8 +60,10 @@ public class Orderform {
         this.booker = booker;
     }
 
+    private String bookerPhone;
+
     @Basic
-    @Column(name = "booker_phone")
+    @javax.persistence.Column(name = "booker_phone", nullable = false, insertable = true, updatable = true, length = 45)
     public String getBookerPhone() {
         return bookerPhone;
     }
@@ -56,8 +72,10 @@ public class Orderform {
         this.bookerPhone = bookerPhone;
     }
 
+    private String bookerAddress;
+
     @Basic
-    @Column(name = "booker_address")
+    @javax.persistence.Column(name = "booker_address", nullable = false, insertable = true, updatable = true, length = 45)
     public String getBookerAddress() {
         return bookerAddress;
     }
@@ -66,8 +84,10 @@ public class Orderform {
         this.bookerAddress = bookerAddress;
     }
 
+    private Timestamp bookTime;
+
     @Basic
-    @Column(name = "book_time")
+    @javax.persistence.Column(name = "book_time", nullable = false, insertable = true, updatable = true)
     public Timestamp getBookTime() {
         return bookTime;
     }
@@ -76,8 +96,10 @@ public class Orderform {
         this.bookTime = bookTime;
     }
 
+    private Timestamp confirmTime;
+
     @Basic
-    @Column(name = "confirm_time")
+    @javax.persistence.Column(name = "confirm_time", nullable = false, insertable = true, updatable = true)
     public Timestamp getConfirmTime() {
         return confirmTime;
     }
@@ -86,8 +108,10 @@ public class Orderform {
         this.confirmTime = confirmTime;
     }
 
+    private int state;
+
     @Basic
-    @Column(name = "state")
+    @javax.persistence.Column(name = "state", nullable = false, insertable = true, updatable = true)
     public int getState() {
         return state;
     }
@@ -96,8 +120,10 @@ public class Orderform {
         this.state = state;
     }
 
+    private double cost;
+
     @Basic
-    @Column(name = "cost")
+    @javax.persistence.Column(name = "cost", nullable = false, insertable = true, updatable = true, precision = 0)
     public double getCost() {
         return cost;
     }
@@ -106,8 +132,10 @@ public class Orderform {
         this.cost = cost;
     }
 
+    private double deposit;
+
     @Basic
-    @Column(name = "deposit")
+    @javax.persistence.Column(name = "deposit", nullable = false, insertable = true, updatable = true, precision = 0)
     public double getDeposit() {
         return deposit;
     }
@@ -116,8 +144,10 @@ public class Orderform {
         this.deposit = deposit;
     }
 
+    private String confirmListBuyer;
+
     @Basic
-    @Column(name = "confirm_list_buyer")
+    @javax.persistence.Column(name = "confirm_list_buyer", nullable = false, insertable = true, updatable = true, length = 100)
     public String getConfirmListBuyer() {
         return confirmListBuyer;
     }
@@ -126,8 +156,10 @@ public class Orderform {
         this.confirmListBuyer = confirmListBuyer;
     }
 
+    private String confirmListSupplier;
+
     @Basic
-    @Column(name = "confirm_list_supplier")
+    @javax.persistence.Column(name = "confirm_list_supplier", nullable = false, insertable = true, updatable = true, length = 100)
     public String getConfirmListSupplier() {
         return confirmListSupplier;
     }
@@ -136,8 +168,22 @@ public class Orderform {
         this.confirmListSupplier = confirmListSupplier;
     }
 
+    private String tripNotice;
+
     @Basic
-    @Column(name = "contract_supplier")
+    @javax.persistence.Column(name = "trip_notice", nullable = false, insertable = true, updatable = true, length = 100)
+    public String getTripNotice() {
+        return tripNotice;
+    }
+
+    public void setTripNotice(String tripNotice) {
+        this.tripNotice = tripNotice;
+    }
+
+    private String contractSupplier;
+
+    @Basic
+    @javax.persistence.Column(name = "contract_supplier", nullable = false, insertable = true, updatable = true, length = 100)
     public String getContractSupplier() {
         return contractSupplier;
     }
@@ -146,8 +192,10 @@ public class Orderform {
         this.contractSupplier = contractSupplier;
     }
 
+    private String contractBuyer;
+
     @Basic
-    @Column(name = "contract_buyer")
+    @javax.persistence.Column(name = "contract_buyer", nullable = false, insertable = true, updatable = true, length = 100)
     public String getContractBuyer() {
         return contractBuyer;
     }
@@ -156,14 +204,40 @@ public class Orderform {
         this.contractBuyer = contractBuyer;
     }
 
+    private String invoice;
+
     @Basic
-    @Column(name = "invoice")
+    @javax.persistence.Column(name = "invoice", nullable = false, insertable = true, updatable = true, length = 100)
     public String getInvoice() {
         return invoice;
     }
 
     public void setInvoice(String invoice) {
         this.invoice = invoice;
+    }
+
+    private String comment;
+
+    @Basic
+    @javax.persistence.Column(name = "comment", nullable = false, insertable = true, updatable = true, length = 100)
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    private int remark;
+
+    @Basic
+    @javax.persistence.Column(name = "remark", nullable = false, insertable = true, updatable = true)
+    public int getRemark() {
+        return remark;
+    }
+
+    public void setRemark(int remark) {
+        this.remark = remark;
     }
 
     @Override
@@ -173,27 +247,32 @@ public class Orderform {
 
         Orderform orderform = (Orderform) o;
 
-        if (id != orderform.id) return false;
-        if (state != orderform.state) return false;
+        if (buyerId != orderform.buyerId) return false;
         if (Double.compare(orderform.cost, cost) != 0) return false;
         if (Double.compare(orderform.deposit, deposit) != 0) return false;
+        if (id != orderform.id) return false;
+        if (remark != orderform.remark) return false;
+        if (state != orderform.state) return false;
+        if (tripSetoffId != orderform.tripSetoffId) return false;
+        if (bookTime != null ? !bookTime.equals(orderform.bookTime) : orderform.bookTime != null) return false;
         if (booker != null ? !booker.equals(orderform.booker) : orderform.booker != null) return false;
-        if (bookerPhone != null ? !bookerPhone.equals(orderform.bookerPhone) : orderform.bookerPhone != null)
-            return false;
         if (bookerAddress != null ? !bookerAddress.equals(orderform.bookerAddress) : orderform.bookerAddress != null)
             return false;
-        if (bookTime != null ? !bookTime.equals(orderform.bookTime) : orderform.bookTime != null) return false;
-        if (confirmTime != null ? !confirmTime.equals(orderform.confirmTime) : orderform.confirmTime != null)
+        if (bookerPhone != null ? !bookerPhone.equals(orderform.bookerPhone) : orderform.bookerPhone != null)
             return false;
+        if (comment != null ? !comment.equals(orderform.comment) : orderform.comment != null) return false;
         if (confirmListBuyer != null ? !confirmListBuyer.equals(orderform.confirmListBuyer) : orderform.confirmListBuyer != null)
             return false;
         if (confirmListSupplier != null ? !confirmListSupplier.equals(orderform.confirmListSupplier) : orderform.confirmListSupplier != null)
             return false;
-        if (contractSupplier != null ? !contractSupplier.equals(orderform.contractSupplier) : orderform.contractSupplier != null)
+        if (confirmTime != null ? !confirmTime.equals(orderform.confirmTime) : orderform.confirmTime != null)
             return false;
         if (contractBuyer != null ? !contractBuyer.equals(orderform.contractBuyer) : orderform.contractBuyer != null)
             return false;
+        if (contractSupplier != null ? !contractSupplier.equals(orderform.contractSupplier) : orderform.contractSupplier != null)
+            return false;
         if (invoice != null ? !invoice.equals(orderform.invoice) : orderform.invoice != null) return false;
+        if (tripNotice != null ? !tripNotice.equals(orderform.tripNotice) : orderform.tripNotice != null) return false;
 
         return true;
     }
@@ -203,6 +282,8 @@ public class Orderform {
         int result;
         long temp;
         result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (buyerId ^ (buyerId >>> 32));
+        result = 31 * result + (int) (tripSetoffId ^ (tripSetoffId >>> 32));
         result = 31 * result + (booker != null ? booker.hashCode() : 0);
         result = 31 * result + (bookerPhone != null ? bookerPhone.hashCode() : 0);
         result = 31 * result + (bookerAddress != null ? bookerAddress.hashCode() : 0);
@@ -215,9 +296,12 @@ public class Orderform {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (confirmListBuyer != null ? confirmListBuyer.hashCode() : 0);
         result = 31 * result + (confirmListSupplier != null ? confirmListSupplier.hashCode() : 0);
+        result = 31 * result + (tripNotice != null ? tripNotice.hashCode() : 0);
         result = 31 * result + (contractSupplier != null ? contractSupplier.hashCode() : 0);
         result = 31 * result + (contractBuyer != null ? contractBuyer.hashCode() : 0);
         result = 31 * result + (invoice != null ? invoice.hashCode() : 0);
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        result = 31 * result + remark;
         return result;
     }
 }
