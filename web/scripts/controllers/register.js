@@ -50,3 +50,36 @@ rangerApp.controller('GuideController', ['$scope', '$http', function ($scope, $h
         })
     };
 }]);
+
+
+rangerApp.controller('loginCtrl', ['$scope', '$http', '$state', 'angency',
+    function($scope, $http, $state, angency) {
+        $scope.account = {
+            username: '',
+            password: ''
+        };
+        $scope.login = function (account) {
+            $http({
+                url: '/Ranger/angency/login',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                transformRequest: function(data) {
+                    return $.param(data);
+                },
+                data: account
+            }).then(function (response) {
+                if (response.data.result == 'success') {
+                    $scope.loginSuccess = true;
+                    angency.id = response.data.angency.id;
+                    $state.go('home');
+                } else {
+                    $scope.loginSuccess = false;
+                }
+            }, function (err) {
+                alert("登录失败  " + err);
+            });
+        }
+    }]);
+

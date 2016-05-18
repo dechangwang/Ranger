@@ -1,22 +1,18 @@
 package cn.edu.tongji.ranger.service;
 
-import cn.edu.tongji.ranger.model.Account;
 import cn.edu.tongji.ranger.model.Angency;
 
 import java.util.List;
 
-public interface AngencyService {
-//    public void create(Account account);
-    public void create(Angency angency);
-//    public List<Account> find(String name);
+public interface AngencyService extends BaseService<Angency> {
+
     public List<Angency> findExistAngency(String name);
+
     public Angency findById(long id);
+
     public boolean updateAngency(Angency angency);
+
+    public Angency findByPhone(String phone);
+
+    public Angency findByEmail(String email);
 }
-
-/*
-
-public interface AccountService extends AbstractService<Account, Long> {
-
-}
-*/

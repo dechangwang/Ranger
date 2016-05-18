@@ -30,6 +30,45 @@ public class RegisterController {
     @Autowired
     private GuideService guideService;
 
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> login(
+            @RequestParam(value = "username")String username, @RequestParam(value = "password")String password) {
+
+        System.out.println("用户名" + username + "密码" + password);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        Angency angency = null;
+        angency = angencyService.findByPhone(username);
+        if (angency != null) {
+            if (angency.getPassword().equals(password)) {
+                map.put("result", "success");
+                map.put("angency", angency);
+                System.out.println("登录成功");
+                return map;
+            } else {
+                map.put("result", "fail");
+                return map;
+            }
+        } else {
+            angency = angencyService.findByEmail(username);
+            if (angency != null) {
+                if (angency.getPassword().equals(password)) {
+                    map.put("result", "success");
+                    map.put("angency", angency);
+                    System.out.println("登录成功");
+                    return map;
+                } else {
+                    map.put("result", "fail");
+                    return map;
+                }
+            } else {
+                map.put("result", "fail");
+                return map;
+            }
+        }
+    }
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> angencyRegister(@RequestBody Angency angency) {

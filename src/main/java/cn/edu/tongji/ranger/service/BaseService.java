@@ -1,6 +1,6 @@
-package cn.edu.tongji.ranger.dao;
+package cn.edu.tongji.ranger.service;
 
-public interface BaseDao<T> {
+public interface BaseService<T> {
 
     public Long create(T t);
 
