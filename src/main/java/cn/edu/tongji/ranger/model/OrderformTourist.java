@@ -4,14 +4,12 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by 马二爷 on 2016/5/2.
+ * Created by LiaoShanhe on 2016/4/27.
  */
 @Entity
-@Table(name = "orderform_tourist", schema = "", catalog = "ranger")
+@Table(name = "orderform_tourist", schema = "ranger", catalog = "")
 public class OrderformTourist {
     private long id;
-    private long orderformId;
-    private long touristTypeId;
     private String name;
     private boolean gender;
     private String phone;
@@ -23,7 +21,7 @@ public class OrderformTourist {
     private String remark;
 
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -33,27 +31,7 @@ public class OrderformTourist {
     }
 
     @Basic
-    @Column(name = "orderform_id", nullable = false, insertable = true, updatable = true)
-    public long getOrderformId() {
-        return orderformId;
-    }
-
-    public void setOrderformId(long orderformId) {
-        this.orderformId = orderformId;
-    }
-
-    @Basic
-    @Column(name = "tourist_type_id", nullable = false, insertable = true, updatable = true)
-    public long getTouristTypeId() {
-        return touristTypeId;
-    }
-
-    public void setTouristTypeId(long touristTypeId) {
-        this.touristTypeId = touristTypeId;
-    }
-
-    @Basic
-    @Column(name = "name", nullable = false, insertable = true, updatable = true, length = 45)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -63,7 +41,7 @@ public class OrderformTourist {
     }
 
     @Basic
-    @Column(name = "gender", nullable = false, insertable = true, updatable = true)
+    @Column(name = "gender")
     public boolean isGender() {
         return gender;
     }
@@ -73,7 +51,7 @@ public class OrderformTourist {
     }
 
     @Basic
-    @Column(name = "phone", nullable = false, insertable = true, updatable = true, length = 45)
+    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -83,7 +61,7 @@ public class OrderformTourist {
     }
 
     @Basic
-    @Column(name = "email", nullable = false, insertable = true, updatable = true, length = 45)
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -93,7 +71,7 @@ public class OrderformTourist {
     }
 
     @Basic
-    @Column(name = "birth_date", nullable = false, insertable = true, updatable = true)
+    @Column(name = "birth_date")
     public Timestamp getBirthDate() {
         return birthDate;
     }
@@ -103,7 +81,7 @@ public class OrderformTourist {
     }
 
     @Basic
-    @Column(name = "certifate_type", nullable = false, insertable = true, updatable = true, length = 45)
+    @Column(name = "certifate_type")
     public String getCertifateType() {
         return certifateType;
     }
@@ -113,7 +91,7 @@ public class OrderformTourist {
     }
 
     @Basic
-    @Column(name = "certifate_number", nullable = false, insertable = true, updatable = true, length = 45)
+    @Column(name = "certifate_number")
     public String getCertifateNumber() {
         return certifateNumber;
     }
@@ -123,7 +101,7 @@ public class OrderformTourist {
     }
 
     @Basic
-    @Column(name = "state", nullable = false, insertable = true, updatable = true)
+    @Column(name = "state")
     public int getState() {
         return state;
     }
@@ -133,7 +111,7 @@ public class OrderformTourist {
     }
 
     @Basic
-    @Column(name = "remark", nullable = false, insertable = true, updatable = true, length = 100)
+    @Column(name = "remark")
     public String getRemark() {
         return remark;
     }
@@ -147,22 +125,20 @@ public class OrderformTourist {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OrderformTourist tourist = (OrderformTourist) o;
+        OrderformTourist that = (OrderformTourist) o;
 
-        if (gender != tourist.gender) return false;
-        if (id != tourist.id) return false;
-        if (orderformId != tourist.orderformId) return false;
-        if (state != tourist.state) return false;
-        if (touristTypeId != tourist.touristTypeId) return false;
-        if (birthDate != null ? !birthDate.equals(tourist.birthDate) : tourist.birthDate != null) return false;
-        if (certifateNumber != null ? !certifateNumber.equals(tourist.certifateNumber) : tourist.certifateNumber != null)
+        if (id != that.id) return false;
+        if (gender != that.gender) return false;
+        if (state != that.state) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (birthDate != null ? !birthDate.equals(that.birthDate) : that.birthDate != null) return false;
+        if (certifateType != null ? !certifateType.equals(that.certifateType) : that.certifateType != null)
             return false;
-        if (certifateType != null ? !certifateType.equals(tourist.certifateType) : tourist.certifateType != null)
+        if (certifateNumber != null ? !certifateNumber.equals(that.certifateNumber) : that.certifateNumber != null)
             return false;
-        if (email != null ? !email.equals(tourist.email) : tourist.email != null) return false;
-        if (name != null ? !name.equals(tourist.name) : tourist.name != null) return false;
-        if (phone != null ? !phone.equals(tourist.phone) : tourist.phone != null) return false;
-        if (remark != null ? !remark.equals(tourist.remark) : tourist.remark != null) return false;
+        if (remark != null ? !remark.equals(that.remark) : that.remark != null) return false;
 
         return true;
     }
@@ -170,8 +146,6 @@ public class OrderformTourist {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (orderformId ^ (orderformId >>> 32));
-        result = 31 * result + (int) (touristTypeId ^ (touristTypeId >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (gender ? 1 : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);

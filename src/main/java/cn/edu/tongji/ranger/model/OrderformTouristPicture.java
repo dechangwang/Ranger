@@ -3,18 +3,17 @@ package cn.edu.tongji.ranger.model;
 import javax.persistence.*;
 
 /**
- * Created by 马二爷 on 2016/5/10.
+ * Created by LiaoShanhe on 2016/4/27.
  */
 @Entity
-@Table(name = "orderform_tourist_picture", schema = "", catalog = "ranger")
+@Table(name = "orderform_tourist_picture", schema = "ranger", catalog = "")
 public class OrderformTouristPicture {
     private long id;
-    private long orderformTouristId;
     private String picturePath;
     private String brief;
 
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -24,17 +23,7 @@ public class OrderformTouristPicture {
     }
 
     @Basic
-    @Column(name = "orderform_tourist_id", nullable = false, insertable = true, updatable = true)
-    public long getOrderformTouristId() {
-        return orderformTouristId;
-    }
-
-    public void setOrderformTouristId(long orderformTouristId) {
-        this.orderformTouristId = orderformTouristId;
-    }
-
-    @Basic
-    @Column(name = "picture_path", nullable = false, insertable = true, updatable = true, length = 100)
+    @Column(name = "picture_path")
     public String getPicturePath() {
         return picturePath;
     }
@@ -44,7 +33,7 @@ public class OrderformTouristPicture {
     }
 
     @Basic
-    @Column(name = "brief", nullable = false, insertable = true, updatable = true, length = 100)
+    @Column(name = "brief")
     public String getBrief() {
         return brief;
     }
@@ -61,9 +50,8 @@ public class OrderformTouristPicture {
         OrderformTouristPicture that = (OrderformTouristPicture) o;
 
         if (id != that.id) return false;
-        if (orderformTouristId != that.orderformTouristId) return false;
-        if (brief != null ? !brief.equals(that.brief) : that.brief != null) return false;
         if (picturePath != null ? !picturePath.equals(that.picturePath) : that.picturePath != null) return false;
+        if (brief != null ? !brief.equals(that.brief) : that.brief != null) return false;
 
         return true;
     }
@@ -71,7 +59,6 @@ public class OrderformTouristPicture {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (orderformTouristId ^ (orderformTouristId >>> 32));
         result = 31 * result + (picturePath != null ? picturePath.hashCode() : 0);
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
         return result;

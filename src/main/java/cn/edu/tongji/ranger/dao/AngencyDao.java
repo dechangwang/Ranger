@@ -2,9 +2,15 @@ package cn.edu.tongji.ranger.dao;
 
 import cn.edu.tongji.ranger.model.Angency;
 
+import java.util.List;
+
 /**
- * Created by 马二爷 on 2016/5/2.
+ * Created by wangdechang on 2016/4/25.
  */
 public interface AngencyDao {
-    public Angency getAngencyById(long id);
+    public void create(Angency angency);
+    public List<Angency> findByName(String name);
+    public Angency findById(long id);
+    public boolean updateAngency(Angency angency);
+     public Angency getAngencyById(long id);
 }

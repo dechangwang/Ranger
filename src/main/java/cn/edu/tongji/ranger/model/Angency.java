@@ -3,25 +3,67 @@ package cn.edu.tongji.ranger.model;
 import javax.persistence.*;
 
 /**
- * Created by 马二爷 on 2016/5/2.
+ * Created by wangdechang on 2016/4/25.
  */
 @Entity
 @Table(name = "angency")
 public class Angency {
     private long id;
-    private String registerName;
-    private String registerCertifateType;
-    private String registerBrief;
+    private String name;
+    private String type;
+    private String number;
+    private String rnumber;
     private String phone;
     private String email;
     private String address;
-    private String lincensePicture;
+    private String certificate;
     private double balance;
     private String brief;
     private String password;
+    private String cname;
+
+    public Angency() {
+    }
+
+    public Angency(long id, String name, String type, String number, String phone,
+                   String email, String address, String certificate, double balance,
+                   String brief, String password, String cname,String rnumber) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.number = number;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.certificate = certificate;
+        this.balance = balance;
+        this.brief = brief;
+        this.password = password;
+        this.cname = cname;
+        this.rnumber = rnumber;
+    }
+
+    public Angency(long id, String name, String type, String number, String phone,
+                   String email, String address, String certificate, double balance,
+                   String brief, String password) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.number = number;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.certificate = certificate;
+        this.balance = balance;
+        this.brief = brief;
+        this.password = password;
+    }
+
+
 
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+    @GeneratedValue
+    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -31,37 +73,50 @@ public class Angency {
     }
 
     @Basic
-    @Column(name = "register_name", nullable = false, insertable = true, updatable = true, length = 45)
-    public String getRegisterName() {
-        return registerName;
+    @Column(name = "register_name")
+    public String getName() {
+        return name;
     }
 
-    public void setRegisterName(String registerName) {
-        this.registerName = registerName;
-    }
+    public void setName(String name) {
+        this.name = name;
 
-    @Basic
-    @Column(name = "register_certifate_type", nullable = false, insertable = true, updatable = true, length = 45)
-    public String getRegisterCertifateType() {
-        return registerCertifateType;
-    }
-
-    public void setRegisterCertifateType(String registerCertifateType) {
-        this.registerCertifateType = registerCertifateType;
     }
 
     @Basic
-    @Column(name = "register_brief", nullable = false, insertable = true, updatable = true, length = 100)
-    public String getRegisterBrief() {
-        return registerBrief;
+    @Column(name = "register_certifate_type")
+    public String getType() {
+        return type;
     }
 
-    public void setRegisterBrief(String registerBrief) {
-        this.registerBrief = registerBrief;
+    public void setType(String type) {
+        this.type = type;
+
     }
 
     @Basic
-    @Column(name = "phone", nullable = false, insertable = true, updatable = true, length = 45)
+    @Column(name = "register_brief")
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+
+    }
+
+    @Basic
+    @Column(name = "regiester_number")
+    public String getRnumber() {
+        return rnumber;
+    }
+
+    public void setRnumber(String rnumber) {
+        this.rnumber = rnumber;
+    }
+
+    @Basic
+    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -71,7 +126,7 @@ public class Angency {
     }
 
     @Basic
-    @Column(name = "email", nullable = false, insertable = true, updatable = true, length = 45)
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -81,7 +136,7 @@ public class Angency {
     }
 
     @Basic
-    @Column(name = "address", nullable = false, insertable = true, updatable = true, length = 100)
+    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -91,17 +146,18 @@ public class Angency {
     }
 
     @Basic
-    @Column(name = "lincense_picture", nullable = false, insertable = true, updatable = true, length = 100)
-    public String getLincensePicture() {
-        return lincensePicture;
+    @Column(name = "lincense_picture")
+    public String getCertificate() {
+        return certificate;
     }
 
-    public void setLincensePicture(String lincensePicture) {
-        this.lincensePicture = lincensePicture;
+    public void setCertificate(String certificate) {
+        this.certificate = certificate;
     }
+
 
     @Basic
-    @Column(name = "balance", nullable = false, insertable = true, updatable = true, precision = 0)
+    @Column(name = "balance")
     public double getBalance() {
         return balance;
     }
@@ -111,17 +167,29 @@ public class Angency {
     }
 
     @Basic
-    @Column(name = "brief", nullable = false, insertable = true, updatable = true, length = 100)
+    @Column(name = "brief")
     public String getBrief() {
         return brief;
     }
+
 
     public void setBrief(String brief) {
         this.brief = brief;
     }
 
+
     @Basic
-    @Column(name = "password", nullable = false, insertable = true, updatable = true, length = 45)
+    @Column(name = "name")
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+
+    @Basic
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -130,6 +198,7 @@ public class Angency {
         this.password = password;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -137,21 +206,21 @@ public class Angency {
 
         Angency angency = (Angency) o;
 
-        if (Double.compare(angency.balance, balance) != 0) return false;
         if (id != angency.id) return false;
-        if (address != null ? !address.equals(angency.address) : angency.address != null) return false;
-        if (brief != null ? !brief.equals(angency.brief) : angency.brief != null) return false;
-        if (email != null ? !email.equals(angency.email) : angency.email != null) return false;
-        if (lincensePicture != null ? !lincensePicture.equals(angency.lincensePicture) : angency.lincensePicture != null)
+        if (Double.compare(angency.balance, balance) != 0) return false;
+        if (name != null ? !name.equals(angency.name) : angency.name != null)
             return false;
-        if (password != null ? !password.equals(angency.password) : angency.password != null) return false;
+        if (type != null ? !type.equals(angency.type) : angency.type != null)
+            return false;
+        if (number != null ? !number.equals(angency.number) : angency.number != null)
+
+            return false;
         if (phone != null ? !phone.equals(angency.phone) : angency.phone != null) return false;
-        if (registerBrief != null ? !registerBrief.equals(angency.registerBrief) : angency.registerBrief != null)
+        if (email != null ? !email.equals(angency.email) : angency.email != null) return false;
+        if (address != null ? !address.equals(angency.address) : angency.address != null) return false;
+        if (certificate != null ? !certificate.equals(angency.certificate) : angency.certificate != null)
             return false;
-        if (registerCertifateType != null ? !registerCertifateType.equals(angency.registerCertifateType) : angency.registerCertifateType != null)
-            return false;
-        if (registerName != null ? !registerName.equals(angency.registerName) : angency.registerName != null)
-            return false;
+        if (brief != null ? !brief.equals(angency.brief) : angency.brief != null) return false;
 
         return true;
     }
@@ -161,17 +230,37 @@ public class Angency {
         int result;
         long temp;
         result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (registerName != null ? registerName.hashCode() : 0);
-        result = 31 * result + (registerCertifateType != null ? registerCertifateType.hashCode() : 0);
-        result = 31 * result + (registerBrief != null ? registerBrief.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (number != null ? number.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (lincensePicture != null ? lincensePicture.hashCode() : 0);
+        result = 31 * result + (certificate != null ? certificate.hashCode() : 0);
         temp = Double.doubleToLongBits(balance);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
     }
+
+
+    @Override
+    public String toString() {
+        return "Angency{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", number='" + number + '\'' +
+                ", phone='" + phone + '\'' +
+                ", rnumber='"+rnumber+'\''+
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", certificate='" + certificate + '\'' +
+                ", balance=" + balance +
+                ", brief='" + brief + '\'' +
+                ", password='" + password + '\'' +
+                ", cname ='"+cname+'\''+
+                '}';
+    }
+
 }

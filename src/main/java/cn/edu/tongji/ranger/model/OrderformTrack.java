@@ -4,18 +4,17 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by 马二爷 on 2016/5/10.
+ * Created by LiaoShanhe on 2016/4/27.
  */
 @Entity
-@Table(name = "orderform_track", schema = "", catalog = "ranger")
+@Table(name = "orderform_track", schema = "ranger", catalog = "")
 public class OrderformTrack {
     private long id;
-    private long orderformId;
     private String trackItem;
     private Timestamp updateTime;
 
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -25,17 +24,7 @@ public class OrderformTrack {
     }
 
     @Basic
-    @Column(name = "orderform_id", nullable = false, insertable = true, updatable = true)
-    public long getOrderformId() {
-        return orderformId;
-    }
-
-    public void setOrderformId(long orderformId) {
-        this.orderformId = orderformId;
-    }
-
-    @Basic
-    @Column(name = "track_item", nullable = false, insertable = true, updatable = true, length = 100)
+    @Column(name = "track_item")
     public String getTrackItem() {
         return trackItem;
     }
@@ -45,7 +34,7 @@ public class OrderformTrack {
     }
 
     @Basic
-    @Column(name = "update_time", nullable = false, insertable = true, updatable = true)
+    @Column(name = "update_time")
     public Timestamp getUpdateTime() {
         return updateTime;
     }
@@ -62,7 +51,6 @@ public class OrderformTrack {
         OrderformTrack that = (OrderformTrack) o;
 
         if (id != that.id) return false;
-        if (orderformId != that.orderformId) return false;
         if (trackItem != null ? !trackItem.equals(that.trackItem) : that.trackItem != null) return false;
         if (updateTime != null ? !updateTime.equals(that.updateTime) : that.updateTime != null) return false;
 
@@ -72,7 +60,6 @@ public class OrderformTrack {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (orderformId ^ (orderformId >>> 32));
         result = 31 * result + (trackItem != null ? trackItem.hashCode() : 0);
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
         return result;
