@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Service("OrderService")
 @Transactional
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService{/*
     @Autowired
     private OrderformDao orderformDao;
     @Autowired
@@ -95,6 +95,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
 
+*//*
 
     @Override
     public List<OrderListItem> getAllListOrder(long buyerid) {
@@ -154,6 +155,7 @@ public class OrderServiceImpl implements OrderService{
         }
         return result;
     }
+*//*
 
     @Override
     public List<OrderListItem> getToPay(long buyerid) {
@@ -244,6 +246,6 @@ public class OrderServiceImpl implements OrderService{
         return result;
     }
 
-
+*/
 
 }
