@@ -2,6 +2,7 @@ package cn.edu.tongji.ranger.dao.impl;
 
 import cn.edu.tongji.ranger.dao.TripPriceDao;
 import cn.edu.tongji.ranger.model.TripPrice;
+import cn.edu.tongji.ranger.model2show.TripPrice2;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,11 +20,11 @@ public class TripPriceDaoImpl implements TripPriceDao {
     @Override
     public double getProductTouristPrice(long productId, long touristTypeId) {
         Session session=sessionFactory.getCurrentSession();
-        String hql="FROM TripPrice tp WHERE tp.product.id=:pid and tp.touristType.id=:tid and tp.isExpired !=1";
+        String hql="FROM TripPrice2 tp WHERE tp.productId=:pid and tp.touristType.id=:tid and tp.isExpired !=1";
         Query query=session.createQuery(hql);
         query.setParameter("pid",productId);
         query.setParameter("tid",touristTypeId);
-        TripPrice tp=(TripPrice)query.uniqueResult();
+        TripPrice2 tp=(TripPrice2)query.uniqueResult();
         if(tp!=null)
         return tp.getPrice();
         else return 0d;

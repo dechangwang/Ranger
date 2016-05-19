@@ -1,5 +1,7 @@
 package cn.edu.tongji.ranger.model;
 
+import cn.edu.tongji.ranger.model2show.Product2;
+import cn.edu.tongji.ranger.model2show.TripSetoff2;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -14,8 +16,8 @@ import java.util.List;
 public class OrderDetail {
 
     private Orderform orderform;
-    private Product product;
-    private TripSetoff tripSetoff;
+    private Product3 product;
+    private TripSetoff2 tripSetoff;
     private PriceDetail price;
     private List<OrderformTrack> orderprocess;
     private List<OrderformTourist> tourists;
@@ -37,19 +39,19 @@ public class OrderDetail {
         this.orderform = orderform;
     }
 
-    public Product getProduct() {
+    public Product3 getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(Product3 product) {
         this.product = product;
     }
 
-    public TripSetoff getTripSetoff() {
+    public TripSetoff2 getTripSetoff() {
         return tripSetoff;
     }
 
-    public void setTripSetoff(TripSetoff tripSetoff) {
+    public void setTripSetoff(TripSetoff2 tripSetoff) {
         this.tripSetoff = tripSetoff;
     }
 

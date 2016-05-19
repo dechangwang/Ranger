@@ -18,6 +18,7 @@ public class TripPrice2 {
     private Timestamp updateTime;
 //    private Product product;
     private TouristType touristType;
+    private long productId;
 
     @Id
     @GeneratedValue
@@ -25,9 +26,17 @@ public class TripPrice2 {
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name="product_id")
+    public long getProductId() {
+        return productId;
+    }
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
     @Basic

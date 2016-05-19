@@ -12,7 +12,7 @@ public class OrderformTrack {
     private long id;
     private String trackItem;
     private Timestamp updateTime;
-
+    private long orderformId;
     @Id
     @Column(name = "id")
     public long getId() {
@@ -23,6 +23,10 @@ public class OrderformTrack {
         this.id = id;
     }
 
+    @Basic
+    @Column(name="orderform_id")
+    public long getOrderformId(){return orderformId;}
+    public void setOrderformId(long orderformId){this.orderformId=orderformId;}
     @Basic
     @Column(name = "track_item")
     public String getTrackItem() {

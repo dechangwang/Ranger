@@ -76,7 +76,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
-        .state('home.order.detail',{
+        .state('home.detail',{
             url:'/orderDetail/:id',
             views:{
                 'main@home':{

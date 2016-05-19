@@ -22,6 +22,7 @@ public class TripSetoff2 {
 
 //    private Product product;
     private Guide guide;
+    private long productId;
 
     @Id
     @Column(name = "id")
@@ -33,6 +34,17 @@ public class TripSetoff2 {
         this.id = id;
     }
 
+
+
+    @Basic
+    @Column(name="product_id")
+    public long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(long productId) {
+        this.productId = productId;
+    }
     @Basic
     @Column(name = "trip_setoff_date")
     public Timestamp getTripSetoffDate() {
