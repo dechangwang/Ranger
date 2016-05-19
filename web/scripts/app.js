@@ -4,13 +4,11 @@
 
 var rangerApp = angular.module('rangerApp', ['ui.router', 'ngFileUpload','ngResource']);
 rangerApp.value('angency',{id: undefined});
-
-
 rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $urlRouterProvider.otherwise('/home');
-    $stateProvider.
-        state('/orderList/:type', {
+    $stateProvider
+/*        state('/orderList/:type', {
         templateUrl: 'views/orderList.html',
         controller: 'listOrderCtrl'
     }).
@@ -21,7 +19,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
         state('/submitTourist/:orderid',{
             templateUrl:'views/submitTouristInfo.html',
             controller:'submitController'
-        })
+        })*/
         .state('home', {
             url: '/home',
             views: {
@@ -71,10 +69,18 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
             }
         })
         .state('home.order', {
-            url: '/order',
+            url: '/orderList/:type',
             views: {
                 'main@home': {
-                    template: '订单页面'
+                    templateUrl: 'views/orderList.html'
+                }
+            }
+        })
+        .state('home.order.detail',{
+            url:'/orderDetail/:id',
+            views:{
+                'main@home':{
+                    templateUrl:'views/orderdetail.html'
                 }
             }
         })
@@ -118,7 +124,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
             url: '/my_product',
             views: {
                 'main@home': {
-                    templateUrl: 'views/my_product.html',
+                    templateUrl: 'views/my_product.html'
                     /* controller:function ($scope,$http) {
                      $scope.productList={
                      name:'',

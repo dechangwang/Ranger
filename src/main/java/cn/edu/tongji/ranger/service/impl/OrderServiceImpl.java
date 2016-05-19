@@ -33,12 +33,10 @@ public class OrderServiceImpl implements OrderService{/*
 
     private List<OrderListItem> allorder= new ArrayList<OrderListItem>();
 
-    @Override
     public boolean addTourist(OrderformTourist tourist) {
         return orderFormTouristDao.createTourist(tourist);
     }
 
-    @Override
     public OrderDetail getOrderDetail(long orderId)
     {
         OrderDetail detail=new OrderDetail();
@@ -55,7 +53,8 @@ public class OrderServiceImpl implements OrderService{/*
             tourists = orderFormTouristDao.getOrderFormTouristByOrderId(order.getId());
         }
         if (tripSetoff!=null)
-        product=productDao.getProductById(tripSetoff.getProductId());
+       // product=productDao.getProductById(tripSetoff.getProductId());
+        product=tripSetoff.getProduct();
 
         int adultnum=0;
         int childnum=0;
@@ -97,7 +96,6 @@ public class OrderServiceImpl implements OrderService{/*
 
 *//*
 
-    @Override
     public List<OrderListItem> getAllListOrder(long buyerid) {
 
         List<OrderListItem> itemlist= new ArrayList<OrderListItem>();
@@ -111,9 +109,14 @@ public class OrderServiceImpl implements OrderService{/*
         {
             double price=0;
             ts=tripSetOffDao.getTripSetOffById(od.getTripSetoffId());
-            if(ts!=null)pd=productDao.getProductById(ts.getProductId());
+            if(ts!=null)
+                //pd=productDao.getProductById(ts.getProductId());
+            pd=ts.getProduct();
+
             odft=orderFormTouristDao.getOrderFormTouristByOrderId(od.getId());
-             if(pd!=null) angency=angencyDao.getAngencyById(pd.getSupplierId());
+             if(pd!=null)
+                 //angency=angencyDao.getAngencyById(pd.getSupplierId());
+             angency=pd.getSupplier();
 
             for(OrderformTourist tourist:odft)
             {
@@ -130,7 +133,7 @@ public class OrderServiceImpl implements OrderService{/*
             if(ts!=null)
             oditem.setSetOffDate(ts.getTripSetoffDate());
             if(angency!=null)
-            oditem.setSupplierName(angency.getRegisterName());
+            oditem.setSupplierName(angency.getName());
             oditem.setPrice(price);
             itemlist.add(oditem);
             System.out.println(oditem.getSupplierName());
@@ -140,7 +143,6 @@ public class OrderServiceImpl implements OrderService{/*
         return itemlist;
     }
 
-    @Override
     public List<OrderListItem> getToBeACK(long buyerid) {
         if(allorder.isEmpty())
         allorder=getAllListOrder(buyerid);
@@ -157,7 +159,6 @@ public class OrderServiceImpl implements OrderService{/*
     }
 *//*
 
-    @Override
     public List<OrderListItem> getToPay(long buyerid) {
         if(allorder.isEmpty())
             allorder=getAllListOrder(buyerid);
@@ -172,7 +173,6 @@ public class OrderServiceImpl implements OrderService{/*
         return result;
     }
 
-    @Override
     public List<OrderListItem> getHasPaidDeposit(long buyerid) {
         if(allorder.isEmpty())
             allorder=getAllListOrder(buyerid);
@@ -187,7 +187,6 @@ public class OrderServiceImpl implements OrderService{/*
         return result;
     }
 
-    @Override
     public List<OrderListItem> getHasPaidAll(long buyerid) {
         if(allorder.isEmpty())
             allorder=getAllListOrder(buyerid);
@@ -202,7 +201,6 @@ public class OrderServiceImpl implements OrderService{/*
         return result;
     }
 
-    @Override
     public List<OrderListItem> getHasFinished(long buyerid) {
         if(allorder.isEmpty())
             allorder=getAllListOrder(buyerid);
@@ -217,7 +215,6 @@ public class OrderServiceImpl implements OrderService{/*
         return result;
     }
 
-    @Override
     public List<OrderListItem> getHasEvaluate(long buyerid) {
         if(allorder.isEmpty())
             allorder=getAllListOrder(buyerid);
@@ -231,7 +228,7 @@ public class OrderServiceImpl implements OrderService{/*
         }
         return result;
     }
-    @Override
+
     public List<OrderListItem> getHasCanceled(long buyerid) {
         if(allorder.isEmpty())
             allorder=getAllListOrder(buyerid);
