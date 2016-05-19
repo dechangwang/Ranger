@@ -2,6 +2,8 @@ package cn.edu.tongji.ranger.service.impl;
 
 import cn.edu.tongji.ranger.dao.*;
 import cn.edu.tongji.ranger.model.*;
+import cn.edu.tongji.ranger.model2show.Product2;
+import cn.edu.tongji.ranger.model2show.TripSetoff2;
 import cn.edu.tongji.ranger.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ import java.util.List;
  */
 @Service("OrderService")
 @Transactional
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService{/*
     @Autowired
     private OrderformDao orderformDao;
     @Autowired
@@ -41,8 +43,8 @@ public class OrderServiceImpl implements OrderService{
     {
         OrderDetail detail=new OrderDetail();
         Orderform order=orderformDao.findByOrderId(orderId);
-        Product product=null;
-        TripSetoff tripSetoff=null;
+        Product3 product=null;
+        TripSetoff2 tripSetoff=null;
         PriceDetail priceDetail=new PriceDetail();
         List<OrderformTourist> tourists=null;
         List<OrderformTrack> process=null;
@@ -53,8 +55,8 @@ public class OrderServiceImpl implements OrderService{
             tourists = orderFormTouristDao.getOrderFormTouristByOrderId(order.getId());
         }
         if (tripSetoff!=null)
-       // product=productDao.getProductById(tripSetoff.getProductId());
-        product=tripSetoff.getProduct();
+        product=productDao.getProductById(tripSetoff.getProductId());
+        //product=tripSetoff.getProduct();
 
         int adultnum=0;
         int childnum=0;
@@ -85,8 +87,20 @@ public class OrderServiceImpl implements OrderService{
         detail.setOrderform(order);
         detail.setOrderprocess(process);
         detail.setPrice(priceDetail);
+       /* TripSetoff2 tripSetoff2=new TripSetoff2();
+
+        if(tripSetoff!=null)
+        tripSetoff2.setTripSetoffDate(tripSetoff.getTripSetoffDate());*/
+
         detail.setTripSetoff(tripSetoff);
         detail.setTourists(tourists);
+        /*Product2 product2=new Product2();
+
+        if(product!=null){
+        product2.setId(product.getId());
+        product2.setName(product.getName());
+        product2.setDuration(product.getDuration());
+        }*/
         detail.setProduct(product);
 
         return detail;
@@ -94,14 +108,15 @@ public class OrderServiceImpl implements OrderService{
     }
 
 
+*//*
 
     public List<OrderListItem> getAllListOrder(long buyerid) {
 
         List<OrderListItem> itemlist= new ArrayList<OrderListItem>();
         List<Orderform> orderforms= orderformDao.findByBuyerId(buyerid);
         OrderListItem oditem;
-        TripSetoff ts;
-        Product pd=null;
+        TripSetoff2 ts;
+        Product3 pd=null;
         Angency angency=null;
         List<OrderformTourist> odft;
         for(Orderform od:orderforms)
@@ -109,13 +124,13 @@ public class OrderServiceImpl implements OrderService{
             double price=0;
             ts=tripSetOffDao.getTripSetOffById(od.getTripSetoffId());
             if(ts!=null)
-                //pd=productDao.getProductById(ts.getProductId());
-            pd=ts.getProduct();
+                pd=productDao.getProductById(ts.getProductId());
+          //  pd=ts.getProduct();
 
             odft=orderFormTouristDao.getOrderFormTouristByOrderId(od.getId());
              if(pd!=null)
-                 //angency=angencyDao.getAngencyById(pd.getSupplierId());
-             angency=pd.getSupplier();
+                 angency=angencyDao.getAngencyById(pd.getSupplierId());
+             //angency=pd.getSupplier();
 
             for(OrderformTourist tourist:odft)
             {
@@ -156,6 +171,7 @@ public class OrderServiceImpl implements OrderService{
         }
         return result;
     }
+*//*
 
     public List<OrderListItem> getToPay(long buyerid) {
         if(allorder.isEmpty())
@@ -241,6 +257,6 @@ public class OrderServiceImpl implements OrderService{
         return result;
     }
 
-
+*/
 
 }

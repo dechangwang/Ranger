@@ -1,6 +1,7 @@
 package cn.edu.tongji.ranger.dao;
 
 import cn.edu.tongji.ranger.model.TripSetoff;
+import cn.edu.tongji.ranger.model2show.TripSetoff2;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,5 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 
 public interface TripSetOffDao {
-    public TripSetoff getTripSetOffById(long id);
+    public TripSetoff2 getTripSetOffById(long id);
 }

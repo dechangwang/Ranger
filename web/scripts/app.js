@@ -76,7 +76,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
-        .state('home.order.detail',{
+        .state('home.detail',{
             url:'/orderDetail/:id',
             views:{
                 'main@home':{
@@ -216,7 +216,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
         //     url:'/search/:search_str',
         //     templateUrl:'views/search_product.html'
         // })
-    // $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
 }]);
 
 

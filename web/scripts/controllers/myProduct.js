@@ -3,7 +3,7 @@
  * Created by wangdechang on 2016/5/11.
  */
 
-rangerApp.controller('myProductCtrl',['$scope','$http','$state',function ($scope, $http,$state) {
+rangerApp.controller('myProductCtrl',['$scope','$http','$state','angency',function ($scope, $http,$state,angency) {
     $scope.productList={
         product_id:'',
         product_name:'',
@@ -12,15 +12,29 @@ rangerApp.controller('myProductCtrl',['$scope','$http','$state',function ($scope
         price:'',
         state:'',
     };
-    $http({
-        url: '/Ranger/products/lists',
-        method: 'GET'
-    }).then(function (response) {
-        $scope.productList = response.data;
-        console.log(response.data);
-    }, function (err) {
-        alert("获取失败  " + err);
-    });
+    if(!angency.id){
+        alert("请先登录");
+        window.history.back();
+    }else{
+        console.log(angency);
+        $http({
+            url: '/Ranger/products/lists',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            transformRequest : function(data) {
+                return $.param(data);
+            },
+            data:angency
+        }).then(function (response) {
+            $scope.productList = response.data;
+            console.log(response.data);
+        }, function (err) {
+            alert("获取失败  " + err);
+        });
+    }
+
     $scope.editProduct = function (product_id) {
         $state.go('home.my_product.edit',{product_id:product_id});
         /*layer.open({

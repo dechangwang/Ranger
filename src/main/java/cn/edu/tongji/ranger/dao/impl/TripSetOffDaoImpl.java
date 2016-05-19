@@ -2,6 +2,7 @@ package cn.edu.tongji.ranger.dao.impl;
 
 import cn.edu.tongji.ranger.dao.TripSetOffDao;
 import cn.edu.tongji.ranger.model.TripSetoff;
+import cn.edu.tongji.ranger.model2show.TripSetoff2;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class TripSetOffDaoImpl implements TripSetOffDao {
     @Autowired
     private SessionFactory sessionFactory;
     @Override
-    public TripSetoff getTripSetOffById(long id) {
+    public TripSetoff2 getTripSetOffById(long id) {
         Session session=sessionFactory.getCurrentSession();
-       return (TripSetoff)session.get(TripSetoff.class,id);
+       return (TripSetoff2)session.get(TripSetoff2.class,id);
     }
 }
