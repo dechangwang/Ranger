@@ -29,7 +29,7 @@ public class AngencyDaoImpl extends BaseDaoImpl<Angency> implements AngencyDao {
 
     public Angency findById(long id) {
         Session session = sessionFactory.getCurrentSession();
-        Angency angency = (Angency) session.get(Angency.class,id);
+        Angency angency = (Angency) session.get(Angency.class, id);
         return angency;
     }
 
@@ -38,10 +38,11 @@ public class AngencyDaoImpl extends BaseDaoImpl<Angency> implements AngencyDao {
         session.update(angency);
         return true;
     }
-         @Override
+
+
     public Angency getAngencyById(long id) {
-        Session session=sessionFactory.getCurrentSession();
-        return (Angency)session.get(Angency.class,id);
+        Session session = sessionFactory.getCurrentSession();
+        return (Angency) session.get(Angency.class, id);
     }
 
     public Angency findByPhone(String phone) {

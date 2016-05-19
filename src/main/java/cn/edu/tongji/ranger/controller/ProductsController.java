@@ -167,10 +167,11 @@ public class ProductsController {
         return map;
     }
 
-    @RequestMapping(value = "/lists", method = RequestMethod.GET)
+    @RequestMapping(value = "/lists", method = RequestMethod.POST)
     @ResponseBody
-    public List<MyProduct> productsList() {
-        List<MyProduct> productList = productsService.findBySupplierId(7L);
+    public List<MyProduct> productsList(@RequestParam(value = "id")String id) {
+        System.out.println("id = "+id);
+        List<MyProduct> productList = productsService.findBySupplierId(Long.parseLong(id));
         System.out.println(productList);
 
         return productList;
