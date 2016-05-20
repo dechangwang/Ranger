@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">user</property>
+        <property name="hibernate.connection.url">jdbc:mysql://115.28.177.76:3306/ranger?useUnicode=true&amp;characterEncoding=UTF-8</property>
+        <property name="hibernate.connection.username">user</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="show_sql">true</property>
+
+        <mapping class="cn.edu.tongji.ranger.model.Guide"/>
+        <mapping class="cn.edu.tongji.ranger.model.Product" />
+        <mapping class="cn.edu.tongji.ranger.model.LocationD" />
+        <mapping class="cn.edu.tongji.ranger.model.Angency" />
+        <mapping class="cn.edu.tongji.ranger.model.Location" />
+        <mapping class="cn.edu.tongji.ranger.model.TripAccomodation"/>
+        <mapping class="cn.edu.tongji.ranger.model.TripDestination"/>
+        <mapping class="cn.edu.tongji.ranger.model.TripDetail" />
+        <mapping class="cn.edu.tongji.ranger.model.TripPicture" />
+        <mapping class="cn.edu.tongji.ranger.model.TripPrice" />
+        <mapping class="cn.edu.tongji.ranger.model.TripSetoff" />
+        <mapping class="cn.edu.tongji.ranger.model.TripTraffic" />
+        <mapping class="cn.edu.tongji.ranger.model.BankCard" />
+        <mapping class="cn.edu.tongji.ranger.model.TouristType"/>
+        <mapping class="cn.edu.tongji.ranger.model.TrafficType"/>
+        <mapping class="cn.edu.tongji.ranger.model2show.SimpleProduct"/>
+        <mapping class="cn.edu.tongji.ranger.model2show.TripSetoff2"/>
+        <mapping class="cn.edu.tongji.ranger.model2show.TripDestination2"/>
+        <mapping class="cn.edu.tongji.ranger.model2show.TripPrice2"/>
+        <mapping package="cn.edu.tongji.ranger.model"/>
+    </session-factory>
+</hibernate-configuration>

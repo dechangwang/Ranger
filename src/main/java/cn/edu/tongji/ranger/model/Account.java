@@ -1,17 +1,12 @@
 package cn.edu.tongji.ranger.model;
 
-import javax.persistence.*;
-import java.io.Serializable;
-
-@Entity
-@Table(name = "account")
-//public class Account extends BaseModel implements Serializable {
-public class Account implements Serializable {
+/**
+ * Created by daidongyang on 5/9/16.
+ */
+public class Account {
     private String name;
     private String password;
 
-    @Id
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -20,8 +15,6 @@ public class Account implements Serializable {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -29,6 +22,4 @@ public class Account implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
 }

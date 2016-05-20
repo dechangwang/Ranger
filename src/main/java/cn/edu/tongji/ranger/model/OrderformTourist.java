@@ -4,12 +4,14 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by 马二爷 on 2016/4/28.
+ * Created by 马二爷 on 2016/5/18.
  */
 @Entity
 @Table(name = "orderform_tourist", schema = "", catalog = "ranger")
 public class OrderformTourist {
     private long id;
+    private long orderformId;
+    private long touristTypeId;
     private String name;
     private boolean gender;
     private String phone;
@@ -28,6 +30,26 @@ public class OrderformTourist {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "orderform_id", nullable = false, insertable = true, updatable = true)
+    public long getOrderformId() {
+        return orderformId;
+    }
+
+    public void setOrderformId(long orderformId) {
+        this.orderformId = orderformId;
+    }
+
+    @Basic
+    @Column(name = "tourist_type_id", nullable = false, insertable = true, updatable = true)
+    public long getTouristTypeId() {
+        return touristTypeId;
+    }
+
+    public void setTouristTypeId(long touristTypeId) {
+        this.touristTypeId = touristTypeId;
     }
 
     @Basic
@@ -125,20 +147,22 @@ public class OrderformTourist {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OrderformTourist that = (OrderformTourist) o;
+        OrderformTourist tourist = (OrderformTourist) o;
 
-        if (gender != that.gender) return false;
-        if (id != that.id) return false;
-        if (state != that.state) return false;
-        if (birthDate != null ? !birthDate.equals(that.birthDate) : that.birthDate != null) return false;
-        if (certifateNumber != null ? !certifateNumber.equals(that.certifateNumber) : that.certifateNumber != null)
+        if (gender != tourist.gender) return false;
+        if (id != tourist.id) return false;
+        if (orderformId != tourist.orderformId) return false;
+        if (state != tourist.state) return false;
+        if (touristTypeId != tourist.touristTypeId) return false;
+        if (birthDate != null ? !birthDate.equals(tourist.birthDate) : tourist.birthDate != null) return false;
+        if (certifateNumber != null ? !certifateNumber.equals(tourist.certifateNumber) : tourist.certifateNumber != null)
             return false;
-        if (certifateType != null ? !certifateType.equals(that.certifateType) : that.certifateType != null)
+        if (certifateType != null ? !certifateType.equals(tourist.certifateType) : tourist.certifateType != null)
             return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
-        if (remark != null ? !remark.equals(that.remark) : that.remark != null) return false;
+        if (email != null ? !email.equals(tourist.email) : tourist.email != null) return false;
+        if (name != null ? !name.equals(tourist.name) : tourist.name != null) return false;
+        if (phone != null ? !phone.equals(tourist.phone) : tourist.phone != null) return false;
+        if (remark != null ? !remark.equals(tourist.remark) : tourist.remark != null) return false;
 
         return true;
     }
@@ -146,6 +170,8 @@ public class OrderformTourist {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (orderformId ^ (orderformId >>> 32));
+        result = 31 * result + (int) (touristTypeId ^ (touristTypeId >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (gender ? 1 : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);

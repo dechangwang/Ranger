@@ -21,17 +21,17 @@ public class OrderformDaoImpl implements OrderformDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public Orderform findByOrderId(int orderId) {
+    public Orderform findByOrderId(long orderId) {
             Session session=sessionFactory.getCurrentSession();
 
             /*String hql="FROM Orderform o WHERE o.id=:oid";
             Query query=session.createQuery(hql);
             query.setParameter("oid",orderId);*/
 
-            return (Orderform)session.load(Orderform.class,orderId);
+            return (Orderform)session.get(Orderform.class,orderId);
     }
 
-    public List<Orderform> findByBuyerId(int buyerId) {
+    public List<Orderform> findByBuyerId(long buyerId) {
         Session session=sessionFactory.getCurrentSession();
         String hql="FROM Orderform o WHERE o.buyerId=:bid";
         Query query=session.createQuery(hql);
@@ -39,7 +39,7 @@ public class OrderformDaoImpl implements OrderformDao {
         return (List<Orderform>)query.list();
     }
 
-    public List<Orderform> findByTripSetOffId(int setoffId) {
+    public List<Orderform> findByTripSetOffId(long setoffId) {
        Session session=sessionFactory.getCurrentSession();
         String hql="From Orderform o WHERE o.tripSetoffId=:setoffid";
         Query query=session.createQuery(hql);

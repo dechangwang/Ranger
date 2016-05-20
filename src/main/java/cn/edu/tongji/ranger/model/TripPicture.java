@@ -3,18 +3,19 @@ package cn.edu.tongji.ranger.model;
 import javax.persistence.*;
 
 /**
- * Created by 马二爷 on 2016/4/28.
+
  */
 @Entity
-@Table(name = "trip_picture", schema = "", catalog = "ranger")
+@Table(name = "trip_picture", schema = "ranger", catalog = "")
 public class TripPicture {
     private long id;
     private String picturePath;
     private String brief;
-    private Product productByProductId;
+    private Product product;
 
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+    @GeneratedValue
+    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -24,7 +25,7 @@ public class TripPicture {
     }
 
     @Basic
-    @Column(name = "picture_path", nullable = false, insertable = true, updatable = true, length = 100)
+    @Column(name = "picture_path")
     public String getPicturePath() {
         return picturePath;
     }
@@ -34,13 +35,24 @@ public class TripPicture {
     }
 
     @Basic
-    @Column(name = "brief", nullable = false, insertable = true, updatable = true, length = 100)
+    @Column(name = "brief")
     public String getBrief() {
         return brief;
     }
 
     public void setBrief(String brief) {
         this.brief = brief;
+    }
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
@@ -51,10 +63,10 @@ public class TripPicture {
         TripPicture that = (TripPicture) o;
 
         if (id != that.id) return false;
-        if (brief != null ? !brief.equals(that.brief) : that.brief != null) return false;
         if (picturePath != null ? !picturePath.equals(that.picturePath) : that.picturePath != null) return false;
+        if (brief != null ? !brief.equals(that.brief) : that.brief != null) return false;
+        return product != null ? product.equals(that.product) : that.product == null;
 
-        return true;
     }
 
     @Override
@@ -62,16 +74,17 @@ public class TripPicture {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (picturePath != null ? picturePath.hashCode() : 0);
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
-    public Product getProductByProductId() {
-        return productByProductId;
+    @Override
+    public String toString() {
+        return "TripPicture{" +
+                "id=" + id +
+                ", picturePath='" + picturePath + '\'' +
+                ", brief='" + brief + '\'' +
+                '}';
     }
 
-    public void setProductByProductId(Product productByProductId) {
-        this.productByProductId = productByProductId;
-    }
 }

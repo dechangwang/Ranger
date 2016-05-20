@@ -39,7 +39,13 @@
         <!--<bean class=""/>-->
         <!--</property>-->
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="cn.edu.tongji.ranger.model"/>
+        <!--<property name="packagesToScan" value="cn.edu.tongji.ranger.model"/>-->
+        <property name="packagesToScan">
+            <array>
+                <value>cn.edu.tongji.ranger.model</value>
+                <value>cn.edu.tongji.ranger.model2show</value>
+            </array>
+        </property>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>

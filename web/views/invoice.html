@@ -1,0 +1,36 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">发票管理</div>
+    </div>
+    <div class="panel-body" ng-controller="invoiceCtrl">
+        <!-- <ul>
+             <li ng-repeat="(name,date) in productList">{{name}},{{date}}</li>
+         </ul>-->
+        <table class="table">
+            <tr>
+                <th>发票编号</th>
+                <th>产品信息</th>
+                <th>申请时间</th>
+                <th>发票金额</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="invoice in invoiceList">
+                <td ng-bind="invoice.invoice_id"></td>
+                <td ng-bind="invoice.invoice_info"></td>
+                <td ng-bind="invoice.apply_time"></td>
+                <td ng-bind="invoice.price"></td>
+                <td>
+                    <button ng-click="editInvoice(invoice)" >查看详情</button>
+                </td>
+            </tr>
+
+        </table>
+        {{invoiceList.invoice_info}}
+        <nav>
+            <ul class="pager">
+                <li><a href="#">Previous</a></li>
+                <li><a href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

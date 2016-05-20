@@ -1,0 +1,95 @@
+
+
+<div ng-controller="submitController">
+    <div>
+        订单状态：{{orderdetail.orderform.state}}
+        订单编号:{{orderdetail.orderform.id}}
+        出团日期：{{orderdetail.tripSetoff.tripSetoffDate |date: 'yyyy-MM-dd'}}
+        预订产品：{{orderdetail.product.name}}
+        下单日期：{{orderdetail.orderform.bookTime|date: 'yyyy-MM-dd'}}
+        回团日期：{{orderdetail.tripSetoff.tripSetoffDate+orderdetail.product.duration |date: 'yyyy-MM-dd'}}
+        订单金额：{{orderdetail.price.total}}
+        价格明细：成人（{{orderdetail.price.adultPrice }}元）{{orderdetail.price.adultnum}} 人
+        儿童（{{orderdetail.price.childPrice}} 元）{{orderdetail.price.childnum}} 人
+    </div>
+    <h1>订单处理</h1>
+    <div>
+        <div>
+            处理联系人：
+            <div>
+                联系人：{{orderdetail.orderform.booker}}
+                联系电话：{{orderdetail.orderform.bookerPhone}}
+            </div>
+        </div>
+
+        <div>
+            出团通知书&合同
+        </div>
+        <div>
+            签证材料寄送地址
+            <div>
+                联系人：{{orderdetail.orderform.booker}}
+                联系电话：{{orderdetail.orderform.bookerPhone}}
+            </div>
+        </div>
+        <div>
+            处理跟踪
+            <table>
+                <thead>
+                <tr>
+                    <th>时间</th>
+                    <th>操作信息</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="process in orderdetail.orderprocess">
+                    <td>{{process.updateTime |date: 'yyyy-MM-dd'}}</td>
+                    <td>{{process.trackItem}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h1>订单信息</h1>
+    <div>
+        预订信息：
+        <div>
+            联系人：{{orderdetail.orderform.booker}}
+            联系电话：{{orderdetail.orderform.bookerPhone}}
+        </div>
+    </div>
+    <div>
+        产品信息：
+        <div>
+            产品编号:{{orderdetail.product.id}}
+            产品名称：{{orderdetail.product.name}}
+            出发城市：{{}}
+            出游人数：成人{{orderdetail.price.adultnum}} 人
+            儿童{{orderdetail.price.childnum}} 人
+            订单金额：{{orderdetail.price.total}}
+        </div>
+    </div>
+    <div>
+        <h1>游客信息</h1>
+        <form>
+            姓名:<input type="text" ng-model="tourist.name"/>
+            手机:<input type="text" ng-model="tourist.phone"/>
+            客户类型:<select ng-model="tourist.touristTypeId">
+            <option value="1">成人</option>
+            <option value="2">儿童</option>
+        </select>
+            证件类型:<select ng-model="tourist.certifateType">
+            <option value="身份证">身份证</option>
+            <option value="护照">护照</option>
+        </select>
+           证件号码: <input type="text" ng-model="tourist.certifateNumber"/>
+            性别:<select ng-model="tourist.gender">
+            <option value="male">男</option>
+            <option value="female">女</option>
+        </select>
+        出生日期：<input type="date" ng-model="tourist.birthDate"/>
+            备注：<input type="text" ng-model="tourist.remark"/>
+            <input type="submit" onclick="submit(tourist)" value="提交游客信息"/>
+        </form>
+    </div>
+</div>

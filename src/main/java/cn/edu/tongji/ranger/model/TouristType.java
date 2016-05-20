@@ -3,17 +3,18 @@ package cn.edu.tongji.ranger.model;
 import javax.persistence.*;
 
 /**
- * Created by 马二爷 on 2016/4/28.
+ * Created by LiaoShanhe on 2016/4/27.
  */
 @Entity
-@Table(name = "tourist_type", schema = "", catalog = "ranger")
+@Table(name = "tourist_type", schema = "ranger", catalog = "")
 public class TouristType {
     private long id;
     private String type;
     private String brief;
 
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+    @GeneratedValue
+    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -23,7 +24,7 @@ public class TouristType {
     }
 
     @Basic
-    @Column(name = "type", nullable = false, insertable = true, updatable = true, length = 45)
+    @Column(name = "type")
     public String getType() {
         return type;
     }
@@ -33,7 +34,7 @@ public class TouristType {
     }
 
     @Basic
-    @Column(name = "brief", nullable = false, insertable = true, updatable = true, length = 100)
+    @Column(name = "brief")
     public String getBrief() {
         return brief;
     }
@@ -50,10 +51,9 @@ public class TouristType {
         TouristType that = (TouristType) o;
 
         if (id != that.id) return false;
-        if (brief != null ? !brief.equals(that.brief) : that.brief != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        return brief != null ? brief.equals(that.brief) : that.brief == null;
 
-        return true;
     }
 
     @Override
@@ -62,5 +62,14 @@ public class TouristType {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TouristType{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", brief='" + brief + '\'' +
+                '}';
     }
 }

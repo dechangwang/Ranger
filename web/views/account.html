@@ -1,0 +1,14 @@
+<div ng-controller = "myCtrl">
+    <input type="file" file-model="myFile"/>
+    <button ng-click="uploadFile()">upload me</button>
+</div>
+<input type="file" accept="image/gif, image/*">
+<div ng-controller="mulImageCtrl">
+    <img ngf-src="data.file || data.defaultImage" class="img-responsive" style="width:200px; height: 200px; max-width:500px;"/>
+    <div class="button" ngf-select="" ngf-pattern="'image/*'" ngf-multiple="true" ng-model="data.file">
+        选择文件
+    </div>
+    <button ng-click="upload()">upload</button>
+</div>
+
+

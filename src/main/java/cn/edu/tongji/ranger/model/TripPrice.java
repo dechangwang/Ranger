@@ -1,23 +1,25 @@
 package cn.edu.tongji.ranger.model;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Fetch;
 import java.sql.Timestamp;
 
 /**
- * Created by 马二爷 on 2016/4/28.
+
  */
 @Entity
-@Table(name = "trip_price", schema = "", catalog = "ranger")
+@Table(name = "trip_price", schema = "ranger", catalog = "")
 public class TripPrice {
     private long id;
     private double price;
     private byte isExpired;
     private Timestamp updateTime;
-    private Product productByProductId;
-    private TouristType touristTypeByTouristTypeId;
+    private Product product;
+    private TouristType touristType;
 
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+    @GeneratedValue
+    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -27,7 +29,7 @@ public class TripPrice {
     }
 
     @Basic
-    @Column(name = "price", nullable = false, insertable = true, updatable = true, precision = 0)
+    @Column(name = "price")
     public double getPrice() {
         return price;
     }
@@ -37,7 +39,7 @@ public class TripPrice {
     }
 
     @Basic
-    @Column(name = "is_expired", nullable = false, insertable = true, updatable = true)
+    @Column(name = "is_expired")
     public byte getIsExpired() {
         return isExpired;
     }
@@ -47,13 +49,33 @@ public class TripPrice {
     }
 
     @Basic
-    @Column(name = "update_time", nullable = false, insertable = true, updatable = true)
+    @Column(name = "update_time")
     public Timestamp getUpdateTime() {
         return updateTime;
     }
 
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tourist_type_id")
+    public TouristType getTouristType() {
+        return touristType;
+    }
+
+    public void setTouristType(TouristType touristType) {
+        this.touristType = touristType;
     }
 
     @Override
@@ -64,11 +86,12 @@ public class TripPrice {
         TripPrice tripPrice = (TripPrice) o;
 
         if (id != tripPrice.id) return false;
-        if (isExpired != tripPrice.isExpired) return false;
         if (Double.compare(tripPrice.price, price) != 0) return false;
+        if (isExpired != tripPrice.isExpired) return false;
         if (updateTime != null ? !updateTime.equals(tripPrice.updateTime) : tripPrice.updateTime != null) return false;
+        if (product != null ? !product.equals(tripPrice.product) : tripPrice.product != null) return false;
+        return touristType != null ? touristType.equals(tripPrice.touristType) : tripPrice.touristType == null;
 
-        return true;
     }
 
     @Override
@@ -80,26 +103,19 @@ public class TripPrice {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (int) isExpired;
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
+        result = 31 * result + (touristType != null ? touristType.hashCode() : 0);
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
-    public Product getProductByProductId() {
-        return productByProductId;
+    @Override
+    public String toString() {
+        return "TripPrice{" +
+                "id=" + id +
+                ", price=" + price +
+                ", isExpired=" + isExpired +
+                ", updateTime=" + updateTime +
+                '}';
     }
 
-    public void setProductByProductId(Product productByProductId) {
-        this.productByProductId = productByProductId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "tourist_type_id", referencedColumnName = "id", nullable = false)
-    public TouristType getTouristTypeByTouristTypeId() {
-        return touristTypeByTouristTypeId;
-    }
-
-    public void setTouristTypeByTouristTypeId(TouristType touristTypeByTouristTypeId) {
-        this.touristTypeByTouristTypeId = touristTypeByTouristTypeId;
-    }
 }

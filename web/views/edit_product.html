@@ -1,0 +1,98 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">产品信息</div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <form ng-submit="editProduct(productInfo)" method="post" class="form-horizontal" role="form">
+                <!--<input type="text" name="id" ng-moel="productInfo.id" style="display:none;">-->
+                <div class="form-group">
+                    <label class="col-md-2 control-label">产品编号：
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" name="name" class="form-control" ng-model="productInfo.id"
+                               placeholder="请输入名字" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">产品名称：
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" name="name" class="form-control" ng-model="productInfo.name"
+                               placeholder="请输入名字" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">产品详情：</label>
+                    <div class="col-md-8">
+                        <textarea class="form-control" rows="5" name="detail" ng-model="productInfo.summary"
+                                  placeholder="请输入旅游产品详情" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                        <label class="control-label">时长</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="duration" placeholder="请输入天数"
+                                   ng-model="productInfo.duration">
+                            <span class="input-group-addon">天</span>
+                        </div>
+
+
+                    </div><!--   <p class="col-md-1">天</p>-->
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <label class="control-label">出团日期</label>
+                        <input type="text" name="setoff_date" class="form-control col-md-3" ng-model="productInfo.setoff_date">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label ">邮政编码：</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" rows="3" name="postcode"
+                                   ng-model="productInfo.postcode"
+                                   placeholder="请输入邮政编码" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">收件人：</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" rows="3" name="receiver"
+                                   ng-model="productInfo.post_receiver"
+                                   placeholder="请输入收件人姓名" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">电话：</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" rows="3" name="postphone"
+                                   ng-model="productInfo.post_phone"
+                                   placeholder="请输入收件人电话" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">地址：</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" rows="3" name="postaddress"
+                                   ng-model="productInfo.post_address"
+                                   placeholder="请输入收件地址" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-5">
+                        <input type="submit" class="btn btn-default" value="修  &nbsp;   改">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+</div>

@@ -3,12 +3,14 @@ package cn.edu.tongji.ranger.model;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
 /**
- * Created by 马二爷 on 2016/4/26.
+ * Created by 马二爷 on 2016/5/18.
  */
 @Entity
+@Table(name="orderform")
 public class Orderform {
     private long id;
 
@@ -166,6 +168,18 @@ public class Orderform {
         this.confirmListSupplier = confirmListSupplier;
     }
 
+    private String tripNotice;
+
+    @Basic
+    @javax.persistence.Column(name = "trip_notice", nullable = false, insertable = true, updatable = true, length = 100)
+    public String getTripNotice() {
+        return tripNotice;
+    }
+
+    public void setTripNotice(String tripNotice) {
+        this.tripNotice = tripNotice;
+    }
+
     private String contractSupplier;
 
     @Basic
@@ -202,6 +216,30 @@ public class Orderform {
         this.invoice = invoice;
     }
 
+    private String comment;
+
+    @Basic
+    @javax.persistence.Column(name = "comment", nullable = false, insertable = true, updatable = true, length = 100)
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    private int remark;
+
+    @Basic
+    @javax.persistence.Column(name = "remark", nullable = false, insertable = true, updatable = true)
+    public int getRemark() {
+        return remark;
+    }
+
+    public void setRemark(int remark) {
+        this.remark = remark;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -213,6 +251,7 @@ public class Orderform {
         if (Double.compare(orderform.cost, cost) != 0) return false;
         if (Double.compare(orderform.deposit, deposit) != 0) return false;
         if (id != orderform.id) return false;
+        if (remark != orderform.remark) return false;
         if (state != orderform.state) return false;
         if (tripSetoffId != orderform.tripSetoffId) return false;
         if (bookTime != null ? !bookTime.equals(orderform.bookTime) : orderform.bookTime != null) return false;
@@ -221,6 +260,7 @@ public class Orderform {
             return false;
         if (bookerPhone != null ? !bookerPhone.equals(orderform.bookerPhone) : orderform.bookerPhone != null)
             return false;
+        if (comment != null ? !comment.equals(orderform.comment) : orderform.comment != null) return false;
         if (confirmListBuyer != null ? !confirmListBuyer.equals(orderform.confirmListBuyer) : orderform.confirmListBuyer != null)
             return false;
         if (confirmListSupplier != null ? !confirmListSupplier.equals(orderform.confirmListSupplier) : orderform.confirmListSupplier != null)
@@ -232,6 +272,7 @@ public class Orderform {
         if (contractSupplier != null ? !contractSupplier.equals(orderform.contractSupplier) : orderform.contractSupplier != null)
             return false;
         if (invoice != null ? !invoice.equals(orderform.invoice) : orderform.invoice != null) return false;
+        if (tripNotice != null ? !tripNotice.equals(orderform.tripNotice) : orderform.tripNotice != null) return false;
 
         return true;
     }
@@ -255,9 +296,12 @@ public class Orderform {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (confirmListBuyer != null ? confirmListBuyer.hashCode() : 0);
         result = 31 * result + (confirmListSupplier != null ? confirmListSupplier.hashCode() : 0);
+        result = 31 * result + (tripNotice != null ? tripNotice.hashCode() : 0);
         result = 31 * result + (contractSupplier != null ? contractSupplier.hashCode() : 0);
         result = 31 * result + (contractBuyer != null ? contractBuyer.hashCode() : 0);
         result = 31 * result + (invoice != null ? invoice.hashCode() : 0);
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        result = 31 * result + remark;
         return result;
     }
 }
