@@ -12,14 +12,14 @@ import java.util.List;
  */
 
 public interface OrderService {
-//    public List<OrderListItem> getAllListOrder(long buyerid);
-//    public List<OrderListItem> getToBeACK(long buyerid);
-//    public List<OrderListItem> getToPay(long buyreid);
-//    public List<OrderListItem> getHasPaidDeposit(long buyerid);
-//    public List<OrderListItem> getHasPaidAll(long buyerid);
-//    public List<OrderListItem> getHasFinished(long buyerid);
-//    public List<OrderListItem> getHasCanceled(long buyerid);
-//    public List<OrderListItem> getHasEvaluate(long buyerid);
-//    public OrderDetail getOrderDetail(long orderId);
-//    public boolean addTourist(OrderformTourist tourist);
+    public List<OrderListItem> getAllListOrder(long buyerid);
+    public List<OrderListItem> getToBeACK(long buyerid);
+    public List<OrderListItem> getToPay(long buyreid);
+    public List<OrderListItem> getHasPaidDeposit(long buyerid);
+    public List<OrderListItem> getHasPaidAll(long buyerid);
+    public List<OrderListItem> getHasFinished(long buyerid);
+    public List<OrderListItem> getHasCanceled(long buyerid);
+    public List<OrderListItem> getHasEvaluate(long buyerid);
+    public OrderDetail getOrderDetail(long orderId);
+    public boolean addTourist(OrderformTourist tourist);
 }

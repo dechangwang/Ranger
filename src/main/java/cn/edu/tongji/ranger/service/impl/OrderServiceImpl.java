@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Service("OrderService")
 @Transactional
-public class OrderServiceImpl implements OrderService{/*
+public class OrderServiceImpl implements OrderService{
     @Autowired
     private OrderformDao orderformDao;
     @Autowired
@@ -87,28 +87,14 @@ public class OrderServiceImpl implements OrderService{/*
         detail.setOrderform(order);
         detail.setOrderprocess(process);
         detail.setPrice(priceDetail);
-       /* TripSetoff2 tripSetoff2=new TripSetoff2();
-
-        if(tripSetoff!=null)
-        tripSetoff2.setTripSetoffDate(tripSetoff.getTripSetoffDate());*/
-
         detail.setTripSetoff(tripSetoff);
         detail.setTourists(tourists);
-        /*Product2 product2=new Product2();
-
-        if(product!=null){
-        product2.setId(product.getId());
-        product2.setName(product.getName());
-        product2.setDuration(product.getDuration());
-        }*/
         detail.setProduct(product);
 
         return detail;
 
     }
 
-
-*//*
 
     public List<OrderListItem> getAllListOrder(long buyerid) {
 
@@ -171,7 +157,7 @@ public class OrderServiceImpl implements OrderService{/*
         }
         return result;
     }
-*//*
+
 
     public List<OrderListItem> getToPay(long buyerid) {
         if(allorder.isEmpty())
@@ -257,6 +243,6 @@ public class OrderServiceImpl implements OrderService{/*
         return result;
     }
 
-*/
+
 
 }

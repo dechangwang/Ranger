@@ -14,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 马二爷 on 2016/4/28.
@@ -22,18 +24,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/order")
-public class OrderController {/*
+public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
     @RequestMapping(value = "/submittourist/{oid}",method = RequestMethod.POST)
     @ResponseBody
-    public void submitTourist(@PathVariable("oid") long oid,@RequestBody OrderformTourist tourist)
+    public Map<String,String> submitTourist(@PathVariable("oid") long oid,@RequestBody OrderformTourist tourist)
     {
+        Map<String,String> result=new HashMap<String, String>();
+
         tourist.setOrderformId(oid);
         //插入数据库
-        orderService.addTourist(tourist);
+        if(orderService.addTourist(tourist))
+            result.put("result","success");
+        else
+            result.put("result","fail");
+        return result;
+
     }
 
 
@@ -104,6 +113,5 @@ public class OrderController {/*
         return orderService.getHasCanceled(bid);
     }
 
-*/
 
 }
