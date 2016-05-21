@@ -1,5 +1,4 @@
-
-<div>
+<div ng-controller="submitCtrl">
     <div>
         订单状态：{{orderdetail.orderform.state}}
         订单编号:{{orderdetail.orderform.id}}
@@ -70,25 +69,27 @@
     </div>
     <div>
         <h1>游客信息</h1>
-        <form>
-            姓名:<input type="text" ng-model="tourist.name"/>
-            手机:<input type="text" ng-model="tourist.phone"/>
-            客户类型:<select ng-model="tourist.touristTypeId">
+        <form name="touristForm" novalidate>
+            姓名:<input type="text" name="name" ng-model="tourist.name" required/>
+            手机:<input type="text" name="phone"ng-model="tourist.phone" required/>
+            客户类型:<select ng-model="tourist.touristTypeId" name="type" required>
             <option value="1">成人</option>
             <option value="2">儿童</option>
         </select>
-            证件类型:<select ng-model="tourist.certifateType">
+            证件类型:<select ng-model="tourist.certifateType" name="certifateType" required>
             <option value="身份证">身份证</option>
             <option value="护照">护照</option>
         </select>
-           证件号码: <input type="text" ng-model="tourist.certifateNumber"/>
-            性别:<select ng-model="tourist.gender">
-            <option value="male">男</option>
-            <option value="female">女</option>
+           证件号码: <input type="text" ng-model="tourist.certifateNumber" name="certifateNumber" required/>
+            性别:<select ng-model="tourist.gender" name="gender" required>
+            <option value="0">男</option>
+            <option value="1">女</option>
         </select>
-        出生日期：<input type="date" ng-model="tourist.birthDate"/>
-            备注：<input type="text" ng-model="tourist.remark"/>
-            <input type="submit" onclick="submit(tourist)" value="提交游客信息"/>
+        出生日期：<input type="date" ng-model="tourist.birthDate" name="birthDate" required/>
+            备注：<input type="text" ng-model="tourist.remark" name="remark" required/>
+            邮箱: <input type="email" ng-model="tourist.email" name="email" required/>
+            <input type="submit" ng-disabled="touristForm.$invalid" ng-click="submit(tourist)" value="提交游客信息"/>
+            <span ng-show="touristForm.$dirty&&touristForm.$invalid">请填写表单所需内容。</span>
         </form>
     </div>
 </div>

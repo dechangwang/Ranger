@@ -73,11 +73,10 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
             }
         })
         .state('home.addTourist',{
-            url:'/addTourist/:orderId',
+            url:'/addTourist/:id',
             views:{
                 'main@home':{
-                    templateUrl:'views/submitTouristInfo.html',
-                    controller: 'submitController'
+                    templateUrl:'views/addTourist.html'
                 }
             }
         }

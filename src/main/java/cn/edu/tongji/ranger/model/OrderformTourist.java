@@ -22,6 +22,20 @@ public class OrderformTourist {
     private int state;
     private String remark;
 
+    public OrderformTourist(){}
+
+    public OrderformTourist(TouristForm form)
+    {
+        this.name=form.getName();
+        this.gender=form.getGender().equals("0");
+        this.phone=form.getPhone();
+        this.birthDate=new Timestamp(form.getBirthDate().getTime());
+        this.certifateType=form.getCertifateType();
+        this.certifateNumber=form.getCertifateNumber();
+        this.touristTypeId=Long.parseLong(form.getTouristTypeId());
+        this.remark=form.getRemark();
+        this.email=form.getEmail();
+    }
     @Id
     @Column(name = "id", nullable = false, insertable = true, updatable = true)
     public long getId() {
