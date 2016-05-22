@@ -92,5 +92,19 @@ public class SessionPersistence {
         return results;
     }
 
+    public <T> void deleteById(Long id, Class<T> type){
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            T entity = (T)session.load(type, id);
+            session.delete(entity);
+            session.flush();
+            transaction.commit();
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            transaction.rollback();
+        }
+    }
+
 
 }

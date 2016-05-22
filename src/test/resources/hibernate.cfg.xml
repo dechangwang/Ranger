@@ -30,6 +30,7 @@
         <mapping class="cn.edu.tongji.ranger.model.BankCard" />
         <mapping class="cn.edu.tongji.ranger.model.TouristType"/>
         <mapping class="cn.edu.tongji.ranger.model.TrafficType"/>
+        <mapping class="cn.edu.tongji.ranger.model.Collection"/>
         <mapping class="cn.edu.tongji.ranger.model2show.SimpleProduct"/>
         <mapping class="cn.edu.tongji.ranger.model2show.TripSetoff2"/>
         <mapping class="cn.edu.tongji.ranger.model2show.TripDestination2"/>

@@ -2,6 +2,7 @@ package cn.edu.tongji.ranger.dao.impl;
 
 import cn.edu.tongji.ranger.init.HibernateUtil;
 import cn.edu.tongji.ranger.model.*;
+import cn.edu.tongji.ranger.model.Collection;
 import cn.edu.tongji.ranger.model2show.SimpleProduct;
 import org.hibernate.*;
 import org.junit.Before;
@@ -23,6 +24,17 @@ public class SessionPersistenceTestD {
 
     }
 
+    @Test
+    public void testRemoveCollection(){
+        sp.deleteById(4L, Collection.class);
+    }
+
+//    @Test
+    public void testCollectionListAll(){
+        List<Collection> collections = sp.listAll(Collection.class);
+        System.out.println(collections);
+    }
+
 //    @Test
     public void testSimpleProductList(){
         List<SimpleProduct> products = sp.listAll(SimpleProduct.class);
@@ -32,7 +44,7 @@ public class SessionPersistenceTestD {
         }
     }
 
-    @Test
+//    @Test
     public void testSimpleProductFindById(){
         long id = 3;
         List<SimpleProduct> simpleProducts = new ArrayList<SimpleProduct>();
