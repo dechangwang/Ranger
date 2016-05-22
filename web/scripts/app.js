@@ -8,18 +8,6 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
 
     $urlRouterProvider.otherwise('/home');
     $stateProvider
-/*        state('/orderList/:type', {
-        templateUrl: 'views/orderList.html',
-        controller: 'listOrderCtrl'
-    }).
-        state('/orderDetail/:id',{
-            templateUrl:'views/orderdetail.html',
-            controller:'orderDetailCtrl'
-        }).
-        state('/submitTourist/:orderid',{
-            templateUrl:'views/submitTouristInfo.html',
-            controller:'submitController'
-        })*/
         .state('home', {
             url: '/home',
             views: {
@@ -84,6 +72,15 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
+        .state('home.addTourist',{
+            url:'/addTourist/:id',
+            views:{
+                'main@home':{
+                    templateUrl:'views/addTourist.html'
+                }
+            }
+        }
+        )
         .state('home.notification', {
             url: '/notification',
             views: {

@@ -21,6 +21,7 @@ public class OrderDetail {
     private PriceDetail price;
     private List<OrderformTrack> orderprocess;
     private List<OrderformTourist> tourists;
+
     public List<OrderformTourist> getTourists() {
         return tourists;
     }

@@ -99,26 +99,35 @@ rangerApp.controller("orderDetailCtrl",["$scope","$http","$stateParams",function
     );
 }]);
 
-rangerApp.controller("submitController",["$scope","$http","$stateParams",function($scope,$http,$stateParams){
-
-    var orderid=$stateParams.orderid;
-    $http.get("/Ranger/order/detail/"+orderid).then(
+rangerApp.controller("submitCtrl",["$scope","$http","$stateParams",function($scope,$http,$stateParams){
+   /* $scope.tourist={
+        'name': '',
+        'phone':'',
+        'touristTypeId':'',
+        'certifateType':'',
+        'certifateNumber':'',
+        'gender':'',
+        'birthDate':'',
+        'remark':''
+    };*/
+    $http.get("/Ranger/order/detail/"+$stateParams.id).then(
         function(response){
             $scope.orderdetail=response.data;
         },function(err)
         {
-            alert("error");
+            alert("error to get detail");
         }
     );
 
     $scope.submit=function(tourist)
     {
-        $http.post("Ranger/order/submittourist/"+orderid,tourist).success(
-            function(response){
 
+        $http.post("/Ranger/order/submittourist/"+$stateParams.id,tourist).success(
+            function(response){
+                alert(response.result);
             }
         ).error(function(err){
-
-            })
-    }
+                alert("error to submit");
+            });
+    };
 }]);
