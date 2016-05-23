@@ -10,9 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +49,7 @@ public class RegisterController {
                 map.put("result", "success");
                 map.put("angency", angency);
                 System.out.println("登录成功");
+                getSession().setAttribute("angency", angency);
                 return map;
             } else {
                 map.put("result", "fail");
@@ -57,6 +62,7 @@ public class RegisterController {
                     map.put("result", "success");
                     map.put("angency", angency);
                     System.out.println("登录成功");
+                    getSession().setAttribute("angency", angency);
                     return map;
                 } else {
                     map.put("result", "fail");
@@ -232,4 +238,18 @@ public class RegisterController {
         }
         return "home";
     }*/
+
+    public static HttpSession getSession() {
+        HttpSession session = null;
+        try {
+            session = getRequest().getSession();
+        } catch (Exception e) {}
+        return session;
+    }
+
+    public static HttpServletRequest getRequest() {
+        ServletRequestAttributes attrs =(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        return attrs.getRequest();
+    }
+
 }
