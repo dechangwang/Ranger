@@ -9,4 +9,5 @@ public interface GenericDao {
     void saveOrUpdate(Object obj);
     <T> List<T> findByExample(T instance, Class<T> type);
     <T>T findById(Long id, Class<T> type);
+    <T> void deleteById(Long id, Class<T> type);
 }

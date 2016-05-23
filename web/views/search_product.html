@@ -28,6 +28,68 @@
         <button type="button" class="btn btn-primary" name="button" ng-click = "search()">搜索</button>
     </div>
 </div>
+    <div class="basicDiv" style="border: 1px solid purple;padding:20px;">
+        <div class="basicDiv" >
+            <label >出发日期：</label>
+            <input type="date" value="2016-05-20"></input>
+        </div>
+
+        <div class="basicDiv">
+            <label >出发城市：</label>
+            <input name = "city" type="radio">北京</input>
+            <input name = "city" type="radio">上海</input>
+            <input name = "city" type="radio">深圳</input>
+            <input name = "city" type="radio">广州</input>
+            <input name = "city" type="radio">成都</input>
+            <input name = "city" type="radio">其他：<input name = "city"type="text"></input></input>
+        </div>
+
+        <div class="basicDiv">
+            <label >行程天数：</label>
+            <input name = "days" type="radio">1-3</input>
+            <input name = "days" type="radio">3-5</input>
+            <input name = "days" type="radio">5-7</input>
+            <input name = "days" type="radio">7-10</input>
+            <input name = "days" type="radio">10+</input>
+            <input name = "days" type="radio">其他：<input name= "days"type="text"></input></input>
+        </div>
+
+        <div class="basicDiv">
+            <label >包含区域：</label>
+            <input name = "district" type="radio">珠海</input>
+            <input name = "district" type="radio">湛江</input>
+            <input name = "district" type="radio">广州</input>
+            <input name = "district" type="radio">惠州</input>
+            <input name = "district" type="radio">东莞</input>
+            <input name = "district" type="radio">其他：<input name = "district"type="text"></input></input>
+        </div>
+        <div class="basicDiv">
+            <label >出行方式：</label>
+            <input name="way" type="radio">不限</input>
+            <input name="way" type="radio">飞机</input>
+            <input name="way" type="radio">火车</input>
+            <input name="way" type="radio">巴士</input>
+            <input name="way" type="radio">其他：<input name="way" type="text"></input></input>
+
+        </div>
+
+        <div class="basicDiv">
+            <label >综合排序：</label>
+            <input name="sort" type="checkbox">销量</input>
+            <input name="sort" type="checkbox">评分</input>
+            <input name="sort" type="checkbox">
+            <select>
+                <option>价格从高到低</option>
+                <option>价格从低到高</option>
+            </select>
+            <input name="sort" type="checkbox">价格区间：</input>
+            <input type="text"></input>-
+            <input type="text"></input>
+
+            </input>
+
+        </div>
+    </div>
 <div class="panel-body">
     <table class="table">
     <tr ng-repeat="simplep in results">

@@ -38,4 +38,12 @@ public class GenericDaoImpl implements GenericDao {
         T instance = (T)session.get(type, id);
         return instance;
     }
+
+    @Override
+    public <T> void deleteById(Long id, Class<T> type) {
+        Session session = sessionFactory.getCurrentSession();
+        T entity = (T)session.load(type, id);
+        session.delete(entity);
+        session.flush();
+    }
 }
