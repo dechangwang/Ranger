@@ -184,9 +184,32 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
             }
         })
 
-        .state('search',{
+        .state('home.search',{
             url:'/search',
-            templateUrl:'views/search_product.html'
+            views:{
+                'main@home':{
+                    templateUrl:'views/search_product.html'
+                }
+            }
+        })
+
+        .state('home.create_orderform',{
+            url:'/create_orderform/:setoff_id',
+            views:{
+                'main@home':{
+                    templateUrl:'views/create_orderform.html'
+                }
+            }
+
+        })
+
+        .state('home.collection_manage',{
+            url:'/collection_manage',
+            views:{
+                'main@home':{
+                    templateUrl:'views/collection_manage.html'
+                }
+            }
         })
 
         .state('product_detail',{
@@ -206,14 +229,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         });
-        
 
-
-        // .state('search_str',{
-        //     url:'/search/:search_str',
-        //     templateUrl:'views/search_product.html'
-        // })
-    //$locationProvider.html5Mode(true);
 }]);
 
 
