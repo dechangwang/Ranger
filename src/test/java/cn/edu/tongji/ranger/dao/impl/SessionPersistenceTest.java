@@ -30,12 +30,7 @@ public class SessionPersistenceTest {
 
     }
 
-    public void testCreate() {
-        LocationD ld = new LocationD();
-        ld.setName("Henan");
-        ld.setFatherId(new Long(2));
-        sp.create(ld);
-    }
+
 
 
     @Test
@@ -54,18 +49,6 @@ public class SessionPersistenceTest {
         transaction.commit();
     }
 
-    public void testFindById() {
-        LocationD ld = sp.findById(1L, LocationD.class);
-        System.out.println(ld);
-    }
-
-
-    public void testFindByExample() {
-        LocationD ld = new LocationD();
-        List<LocationD> lds = sp.findByExample(ld, LocationD.class);
-        System.out.println(lds);
-
-    }
 
     //    @Test
     public void testListAll() {

@@ -27,7 +27,7 @@ rangerApp.controller('searchBarCtrl', ['$scope', '$http', '$state', 'searchSessi
         // data.search_str = $scope.search_str;
         searchSessionService.set(data);
         console.log(data);
-        $state.go('search');
+        $state.go('home.search');
     }
 
 }]);
