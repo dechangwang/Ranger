@@ -52,8 +52,8 @@ rangerApp.controller('GuideController', ['$scope', '$http', function ($scope, $h
 }]);
 
 
-rangerApp.controller('loginCtrl', ['$scope', '$http', '$state', 'angency',
-    function($scope, $http, $state, angency) {
+rangerApp.controller('loginCtrl', ['$scope', '$http', '$state', 'angency', 'Angency', '$window',
+    function($scope, $http, $state, angency, Angency, $window) {
         $scope.account = {
             username: '',
             password: ''
@@ -72,6 +72,8 @@ rangerApp.controller('loginCtrl', ['$scope', '$http', '$state', 'angency',
             }).then(function (response) {
                 if (response.data.result == 'success') {
                     $scope.loginSuccess = true;
+                    $window.sessionStorage.angencyId = response.data.angency.id;
+                    Angency.setAngencyId(response.data.angency.id);
                     angency.id = response.data.angency.id;
                     $state.go('home');
                 } else {

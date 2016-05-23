@@ -25,8 +25,13 @@ public class NotificationDaoImpl extends BaseDaoImpl<Notification> implements No
 
     public List<Notification> findAllNotificationsByAngencyId(Long receiver_id) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Notification.class)
-                .add(Restrictions.eq("receiver_id", receiver_id)).addOrder(Order.desc("generate_time"));
+                .add(Restrictions.eq("receiverId", receiver_id)).addOrder(Order.desc("generateTime"));
         return (List<Notification>) criteria.list();
+    }
+
+    public static void main(String[] args) {
+        NotificationDao notificationDao = new NotificationDaoImpl();
+        notificationDao.findAllNotificationsByAngencyId((long) 7);
     }
 
 }

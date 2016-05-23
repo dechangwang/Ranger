@@ -1,27 +1,33 @@
 <div>
     <span>
-        <table>
-
-        </table>
+        <li ng-click="unread()">未读消息</li>
+        <li ng-click="read()">已读消息</li>
+        <li ng-click="all()">全部消息</li>
     </span>
     <span>
         <table border="2">
-        <tr>
-            <th>id</th>
-            <th>orderformId</th>
-            <th>content</th>
-            <th>generateTime</th>
-            <th>isViewed</th>
-            <th>receiverId</th>
-        </tr>
-        <tr ng-repeat="noti in unread">
-            <td ng-bind="noti.id"></td>
-            <td ng-bind="noti.orderformId"></td>
-            <td ng-bind="noti.content"></td>
-            <td ng-bind="noti.generateTime"></td>
-            <td ng-bind="noti.isViewed"></td>
-            <td ng-bind="noti.receiverId"></td>
-        </tr>
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>orderformId</th>
+                <th>content</th>
+                <th>generateTime</th>
+                <th>isViewed</th>
+                <th>receiverId</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="noti in notis">
+                <td ng-bind="noti.id"></td>
+                <td ng-bind="noti.orderformId"></td>
+                <td><a ng-click="setViewed(noti.id)" ng-bind="noti.content" href="#"></a></td>
+                <td ng-bind="noti.generateTime"></td>
+                <td ng-bind="noti.isViewed"></td>
+                <td ng-bind="noti.receiverId"></td>
+            </tr>
+            </tbody>
+
     </table>
     </span>
 </div>

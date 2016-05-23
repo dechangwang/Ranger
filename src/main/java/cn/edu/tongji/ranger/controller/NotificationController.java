@@ -4,12 +4,8 @@ import cn.edu.tongji.ranger.model.Notification;
 import cn.edu.tongji.ranger.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,26 +15,33 @@ public class NotificationController {
     @Autowired
     private NotificationService notificationService;
 
-    @RequestMapping(value = "/unread", method = RequestMethod.GET)
+    @RequestMapping(value = "/unread/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public List<Notification> listUnread() {
+    public List<Notification> listUnread(@PathVariable("id") Long id) {
+        System.out.println("id = " + id);
+        return notificationService.findUnreadNotificationsByAngencyId(id);
+    }
 
-        System.out.println("调用notification controller");
+    @RequestMapping(value = "/read/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Notification> listRead(@PathVariable("id") Long id) {
+        System.out.println("id = " + id);
+        return notificationService.findReadNotificationsByAngencyId(id);
+    }
 
-        List<Notification> ns = new ArrayList<Notification>();
-        for (int i = 0; i < 5; i ++) {
-            Notification n = new Notification();
-            n.setId(i);
-            n.setContent("第" + i + "条");
-            n.setGenerateTime(new Timestamp(System.currentTimeMillis()));
-            n.setOrderformId(i*10);
-            n.setIsViewed((byte) 0);
-            n.setReceiverId(i*100);
-            ns.add(n);
-        }
+    @RequestMapping(value = "/all/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Notification> listAll(@PathVariable("id") Long id) {
+        System.out.println("id = " + id);
+        return notificationService.findAllNotificationsByAngencyId(id);
+    }
 
-        return ns;
-//        return notificationService.findUnreadNotifications((long) 5);
+    @RequestMapping(value = "/setviewed/{nid}", method = RequestMethod.GET)
+    @ResponseBody
+    public String setViewed(@PathVariable("nid") Long nid) {
+        String s =  String.valueOf(notificationService.setViewed(nid));
+        System.out.println(s);
+        return s;
     }
 
 }

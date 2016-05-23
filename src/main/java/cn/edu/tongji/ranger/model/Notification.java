@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by LiaoShanhe on 2016/5/4.
+ * Created by LiaoShanhe on 2016/5/23.
  */
 @Entity
 @Table(name = "notification")

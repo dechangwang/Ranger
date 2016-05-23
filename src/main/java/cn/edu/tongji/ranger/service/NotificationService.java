@@ -10,8 +10,10 @@ public interface NotificationService extends BaseService<Notification> {
 
     public List<Notification> findAllNotificationsByAngencyId(Long receiver_id);
 
-    public List<Notification> findUnreadNotifications(Long receiver_id);
+    public List<Notification> findUnreadNotificationsByAngencyId(Long receiver_id);
 
-    public List<Notification> findReadNotifications(Long receiver_id);
+    public List<Notification> findReadNotificationsByAngencyId(Long receiver_id);
+
+    public boolean setViewed(Long notificationId);
 
 }
