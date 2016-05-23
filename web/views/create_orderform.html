@@ -10,27 +10,27 @@
         <div class="form-group">
             <label class="col-md-2 control-label">姓名:</label>
             <div class="col-md-8">
-                <input type="text" name="booker" class="form-control" placeholder="请输入姓名">
+                <input type="text" name="booker" class="form-control" placeholder="请输入姓名" ng-model="booker">
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-2 control-label">电话:</label>
             <div class="col-md-8">
-                <input type="text" name="booker_phone" class="form-control" placeholder="请输入电话">
+                <input type="text" name="booker_phone" class="form-control" placeholder="请输入电话" ng-model="booker_phone">
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-2 control-label">地址:</label>
             <div class="col-md-8">
-                <input type="text" name="booker_address" class="form-control" placeholder="请输入地址">
+                <input type="text" name="booker_address" class="form-control" placeholder="请输入地址" ng-model="booker_address">
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="确 认">
+                <input type="submit" class="btn btn-default" ng-click="create_orderform()" value="确 认">
             </div>
         </div>
     </form>

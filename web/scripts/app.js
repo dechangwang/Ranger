@@ -226,6 +226,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 },
                 'productTemplate@product_detail':{
                     templateUrl:'views/product_detail_template.html'
+                    
                 }
             }
         });

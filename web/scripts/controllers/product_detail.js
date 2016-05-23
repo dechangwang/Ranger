@@ -2,8 +2,9 @@
  * Created by daidongyang on 5/16/16.
  */
 
-rangerApp.controller('productDetailCtrl', ['$scope', '$http', '$stateParams',
-    function($scope, $http, $stateParams){
+rangerApp.controller('productDetailCtrl', ['$scope', '$http', '$stateParams','$state',
+    function($scope, $http, $stateParams, $state){
+
         $scope.product = {
             'id':0,
             'name':'',
@@ -37,6 +38,11 @@ rangerApp.controller('productDetailCtrl', ['$scope', '$http', '$stateParams',
                     console.log(err);
                     alert(err);
                 });
+        };
+
+        $scope.tocreate_orderform = function(){
+            console.log("go to create orderform");
+            $state.go('home.create_orderform',{setoff_id:1});
         };
 
         $scope.on_begin = function () {

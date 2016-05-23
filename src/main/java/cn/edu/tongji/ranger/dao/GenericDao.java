@@ -10,4 +10,5 @@ public interface GenericDao {
     <T> List<T> findByExample(T instance, Class<T> type);
     <T>T findById(Long id, Class<T> type);
     <T> void deleteById(Long id, Class<T> type);
+    void persist(Object obj);
 }

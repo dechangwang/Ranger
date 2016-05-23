@@ -1,9 +1,6 @@
 package cn.edu.tongji.ranger.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
@@ -15,6 +12,7 @@ public class Orderform {
     private long id;
 
     @Id
+    @GeneratedValue
     @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true)
     public long getId() {
         return id;
@@ -303,5 +301,30 @@ public class Orderform {
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
         result = 31 * result + remark;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Orderform{" +
+                "id=" + id +
+                ", buyerId=" + buyerId +
+                ", tripSetoffId=" + tripSetoffId +
+                ", booker='" + booker + '\'' +
+                ", bookerPhone='" + bookerPhone + '\'' +
+                ", bookerAddress='" + bookerAddress + '\'' +
+                ", bookTime=" + bookTime +
+                ", confirmTime=" + confirmTime +
+                ", state=" + state +
+                ", cost=" + cost +
+                ", deposit=" + deposit +
+                ", confirmListBuyer='" + confirmListBuyer + '\'' +
+                ", confirmListSupplier='" + confirmListSupplier + '\'' +
+                ", tripNotice='" + tripNotice + '\'' +
+                ", contractSupplier='" + contractSupplier + '\'' +
+                ", contractBuyer='" + contractBuyer + '\'' +
+                ", invoice='" + invoice + '\'' +
+                ", comment='" + comment + '\'' +
+                ", remark=" + remark +
+                '}';
     }
 }

@@ -46,4 +46,10 @@ public class GenericDaoImpl implements GenericDao {
         session.delete(entity);
         session.flush();
     }
+
+    @Override
+    public void persist(Object obj) {
+        Session session = sessionFactory.getCurrentSession();
+        session.persist(obj);
+    }
 }
