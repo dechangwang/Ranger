@@ -3,7 +3,7 @@
  * Created by wangdechang on 2016/5/11.
  */
 
-rangerApp.controller('myProductCtrl',['$scope','$http','$state','angency',function ($scope, $http,$state,angency) {
+rangerApp.controller('myProductCtrl',['$scope','$http','$state','angency','$window',function ($scope, $http,$state,angency,$window) {
     $scope.productList={
         product_id:'',
         product_name:'',
@@ -12,8 +12,17 @@ rangerApp.controller('myProductCtrl',['$scope','$http','$state','angency',functi
         price:'',
         state:'',
     };
-    if(!angency.id){
-        alert("请先登录");
+    console.log( $window.sessionStorage.angencyId);
+    if(!$window.sessionStorage.angencyId){
+        layer.open({
+            title: '登录信息',
+            content: '未登录，请先登录',
+            btn: ['确定', '取消'],
+            /*  area: ['390px', '330px'],*/
+            yes: function(){
+                layer.closeAll();
+            }
+        });
         window.history.back();
     }else{
         console.log(angency);
