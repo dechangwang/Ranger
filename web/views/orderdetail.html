@@ -1,14 +1,14 @@
 <div ng-controller="orderDetailCtrl">
     <div>
-        订单状态：{{orderdetail.orderform.state}}
-        订单编号:{{orderdetail.orderform.id}}
-        出团日期：{{orderdetail.tripSetoff.tripSetoffDate |date: 'yyyy-MM-dd'}}
-        预订产品：{{orderdetail.product.name}}
-        下单日期：{{orderdetail.orderform.bookTime|date: 'yyyy-MM-dd'}}
-        回团日期：{{orderdetail.tripSetoff.tripSetoffDate+orderdetail.product.duration |date: 'yyyy-MM-dd'}}
-        订单金额：{{orderdetail.price.total}}
-        价格明细：成人（{{orderdetail.price.adultPrice }}元）{{orderdetail.price.adultnum}} 人
-        儿童（{{orderdetail.price.childPrice}} 元）{{orderdetail.price.childnum}} 人
+        <div>订单状态：<span>{{getState(orderdetail.orderform.state)}}</span></div>
+        <div>订单编号:{{orderdetail.orderform.id}}</div>
+        <div>出团日期：{{orderdetail.tripSetoff.tripSetoffDate |date: 'yyyy-MM-dd'}}</div>
+        <div>预订产品：{{orderdetail.product.name}}</div>
+        <div>下单日期：{{orderdetail.orderform.bookTime|date: 'yyyy-MM-dd'}}</div>
+        <div>回团日期：{{orderdetail.tripSetoff.tripSetoffDate+orderdetail.product.duration |date: 'yyyy-MM-dd'}}</div>
+        <div>订单金额：{{orderdetail.price.total}}</div>
+        <div>价格明细：成人（{{orderdetail.price.adultPrice }}元）{{orderdetail.price.adultnum}} 人</div>
+        <div>儿童（{{orderdetail.price.childPrice}} 元）{{orderdetail.price.childnum}} 人</div>
     </div>
     <h1>订单处理</h1>
     <div>

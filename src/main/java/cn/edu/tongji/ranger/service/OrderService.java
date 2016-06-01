@@ -22,4 +22,5 @@ public interface OrderService {
     public List<OrderListItem> getHasEvaluate(long buyerid);
     public OrderDetail getOrderDetail(long orderId);
     public boolean addTourist(OrderformTourist tourist);
+    public boolean changeOrderState(long orderid);
 }
