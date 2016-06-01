@@ -80,26 +80,23 @@ public class RegisterController {
     public Map<String, String> angencyRegister(@RequestBody Angency angency) {
 
         Map<String, String> map = new HashMap<String, String>();
-        String fileDir = UploadFileController.getDir();
-        if (fileDir != null || !"".equals(fileDir)) {
-            angency.setCertificate(fileDir);
-            System.out.println(angency.getCname());
-            List<Angency> list = angencyService.findExistAngency(angency.getCname());
-            System.out.println(list);
 
-            if (angencyService.findExistAngency(angency.getCname()).size() == 0) {
-                angencyService.create(angency);
-                UploadFileController.setDir("");
-                System.out.println("可以注册");
-            } else {
-                System.out.println("has registered");
-                map.put("res", "has registered");
-                return map;
-            }
-            map.put("res", "registered successfully");
+        angency.setCertificate("");
+        System.out.println(angency.getCname());
+        List<Angency> list = angencyService.findExistAngency(angency.getCname());
+        System.out.println(list);
+
+        if (angencyService.findExistAngency(angency.getCname()).size() == 0) {
+            long angency_id = angencyService.create(angency);
+            UploadFileController.setDir("");
+            System.out.println("可以注册");
+            map.put("id",angency+"");
         } else {
-            map.put("res", "no certificate picture ");
+            System.out.println("has registered");
+            map.put("res", "has registered");
+            return map;
         }
+        map.put("res", "permit");
         System.out.println(angency);
 
         return map;

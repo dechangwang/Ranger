@@ -28,9 +28,12 @@ public class UploadFileController {
     private static String dir;
     private static byte[] bytes;
     private boolean hasUpload = false;
+
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/fileUpload")
-    public void upload(@RequestParam("file") MultipartFile file,HttpServletRequest request) throws IOException {
+    public void upload(@RequestParam("file") MultipartFile file,
+                       @RequestParam("id")String id,HttpServletRequest request) throws IOException {
+        System.out.println("id -> "+id);
         String path = "/images";
         ServletContext sc = request.getSession().getServletContext();
         dir = sc.getRealPath(path);
@@ -40,7 +43,7 @@ public class UploadFileController {
             bytes = file.getBytes();
             //store file in storage
             try {
-                FileUtils.writeByteArrayToFile(new File(dir, file.getOriginalFilename()), bytes);
+                FileUtils.writeByteArrayToFile(new File(dir, id+"-"+file.getOriginalFilename()), bytes);
                 dir = "images" +File.separator+file.getOriginalFilename();
                 hasUpload = true;
                 //FileUtils.copyInputStreamToFile(file.getInputStream(), new File("/web/images/", System.currentTimeMillis() + file.getOriginalFilename()));

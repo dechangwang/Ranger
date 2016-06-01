@@ -3,7 +3,7 @@
  * Created by wangdechang on 2016/4/28.
  */
 
-rangerApp.controller('UserinfoController', ['$scope', '$http', function ($scope, $http) {
+rangerApp.controller('UserinfoController', ['$scope', '$http','$window','$state', function ($scope, $http,$window,$state) {
     $scope.userInfo = {
         name: '',
         type: '身份证',
@@ -22,8 +22,14 @@ rangerApp.controller('UserinfoController', ['$scope', '$http', function ($scope,
         //userInfo.
         $http.post('/Ranger/angency/register', userInfo)
             .success(function (data) {
-                console.log(data);
-                alert("register result：  " + data.res);
+                if(data.res =='permit'){
+                    $window.sessionStorage.angencyIdContinue = data.id;
+                    $state.go('home.angencyregister.upload');
+                }else{
+                    console.log(data);
+                    alert("register result：  " + data.res);
+                }
+
             }).error(function (err) {
                 alert("注册失败  " + err);
             })

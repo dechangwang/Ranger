@@ -39,6 +39,14 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
+        .state('home.angencyregister.upload',{
+            url:'/upload',
+            views:{
+                'main@home':{
+                    templateUrl:'views/angency_upload.html'
+                }
+            }
+        })
         .state('home.guideregister', {
             url: '/guideregister',
             views: {

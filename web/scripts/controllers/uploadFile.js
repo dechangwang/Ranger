@@ -19,22 +19,36 @@ rangerApp.directive('fileModel', ['$parse', function ($parse) {
     };
 }]);
 
-rangerApp.service('fileUpload', ['$http', function ($http) {
+rangerApp.service('fileUpload', ['$http','$window','$state', function ($http,$window,$state) {
+
     this.uploadFileToUrl = function (file, uploadUrl) {
+        // if(!$window.sessionStorage.angencyIdContinue){
+        //   //  alert("间隔时间太久");
+        //     $state.go('home.angencyregister');
+        // }
         var fd = new FormData();
+        var id = $window.sessionStorage.angencyIdContinue;//$window.sessionStorage.angencyIdContinue;
+
         fd.append('file', file);
-        $http.post(uploadUrl, fd, {
+        fd.append('id','1234');
+        console.log(file.name);
+       // id.append('id',id);
+        $http.post(uploadUrl, fd,{
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             })
             .success(function () {
+                alert('ok')
+                return 'ok';
             })
             .error(function () {
+                alert('err')
+                return 'err';
             });
     }
 }]);
 
-rangerApp.controller('myCtrl', ['$scope', 'fileUpload', function ($scope, fileUpload) {
+rangerApp.controller('myCtrl', ['$scope', 'fileUpload',function ($scope,fileUpload) {
 
     $scope.uploadFile = function () {
         // alert("Hell");
@@ -43,7 +57,9 @@ rangerApp.controller('myCtrl', ['$scope', 'fileUpload', function ($scope, fileUp
         console.dir(file);
         var uploadUrl = "/Ranger/files/fileUpload";
         fileUpload.uploadFileToUrl(file, uploadUrl);
+        //console.log(result);
     };
+    
 
 }]);
 rangerApp.controller('mulImageCtrl', ['$scope', function ($scope) {
