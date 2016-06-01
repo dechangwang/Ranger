@@ -43,7 +43,7 @@ public class Product2 implements Serializable{
 
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "product_id")
     public long getId() {
         return id;
     }

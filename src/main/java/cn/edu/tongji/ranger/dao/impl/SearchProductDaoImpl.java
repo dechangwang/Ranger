@@ -28,7 +28,7 @@ public class SearchProductDaoImpl implements SearchProductDao {
 
     public List<Long> searchForIds(String[] searchKeys, long setoffLocationId,int firstResult, int resultSize, SearchProductOrderEnum order) {
         List<Long> results = new ArrayList<Long>();
-        String select = "select product.id as pid ";
+        String select = "select product.product_id as pid ";
         String from = "from product ";
         String where = generateWhereStrWithLikes(searchKeys) + "and product.setoff_location_id = " + setoffLocationId + " ";
         String groupBy = "";
