@@ -13,7 +13,7 @@ public interface OrderformDao {
     public List<Orderform> findByTripSetOffId(long setoffId);
 
     public void createOrder(Orderform orderform);
-    public void updateOrder(Orderform orderform);
+    public boolean updateOrder(Orderform orderform);
     public void deleteOrderById(long id);
 
 }

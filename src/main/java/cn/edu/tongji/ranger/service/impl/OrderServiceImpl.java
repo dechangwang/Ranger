@@ -35,10 +35,27 @@ public class OrderServiceImpl implements OrderService{
 
     private List<OrderListItem> allorder= new ArrayList<OrderListItem>();
 
+
     public boolean addTourist(OrderformTourist tourist) {
         return orderFormTouristDao.createTourist(tourist);
     }
 
+    public boolean changeOrderState(long orderid)
+    {
+        Orderform orderform=orderformDao.findByOrderId(orderid);
+        int state=orderform.getState();
+        switch (state) {
+            case 1:orderform.setState(11);break;
+            case 11:orderform.setState(12);break;
+            case 12:orderform.setState(2);break;
+            case 2: orderform.setState(3);break;
+            case 3: orderform.setState(4);break;
+            case 4:orderform.setState(5);break;
+            case 5: orderform.setState(6);break;
+            case 6:orderform.setState(7);break;
+        }
+        return orderformDao.updateOrder(orderform);
+    }
     public OrderDetail getOrderDetail(long orderId)
     {
         OrderDetail detail=new OrderDetail();
@@ -150,7 +167,7 @@ public class OrderServiceImpl implements OrderService{
         List<OrderListItem> result=new ArrayList<OrderListItem>();
         for(OrderListItem od:allorder)
         {
-            if(od.getOrderform().getState()==1)//1为待确认
+            if(od.getOrderform().getState()==1||od.getOrderform().getState()==11||od.getOrderform().getState()==12)//1为待确认
             {
                 result.add(od);
             }

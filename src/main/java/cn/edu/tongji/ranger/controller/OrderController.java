@@ -4,6 +4,7 @@ import cn.edu.tongji.ranger.model.*;
 import cn.edu.tongji.ranger.service.OrderService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,22 +28,50 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+
+   /* @RequestMapping (value="/changeOrderState",method=RequestMethod.PUT)
+    public Map<String,String> changeOrderState(@RequestBody long oid)
+    {
+        System.out.println("in changestate controller, order id= :"+oid);
+        Map<String,String> map=new HashMap<>();
+        if(orderService.changeOrderState(oid))
+            map.put("result","success");
+        else
+            map.put("result","fail");
+
+        return map;
+    }*/
+
     @RequestMapping(value = "/submittourist/{oid}",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> submitTourist(@PathVariable("oid") long oid,@RequestBody TouristForm tourist)
+    public Map<String,String> submitTourist(@PathVariable("oid") long oid,@RequestBody List<TouristForm> tourist)
     {
         Map<String,String> result=new HashMap<String, String>();
-        OrderformTourist tourist1=new OrderformTourist(tourist);
-        tourist1.setOrderformId(oid);
-        //插入数据库
-        if(orderService.addTourist(tourist1))
-            result.put("result","success");
-        else
-            result.put("result","fail");
+        for(int i=0;i<tourist.size();i++) {
+            OrderformTourist tourist1 = new OrderformTourist(tourist.get(i));
+            tourist1.setOrderformId(oid);
+            //插入数据库
+            if (orderService.addTourist(tourist1)) {
+                orderService.changeOrderState(oid);
+                result.put("result" + i, "success");
+            } else
+                result.put("result"+i, "fail");
+        }
         return result;
 
     }
+    @RequestMapping(value = "/submittourist2/{oid}",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,String> submitTourist2(@PathVariable("oid") long oid,@RequestParam("name") String name,@RequestParam("phone") String phone,@RequestParam("touristTypeId") String touristTypeId,@RequestParam("certifateType") String certifateType,@RequestParam("certifateNumber") String certifateNumber,
+                                             @RequestParam("gender") String gender,@RequestParam("birthDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date birthDate,@RequestParam("remark") String remark,@RequestParam String email)
+    {
+        Map<String,String> result=new HashMap<String, String>();
+        System.out.println("提交成功2"+name);
+     //   OrderformTourist tourist1=new OrderformTourist(tourist);
 
+        return result;
+
+    }
 
     @RequestMapping(value="/detail/{oid}",method=RequestMethod.GET)
     @ResponseBody

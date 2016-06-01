@@ -53,10 +53,16 @@ public class OrderformDaoImpl implements OrderformDao {
 
     }
 
-    public void updateOrder(Orderform orderform) {
+    public boolean updateOrder(Orderform orderform) {
         Session session=sessionFactory.getCurrentSession();
-        session.update(orderform);
-
+        try {
+            session.update(orderform);
+            return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public void deleteOrderById(long id) {
