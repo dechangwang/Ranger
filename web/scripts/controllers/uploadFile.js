@@ -30,7 +30,7 @@ rangerApp.service('fileUpload', ['$http','$window','$state', function ($http,$wi
         var id = $window.sessionStorage.angencyIdContinue;//$window.sessionStorage.angencyIdContinue;
 
         fd.append('file', file);
-        fd.append('id','1234');
+        fd.append('id','8');
         console.log(file.name);
        // id.append('id',id);
         $http.post(uploadUrl, fd,{
@@ -38,7 +38,7 @@ rangerApp.service('fileUpload', ['$http','$window','$state', function ($http,$wi
                 headers: {'Content-Type': undefined}
             })
             .success(function () {
-                alert('ok')
+                alert('ok');
                 return 'ok';
             })
             .error(function () {
