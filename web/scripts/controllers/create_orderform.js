@@ -1,7 +1,8 @@
 'usr strict'
 rangerApp.controller('createOrderformCtrl', ['$http', '$scope', '$stateParams', 'angency','$state',
     function($http, $scope, $stateParams, angency, $state){
-        if(true){
+        var buyer_id = angency.id;
+        if(buyer_id){
             $scope.setoff_id = parseInt($stateParams.setoff_id);
             $scope.booker = "";
             $scope.booker_phone = "";
@@ -12,7 +13,7 @@ rangerApp.controller('createOrderformCtrl', ['$http', '$scope', '$stateParams', 
                     "booker":$scope.booker,
                     "booker_phone":$scope.booker_phone,
                     "booker_address":$scope.booker_address,
-                    "angency_id":7
+                    "angency_id":angency.id
                 };
                 console.log(orderform_data);
                 $http.post('/Ranger/api/createOrderform/create', orderform_data)
