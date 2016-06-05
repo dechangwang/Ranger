@@ -1,11 +1,30 @@
+<!--<script type="text/css">
+    .filter-item {
+        cursor:pointer
+    }
+</script>-->
+
 <div>
-    <span>
-        <li ng-click="unread()">未读消息</li>
-        <li ng-click="read()">已读消息</li>
-        <li ng-click="all()">全部消息</li>
+    <span id="filter-container">
+        <button ng-click="changeType($event)" id="unread" class="filter-item" style="background: #99FFFF">未读消息</button>
+        <button ng-click="changeType($event)" id="read" class="filter-item">已读消息</button>
+        <button ng-click="changeType($event)" id="all" class="filter-item">全部消息</button>
     </span>
     <span>
-        <table border="2">
+        <div class="notification" ng-repeat="noti in notis">
+            <span>
+                <a ng-bind="noti.content" ng-click="setViewed(noti.id)" href="#"></a>
+            </span>
+            <span>
+               {{noti.generateTime | date:'yyyy-MM-dd HH:mm'}}
+            </span>
+        </div>
+        <div id="pagefoot">
+            <span>当前页:{{cPage}}</span>
+            <button ng-click="changePage(cPage-1)" id="previous">上一页</button>
+            <button ng-click="changePage(cPage+1)" id="next">下一页</button>
+        </div>
+        <!--<table border="2">
             <thead>
             <tr>
                 <th>id</th>
@@ -16,18 +35,6 @@
                 <th>receiverId</th>
             </tr>
             </thead>
-
-            <tbody>
-            <tr ng-repeat="noti in notis">
-                <td ng-bind="noti.id"></td>
-                <td ng-bind="noti.orderformId"></td>
-                <td><a ng-click="setViewed(noti.id)" ng-bind="noti.content" href="#"></a></td>
-                <td ng-bind="noti.generateTime"></td>
-                <td ng-bind="noti.isViewed"></td>
-                <td ng-bind="noti.receiverId"></td>
-            </tr>
-            </tbody>
-
-    </table>
+            </table>-->
     </span>
 </div>
