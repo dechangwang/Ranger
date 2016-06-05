@@ -17,5 +17,8 @@
     "angular-moment": "1.0.0-beta.6"
   },
   "appPath": "web",
-  "moduleName": "rangerApp"
+  "moduleName": "rangerApp",
+  "resolutions": {
+    "webcomponentsjs": "~0.5.4"
+  }
 }

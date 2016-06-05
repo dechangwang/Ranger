@@ -278,10 +278,11 @@ rangerApp.controller("commentCtrl",["$scope","$http","$stateParams", function ($
         }
     );
 
-    var content=document.getElementById("content").textContent;
 
      $scope.submit= function () {
-        $http.post("/Ranger/order/comment"+orderid,content).then
+         var content=document.getElementById("content").value;
+         var commentform={"content":content};
+        $http.post("/Ranger/order/comment/"+orderid,commentform).then
         (
             function(response){
                 alert(response.data.result);

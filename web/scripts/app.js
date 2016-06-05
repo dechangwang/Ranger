@@ -93,7 +93,7 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
             url:'/comment/:oid',
             views:{
                 'main@home':{
-                    templateUrl:'views/comment_order'
+                    templateUrl:'views/comment_order.html'
                 }
             }
         })

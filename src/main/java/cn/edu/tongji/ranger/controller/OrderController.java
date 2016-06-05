@@ -31,10 +31,10 @@ public class OrderController {
 
     @RequestMapping(value="/comment/{oid}",method=RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> comment(@PathVariable("oid") long oid,@RequestParam String content)
+    public Map<String,String> comment(@PathVariable("oid") long oid,@RequestBody CommentForm commentForm)
     {
         Map<String,String> result=new HashMap<String, String>();
-        if(orderService.comment(oid,content))
+        if(orderService.comment(oid,commentForm.getContent()))
             result.put("result","success");
         else
         {
