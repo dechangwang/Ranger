@@ -81,6 +81,14 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
             }
         }
         )
+        .state('home.comment',{
+            url:'/comment/:oid',
+            views:{
+                'main@home':{
+                    templateUrl:'views/comment_order'
+                }
+            }
+        })
         .state('home.notification', {
             url: '/notification',
             views: {
