@@ -22,7 +22,7 @@ public class Product3 {
    // private int clickRate;
 
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+    @Column(name = "product_id", nullable = false, insertable = true, updatable = true)
     public long getId() {
         return id;
     }

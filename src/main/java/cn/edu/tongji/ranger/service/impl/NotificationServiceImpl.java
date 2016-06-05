@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,12 +35,13 @@ public class NotificationServiceImpl implements NotificationService {
         return notificationDao.findById(id);
     }
 
-    public List<Notification> findAllNotificationsByAngencyId(Long receiver_id) {
-        return (List<Notification>) notificationDao.findAllNotificationsByAngencyId(receiver_id);
+    public List<Notification> findAllNotificationsByAngencyId(Long receiver_id, int page) {
+        return (List<Notification>) notificationDao.findAllNotificationsByAngencyId(receiver_id, page);
     }
 
-    public List<Notification> findUnreadNotificationsByAngencyId(Long receiver_id) {
-        List<Notification> notifications = findAllNotificationsByAngencyId(receiver_id);
+    public List<Notification> findUnreadNotificationsByAngencyId(Long receiver_id, int page) {
+        return (List<Notification>) notificationDao.findUnreadNotificationsByAngencyId(receiver_id, page);
+        /*List<Notification> notifications = findAllNotificationsByAngencyId(receiver_id);
         Iterator<Notification> iterator = notifications.iterator();
         while (iterator.hasNext()) {
             Notification n = iterator.next();
@@ -47,16 +49,12 @@ public class NotificationServiceImpl implements NotificationService {
                 iterator.remove();
             }
         }
-        /*for (Notification notification : notifications) {
-            if (notification.getIsViewed() != (byte) 0) {
-                notifications.remove(notification);
-            }
-        }*/
-        return notifications;
+        return notifications;*/
     }
 
-    public List<Notification> findReadNotificationsByAngencyId(Long receiver_id) {
-        List<Notification> notifications = findAllNotificationsByAngencyId(receiver_id);
+    public List<Notification> findReadNotificationsByAngencyId(Long receiver_id, int page) {
+        return (List<Notification>) notificationDao.findReadNotificationsByAngencyId(receiver_id, page);
+        /*List<Notification> notifications = findAllNotificationsByAngencyId(receiver_id);
         Iterator<Notification> iterator = notifications.iterator();
         while (iterator.hasNext()) {
             Notification n = iterator.next();
@@ -64,12 +62,7 @@ public class NotificationServiceImpl implements NotificationService {
                 iterator.remove();
             }
         }
-        /*for (Notification notification : notifications) {
-            if (notification.getIsViewed() != (byte) 1) {
-                notifications.remove(notification);
-            }
-        }*/
-        return notifications;
+        return notifications;*/
     }
 
     public boolean setViewed(Long notificationId) {
@@ -78,11 +71,13 @@ public class NotificationServiceImpl implements NotificationService {
             notification.setIsViewed((byte) 1);
             notificationDao.update(notification);
         } catch (Exception e) {
-            System.out.println("exception");
             return false;
         }
-        System.out.println("no exception");
         return true;
+    }
+
+    public Integer getPageNumber(Long aid, String type) {
+        return notificationDao.getPageNumber(aid, type);
     }
 
 }

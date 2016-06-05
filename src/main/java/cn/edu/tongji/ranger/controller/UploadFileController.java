@@ -1,6 +1,9 @@
 package cn.edu.tongji.ranger.controller;
 
+import cn.edu.tongji.ranger.model.Angency;
+import cn.edu.tongji.ranger.service.AngencyService;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by wangdechang on 2016/5/1.
@@ -23,25 +28,36 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/files")
 public class UploadFileController {
+    @Autowired
+    private AngencyService angencyService;
     public static MultipartFile certificate;
 
     private static String dir;
     private static byte[] bytes;
     private boolean hasUpload = false;
+
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/fileUpload")
-    public void upload(@RequestParam("file") MultipartFile file,HttpServletRequest request) throws IOException {
+    public void upload(@RequestParam("file") MultipartFile file,
+                                     @RequestParam("id") String id, HttpServletRequest request) throws IOException {
+        Angency angency = angencyService.findById(Long.parseLong(id));
+        Map<String,String> map = new HashMap<>();
+        map.put("res","");
+                System.out.println("id -> " + id);
         String path = "/images";
         ServletContext sc = request.getSession().getServletContext();
         dir = sc.getRealPath(path);
-        System.out.println("dir - "+dir);
+        System.out.println("dir - " + dir);
 
         if (!file.isEmpty()) {
             bytes = file.getBytes();
             //store file in storage
             try {
-                FileUtils.writeByteArrayToFile(new File(dir, file.getOriginalFilename()), bytes);
-                dir = "images" +File.separator+file.getOriginalFilename();
+                FileUtils.writeByteArrayToFile(new File(dir, id + "-" + file.getOriginalFilename()), bytes);
+                dir = "images" + File.separator + id + "-" + file.getOriginalFilename();
+                angency.setCertificate(dir);
+                angencyService.updateAngency(angency);
+                map.put("res","succeed");
                 hasUpload = true;
                 //FileUtils.copyInputStreamToFile(file.getInputStream(), new File("/web/images/", System.currentTimeMillis() + file.getOriginalFilename()));
             } catch (IOException e) {
@@ -50,7 +66,7 @@ public class UploadFileController {
         }
         certificate = file;
         System.out.println(file.getOriginalFilename());
-       // System.out.println(String.format("receive %s from %s", file.getOriginalFilename()));
+       // return map;
     }
 
     public boolean isHasUpload() {
@@ -58,7 +74,7 @@ public class UploadFileController {
     }
 
     public static String getDir() {
-        return dir+"";
+        return dir + "";
     }
 
     public static void setDir(String dir) {
@@ -74,7 +90,7 @@ public class UploadFileController {
 
                 // String dir = sc.getRealPath(path);
                 FileUtils.writeByteArrayToFile(new File(dir, certificate.getOriginalFilename()), bytes);
-                System.out.println("dir ->"+dir);
+                System.out.println("dir ->" + dir);
             } catch (IOException e) {
                 e.printStackTrace();
             }
