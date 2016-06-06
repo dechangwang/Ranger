@@ -41,7 +41,7 @@ public class ProductsDaoImpl implements ProductsDao {
         Session session = sessionFactory.getCurrentSession();
         List<MyProduct> productList = new ArrayList<MyProduct>();
         List list = session.createSQLQuery("select * from product where supplier_id = " + supplierID)
-                .addScalar("id")
+                .addScalar("product_id")
                 .addScalar("name")
                 .list();
         for (Iterator iterator = list.iterator(); iterator.hasNext(); ) {
