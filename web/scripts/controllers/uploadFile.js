@@ -22,10 +22,10 @@ rangerApp.directive('fileModel', ['$parse', function ($parse) {
 rangerApp.service('fileUpload', ['$http','$window','$state', function ($http,$window,$state) {
 
     this.uploadFileToUrl = function (file, uploadUrl) {
-        // if(!$window.sessionStorage.angencyIdContinue){
-        //   //  alert("间隔时间太久");
-        //     $state.go('home.angencyregister');
-        // }
+        if(!$window.sessionStorage.angencyIdContinue){
+          //  alert("间隔时间太久");
+            $state.go('home.angencyregister');
+        }
         var fd = new FormData();
         var id = $window.sessionStorage.angencyIdContinue;//$window.sessionStorage.angencyIdContinue;
 
