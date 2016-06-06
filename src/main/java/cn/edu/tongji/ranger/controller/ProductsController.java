@@ -99,14 +99,14 @@ public class ProductsController {
         product.setTripTraffics(tripTrafficSet);
 
         //TripPicture
-        Set<TripPicture> tripPictureSet = new HashSet<TripPicture>();
+       /* Set<TripPicture> tripPictureSet = new HashSet<TripPicture>();
         TripPicture tripPicture = new TripPicture();
         tripPicture.setBrief("图片");
         String path = UploadFileController.getDir();
         tripPicture.setPicturePath(path);
         tripPicture.setProduct(product);
         tripPictureSet.add(tripPicture);
-        product.setTripPictures(tripPictureSet);
+        product.setTripPictures(tripPictureSet);*/
 
         //TripAccomodation
         Set<TripAccomodation> tripAccomodationSet = new HashSet<TripAccomodation>();

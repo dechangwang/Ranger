@@ -206,8 +206,9 @@ public class Product implements Serializable{
     }
 
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "product")
+    @OneToMany(fetch = FetchType.EAGER)
     @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "product_id")
     public Set<TripPicture> getTripPictures() {
         return tripPictures;
     }

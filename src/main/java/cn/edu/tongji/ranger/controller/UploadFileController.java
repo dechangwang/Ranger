@@ -1,14 +1,14 @@
 package cn.edu.tongji.ranger.controller;
 
 import cn.edu.tongji.ranger.model.Angency;
+import cn.edu.tongji.ranger.model.TripPicture;
 import cn.edu.tongji.ranger.service.AngencyService;
+import cn.edu.tongji.ranger.service.TripPictureService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
@@ -30,6 +30,8 @@ import java.util.Map;
 public class UploadFileController {
     @Autowired
     private AngencyService angencyService;
+    @Autowired
+    private TripPictureService tripPictureService;
     public static MultipartFile certificate;
 
     private static String dir;
@@ -55,7 +57,8 @@ public class UploadFileController {
             try {
                 FileUtils.writeByteArrayToFile(new File(dir, id + "-" + file.getOriginalFilename()), bytes);
                 dir = "images" + File.separator + id + "-" + file.getOriginalFilename();
-                angency.setCertificate(dir);
+                String origin = angency.getCertificate()+"&"+dir;
+                angency.setCertificate(origin);
                 angencyService.updateAngency(angency);
                 map.put("res","succeed");
                 hasUpload = true;
@@ -69,6 +72,25 @@ public class UploadFileController {
        // return map;
     }
 
+
+    @RequestMapping(value = "/picProductUpload",method = RequestMethod.POST)
+    @ResponseBody
+    public void uploadPictureProduct(@RequestParam("file") MultipartFile file,
+                                     @RequestParam("brief") String brief){
+        String id = "51";
+        System.out.println(brief+file.getOriginalFilename());
+        try {
+            byte[] bytes1 = file.getBytes();
+            FileUtils.writeByteArrayToFile(new File(dir, id + "-" + file.getOriginalFilename()), bytes1);
+            String path = "images" + File.separator + id + "-" + file.getOriginalFilename();
+            TripPicture tripPicture = new TripPicture(path,brief,Long.parseLong(id));
+            tripPictureService.create(tripPicture);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
     public boolean isHasUpload() {
         return hasUpload;
     }
