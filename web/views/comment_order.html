@@ -1,0 +1,9 @@
+<div ng-controller="commentCtrl">
+    <div>
+        {{orderdetail.product.summary}}
+    </div>
+    <form>
+        <label>评价内容：<textarea id="content" class="text" cols="20" rows ="20" name="content"></textarea></label>
+        <input type="submit" ng-click="submit()">
+    </form>
+</div>

@@ -29,19 +29,19 @@ public class OrderController {
     private OrderService orderService;
 
 
-   /* @RequestMapping (value="/changeOrderState",method=RequestMethod.PUT)
-    public Map<String,String> changeOrderState(@RequestBody long oid)
+    @RequestMapping(value="/comment/{oid}",method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String,String> comment(@PathVariable("oid") long oid,@RequestBody CommentForm commentForm)
     {
-        System.out.println("in changestate controller, order id= :"+oid);
-        Map<String,String> map=new HashMap<>();
-        if(orderService.changeOrderState(oid))
-            map.put("result","success");
+        Map<String,String> result=new HashMap<String, String>();
+        if(orderService.comment(oid,commentForm.getContent()))
+            result.put("result","success");
         else
-            map.put("result","fail");
-
-        return map;
-    }*/
-
+        {
+            result.put("result","fail");
+        }
+        return result;
+    }
     @RequestMapping(value = "/submittourist/{oid}",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,String> submitTourist(@PathVariable("oid") long oid,@RequestBody List<TouristForm> tourist)
@@ -60,7 +60,7 @@ public class OrderController {
         return result;
 
     }
-    @RequestMapping(value = "/submittourist2/{oid}",method = RequestMethod.POST)
+ /*   @RequestMapping(value = "/submittourist2/{oid}",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,String> submitTourist2(@PathVariable("oid") long oid,@RequestParam("name") String name,@RequestParam("phone") String phone,@RequestParam("touristTypeId") String touristTypeId,@RequestParam("certifateType") String certifateType,@RequestParam("certifateNumber") String certifateNumber,
                                              @RequestParam("gender") String gender,@RequestParam("birthDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date birthDate,@RequestParam("remark") String remark,@RequestParam String email)
@@ -71,7 +71,7 @@ public class OrderController {
 
         return result;
 
-    }
+    }*/
 
     @RequestMapping(value="/detail/{oid}",method=RequestMethod.GET)
     @ResponseBody

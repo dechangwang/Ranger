@@ -257,30 +257,41 @@ rangerApp.controller("submitCtrl",["$scope","$http","$stateParams","$location",f
         }
         $http.post("/Ranger/order/submittourist/"+orderid,tourists).then(
             function(response){
-                alert(response.data)
+                alert("提交成功");
+                $location.path("/home/orderDetail/"+orderid);
             },function(err){
                 alert("error");
             }
         );
 
     };
+}]);
+rangerApp.controller("commentCtrl",["$scope","$http","$stateParams", function ($scope,$http,$stateParams){
+    var orderid=$stateParams.oid;
+
+    $http.get("/Ranger/order/detail/"+orderid).then(
+        function(response){
+            $scope.orderdetail=response.data;
+        },function(err)
+        {
+            alert("error to get detail");
+        }
+    );
 
 
-
-
-  /*  if($scope.submitresult=="success")
-    {
-        alert("提交成功");
-        $http.put("/Ranger/order//changeOrderState",orderid).then(
-            function(resposne){
-                alert("修改状态成功");
-            },function(error){
-                alert("修改状态失败");
+     $scope.submit= function () {
+         var content=document.getElementById("content").value;
+         var commentform={"content":content};
+        $http.post("/Ranger/order/comment/"+orderid,commentform).then
+        (
+            function(response){
+                alert(response.data.result);
+            },function(err)
+            {
+                alert("error to comment");
             }
         )
     }
-    if($scope.submitresult=="fail")
-    {
-        alert("提交失败");
-    }*/
+
+
 }]);

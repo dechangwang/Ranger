@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.Order;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,14 @@ public class OrderServiceImpl implements OrderService{
 
     private List<OrderListItem> allorder= new ArrayList<OrderListItem>();
 
+    public boolean comment(long oid,String content)
+    {
 
+      Orderform order= orderformDao.findByOrderId(oid);
+        order.setComment(content);
+        return orderformDao.updateOrder(order);
+
+    }
     public boolean addTourist(OrderformTourist tourist) {
         return orderFormTouristDao.createTourist(tourist);
     }
