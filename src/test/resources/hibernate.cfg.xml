@@ -17,7 +17,7 @@
 
         <mapping class="cn.edu.tongji.ranger.model.Guide"/>
         <mapping class="cn.edu.tongji.ranger.model.Product" />
-        <mapping class="cn.edu.tongji.ranger.model.LocationD" />
+       <!-- <mapping class="cn.edu.tongji.ranger.model.LocationD" />-->
         <mapping class="cn.edu.tongji.ranger.model.Angency" />
         <mapping class="cn.edu.tongji.ranger.model.Location" />
         <mapping class="cn.edu.tongji.ranger.model.TripAccomodation"/>

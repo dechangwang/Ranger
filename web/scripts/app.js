@@ -131,6 +131,14 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
+        .state('home.product_picture_upload',{
+            url:'/product_picture_upload',
+            views:{
+                'main@home':{
+                    templateUrl:'views/product_picture_upload.html'
+                }
+            }
+        })
         .state('home.my_product', {
             url: '/my_product',
             views: {

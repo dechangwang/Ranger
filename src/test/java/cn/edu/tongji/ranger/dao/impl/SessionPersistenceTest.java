@@ -30,10 +30,17 @@ public class SessionPersistenceTest {
 
     }
 
-
-
-
     @Test
+    public void testTripPicture() {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = HibernateUtil.getSession();
+        TripPicture tripPicture = new TripPicture("images\2.png", "zhehsi biref", Long.parseLong("51"));
+        session.persist(tripPicture);
+       // session.close();
+    }
+
+
+    // @Test
     public void testBankCard() {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = HibernateUtil.getSession();

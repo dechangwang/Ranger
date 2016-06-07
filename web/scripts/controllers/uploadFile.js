@@ -30,16 +30,28 @@ rangerApp.service('fileUpload', ['$http','$window','$state', function ($http,$wi
         var id = $window.sessionStorage.angencyIdContinue;//$window.sessionStorage.angencyIdContinue;
 
         fd.append('file', file);
-        fd.append('id','8');
+       // fd.append('id','8');
         console.log(file.name);
-       // id.append('id',id);
+        fd.append('id',id);
         $http.post(uploadUrl, fd,{
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             })
             .success(function () {
-                alert('ok');
-                return 'ok';
+                layer.open({
+                    title: '信息',
+                    content: '上传成功，继续添加？',
+                    btn: ['继续', '取消'],
+                    /*  area: ['390px', '330px'],*/
+                    yes: function(){
+                       // $state.go('home.angencyregister.upload');
+                        history.go(0);
+                        layer.closeAll();
+                    },btn2:function () {
+                        $state.go('home');
+                        layer.closeAll();
+                    }
+                });
             })
             .error(function () {
                 alert('err')
@@ -59,9 +71,72 @@ rangerApp.controller('myCtrl', ['$scope', 'fileUpload',function ($scope,fileUplo
         fileUpload.uploadFileToUrl(file, uploadUrl);
         //console.log(result);
     };
-    
+
 
 }]);
+
+rangerApp.controller('picCtrl', ['$scope', 'fileUpload','$http',function ($scope,fileUpload,$http) {
+    $scope.picture={
+        brief:''
+    };
+    $scope.uploadFile = function (picture) {
+        // alert("Hell");
+        var file = $scope.myFile;
+        console.log('file is ');
+        console.dir(file);
+        var uploadUrl = "/Ranger/files/picProductUpload";
+        console.log(picture);
+        var fd = new FormData();
+        fd.append('file', file);
+        var product_id = $window.sessionStorage.product_id;
+        fd.append('product_id',product_id);
+        fd.append('brief',picture.brief);
+        $http.post(uploadUrl, fd,{
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+            .success(function () {
+                layer.open({
+                    title: '信息',
+                    content: '上传成功，继续添加？',
+                    btn: ['继续', '取消'],
+                    /*  area: ['390px', '330px'],*/
+                    yes: function(){
+                        // $state.go('home.angencyregister.upload');
+                        history.go(0);
+                        layer.closeAll();
+                    },btn2:function () {
+                        $state.go('home');
+                        layer.closeAll();
+                    }
+                });
+            })
+            .error(function () {
+                alert('err')
+                return 'err';
+            });
+        //fileUpload.uploadFileToUrl(file, uploadUrl);
+        //console.log(result);
+    };
+
+
+}]);
+
+rangerApp.controller('AlertDemoCtrl', function ($scope) {
+    $scope.alerts = [
+        { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
+        { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
+    ];
+
+    $scope.addAlert = function() {
+        $scope.alerts.push({msg: 'Another alert!'});
+    };
+
+    $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+    };
+});
+
 rangerApp.controller('mulImageCtrl', ['$scope', function ($scope) {
     $scope.data = {
         file: null

@@ -1,9 +1,10 @@
 <div ng-controller="commentCtrl">
     <div>
-        {{orderdetail.product.summary}}
+        {{orderdetail.product.searchContent}}
     </div>
-    <form>
-        <label>评价内容：<textarea id="content" class="text" cols="20" rows ="20" name="content"></textarea></label>
+    <form ng-if="!hasComment">
+        <label>评价内容：<textarea id="content" class="text" cols="20" rows ="5" name="content"></textarea></label>
         <input type="submit" ng-click="submit()">
     </form>
+    <div ng-if="hasComment">感谢您的评价！</div>
 </div>

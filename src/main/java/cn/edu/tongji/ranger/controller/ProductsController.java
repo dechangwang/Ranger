@@ -99,14 +99,14 @@ public class ProductsController {
         product.setTripTraffics(tripTrafficSet);
 
         //TripPicture
-        Set<TripPicture> tripPictureSet = new HashSet<TripPicture>();
+       /* Set<TripPicture> tripPictureSet = new HashSet<TripPicture>();
         TripPicture tripPicture = new TripPicture();
         tripPicture.setBrief("图片");
         String path = UploadFileController.getDir();
         tripPicture.setPicturePath(path);
         tripPicture.setProduct(product);
         tripPictureSet.add(tripPicture);
-        product.setTripPictures(tripPictureSet);
+        product.setTripPictures(tripPictureSet);*/
 
         //TripAccomodation
         Set<TripAccomodation> tripAccomodationSet = new HashSet<TripAccomodation>();
@@ -160,10 +160,11 @@ public class ProductsController {
         tripSetoff.setProduct(product);
         product.setTripSetoffs(tripSetoffSet);
 
-        productsService.create(product);
+        long id = productsService.create(product);
 
         Map<String, String> map = new HashMap<String, String>();
-        map.put("res", "release product successfully");
+        map.put("res", "success");
+        map.put("product_id",id+"");
         return map;
     }
 
