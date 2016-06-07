@@ -16,7 +16,7 @@ public class FilePathUtil {
         FilePathUtil.setImageRootLater = setImageRootLater;
     }
 
-    public static FilePathUtil getFilePathUtil(){
+    public static FilePathUtil getInstance(){
         if(null == filePathUtil){
             synchronized (FilePathUtil.class){
                 if(null == filePathUtil){
@@ -67,7 +67,7 @@ public class FilePathUtil {
 
     public static void main(String[] args){
         String testStr = "images\\8-3f.jpg&images\\8-1350954016fUkwCk.jpg";
-        String result  = FilePathUtil.getFilePathUtil().getRealImagesPath(testStr);
+        String result  = FilePathUtil.getInstance().getRealImagesPath(testStr);
         System.out.println(result);
     }
 
