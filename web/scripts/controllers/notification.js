@@ -2,6 +2,25 @@
 
 rangerApp.controller('notificationCtrl', ['$scope', '$http', 'Angency', '$window',
     function ($scope, $http, Angency, $window) {
+
+       /* var ceshi = {
+            orderId: 12,
+            amount: 250.00,
+            buyerId: 233,
+            payPass: 'lshsaji'
+        };
+        $http({
+            url: '/Ranger/api/trade/pay',
+            method: 'POST',
+            data: ceshi
+        }).then(function (response) {
+            console.log(response.data);
+            alert(response.data);
+        }, function (err) {
+            console.log(err.data);
+            alert(err.data);
+        });*/
+        //==========================
         $scope.pageNumber = function () {
             var angencyId = $window.sessionStorage.angencyId;
             var mUrl = '/Ranger/api/notification/pageNumber/'+angencyId+'?type='+$scope.type;

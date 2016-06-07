@@ -106,17 +106,15 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
-        /*
-         .state('notification', {
-         url: '/notification',
-         views: {
-         'main@home': {
-         templateUrl: 'views/notification.html',
-         controller: 'notificationCtrl'
-         }
-         }
-         });
-        * */
+        .state('home.pay', {
+            url: '/pay/:orderId',
+            views: {
+                'main@home': {
+                    templateUrl: 'views/pay.html',
+                    controller: 'payCtrl'
+                }
+            }
+        })
         .state('home.account', {
             url: '/account',
             views: {

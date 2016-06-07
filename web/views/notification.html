@@ -13,16 +13,16 @@
     <span>
         <div class="notification" ng-repeat="noti in notis">
             <span>
-                <a ng-bind="noti.content" ng-click="setViewed(noti.id)" href="#"></a>
+                <a ng-bind="noti.content" ng-click="setViewed(noti.id)" href="{{'#/home/orderDetail/' + noti.orderformId}}"></a>
             </span>
-            <span>
-               {{noti.generateTime | date:'yyyy-MM-dd HH:mm'}}
+            <span ng-bind="noti.generateTime | date:'yyyy-MM-dd HH:mm'">
             </span>
         </div>
         <div id="pagefoot">
             <span>当前页:{{cPage}}</span>
             <button ng-click="changePage(cPage-1)" id="previous">上一页</button>
             <button ng-click="changePage(cPage+1)" id="next">下一页</button>
+            <span>总页数：{{maxPage}}</span>
         </div>
         <!--<table border="2">
             <thead>

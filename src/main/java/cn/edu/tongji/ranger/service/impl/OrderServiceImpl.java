@@ -5,6 +5,7 @@ import cn.edu.tongji.ranger.model.*;
 import cn.edu.tongji.ranger.model2show.Product2;
 import cn.edu.tongji.ranger.model2show.TripSetoff2;
 import cn.edu.tongji.ranger.service.OrderService;
+import cn.edu.tongji.ranger.utils.OrderStateEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +45,20 @@ public class OrderServiceImpl implements OrderService{
         return orderformDao.updateOrder(order);
 
     }
+
+    public Long findSupplierId(Long orderId) {
+        Orderform orderform = orderformDao.findByOrderId(orderId);
+        Long tripSetoffId = orderform.getTripSetoffId();
+        TripSetoff2 tripSetoff2 = tripSetOffDao.getTripSetOffById(tripSetoffId);
+        Long productId = tripSetoff2.getProductId();
+        Product3 product3 = productDao.getProductById(productId);
+        return product3.getSupplierId();
+    }
+
+    public boolean updateOrderForm(Orderform orderform) {
+        return orderformDao.updateOrder(orderform);
+    }
+
     public boolean addTourist(OrderformTourist tourist) {
         return orderFormTouristDao.createTourist(tourist);
     }
@@ -260,7 +275,7 @@ public class OrderServiceImpl implements OrderService{
         List<OrderListItem> result=new ArrayList<OrderListItem>();
         for(OrderListItem od:allorder)
         {
-            if(od.getOrderform().getState()==7)//7为已取消
+            if(od.getOrderform().getState()== OrderStateEnum.已取消.getValue())//7为已取消
             {
                 result.add(od);
             }
