@@ -2,10 +2,11 @@
 
 
 
-rangerApp.controller("listOrderCtrl",["$scope","$http","$stateParams","angency",function($scope,$http,$stateParams,angency){
+rangerApp.controller("listOrderCtrl",["$scope","$http","$stateParams","$window",function($scope,$http,$stateParams,$window){
     var type=$stateParams.type;
-    var buyer_id = angency.id;
-    if(buyer_id==null) alert("请先登录！");
+    var buyer_id = $window.sessionStorage.angencyId;
+    if(buyer_id==null)
+        alert("请先登录！");
     switch (type){
         case '0':
             $http.get("/Ranger/order/listAll/"+buyer_id).then(
@@ -99,6 +100,9 @@ rangerApp.controller("listOrderCtrl",["$scope","$http","$stateParams","angency",
     };
     $scope.isWaitConfirm=function(statenum){
         return statenum==1;
+    };
+    $scope.isFinished=function(state){
+        return state==5;
     };
 
 
@@ -197,12 +201,18 @@ rangerApp.controller("submitCtrl",["$scope","$http","$stateParams","$location",f
         form.appendChild(label).appendChild(select);
 
     };
+    var formid=0;
+    var deleteForm=function(id)
+    {
+        var formtodelete=document.getElementById(id.toString());
+        document.getElementById("touristForms").removeChild(formtodelete);
+    };
     $scope.createForm=function()
     {
       var submitForm=document.createElement("form");
-
+        submitForm.id=formid.toString();
+        var thisid=formid;
         document.getElementById("touristForms").appendChild(submitForm);
-
         addInputElement(submitForm,"text","姓名:","name");
         addInputElement(submitForm,"text","手机:","phone");
         addSelectElement(submitForm,"客户类型:",[1,2],["成人","儿童"],"touristTypeId");
@@ -213,15 +223,18 @@ rangerApp.controller("submitCtrl",["$scope","$http","$stateParams","$location",f
         addInputElement(submitForm,"text","备注:","remark");
         addInputElement(submitForm,"email","邮箱:","email");
 
+        var deletebtn=document.createElement("input");
+        deletebtn.type="button";
+        deletebtn.value="删除用户";
+        deletebtn.onclick=function(){deleteForm(thisid)};
+        submitForm.appendChild(deletebtn);
       /*  var submit=document.createElement("input");
         submit.type="submit";
         submit.value="提交游客信息";
         submitForm.appendChild(submit);*/
 
-        submitForm.method="post";
-        submitForm.action="/Ranger/order/submittourist2/"+orderid;
-
         forms.push(submitForm);
+        formid++;
     };
 
     $scope.submitAll=function()
@@ -268,7 +281,7 @@ rangerApp.controller("submitCtrl",["$scope","$http","$stateParams","$location",f
 }]);
 rangerApp.controller("commentCtrl",["$scope","$http","$stateParams", function ($scope,$http,$stateParams){
     var orderid=$stateParams.oid;
-
+    $scope.hasComment=false;
     $http.get("/Ranger/order/detail/"+orderid).then(
         function(response){
             $scope.orderdetail=response.data;
@@ -280,12 +293,14 @@ rangerApp.controller("commentCtrl",["$scope","$http","$stateParams", function ($
 
 
      $scope.submit= function () {
+
          var content=document.getElementById("content").value;
          var commentform={"content":content};
         $http.post("/Ranger/order/comment/"+orderid,commentform).then
         (
             function(response){
                 alert(response.data.result);
+                $scope.hasComment=true;
             },function(err)
             {
                 alert("error to comment");
