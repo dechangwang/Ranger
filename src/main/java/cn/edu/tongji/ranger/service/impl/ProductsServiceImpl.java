@@ -19,8 +19,8 @@ public class ProductsServiceImpl implements ProductsService {
     @Autowired
     private ProductsDao productsDao;
 
-    public void create(Product product) {
-        productsDao.create(product);
+    public long create(Product product) {
+        return productsDao.create(product);
     }
 
     public <T> T findById(Long id, Class<T> type) {

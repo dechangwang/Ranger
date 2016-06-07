@@ -11,7 +11,17 @@ public class TripPicture {
     private long id;
     private String picturePath;
     private String brief;
-    private Product product;
+    private long product_id;
+
+    public TripPicture() {
+    }
+
+    public TripPicture(String picturePath, String brief, long product_id) {
+
+        this.picturePath = picturePath;
+        this.brief = brief;
+        this.product_id = product_id;
+    }
 
     @Id
     @GeneratedValue
@@ -44,15 +54,12 @@ public class TripPicture {
         this.brief = brief;
     }
 
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id")
-    public Product getProduct() {
-        return product;
+    public long getProduct_id() {
+        return product_id;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProduct_id(long product_id) {
+        this.product_id = product_id;
     }
 
     @Override
@@ -65,16 +72,17 @@ public class TripPicture {
         if (id != that.id) return false;
         if (picturePath != null ? !picturePath.equals(that.picturePath) : that.picturePath != null) return false;
         if (brief != null ? !brief.equals(that.brief) : that.brief != null) return false;
-        return product != null ? product.equals(that.product) : that.product == null;
+       // return product_id != null ? product.equals(that.product) : that.product == null;
+        return product_id!= 0;
 
     }
+
 
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (picturePath != null ? picturePath.hashCode() : 0);
         result = 31 * result + (brief != null ? brief.hashCode() : 0);
-        result = 31 * result + (product != null ? product.hashCode() : 0);
         return result;
     }
 

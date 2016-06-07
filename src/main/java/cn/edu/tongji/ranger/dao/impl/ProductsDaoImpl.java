@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,9 +23,12 @@ public class ProductsDaoImpl implements ProductsDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void create(Product product) {
+    public long create(Product product) {
         Session session = sessionFactory.getCurrentSession();
-         session.saveOrUpdate(product);
+        session.saveOrUpdate(product);
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(product.getClass())
+                .setProjection(Projections.projectionList().add(Projections.max("id")));
+        return (Long) criteria.list().get(0);
      }
 
     public <T> T findById(Long id, Class<T> type) {
@@ -41,7 +45,7 @@ public class ProductsDaoImpl implements ProductsDao {
         Session session = sessionFactory.getCurrentSession();
         List<MyProduct> productList = new ArrayList<MyProduct>();
         List list = session.createSQLQuery("select * from product where supplier_id = " + supplierID)
-                .addScalar("id")
+                .addScalar("product_id")
                 .addScalar("name")
                 .list();
         for (Iterator iterator = list.iterator(); iterator.hasNext(); ) {

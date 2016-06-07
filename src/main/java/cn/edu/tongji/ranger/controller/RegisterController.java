@@ -37,7 +37,7 @@ public class RegisterController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> login(
-            @RequestParam(value = "username")String username, @RequestParam(value = "password")String password) {
+            @RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
 
         System.out.println("用户名" + username + "密码" + password);
 
@@ -90,7 +90,7 @@ public class RegisterController {
             long angency_id = angencyService.create(angency);
             UploadFileController.setDir("");
             System.out.println("可以注册");
-            map.put("id",angency+"");
+            map.put("id", angency_id + "");
         } else {
             System.out.println("has registered");
             map.put("res", "has registered");
@@ -104,7 +104,7 @@ public class RegisterController {
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
-    public List<Angency> angencyInfos(){
+    public List<Angency> angencyInfos() {
         Angency angency = angencyService.findById(7L);
         System.out.println(angency);
         List<Angency> angencyList = new ArrayList<Angency>();
@@ -114,10 +114,10 @@ public class RegisterController {
 
     @RequestMapping(value = "/editangency", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> updateAngencyInfo(@RequestBody Angency angency){
-        Map<String,String> map = new HashMap<String, String>();
+    public Map<String, String> updateAngencyInfo(@RequestBody Angency angency) {
+        Map<String, String> map = new HashMap<String, String>();
         angencyService.updateAngency(angency);
-        map.put("res","succeed");
+        map.put("res", "succeed");
         return map;
     }
 
@@ -148,43 +148,43 @@ public class RegisterController {
         return map;
     }
 
-    @RequestMapping(value = "/guideinfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/guideinfo", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String,String> guideInfo(){
-        Map<String,String> mapGuide = new HashMap<String, String>();
+    public Map<String, String> guideInfo() {
+        Map<String, String> mapGuide = new HashMap<String, String>();
         Guide guide = guideService.findById(2L);
-        if(guide!= null){
+        if (guide != null) {
             angencyService.findById(guide.getAngency_id());
-            mapGuide.put("name",guide.getName());
-            if(guide.isGender()){
-                mapGuide.put("gender","male");
-            }else{
-                mapGuide.put("gender","female");
+            mapGuide.put("name", guide.getName());
+            if (guide.isGender()) {
+                mapGuide.put("gender", "male");
+            } else {
+                mapGuide.put("gender", "female");
             }
 
-            mapGuide.put("email",guide.getEmail());
-            mapGuide.put("id",guide.getId()+"");
-            mapGuide.put("address",guide.getAddress());
-            mapGuide.put("phone",guide.getPhone());
+            mapGuide.put("email", guide.getEmail());
+            mapGuide.put("id", guide.getId() + "");
+            mapGuide.put("address", guide.getAddress());
+            mapGuide.put("phone", guide.getPhone());
             Angency angency = angencyService.findById(guide.getAngency_id());
-            mapGuide.put("cname",angency.getName());
-            mapGuide.put("res","ok");
-        }else{
-            mapGuide.put("res","error");
+            mapGuide.put("cname", angency.getName());
+            mapGuide.put("res", "ok");
+        } else {
+            mapGuide.put("res", "error");
         }
         return mapGuide;
     }
 
-    @RequestMapping(value = "/editguide",method = RequestMethod.POST)
+    @RequestMapping(value = "/editguide", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> updateGuide(@RequestParam(value = "id") String id,
-                                          @RequestParam(value = "name") String name,
-                                          @RequestParam(value = "gender") String gender,
-                                          @RequestParam(value = "phone") String phone,
-                                          @RequestParam(value = "email") String email,
-                                          @RequestParam(value = "address") String address,
-                                          @RequestParam(value = "cname") String cname,
-                                          Model model){
+    public Map<String, String> updateGuide(@RequestParam(value = "id") String id,
+                                           @RequestParam(value = "name") String name,
+                                           @RequestParam(value = "gender") String gender,
+                                           @RequestParam(value = "phone") String phone,
+                                           @RequestParam(value = "email") String email,
+                                           @RequestParam(value = "address") String address,
+                                           @RequestParam(value = "cname") String cname,
+                                           Model model) {
 
 
         /*  gender:'',
@@ -192,10 +192,10 @@ public class RegisterController {
         email:'',
         address:'',
         cname:''*/
-        Map<String,String> guideMap  = new HashMap<String, String>();
-        List<Angency> angencyList =  angencyService.findExistAngency(cname);
-        if(angencyList.size() == 0){
-            guideMap.put("res","no");
+        Map<String, String> guideMap = new HashMap<String, String>();
+        List<Angency> angencyList = angencyService.findExistAngency(cname);
+        if (angencyList.size() == 0) {
+            guideMap.put("res", "no");
             return guideMap;
         }
         Guide guide = new Guide();
@@ -211,8 +211,8 @@ public class RegisterController {
         guide.setAngency_id(angencyList.get(0).getId());
         guide.setId(Long.parseLong(id));
         guideService.updateGuide(guide);
-        guideMap.put("res","succeed");
-        return  guideMap;
+        guideMap.put("res", "succeed");
+        return guideMap;
     }
 
    /* @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -240,12 +240,13 @@ public class RegisterController {
         HttpSession session = null;
         try {
             session = getRequest().getSession();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         return session;
     }
 
     public static HttpServletRequest getRequest() {
-        ServletRequestAttributes attrs =(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         return attrs.getRequest();
     }
 

@@ -1,25 +1,32 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <div class="panel-title">旅行社上传证书文件</div>
+        <div class="panel-title">上传产品图片</div>
     </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
 
                 <form method="post" class="form-horizontal" role="form"
-                      enctype="multipart/form-data">
+                      enctype="multipart/form-data" ng-controller="picCtrl">
                     <div class="form-group">
-                        <label class="col-md-2 control-label">上传证书
+                        <label class="col-md-2 control-label">简介：</label>
+                        <div class="col-md-8">
+                        <textarea class="form-control" rows="5" name="brief" ng-model="picture.brief"
+                                  placeholder="请输入图片对应介绍" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">上传图片
                         </label>
 
-                        <div class="col-md-8" ng-controller="myCtrl">
+                        <div class="col-md-8" >
                             <input type="file" name="certificate" class="form-control" file-model="myFile"
                                    onchange="openFile(event)"
                                    placeholder="" required>
                             <img id='output' width="150px" float="left">
-                            <button ng-click="uploadFile()" id="certificate" float="left" style="display:none;">上 传
+                            <button ng-click="uploadFile(picture)" id="certificate" float="left" style="display:none;">上 传
                             </button>
-                            <!-- <input type="submit" value="上传" class="col-md-2">-->
+
                             <script>
                                 var openFile = function (event) {
 
@@ -40,23 +47,6 @@
                         </div>
                         <!-- <button class="col-md-2" onclick="uploadmyfile()">上传</button>-->
                     </div>
-               <!--     <div class="form-group" ng-controller="AlertDemoCtrl">
-
-                        <script type="text/ng-template" id="alert.html">
-                            <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
-                                <div ng-transclude></div>
-                            </div>
-                        </script>
-
-                        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
-                            {{alert.msg}}
-                        </uib-alert>
-                        &lt;!&ndash;<uib-alert template-url="alert.html">A happy alert!</uib-alert>&ndash;&gt;
-                        <button type="button" class='btn btn-default' ng-click="addAlert()">Add Alert</button>
-
-                    </div>-->
-
-
                 </form>
             </div>
         </div>
