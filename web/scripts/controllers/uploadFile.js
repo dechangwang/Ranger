@@ -32,7 +32,7 @@ rangerApp.service('fileUpload', ['$http','$window','$state', function ($http,$wi
         fd.append('file', file);
        // fd.append('id','8');
         console.log(file.name);
-        id.append('id',id);
+        fd.append('id',id);
         $http.post(uploadUrl, fd,{
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
@@ -88,7 +88,8 @@ rangerApp.controller('picCtrl', ['$scope', 'fileUpload','$http',function ($scope
         console.log(picture);
         var fd = new FormData();
         fd.append('file', file);
-        //fd.append('product_id','11');
+        var product_id = $window.sessionStorage.product_id;
+        fd.append('product_id',product_id);
         fd.append('brief',picture.brief);
         $http.post(uploadUrl, fd,{
                 transformRequest: angular.identity,

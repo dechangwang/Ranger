@@ -8,7 +8,7 @@ import java.util.List;
  * Created by wangdechang on 2016/5/7.
  */
 public interface  ProductsService {
-    public void create(Product product);
+    public long create(Product product);
     public <T>T findById(Long id, Class<T> type);
     public List<MyProduct> findBySupplierId(long supplierID);
     public void update(Product product);

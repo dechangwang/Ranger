@@ -160,10 +160,11 @@ public class ProductsController {
         tripSetoff.setProduct(product);
         product.setTripSetoffs(tripSetoffSet);
 
-        productsService.create(product);
+        long id = productsService.create(product);
 
         Map<String, String> map = new HashMap<String, String>();
-        map.put("res", "release product successfully");
+        map.put("res", "success");
+        map.put("product_id",id+"");
         return map;
     }
 

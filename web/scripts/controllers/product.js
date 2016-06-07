@@ -2,7 +2,7 @@
 /**
  * Created by wangdechang on 2016/5/4.
  */
-rangerApp.controller('productCtrl', ['$scope', '$http', function ($scope, $http){
+rangerApp.controller('productCtrl', ['$scope', '$http','$state','$window', function ($scope, $http,$state,$window){
     $scope.products={
         name:'',
         brief:'',
@@ -35,13 +35,25 @@ rangerApp.controller('productCtrl', ['$scope', '$http', function ($scope, $http)
         $http.post('/Ranger/products/release', products)
             .success(function (data) {
                 console.log(data);
-                alert("注册结果  " + data.res);
+                //alert("发布结果  " + data.res);
+                if(data.res == 'success'){
+                    $window.sessionStorage.product_id = data.product_id;
+                    $state.go('home.product_picture_upload');
+                }else{
+                    layer.open({
+                        title: '信息',
+                        content: '发布失败',
+                        btn: ['确定', '取消'],
+                        yes: function(){
+                            layer.closeAll();
+                        }
+                    });
+                }
             }).error(function (err) {
             layer.open({
-                title: '注册信息',
-                content: '注册失败',
+                title: '信息',
+                content: '发布失败',
                 btn: ['确定', '取消'],
-                /*  area: ['390px', '330px'],*/
                 yes: function(){
                     layer.closeAll();
                 }

@@ -42,6 +42,7 @@ public class UploadFileController {
     @RequestMapping(value = "/fileUpload")
     public void upload(@RequestParam("file") MultipartFile file,
                                      @RequestParam("id") String id, HttpServletRequest request) throws IOException {
+
         Angency angency = angencyService.findById(Long.parseLong(id));
         Map<String,String> map = new HashMap<>();
         map.put("res","");
@@ -76,14 +77,15 @@ public class UploadFileController {
     @RequestMapping(value = "/picProductUpload",method = RequestMethod.POST)
     @ResponseBody
     public void uploadPictureProduct(@RequestParam("file") MultipartFile file,
-                                     @RequestParam("brief") String brief){
+                                     @RequestParam("brief") String brief,
+                                     @RequestParam("product_id")String product_id){
         String id = "51";
         System.out.println(brief+file.getOriginalFilename());
         try {
             byte[] bytes1 = file.getBytes();
             FileUtils.writeByteArrayToFile(new File(dir, id + "-" + file.getOriginalFilename()), bytes1);
             String path = "images" + File.separator + id + "-" + file.getOriginalFilename();
-            TripPicture tripPicture = new TripPicture(path,brief,Long.parseLong(id));
+            TripPicture tripPicture = new TripPicture(path,brief,Long.parseLong(product_id));
             tripPictureService.create(tripPicture);
         } catch (IOException e) {
             e.printStackTrace();

@@ -90,7 +90,7 @@ public class RegisterController {
             long angency_id = angencyService.create(angency);
             UploadFileController.setDir("");
             System.out.println("可以注册");
-            map.put("id", angency + "");
+            map.put("id", angency_id + "");
         } else {
             System.out.println("has registered");
             map.put("res", "has registered");
