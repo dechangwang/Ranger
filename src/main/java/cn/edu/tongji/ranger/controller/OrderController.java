@@ -35,7 +35,8 @@ public class OrderController {
     {
         Map<String,String> result=new HashMap<String, String>();
         if(orderService.comment(oid,commentForm.getContent()))
-            result.put("result","success");
+        { orderService.changeOrderState(oid);
+            result.put("result","success");}
         else
         {
             result.put("result","fail");

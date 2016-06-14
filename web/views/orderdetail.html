@@ -1,5 +1,20 @@
+<style>
+    #orderinfo{
+        border: 1px solid black;
+        margin-bottom: 10px;
+    }
+    #orderprocess
+    {
+        border: 1px solid black;
+        margin-bottom: 10px;
+    }
+    #multiInfo{
+        border: 1px solid black;
+        margin-bottom: 10px;
+    }
+</style>
 <div ng-controller="orderDetailCtrl">
-    <div>
+    <div id="orderinfo">
         <div>订单状态：<span>{{getState(orderdetail.orderform.state)}}</span></div>
         <div>订单编号:{{orderdetail.orderform.id}}</div>
         <div>出团日期：{{orderdetail.tripSetoff.tripSetoffDate |date: 'yyyy-MM-dd'}}</div>
@@ -10,8 +25,9 @@
         <div>价格明细：成人（{{orderdetail.price.adultPrice }}元）{{orderdetail.price.adultnum}} 人</div>
         <div>儿童（{{orderdetail.price.childPrice}} 元）{{orderdetail.price.childnum}} 人</div>
     </div>
-    <h1>订单处理</h1>
-    <div>
+
+    <div id="orderprocess">
+        <h1>订单处理</h1>
         <div>
         处理联系人：
         <div>
@@ -48,9 +64,10 @@
             </table>
         </div>
     </div>
-    <h1>订单信息</h1>
-    <div>
-         预订信息：
+<div id="multiInfo">
+    <div >
+        <h1>订单信息</h1>
+        预订信息：
         <div>
             联系人：{{orderdetail.orderform.booker}}
             联系电话：{{orderdetail.orderform.bookerPhone}}
@@ -90,7 +107,7 @@
                 <td>{{tourist.touristTypeId}}</td>
                 <td>{{tourist.certifateType}}</td>
                 <td>{{tourist.certifateNumber}}</td>
-                <td>{{tourist.gender}}</td>
+                <td><span></span>{{tourist.gender}}</td>
                 <td>{{tourist.birthDate|date: 'yyyy-MM-dd'}}</td>
                 <td>{{tourist.remark}}</td>
                 <td>{{tourist.state}}</td>
@@ -98,4 +115,6 @@
             </tbody>
         </table>
     </div>
+</div>
+
 </div>

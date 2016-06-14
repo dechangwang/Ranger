@@ -24,4 +24,8 @@ public interface OrderService {
     public boolean addTourist(OrderformTourist tourist);
     public boolean changeOrderState(long orderid);
     public boolean comment(long orderid,String content);
+
+    public Long findSupplierId(Long orderId);
+    public boolean updateOrderForm(Orderform orderform);
+
 }

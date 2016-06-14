@@ -10,7 +10,7 @@ public class ReturnWrapper<T> implements Serializable {
 
     private T data;
 
-    private String sessionKey;
+//    private String sessionKey;
 
     public ReturnWrapper() {
         this.status = ReturnStatusEnum.SUCCEED;
@@ -49,11 +49,11 @@ public class ReturnWrapper<T> implements Serializable {
         this.data = data;
     }
 
-    public String getSessionKey() {
-        return sessionKey;
-    }
-
-    public void setSessionKey(String sessionKey) {
-        this.sessionKey = sessionKey;
-    }
+//    public String getSessionKey() {
+//        return sessionKey;
+//    }
+//
+//    public void setSessionKey(String sessionKey) {
+//        this.sessionKey = sessionKey;
+//    }
 }

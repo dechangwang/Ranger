@@ -112,6 +112,12 @@ public class RegisterController {
         return angencyList;
     }
 
+    @RequestMapping(value = "/detail/{aid}", method = RequestMethod.GET)
+    @ResponseBody
+    public Angency getAngencyDetail(@PathVariable("aid") Long aid) {
+        return angencyService.findById(aid);
+    }
+
     @RequestMapping(value = "/editangency", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> updateAngencyInfo(@RequestBody Angency angency) {

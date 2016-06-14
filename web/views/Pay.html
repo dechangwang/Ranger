@@ -1,0 +1,54 @@
+<div>
+    <div ng-show="orderdetails.orderform.state == 2">
+        <div id="orderDetail">
+            <table>
+                <thead><tr>
+                    <td align="center">订单编号</td>
+                    <td align="center">产品名称</td>
+                    <td align="center">出团日期</td>
+                    <td align="center">出游人数</td>
+                    <td align="center">金额总计</td>
+                </tr></thead>
+                <tbody><tr>
+                    <td ng-bind="orderdetails.orderform.id" align="center"></td>
+                    <td ng-bind="orderdetails.product.name" align="center"></td>
+                    <td ng-bind="orderdetails.tripSetoff.tripSetoffDate | date:'yyyy-MM-dd'" align="center"></td>
+                    <td ng-bind="orderdetails.tourists.length" align="center"></td>
+                    <td ng-bind="orderdetails.price.total" align="center"></td>
+                </tr></tbody>
+            </table>
+        </div>
+        <div id="balance">
+            <span ng-bind="angency.balance | number:2"></span>
+        </div>
+        <div id="pay">
+            <form ng-submit="pay()">
+                <label>支付密码</label><input ng-model="payDetails.payPass" type="password" id="payPass" name="payPass">
+                <button type="submit">确认支付</button>
+            </form>
+        </div>
+        <div id="payresult" style="display: none;">
+            <span ng-bind="'支付' + payresult.result"></span>
+            <span ng-bind="payresult.reason" ng-show="!!payresult.reason"></span>
+        </div>
+    </div>
+    <div ng-show="orderdetails.orderform.state != 2">
+        <div>当前订单不需要支付</div>
+    </div>
+    <!--<span>
+        <div class="notification" ng-repeat="noti in notis">
+            <span>
+                <a ng-bind="noti.content" ng-click="setViewed(noti.id)" href="{{'#/home/orderDetail/' + noti.orderformId}}"></a>
+            </span>
+            <span>
+               {{noti.generateTime | date:'yyyy-MM-dd HH:mm'}}
+            </span>
+        </div>
+        <div id="pagefoot">
+            <span>当前页:{{cPage}}</span>
+            <button ng-click="changePage(cPage-1)" id="previous">上一页</button>
+            <button ng-click="changePage(cPage+1)" id="next">下一页</button>
+            <span>总页数：{{maxPage}}</span>
+        </div>
+    </span>-->
+</div>

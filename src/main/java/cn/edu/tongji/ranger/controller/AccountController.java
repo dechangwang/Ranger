@@ -67,23 +67,41 @@ public class AccountController {
 //        return map;
 //    }
 //
-//    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    @ResponseBody
-//    public Map<String, Object> login(@RequestBody Account account) {
-//        System.out.println("===================="+ "进行登录" +"==================");
-//        String name = account.getName();
-//        String password = account.getPassword();
-//        List<Account> accounts = accountService.find(name);
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        if (accounts.size() != 0) {
-//            System.out.println("..==========db pass: " + accounts.get(0).getPassword() + ";;; front pass: " + password);
-//            if (accounts.get(0).getPassword().equals(password)) {
-//                map.put("result", "SUCCESS");
-//                return map;
-//            }
-//        }
-//        map.put("result", "FAIL");
-//        return map;
-//    }
+    /*private class Account {
+    private String name;
+    private String password;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+}
+
+    @RequestMapping(value = "/ceshirb", method = RequestMethod.POST)
+    @ResponseBody
+    public String login(@RequestBody Account account) {
+        String name = account.getName();
+        String password = account.getPassword();
+        return String.valueOf(account);
+    }*/
 
 }
