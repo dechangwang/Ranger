@@ -26,7 +26,22 @@ public class SessionPersistenceTestD {
 
     @Test
     public void testRemoveCollection(){
-        sp.deleteById(4L, Collection.class);
+       /* Angency angency = angencyService.findById(Long.parseLong(angencyId));
+        List<String> list = new ArrayList<>();
+        String[] imageArr = angency.getCertificate().split("&");
+        for(String str : imageArr){
+            System.out.println(str);
+            list.add(str);
+        }*/
+        //sp.deleteById(4L, Collection.class);
+        Angency angency = sp.findById(13L,Angency.class);
+        List<String> list = new ArrayList<>();
+        String[] imageArr = angency.getCertificate().split("&");
+        for(String str : imageArr){
+            System.out.println(str);
+            list.add(str);
+        }
+
     }
 
 //    @Test

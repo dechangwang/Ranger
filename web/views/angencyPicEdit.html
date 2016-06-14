@@ -1,0 +1,42 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">旅游社图片信息</div>
+    </div>
+    <div class="panel-body" ng-controller="angencyPicCtrl">
+        <ul ng-repeat="url in productList">
+            <img width="50%" src="{{url}}"/>
+            <td>
+                <button ng-click="deletePic(url)" >删除</button>
+            </td>
+        </ul>
+        <!-- <ul>
+             <li ng-repeat="(name,date) in productList">{{name}},{{date}}</li>
+         </ul>-->
+<!--
+        <table class="table">
+            <tr>
+                <th>产品编号</th>
+                <th>产品名称</th>
+                <th>出行时间</th>
+                <th>更新时间</th>
+                <th>单价</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="product in productList">
+                <td ng-bind="product.product_id"></td>
+                <td ng-bind="product.product_name"></td>
+                <td ng-bind="product.setoff_time"></td>
+                <td ng-bind="product.release_time"></td>
+                <td ng-bind="product.price"></td>
+                <td ng-bind="product.state"></td>
+                <td>
+                    <button ng-click="editProduct(product.product_id)" >编辑</button>
+                </td>
+            </tr>
+
+        </table>
+-->
+
+    </div>
+</div>

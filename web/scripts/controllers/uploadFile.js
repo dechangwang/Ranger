@@ -22,12 +22,12 @@ rangerApp.directive('fileModel', ['$parse', function ($parse) {
 rangerApp.service('fileUpload', ['$http','$window','$state', function ($http,$window,$state) {
 
     this.uploadFileToUrl = function (file, uploadUrl) {
-        if(!$window.sessionStorage.angencyIdContinue){
+        if(!$window.sessionStorage.angencyId){
           //  alert("间隔时间太久");
             $state.go('home.angencyregister');
         }
         var fd = new FormData();
-        var id = $window.sessionStorage.angencyIdContinue;//$window.sessionStorage.angencyIdContinue;
+        var id = $window.sessionStorage.angencyId;//$window.sessionStorage.angencyIdContinue;
 
         fd.append('file', file);
        // fd.append('id','8');
@@ -75,7 +75,7 @@ rangerApp.controller('myCtrl', ['$scope', 'fileUpload',function ($scope,fileUplo
 
 }]);
 
-rangerApp.controller('picCtrl', ['$scope', 'fileUpload','$http',function ($scope,fileUpload,$http) {
+rangerApp.controller('picCtrl', ['$scope', 'fileUpload','$http','$window',function ($scope,fileUpload,$http,$window) {
     $scope.picture={
         brief:''
     };

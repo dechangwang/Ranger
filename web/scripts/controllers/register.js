@@ -23,7 +23,7 @@ rangerApp.controller('UserinfoController', ['$scope', '$http','$window','$state'
         $http.post('/Ranger/angency/register', userInfo)
             .success(function (data) {
                 if(data.res =='permit'){
-                    $window.sessionStorage.angencyIdContinue = data.id;
+                    $window.sessionStorage.angencyId = data.id;
                     $state.go('home.angencyregister.upload');
                 }else{
                     console.log(data);

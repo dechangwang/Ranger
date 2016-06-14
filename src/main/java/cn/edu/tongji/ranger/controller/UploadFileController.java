@@ -56,8 +56,12 @@ public class UploadFileController {
             bytes = file.getBytes();
             //store file in storage
             try {
-                FileUtils.writeByteArrayToFile(new File(dir, id + "-" + file.getOriginalFilename()), bytes);
-                dir = "images" + File.separator + id + "-" + file.getOriginalFilename();
+
+               // file.transferTo(new File(id+"-"+file.getOriginalFilename()));
+                FileUtils.writeByteArrayToFile(new File(dir, file.getOriginalFilename()), bytes);
+                dir = "images" + File.separator +  file.getOriginalFilename();
+              /*  FileUtils.writeByteArrayToFile(new File(dir, id + "-" + file.getOriginalFilename()), bytes);
+                dir = "images" + File.separator + id + "-" + file.getOriginalFilename();*/
                 String origin = angency.getCertificate()+"&"+dir;
                 angency.setCertificate(origin);
                 angencyService.updateAngency(angency);

@@ -47,6 +47,14 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
+        .state('home.angencyPicEdit',{
+            url:'/angencyPicEdit',
+            views:{
+                'main@home':{
+                    templateUrl:'views/angencyPicEdit.html'
+                }
+            }
+        })
         .state('home.guideregister', {
             url: '/guideregister',
             views: {
