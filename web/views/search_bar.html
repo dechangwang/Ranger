@@ -1,23 +1,22 @@
-<div class="row" ng-controller="searchBarCtrl">
-    <div class="col-xs-1 col-sm-2 col-md-2">
+<div class="container" ng-controller="searchBarCtrl">
 
-    </div>
-
-    <div class="col-xs-2 col-sm-1 col-md-1">
-
-        <!-- Single button -->
-        <div class="btn-group">
-            <button type="button" class="btn btn-default">
-            <span class="caret">{{setoff_bar_location.name}}</span>
-            </button>
+    <div class="row">
+        <div class="col-xs-1 col-sm-2 col-md-2">
 
         </div>
-    </div>
-    <div class="col-xs-5 col-sm-5 col-md-5">
-        <input class="form-control" type="text" name="name" placeholder="请输入" ng-model="search_bar_str">
 
-    </div>
-    <div class="col-xs-1 col-md-1">
-        <button type="button" class="btn btn-primary" name="button" ng-click = "on_search()">搜索</button>
+        <div class="col-xs-2 col-sm-1 col-md-1">
+            <button type="button" class="btn btn-default">
+                {{setoff_bar_location.name}}
+            </button>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <input class="form-control" type="text" name="name" placeholder="请输入" ng-model="search_bar_str">
+
+        </div>
+        <div class="col-xs-1 col-md-1">
+            <button type="button" class="btn btn-primary" name="button" ng-click="on_search()">搜索</button>
+        </div>
     </div>
 </div>
