@@ -1,29 +1,23 @@
-<div class="row basicDiv" ng-controller="searchBarCtrl">
-    <div class="col-md-1">
+<div class="row" ng-controller="searchBarCtrl">
+    <div class="col-xs-1 col-sm-2 col-md-2">
 
     </div>
 
-    <div class=" col-md-1">
+    <div class="col-xs-2 col-sm-1 col-md-1">
 
         <!-- Single button -->
         <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{setoff_bar_location.name}} <span class="caret"></span>
+            <button type="button" class="btn btn-default">
+            <span class="caret">{{setoff_bar_location.name}}</span>
             </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-            </ul>
+
         </div>
     </div>
-    <div class=" col-md-5">
+    <div class="col-xs-5 col-sm-5 col-md-5">
         <input class="form-control" type="text" name="name" placeholder="请输入" ng-model="search_bar_str">
 
     </div>
-    <div class="col-md-1">
+    <div class="col-xs-1 col-md-1">
         <button type="button" class="btn btn-primary" name="button" ng-click = "on_search()">搜索</button>
     </div>
 </div>
