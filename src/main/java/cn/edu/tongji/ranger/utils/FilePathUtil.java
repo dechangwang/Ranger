@@ -65,10 +65,10 @@ public class FilePathUtil {
         return this.imagesRoot + convert(relatativePath);
     }
 
-    public static void main(String[] args){
-        String testStr = "images\\8-3f.jpg&images\\8-1350954016fUkwCk.jpg";
-        String result  = FilePathUtil.getInstance().getRealImagesPath(testStr);
-        System.out.println(result);
-    }
+//    public static void main(String[] args){
+//        String testStr = "images\\8-3f.jpg&images\\8-1350954016fUkwCk.jpg";
+//        String result  = FilePathUtil.getInstance().getRealImagesPath(testStr);
+//        System.out.println(result);
+//    }
 
 }

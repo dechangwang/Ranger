@@ -11,7 +11,9 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', 'searchSessionService',
         $scope.setoff_location = {
             id: 11,
             name: '上海',
-            fatherId: 2
+            fatherId: 2,
+            e_name:'Shanghai',
+            has_child:false
         };
 
         $scope.setoff_locations = [];
@@ -52,6 +54,7 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', 'searchSessionService',
         };
 
         $scope.search = function () {
+            console.log("search");
             if ($scope.search_condition.search_str.trim() == '') {
                 return;
             }
