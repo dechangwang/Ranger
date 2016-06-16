@@ -17,6 +17,8 @@ public class Location {
     private long id;
     private String name;
     private long fatherId;
+    private String eName;
+    private boolean hasChild;
 
     @Id
     @GeneratedValue
@@ -49,6 +51,27 @@ public class Location {
         this.fatherId = fatherId;
     }
 
+
+    @Basic
+    @Column(name = "e_name")
+    public String geteName() {
+        return eName;
+    }
+
+    public void seteName(String eName) {
+        this.eName = eName;
+    }
+
+    @Basic
+    @Column(name = "has_child")
+    public boolean isHasChild() {
+        return hasChild;
+    }
+
+    public void setHasChild(boolean hasChild) {
+        this.hasChild = hasChild;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,9 +81,10 @@ public class Location {
 
         if (id != location.id) return false;
         if (fatherId != location.fatherId) return false;
+        if (hasChild != location.hasChild) return false;
         if (name != null ? !name.equals(location.name) : location.name != null) return false;
+        return eName != null ? eName.equals(location.eName) : location.eName == null;
 
-        return true;
     }
 
     @Override
@@ -68,6 +92,8 @@ public class Location {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (int) (fatherId ^ (fatherId >>> 32));
+        result = 31 * result + (eName != null ? eName.hashCode() : 0);
+        result = 31 * result + (hasChild ? 1 : 0);
         return result;
     }
 
@@ -77,7 +103,8 @@ public class Location {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", fatherId=" + fatherId +
+                ", eName='" + eName + '\'' +
+                ", hasChild=" + hasChild +
                 '}';
     }
-
 }

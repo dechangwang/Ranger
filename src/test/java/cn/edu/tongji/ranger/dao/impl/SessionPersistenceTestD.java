@@ -204,11 +204,11 @@ public class SessionPersistenceTestD {
 //
 //    }
 
-    //    @Test
+    @Test
     public void testListAll() {
-        List<TrafficType> results = sp.listAll(TrafficType.class);
+        List<Location> results = sp.listAll(Location.class);
         System.out.println(results.size());
-        for (TrafficType result : results) {
+        for (Location result : results) {
             System.out.println(result);
         }
     }

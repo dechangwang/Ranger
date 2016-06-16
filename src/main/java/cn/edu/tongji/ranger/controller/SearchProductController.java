@@ -38,8 +38,8 @@ public class SearchProductController {
 
     @RequestMapping(value = "/setoff")
     @ResponseBody
-    public List<Location> showLocations(long fatherId){
-        return null;
+    public List<Location> showLocations(@RequestBody long fatherId){
+        return searchProductService.listLocations(fatherId);
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
