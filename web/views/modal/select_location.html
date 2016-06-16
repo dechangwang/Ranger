@@ -1,7 +1,17 @@
-<div class="container">
-    <div class="row">
-        <div class="col-xs-2 col-md-1">
-            <button class="btn btn-link" type="submit">Button</button>
+<div class="modal-header">
+    <h3 class="modal-title">Select: {{select_location.name}}</h3>
+</div>
+<div class="modal-body">
+
+        <div class="row">
+            <div class="col-xs-3 col-sm-2 col-md-2" ng-repeat="location in locations">
+                <button class="btn btn-link" type="submit" ng-click="select(location)">{{location.name}}</button>
+            </div>
         </div>
-    </div>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-info" tpye="button" ng-click="back()">Back</button>
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
 </div>

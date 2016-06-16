@@ -36,10 +36,27 @@ public class SearchProductController {
         return results;
     }
 
-    @RequestMapping(value = "/setoff")
+    @RequestMapping(value = "/setoffChild", method = RequestMethod.POST)
     @ResponseBody
     public List<Location> showLocations(@RequestBody long fatherId){
+
+//        System.out.println(searchProductService.listLocations(fatherId));
         return searchProductService.listLocations(fatherId);
+    }
+
+    @RequestMapping(value = "/setoffCofather", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Location> getCoFatherLocations(@RequestBody long id){
+        return searchProductService.getCofatherLocations(id);
+    }
+
+    @RequestMapping(value = "/setoffByID", method=RequestMethod.POST)
+    @ResponseBody
+    public Location getLocationById(@RequestBody long id){
+        if(id < 0){
+            id = 0;
+        }
+        return searchProductService.getLocationById(id);
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)

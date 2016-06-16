@@ -16,5 +16,7 @@ import java.util.List;
 public interface SearchProductService {
     List<SimpleProduct>  listProducts(SearchCondition searchCondition);
     List<Location> listLocations(long fatherId);
+    List<Location> getCofatherLocations(long id);
+    Location getLocationById(long id);
     Product2 getProductInfor(long productId);
 }

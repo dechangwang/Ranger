@@ -71,6 +71,22 @@ public class SearchProductServiceImpl implements SearchProductService {
         return results;
     }
 
+    @Override
+    public List<Location> getCofatherLocations(long id) {
+        Location location = getLocationById(id);
+        long fatherId = location.getFatherId();
+        if(fatherId<0){
+            fatherId=0;
+        }
+        return listLocations(fatherId);
+    }
+
+    @Override
+    public Location getLocationById(long id) {
+
+        return genericDao.findById(id, Location.class);
+    }
+
     public Product2 getProductInfor(long productId) {
         return genericDao.findById(productId, Product2.class);
     }

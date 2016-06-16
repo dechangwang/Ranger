@@ -4,8 +4,8 @@
 
 'use strict';
 
-rangerApp.controller('searchCtrl', ['$scope', '$http', 'searchSessionService',
-    function ($scope, $http, searchSessionService) {
+rangerApp.controller('searchCtrl', ['$scope', '$http','$uibModal', 'searchSessionService',
+    function ($scope, $http,$uibModal, searchSessionService) {
         $scope.results = [];
 
         $scope.setoff_location = {
@@ -111,7 +111,29 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', 'searchSessionService',
                 searchSessionService.set(null);
             }
 
-        }
+        };
+
+        $scope.select_location = function (size) {
+            console.log("select location");
+            var modalInstance = $uibModal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'views/modal/select_location.html',
+                size: size,
+                controller:'selectLocationCtrl',
+                resolve: {
+                    initLocation: function () {
+                        return $scope.setoff_location;
+                    }
+                }
+
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.setoff_bar_location = selectedItem;
+            }, function () {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+        };
 
         $scope.on_begin();
     }]);
