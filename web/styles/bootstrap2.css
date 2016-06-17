@@ -318,7 +318,7 @@
         margin-left: 0;
     }
 }
-@media (min-width: 992px) {
+@media (min-width: 200px) {
     .ud-col-md-1, .ud-col-md-2, .ud-col-md-3, .ud-col-md-4, .ud-col-md-5, .ud-col-md-6, .ud-col-md-7, .ud-col-md-8, .ud-col-md-9, .ud-col-md-10, .ud-col-md-11, .ud-col-md-12 {
         float: left;
     }
@@ -634,3 +634,4 @@
         margin-left: 0;
     }
 }
+
