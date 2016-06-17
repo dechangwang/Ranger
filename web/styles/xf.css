@@ -33,3 +33,8 @@
 	margin: 0px 5px;
 	color: purple;
 }
+
+.div-min-with{
+	min-with:1165px;
+	margin:auto;
+}

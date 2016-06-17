@@ -22,68 +22,146 @@
 
     </div>
 
-    <div class="basicDiv" style="border: 1px solid purple;padding:20px;">
-        <div class="basicDiv">
-            <label>出发日期：</label>
-            <input type="date" value="2016-05-20"/>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-11 col-sm-2 col-md-1">
+                <label><h4><span class="label label-primary">出行方式</span></h4></label>
+            </div>
+
+            <div class="col-xs-2 col-md-1">
+                <div class="checkbox">
+
+                    <label><input type="checkbox" value="">火车</label>
+                </div>
+            </div>
+
+            <div class="col-xs-2 col-md-1">
+                <div class="checkbox">
+
+                    <label><input type="checkbox" value="">飞机</label>
+                </div>
+            </div>
+
+            <div class="col-xs-2 col-md-1">
+                <div class="checkbox">
+
+                    <label><input type="checkbox" value="">轮船</label>
+                </div>
+            </div>
+            <div class="col-xs-2 col-md-1">
+                <div class="checkbox">
+
+                    <label><input type="checkbox" value="">汽车</label>
+                </div>
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2">
+                <div class="checkbox">
+
+                    <label><input type="checkbox" value=""><input type="text" placeholder="其他" class="form-control"></label>
+
+                </div>
+            </div>
         </div>
+        <div class="row">
 
-        <div class="basicDiv">
-            <label>出发城市：</label>
-            <input name="city" type="radio" value="北京">
-            <input name="city" type="radio">上海</input>
-            <input name="city" type="radio">深圳</input>
-            <input name="city" type="radio">广州</input>
-            <input name="city" type="radio">成都</input>
-            <input name="city" type="radio">其他：<input name="city" type="text">
+            <div class="col-xs-11 col-sm-2 col-md-1">
+
+                <label><h4><span class="label label-primary">出发日期</span></h4></label>
+
+            </div>
+
+            <div class="col-xs-4 col-sm-3 col-md-2">
+                <div class="input-group">
+ 			<span class="input-group-addon">
+        	<input type="checkbox" aria-label="...">
+      		</span>
+                    <input type="number" class="form-control" value="2016">
+                    <span class="input-group-addon">年</span>
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-3 col-md-2">
+                <div class="input-group">
+ 			<span class="input-group-addon">
+        	<input type="checkbox" aria-label="...">
+      		</span>
+                    <input type="number" class="form-control" value="1">
+                    <span class="input-group-addon">月</span>
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-3 col-md-2">
+                <div class="input-group">
+ 			<span class="input-group-addon">
+        	<input type="checkbox" aria-label="...">
+      		</span>
+                    <input type="number" class="form-control" value="1">
+                    <span class="input-group-addon">日</span>
+                </div>
+            </div>
         </div>
+        <div class="row">
+            <div class="col-xs-11 col-sm-2 col-md-1">
 
-        <div class="basicDiv">
-            <label>行程天数：</label>
-            <input name="days" type="radio">1-3</input>
-            <input name="days" type="radio">3-5</input>
-            <input name="days" type="radio">5-7</input>
-            <input name="days" type="radio">7-10</input>
-            <input name="days" type="radio">10+</input>
-            <input name="days" type="radio">其他：<input name="days" type="text"></input></input>
+                <button class="btn btn-primary">目的地</span>
+
+            </div>
+
+
+            <div class="col-xs-12 col-sm-10 col-md-11">
+                <div class="col-xs-3 col-sm-2" ng-repeate="">
+                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
+
+                </div>
+                <div class="col-xs-3 col-sm-2">
+                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
+
+                </div>
+                <div class="col-xs-3 col-sm-2">
+                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
+
+                </div>
+                <div class="col-xs-3 col-sm-2">
+                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
+
+                </div>
+                <div class="col-xs-3 col-sm-2">
+                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
+
+                </div>
+                <div class="col-xs-3 col-sm-2">
+                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
+
+                </div>
+                <div class="col-xs-3 col-sm-2">
+                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
+
+                </div>
+            </div>
+
         </div>
+        <div class="row">
 
-        <div class="basicDiv">
-            <label>包含区域：</label>
-            <input name="district" type="radio">珠海</input>
-            <input name="district" type="radio">湛江</input>
-            <input name="district" type="radio">广州</input>
-            <input name="district" type="radio">惠州</input>
-            <input name="district" type="radio">东莞</input>
-            <input name="district" type="radio">其他：<input name="district" type="text"></input></input>
-        </div>
-        <div class="basicDiv">
-            <label>出行方式：</label>
-            <input name="way" type="radio">不限</input>
-            <input name="way" type="radio">飞机</input>
-            <input name="way" type="radio">火车</input>
-            <input name="way" type="radio">巴士</input>
-            <input name="way" type="radio">其他：<input name="way" type="text"></input></input>
 
-        </div>
+            <div class="col-xs-11 col-sm-2 col-md-1">
+                <label><h4><span class="label label-primary">排序方式</span></h4></label>
+            </div>
 
-        <div class="basicDiv">
-            <label>综合排序：</label>
-            <input name="sort" type="checkbox">销量</input>
-            <input name="sort" type="checkbox">评分</input>
-            <input name="sort" type="checkbox">
-            <select>
-                <option>价格从高到低</option>
-                <option>价格从低到高</option>
-            </select>
-            <input name="sort" type="checkbox">价格区间：</input>
-            <input type="text"/>
-            <input type="text"/>
+            <div class="col-xs-12 col-sm-10 col-md-11">
+                <uib-tabset type="pills">
+                    <uib-tab heading="默认" classes="btn-sm"></uib-tab>
+                    <uib-tab heading="点击率" classes="btn-sm"></uib-tab>
+                    <uib-tab heading="价格升" classes="btn-sm"></uib-tab>
+                    <uib-tab heading="价格降" classes="btn-sm"></uib-tab>
+                    <uib-tab heading="购买量" classes="btn-sm"></uib-tab>
+                    <uib-tab heading="评论数" classes="btn-sm"></uib-tab>
+                    <uib-tab heading="评分" classes="btn-sm"></uib-tab>
+                </uib-tabset>
+            </div>
 
-            </input>
+
 
         </div>
     </div>
+
     <div class="panel-body">
         <table class="table">
             <tr ng-repeat="simplep in results">
