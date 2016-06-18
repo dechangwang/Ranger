@@ -190,6 +190,14 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
+        .state('home.guide', {
+            url: '/guide',
+            views: {
+                'main@home': {
+                    templateUrl: 'views/guide.html'
+                }
+            }
+        })
         .state('home.guide_info', {
             url: '/guide_info',
             views: {

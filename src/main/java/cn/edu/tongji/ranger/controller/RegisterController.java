@@ -181,6 +181,13 @@ public class RegisterController {
         return mapGuide;
     }
 
+    @RequestMapping(value = "/guideList",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Guide> getGuideList(@RequestParam("id")String id){
+        List<Guide> guideList = new ArrayList<>();
+        guideList = guideService.findByAngencyID(Long.parseLong(id));
+        return guideList;
+    }
     @RequestMapping(value = "/editguide", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> updateGuide(@RequestParam(value = "id") String id,
@@ -192,12 +199,6 @@ public class RegisterController {
                                            @RequestParam(value = "cname") String cname,
                                            Model model) {
 
-
-        /*  gender:'',
-        phone:'',
-        email:'',
-        address:'',
-        cname:''*/
         Map<String, String> guideMap = new HashMap<String, String>();
         List<Angency> angencyList = angencyService.findExistAngency(cname);
         if (angencyList.size() == 0) {
@@ -219,6 +220,36 @@ public class RegisterController {
         guideService.updateGuide(guide);
         guideMap.put("res", "succeed");
         return guideMap;
+    }
+    @RequestMapping(value = "/editGuideByAency", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> updateGuideByAngency(@RequestParam(value = "id") String id,
+                                           @RequestParam(value = "name") String name,
+                                           @RequestParam(value = "gender") String gender,
+                                           @RequestParam(value = "phone") String phone,
+                                           @RequestParam(value = "email") String email,
+                                           @RequestParam(value = "address") String address,
+                                           Model model) {
+
+        Map<String, String> guideMap = new HashMap<String, String>();
+        Guide guide = guideService.findById(Long.parseLong(id));
+        guide.setName(name);
+        guide.setPhone(phone);
+        guide.setEmail(email);
+        guide.setAddress(address);
+        guideService.updateGuide(guide);
+        guideMap.put("res", "succeed");
+        return guideMap;
+    }
+
+    @RequestMapping(value = "/deleteGuideByAency",method = RequestMethod.POST)
+    public Map<String,String> deleteGuide(@RequestParam("id")String id){
+        Map<String,String> map = new HashMap<>();
+
+        Guide guide = guideService.findById(Long.parseLong(id));
+        guideService.delteGuide(guide);
+        map.put("res","SUCCEED");
+        return  map;
     }
 
    /* @RequestMapping(value = "/register", method = RequestMethod.POST)

@@ -12,6 +12,9 @@ rangerApp.controller('myProductCtrl',['$scope','$http','$state','angency','$wind
         price:'',
         state:'',
     };
+    $scope.angencyID = {
+        id:''
+    };
     console.log( $window.sessionStorage.angencyId);
     if(!$window.sessionStorage.angencyId){
         layer.open({
@@ -26,6 +29,7 @@ rangerApp.controller('myProductCtrl',['$scope','$http','$state','angency','$wind
         });
         window.history.back();
     }else{
+        $scope.angencyID.id = $window.sessionStorage.angencyId;
         console.log(angency);
         $http({
             url: '/Ranger/products/lists',
@@ -36,7 +40,7 @@ rangerApp.controller('myProductCtrl',['$scope','$http','$state','angency','$wind
             transformRequest : function(data) {
                 return $.param(data);
             },
-            data:angency
+            data: $scope.angencyID
         }).then(function (response) {
             $scope.productList = response.data;
             console.log(response.data);
