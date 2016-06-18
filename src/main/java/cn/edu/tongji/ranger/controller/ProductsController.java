@@ -232,14 +232,4 @@ public class ProductsController {
         return map;
     }
 
-    /* id:product_id+"",
-        supplier_id:'',
-        name:'',
-        summary:'',
-        duration:'',
-        setoff_date:'',
-        postcode:'',
-        post_receiver:'',
-        post_address:'',
-        post_phone:''*/
 }
