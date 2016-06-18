@@ -4,25 +4,33 @@
 
 'use strict';
 
-rangerApp.controller('searchCtrl', ['$scope', '$http','$uibModal', 'searchSessionService',
-    function ($scope, $http,$uibModal, searchSessionService) {
+rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessionService',
+    function ($scope, $http, $uibModal, searchSessionService) {
         $scope.results = [];
+
+        $scope.page={
+            "pageSize":10,"pageNo":2,"totalCount":9
+        };
 
         $scope.setoff_location = {
             id: 11,
             name: '上海',
             fatherId: 2,
-            e_name:'Shanghai',
-            has_child:false
+            e_name: 'Shanghai',
+            has_child: false
         };
 
-        $scope.setoff_locations = [];
+        $scope.destinations = [];
+
+        // $scope.setoff_locations = [];
+
+        $scope.basic_search_str = '';
 
         $scope.search_condition = {
             'search_str': '',
             'setoff_location_id': 0,
             'first_result': 0,
-            'result_size': 20,
+            'result_size': 10,
             'order': 0,
             'min_price': -1,
             'max_price': -1,
@@ -55,11 +63,28 @@ rangerApp.controller('searchCtrl', ['$scope', '$http','$uibModal', 'searchSessio
 
         $scope.search = function () {
             console.log("search");
-            if ($scope.search_condition.search_str.trim() == '') {
+            $scope.search_condition.setoff_location_id = $scope.setoff_location.id;
+            $scope.search_condition.search_str = $scope.basic_search_str;
+            for (var dest_i in $scope.destinations) {
+                // console.log(destination);
+                if($scope.destinations[dest_i].name){
+                    $scope.search_condition.search_str += " " + $scope.destinations[dest_i].name.trim();
+                }
+
+            }
+            // log search_condition
+            console.log($scope.search_condition);
+
+            $scope.search_condition.search_str = $scope.search_condition.search_str.trim();
+            if ($scope.search_condition.search_str == '') {
                 return;
             }
 
-            $scope.search_condition.setoff_location_id = $scope.setoff_location.id;
+            if(!$scope.keep_current_page){
+                $scope.page.pageNo = 1;
+            }
+            $scope.search_condition.first_result = ($scope.page.pageNo - 1) * $scope.search_condition.result_size + 1;
+            $scope.keep_current_page = false;
 
             $http.post('/Ranger/api/searchproduct/list', $scope.search_condition)
                 .success(function (data) {
@@ -69,6 +94,7 @@ rangerApp.controller('searchCtrl', ['$scope', '$http','$uibModal', 'searchSessio
                 .error(function (err) {
                     alert(err);
                 });
+            $scope.get_results_count();
         };
 
         $scope.test_p = function (search_condition) {
@@ -102,15 +128,39 @@ rangerApp.controller('searchCtrl', ['$scope', '$http','$uibModal', 'searchSessio
 
         $scope.on_begin = function () {
             var data = searchSessionService.get();
-            if(data){
+            if (data) {
                 console.log(data);
                 $scope.setoff_location = data.location;
                 $scope.setoff_locations = data.locations;
-                $scope.search_condition.search_str = data.search_str;
+                $scope.basic_search_str = data.search_str;
                 $scope.search();
                 searchSessionService.set(null);
             }
 
+        };
+
+        $scope.select_destinations = function (size) {
+            var modalInstance = $uibModal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'views/modal/select_location.html',
+                size: size,
+                controller: 'selectLocationCtrl',
+                resolve: {
+                    initLocation: function () {
+                        return null;
+                    }
+                }
+
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                // $scope.setoff_bar_location = selectedItem;
+                $scope.destinations.push(selectedItem);
+            }, function () {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+            // $scope.destinations.push();
+            console.log($scope.destinations);
         };
 
         $scope.select_location = function (size) {
@@ -119,7 +169,7 @@ rangerApp.controller('searchCtrl', ['$scope', '$http','$uibModal', 'searchSessio
                 animation: $scope.animationsEnabled,
                 templateUrl: 'views/modal/select_location.html',
                 size: size,
-                controller:'selectLocationCtrl',
+                controller: 'selectLocationCtrl',
                 resolve: {
                     initLocation: function () {
                         return $scope.setoff_location;
@@ -129,10 +179,44 @@ rangerApp.controller('searchCtrl', ['$scope', '$http','$uibModal', 'searchSessio
             });
 
             modalInstance.result.then(function (selectedItem) {
-                $scope.setoff_bar_location = selectedItem;
+                $scope.setoff_location = selectedItem;
             }, function () {
                 console.log('Modal dismissed at: ' + new Date());
             });
+        };
+
+        $scope.set_result_order = function (i) {
+            $scope.search_condition.order = i;
+            $scope.search();
+        };
+        $scope.updatepages = false;
+
+        $scope.enableUpdatePages = function(){
+            $scope.updatePages = true;
+        };
+        $scope.get_results_count=function(){
+
+                var counts = 1;
+                $http.post('/Ranger/api/searchproduct/resultsCount', $scope.search_condition)
+                    .success(function (data) {
+                        // $scope.results = data;
+                        $scope.page.totalCount = data;
+                        console.log(data);
+                    })
+                    .error(function (err) {
+                        alert(err);
+                    });
+
+                console.log($scope.page);
+        };
+        $scope.keep_current_page = false;
+        $scope.to_keep_current_page = function(){
+            $scope.keep_current_page = true;
+        };
+
+        $scope.pageChanged = function(){
+            $scope.keep_current_page = true;
+            $scope.search();
         };
 
         $scope.on_begin();

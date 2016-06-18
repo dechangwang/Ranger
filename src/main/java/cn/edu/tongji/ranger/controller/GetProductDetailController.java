@@ -27,9 +27,9 @@ public class GetProductDetailController {
     @RequestMapping(value = "id", method = RequestMethod.POST)
     @ResponseBody
     public Product2 getProductById(@RequestBody Long id){
-//        System.out.println(id);
+        System.out.println(id);
         Product2 p =  searchProductService.getProductInfor(id);
-//        System.out.println(p);
+        System.out.println(p);
         return p;
     }
 
