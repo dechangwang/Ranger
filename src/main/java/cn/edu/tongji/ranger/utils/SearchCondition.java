@@ -1,5 +1,6 @@
 package cn.edu.tongji.ranger.utils;
 
+import cn.edu.tongji.ranger.model.Location;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Arrays;
@@ -39,6 +40,7 @@ public class SearchCondition {
 
     @JsonProperty("limits")
     private String[] limits = null;
+
 
     public String getSearchStr() {
         return searchStr;

@@ -2,7 +2,7 @@
 /**
  * Created by wangdechang on 2016/5/14.
  */
-rangerApp.controller('angencyInfoCtrl', ['$scope', '$http', function ($scope, $http) {
+rangerApp.controller('angencyInfoCtrl', ['$scope', '$http','$window', function ($scope, $http,$window) {
     $scope.angencyInfo = {
         id:'',
         name: '',
@@ -17,15 +17,42 @@ rangerApp.controller('angencyInfoCtrl', ['$scope', '$http', function ($scope, $h
         brief: '',
         cname:''
     };
-    $http({
-        url: '/Ranger/angency/info',
-        method: 'GET'
-    }).then(function (response) {
-        $scope.angencyInfo = response.data[0];
-        console.log(response.data[0]);
-    }, function (err) {
-        alert("获取失败  " + err);
-    });
+
+    $scope.angencyID={
+      id:''
+    };
+    if(!$window.sessionStorage.angencyId){
+        layer.open({
+            title: '登录信息',
+            content: '未登录，请先登录',
+            btn: ['确定', '取消'],
+            /*  area: ['390px', '330px'],*/
+            yes: function(){
+                layer.closeAll();
+                $state.go('home.login');
+            }
+        });
+        //window.history.back();
+    }else{
+        $scope.angencyID.id = $window.sessionStorage.angencyId;
+        $http({
+            url: '/Ranger/angency/info',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            transformRequest : function(data) {
+                return $.param(data);
+            },
+            data: $scope.angencyID
+        }).then(function (response) {
+            $scope.angencyInfo = response.data[0];
+            console.log(response.data[0]);
+        }, function (err) {
+            alert("获取失败  " + err);
+        });
+    }
+
     $scope.editAngencyInfo = function (angencyInfo) {
         console.log(angencyInfo);
         $http({

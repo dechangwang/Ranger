@@ -102,10 +102,10 @@ public class RegisterController {
         return map;
     }
 
-    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    @RequestMapping(value = "/info", method = RequestMethod.POST)
     @ResponseBody
-    public List<Angency> angencyInfos() {
-        Angency angency = angencyService.findById(7L);
+    public List<Angency> angencyInfos(@RequestParam("id")String id) {
+        Angency angency = angencyService.findById(Long.parseLong(id));
         System.out.println(angency);
         List<Angency> angencyList = new ArrayList<Angency>();
         angencyList.add(angency);

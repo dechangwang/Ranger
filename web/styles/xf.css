@@ -38,3 +38,7 @@
 	min-with:1165px;
 	margin:auto;
 }
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+	color: #428bca;
+	background-color: transparent
+}

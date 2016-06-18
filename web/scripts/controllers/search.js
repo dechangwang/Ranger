@@ -4,19 +4,23 @@
 
 'use strict';
 
-rangerApp.controller('searchCtrl', ['$scope', '$http','$uibModal', 'searchSessionService',
-    function ($scope, $http,$uibModal, searchSessionService) {
+rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessionService',
+    function ($scope, $http, $uibModal, searchSessionService) {
         $scope.results = [];
 
         $scope.setoff_location = {
             id: 11,
             name: '上海',
             fatherId: 2,
-            e_name:'Shanghai',
-            has_child:false
+            e_name: 'Shanghai',
+            has_child: false
         };
 
-        $scope.setoff_locations = [];
+        $scope.destinations = [];
+
+        // $scope.setoff_locations = [];
+
+        $scope.basic_search_str = '';
 
         $scope.search_condition = {
             'search_str': '',
@@ -55,12 +59,24 @@ rangerApp.controller('searchCtrl', ['$scope', '$http','$uibModal', 'searchSessio
 
         $scope.search = function () {
             console.log("search");
-            if ($scope.search_condition.search_str.trim() == '') {
-                return;
-            }
+
 
             $scope.search_condition.setoff_location_id = $scope.setoff_location.id;
+            $scope.search_condition.search_str = $scope.basic_search_str;
+            for (var dest_i in $scope.destinations) {
+                // console.log(destination);
+                if($scope.destinations[dest_i].name){
+                    $scope.search_condition.search_str += " " + $scope.destinations[dest_i].name.trim();
+                }
 
+            }
+            // log search_condition
+            console.log($scope.search_condition);
+
+            $scope.search_condition.search_str = $scope.search_condition.search_str.trim();
+            if ($scope.search_condition.search_str == '') {
+                return;
+            }
             $http.post('/Ranger/api/searchproduct/list', $scope.search_condition)
                 .success(function (data) {
                     $scope.results = data;
@@ -102,15 +118,39 @@ rangerApp.controller('searchCtrl', ['$scope', '$http','$uibModal', 'searchSessio
 
         $scope.on_begin = function () {
             var data = searchSessionService.get();
-            if(data){
+            if (data) {
                 console.log(data);
                 $scope.setoff_location = data.location;
                 $scope.setoff_locations = data.locations;
-                $scope.search_condition.search_str = data.search_str;
+                $scope.basic_search_str = data.search_str;
                 $scope.search();
                 searchSessionService.set(null);
             }
 
+        };
+
+        $scope.select_destinations = function (size) {
+            var modalInstance = $uibModal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'views/modal/select_location.html',
+                size: size,
+                controller: 'selectLocationCtrl',
+                resolve: {
+                    initLocation: function () {
+                        return null;
+                    }
+                }
+
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                // $scope.setoff_bar_location = selectedItem;
+                $scope.destinations.push(selectedItem);
+            }, function () {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+            // $scope.destinations.push();
+            console.log($scope.destinations);
         };
 
         $scope.select_location = function (size) {
@@ -119,7 +159,7 @@ rangerApp.controller('searchCtrl', ['$scope', '$http','$uibModal', 'searchSessio
                 animation: $scope.animationsEnabled,
                 templateUrl: 'views/modal/select_location.html',
                 size: size,
-                controller:'selectLocationCtrl',
+                controller: 'selectLocationCtrl',
                 resolve: {
                     initLocation: function () {
                         return $scope.setoff_location;
@@ -133,6 +173,11 @@ rangerApp.controller('searchCtrl', ['$scope', '$http','$uibModal', 'searchSessio
             }, function () {
                 console.log('Modal dismissed at: ' + new Date());
             });
+        };
+
+        $scope.set_result_order = function (i) {
+            $scope.search_condition.order = i;
+            $scope.search();
         };
 
         $scope.on_begin();

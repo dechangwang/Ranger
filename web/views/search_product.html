@@ -12,7 +12,8 @@
             </div>
 
             <div class="col-xs-6 col-sm-6 col-md-6">
-                <input class="form-control" type="text" name="name" placeholder="请输入" ng-model="search_condition.search_str">
+                <input class="form-control" type="text" name="name" placeholder="请输入"
+                       ng-model="basic_search_str">
 
             </div>
             <div class="col-xs-1 col-md-1">
@@ -22,6 +23,7 @@
 
     </div>
 
+    <!--search condition-->
     <div class="container">
         <div class="row">
             <div class="col-xs-11 col-sm-2 col-md-1">
@@ -57,11 +59,14 @@
             <div class="col-xs-2 col-sm-2 col-md-2">
                 <div class="checkbox">
 
-                    <label><input type="checkbox" value=""><input type="text" placeholder="其他" class="form-control"></label>
+                    <label><input type="checkbox" value=""><input type="text" placeholder="其他"
+                                                                  class="form-control"></label>
 
                 </div>
             </div>
         </div>
+
+        <!--setoff date-->
         <div class="row">
 
             <div class="col-xs-11 col-sm-2 col-md-1">
@@ -70,7 +75,7 @@
 
             </div>
 
-            <div class="col-xs-4 col-sm-3 col-md-2">
+            <div class="col-xs-4 col-sm-3 col-md-3">
                 <div class="input-group">
  			<span class="input-group-addon">
         	<input type="checkbox" aria-label="...">
@@ -98,42 +103,23 @@
                 </div>
             </div>
         </div>
+
+        <!--destination-->
         <div class="row">
             <div class="col-xs-11 col-sm-2 col-md-1">
 
-                <button class="btn btn-primary">目的地</span>
+                <button class="btn btn-primary" ng-click="select_destinations(lg)">目的地</span></button>
 
             </div>
 
 
             <div class="col-xs-12 col-sm-10 col-md-11">
-                <div class="col-xs-3 col-sm-2" ng-repeate="">
-                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
+                <div ng-repeat="destination in destinations">
+                    <div class="col-xs-3 col-sm-2">
+                        <h5><span class="label label-info">{{destination.name}}</span><a><i
+                                class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
 
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
-
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
-
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
-
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
-
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
-
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    <h5><span class="label label-info">美国</span><a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> </h5>
-
+                    </div>
                 </div>
             </div>
 
@@ -147,49 +133,136 @@
 
             <div class="col-xs-12 col-sm-10 col-md-11">
                 <uib-tabset type="pills">
-                    <uib-tab heading="默认" classes="btn-sm"></uib-tab>
-                    <uib-tab heading="点击率" classes="btn-sm"></uib-tab>
-                    <uib-tab heading="价格升" classes="btn-sm"></uib-tab>
-                    <uib-tab heading="价格降" classes="btn-sm"></uib-tab>
-                    <uib-tab heading="购买量" classes="btn-sm"></uib-tab>
-                    <uib-tab heading="评论数" classes="btn-sm"></uib-tab>
-                    <uib-tab heading="评分" classes="btn-sm"></uib-tab>
+                    <uib-tab heading="默认" classes="btn-sm" ng-click="set_result_order(0)"></uib-tab>
+                    <uib-tab heading="点击率" classes="btn-sm" ng-click="set_result_order(1)"></uib-tab>
+                    <uib-tab heading="价格升" classes="btn-sm" ng-click="set_result_order(2)"></uib-tab>
+                    <uib-tab heading="价格降" classes="btn-sm" ng-click="set_result_order(3)"></uib-tab>
+                    <uib-tab heading="购买量" classes="btn-sm" ng-click="set_result_order(4)"></uib-tab>
+                    <uib-tab heading="评论数" classes="btn-sm" ng-click="set_result_order(5)"></uib-tab>
+                    <uib-tab heading="评分" classes="btn-sm" ng-click="set_result_order(6)"></uib-tab>
                 </uib-tabset>
             </div>
-
 
 
         </div>
     </div>
 
-    <div class="panel-body">
-        <table class="table">
-            <tr ng-repeat="simplep in results">
-                <td><a href="#/product_detail/{{simplep.id}}">{{simplep.name}}</a></td>
-                <td>{{simplep.summary}}</td>
-                <td>{{simplep.supplier.cname}}</td>
-                <td>出行时长:{{simplep.duration}}</td>
-                <td>点击率:{{simplep.clickRate}}</td>
-                <td>购买数: 0</td>
-                <td>评论数: 0</td>
-                <td>平均评分: 0</td>
-                <td>
-                    <ul ng-repeat="setoff in simplep.tripSetoffs">
-                        <li></li>
-                    </ul>
-                </td>
-                <td>
-                    <ul ng-repeat="price in simplep.tripPrices">
-                        <li>{{price.touristType.type}}:{{price.price}}</li>
+    <!--search result-->
+    <div class="container">
+        <hr>
+        <div ng-repeat="simplep in results">
+            <div class="row">
 
-                    </ul>
-                </td>
-                <td>
-                    <ul ng-repeat="destination in simplep.tripDestinations">
-                        {{destination.location.name}}
-                    </ul>
-                </td>
-            </tr>
-        </table>
+
+                <div class="col-xs-12 col-md-6">
+                    <a href="#/product_detail/{{simplep.id}}"><span style="font-size:1.5em;">{{simplep.name}}</span></a>
+
+                    <label><span class="label label-default">{{simplep.supplier.cname}}</span></label>
+                </div>
+
+
+                <div class="col-xs-4 col-md-2">
+                    <ol class="list-unstyled" ng-repeat="destination in simplep.tripDestinations">
+                        <li><label><span class="label label-default">
+                    {{setoff.location.name}}
+                </span></label></li>
+                    </ol>
+
+
+                </div>
+
+                <div class="col-xs-4 col-md-2">
+                    <ol class="list-unstyled" ng-repeat="price in simplep.tripPrices">
+                        <li>
+                            <label><span class="label label-default">
+                        {{price.touristType.type}}
+                    </span></label>
+                            100
+                            <label><span class="label label-default">
+                        元
+                    </span></label>
+                        </li>
+
+
+                    </ol>
+
+                </div>
+
+                <div class="col-xs-4 col-md-2">
+                    <ol class="list-unstyled" ng-repeat="setoff in simplep.tripSetoffs">
+                        <li>
+                            <button type="button" disabled="true" class="btn btn-sm btn-default">2009-08-24</button>
+                        </li>
+                        <li>
+                            <button type="button" disabled="true" class="btn btn-sm btn-default">2009-08-24</button>
+                        </li>
+                        <li>
+                            <button type="button" disabled="true" class="btn btn-sm btn-default">2009-08-24</button>
+                        </li>
+
+                    </ol>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 col-md-3">
+                    <label><span class="label label-default">
+                {{simplep.duration}}天</span></label>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <label><span class="label label-default">
+                    点击率:{{simplep.clickRate}}</span></label>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <label><span class="label label-default">
+                        评论数</span></label>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <label><span class="label label-default">
+                            购买数</span></label>
+                </div>
+            </div>
+            <hr>
+        </div>
     </div>
+    <div class="container center-block text-center">
+        <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
+                        boundary-link-numbers="true" rotate="false"></uib-pagination>
+
+    </div>
+
+    <!--add pager-->
 </div>
+
+
+<!--<div class="panel-body">-->
+<!--<table class="table">-->
+<!--<tr ng-repeat="simplep in results">-->
+<!--<td><a href="#/product_detail/{{simplep.id}}">{{simplep.name}}</a></td>-->
+<!--<td>{{simplep.summary}}</td>-->
+<!--<td>{{simplep.supplier.cname}}</td>-->
+<!--<td>出行时长:{{simplep.duration}}</td>-->
+<!--<td>点击率:{{simplep.clickRate}}</td>-->
+<!--<td>购买数: 0</td>-->
+<!--<td>评论数: 0</td>-->
+<!--<td>平均评分: 0</td>-->
+<!--<td>-->
+<!--<ul ng-repeat="setoff in simplep.tripSetoffs">-->
+<!--<li></li>-->
+<!--</ul>-->
+<!--</td>-->
+<!--<td>-->
+<!--<ul ng-repeat="price in simplep.tripPrices">-->
+<!--<li>{{price.touristType.type}}:{{price.price}}</li>-->
+
+<!--</ul>-->
+<!--</td>-->
+<!--<td>-->
+<!--<ul ng-repeat="destination in simplep.tripDestinations">-->
+<!--{{destination.location.name}}-->
+<!--</ul>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</table>-->
+<!--</div>-->

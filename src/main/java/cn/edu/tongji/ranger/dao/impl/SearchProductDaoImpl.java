@@ -74,8 +74,9 @@ public class SearchProductDaoImpl implements SearchProductDao {
 
         }
 
-        String sql = select + from + where + orderBy + groupBy;
+        String sql = select + from + where + groupBy + orderBy;
         Session session = sessionFactory.getCurrentSession();
+//        System.err.println(sql);
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         sqlQuery.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         sqlQuery.setFirstResult(firstResult);
