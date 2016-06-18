@@ -236,5 +236,21 @@ public class Product2 implements Serializable{
         this.tripSetoffs = tripSetoffs;
     }
 
-
+    @Override
+    public String toString() {
+        return "Product2{" +
+                "supplier=" + supplier +
+                ", setoffLocation=" + setoffLocation +
+                ", clickRate=" + clickRate +
+                ", postPhone='" + postPhone + '\'' +
+                ", postAddress='" + postAddress + '\'' +
+                ", postReceiver='" + postReceiver + '\'' +
+                ", postcode='" + postcode + '\'' +
+                ", duration=" + duration +
+                ", searchContent='" + searchContent + '\'' +
+                ", summary='" + summary + '\'' +
+                ", name='" + name + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

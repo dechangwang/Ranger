@@ -26,9 +26,12 @@ public class SearchProductDaoImpl implements SearchProductDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    private String countSql = "";
+
     public List<Long> searchForIds(String[] searchKeys, long setoffLocationId,int firstResult, int resultSize, SearchProductOrderEnum order) {
         List<Long> results = new ArrayList<Long>();
         String select = "select product.product_id as pid ";
+
         String from = "from product ";
         String where = generateWhereStrWithLikes(searchKeys) + "and product.setoff_location_id = " + setoffLocationId + " ";
         String groupBy = "";
@@ -44,13 +47,13 @@ public class SearchProductDaoImpl implements SearchProductDao {
 
             case PRICE_UP:
                 from += "natural join  trip_price ";
-                groupBy = "group by pid ";
+                groupBy = "group by product.product_id ";
                 orderBy = "order by avg(trip_price.price) ";
                 break;
 
             case PRICE_DOWN:
                 from += "natural join trip_price ";
-                groupBy = "group by pid ";
+                groupBy = "group by product.product_id ";
                 orderBy = "order by avg(trip_price.price) desc ";
                 break;
 
@@ -62,13 +65,13 @@ public class SearchProductDaoImpl implements SearchProductDao {
 
             case PURCHASE_COUNT:
                 from += "natural join trip_setoff ";
-                groupBy = "group by pid ";
+                groupBy = "group by product.product_id ";
                 orderBy = "order by sum(trip_setoff.purchase_count) desc ";
                 break;
 
             case REMARK:
                 from += "natural join trip_setoff ";
-                groupBy = "group by pid ";
+                groupBy = "group by product.product_id ";
                 orderBy = "order by (sum(trip_setoff.comment_count * trip_setoff.avg_remark)/sum(trip_setoff.comment_count)) desc";
                 break;
 
@@ -78,6 +81,9 @@ public class SearchProductDaoImpl implements SearchProductDao {
         Session session = sessionFactory.getCurrentSession();
 //        System.err.println(sql);
         SQLQuery sqlQuery = session.createSQLQuery(sql);
+        countSql = "select count(distinct product.product_id) " + from + where;
+//        System.err.println(countSql);
+//        System.err.println(((Number) sqlQuery.uniqueResult()).intValue());
         sqlQuery.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         sqlQuery.setFirstResult(firstResult);
         sqlQuery.setMaxResults(resultSize);
