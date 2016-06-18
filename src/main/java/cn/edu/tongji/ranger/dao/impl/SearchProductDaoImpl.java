@@ -89,7 +89,7 @@ public class SearchProductDaoImpl implements SearchProductDao {
 //        System.err.println(((Number) sqlQuery.uniqueResult()).intValue());
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         sqlQuery.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-        sqlQuery.setFirstResult(firstResult);
+        sqlQuery.setFirstResult(firstResult - 1);
         sqlQuery.setMaxResults(resultSize);
         List list = sqlQuery.list();
         for(Object o : list){

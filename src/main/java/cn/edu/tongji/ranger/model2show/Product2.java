@@ -235,6 +235,10 @@ public class Product2 implements Serializable{
         this.tripSetoffs = tripSetoffs;
     }
 
+    public void growClickRate(){
+        this.clickRate++;
+    }
+
     @Override
     public String toString() {
         return "Product2{" +

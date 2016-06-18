@@ -33,34 +33,33 @@
             <div class="col-xs-2 col-md-1">
                 <div class="checkbox">
 
-                    <label><input type="checkbox" value="">火车</label>
+                    <label><input type="checkbox" ng-model="traffic_train">火车</label>
                 </div>
             </div>
 
             <div class="col-xs-2 col-md-1">
                 <div class="checkbox">
 
-                    <label><input type="checkbox" value="">飞机</label>
+                    <label><input type="checkbox" ng-model="traffic_plane">飞机</label>
                 </div>
             </div>
 
             <div class="col-xs-2 col-md-1">
                 <div class="checkbox">
 
-                    <label><input type="checkbox" value="">轮船</label>
+                    <label><input type="checkbox" ng-model="traffic_ship">轮船</label>
                 </div>
             </div>
             <div class="col-xs-2 col-md-1">
                 <div class="checkbox">
 
-                    <label><input type="checkbox" value="">汽车</label>
+                    <label><input type="checkbox" ng-model="traffic_bus">汽车</label>
                 </div>
             </div>
-            <div class="col-xs-2 col-sm-2 col-md-2">
+            <div class="col-xs-2 col-md-1">
                 <div class="checkbox">
 
-                    <label><input type="checkbox" value=""><input type="text" placeholder="其他"
-                                                                  class="form-control"></label>
+                    <label><input type="checkbox" ng-model="traffic_other">其他</label>
 
                 </div>
             </div>
@@ -78,27 +77,27 @@
             <div class="col-xs-4 col-sm-3 col-md-3">
                 <div class="input-group">
  			<span class="input-group-addon">
-        	<input type="checkbox" aria-label="...">
+        	<input type="checkbox" aria-label="..." ng-model="setoff_year" >
       		</span>
-                    <input type="number" class="form-control" value="2016">
+                    <input type="number" class="form-control" ng-model="setoff_year_content" min="1970">
                     <span class="input-group-addon">年</span>
                 </div>
             </div>
             <div class="col-xs-4 col-sm-3 col-md-2">
                 <div class="input-group">
  			<span class="input-group-addon">
-        	<input type="checkbox" aria-label="...">
+        	<input type="checkbox" aria-label="..." ng-model="setoff_month" >
       		</span>
-                    <input type="number" class="form-control" value="1">
+                    <input type="number" class="form-control" ng-model="setoff_month_content" min="1" max="12">
                     <span class="input-group-addon">月</span>
                 </div>
             </div>
             <div class="col-xs-4 col-sm-3 col-md-2">
                 <div class="input-group">
  			<span class="input-group-addon">
-        	<input type="checkbox" aria-label="...">
+        	<input type="checkbox" aria-label="..." ng-model="setoff_day" >
       		</span>
-                    <input type="number" class="form-control" value="1">
+                    <input type="number" class="form-control" ng-model="setoff_day_content" min="1" max="31">
                     <span class="input-group-addon">日</span>
                 </div>
             </div>
@@ -116,9 +115,10 @@
             <div class="col-xs-12 col-sm-10 col-md-11">
                 <div ng-repeat="destination in destinations">
                     <div class="col-xs-3 col-sm-2">
-                        <h5><span class="label label-info">{{destination.name}}</span><a><i
-                                class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
-
+                        <h5><span class="label label-info">{{destination.name}}</span>
+                            <a ng-click="remove_destination(destination)"><i
+                                    class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -162,9 +162,10 @@
 
 
                 <div class="col-xs-4 col-md-2">
-                    <ol class="list-unstyled" >
+                    <ol class="list-unstyled">
                         <li><label><span class="label label-primary">目的地</span></label></li>
-                        <li ng-repeat="destination in simplep.tripDestinations"><label><span class="label label-default">
+                        <li ng-repeat="destination in simplep.tripDestinations"><label><span
+                                class="label label-default">
                     {{destination.location.name}}
                 </span></label></li>
                     </ol>
@@ -173,7 +174,7 @@
                 </div>
 
                 <div class="col-xs-4 col-md-2">
-                    <ol class="list-unstyled" >
+                    <ol class="list-unstyled">
                         <li ng-repeat="price in simplep.tripPrices">
                             <label><span class="label label-default">
                         {{price.touristType.type}}
@@ -190,9 +191,11 @@
                 </div>
 
                 <div class="col-xs-4 col-md-2">
-                    <ol class="list-unstyled" >
+                    <ol class="list-unstyled">
                         <li ng-repeat="setoff in simplep.tripSetoffs">
-                            <button type="button" disabled="true" class="btn btn-sm btn-default">{{setoff.tripSetoffDate|date:'yyyy-MM-dd'}}</button>
+                            <button type="button" disabled="true" class="btn btn-sm btn-default">
+                                {{setoff.tripSetoffDate|date:'yyyy-MM-dd'}}
+                            </button>
                         </li>
 
 
@@ -210,20 +213,21 @@
                     <label><span class="label label-default">
                     点击率:{{simplep.clickRate}}</span></label>
                 </div>
-                <div class="col-xs-6 col-md-3">
-                    <label><span class="label label-default">
-                        评论数</span></label>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <label><span class="label label-default">
-                            购买数</span></label>
-                </div>
+                <!--<div class="col-xs-6 col-md-3">-->
+                    <!--<label><span class="label label-default">-->
+                        <!--评论数</span></label>-->
+                <!--</div>-->
+                <!--<div class="col-xs-6 col-md-3">-->
+                    <!--<label><span class="label label-default">-->
+                            <!--购买数</span></label>-->
+                <!--</div>-->
             </div>
             <hr>
         </div>
     </div>
     <div class="container center-block text-center">
-        <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" max-size="page.pageSize"  ng-change="pageChanged()" class="samplePage pagination-sm" boundary-link-numbers="true">
+        <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" max-size="page.pageSize"
+                        ng-change="pageChanged()" class="samplePage pagination-sm" boundary-link-numbers="true">
         </uib-pagination>
     </div>
 
