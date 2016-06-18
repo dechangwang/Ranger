@@ -59,6 +59,14 @@ public class SearchProductController {
         return searchProductService.getLocationById(id);
     }
 
+    @RequestMapping(value = "/resultsCount", method = RequestMethod.POST)
+    @ResponseBody
+    public Long getResultsCount(@RequestBody SearchCondition searchCondition){
+        Long result = searchProductService.getResultCount(searchCondition);
+        System.out.println("in controller: result is " + result);
+        return result;
+    }
+
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,String> test(@RequestBody SearchCondition searchcondition){

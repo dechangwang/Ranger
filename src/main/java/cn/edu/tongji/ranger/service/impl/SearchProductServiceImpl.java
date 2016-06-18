@@ -91,5 +91,23 @@ public class SearchProductServiceImpl implements SearchProductService {
         return genericDao.findById(productId, Product2.class);
     }
 
+    @Override
+    public Long getResultCount(SearchCondition searchCondition) {
+        StringBuilder searchStrSb = new StringBuilder(searchCondition.getSearchStr());
+        if(searchCondition.getLimits() != null){
+            for(String str : searchCondition.getLimits()){
+                searchStrSb.append(" ");
+                searchStrSb.append(str);
+            }
+        }
+
+        String[] searchKeys = searchStrSb.toString().split("\\s+");
+        long setOffLocationId = searchCondition.getSetoffLoctionId();
+
+        SearchProductOrderEnum order = searchCondition.getOrder();
+
+        return searchProductDao.getResultsCount(searchKeys, setOffLocationId, order);
+    }
+
 
 }

@@ -19,4 +19,5 @@ public interface SearchProductService {
     List<Location> getCofatherLocations(long id);
     Location getLocationById(long id);
     Product2 getProductInfor(long productId);
+    Long getResultCount(SearchCondition searchCondition);
 }

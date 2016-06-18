@@ -26,7 +26,9 @@ public class SearchProductDaoImpl implements SearchProductDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    private String countSql = "";
+//    private String countSql = "";
+//
+//    private Long resultCounts = 1L;
 
     public List<Long> searchForIds(String[] searchKeys, long setoffLocationId,int firstResult, int resultSize, SearchProductOrderEnum order) {
         List<Long> results = new ArrayList<Long>();
@@ -80,10 +82,12 @@ public class SearchProductDaoImpl implements SearchProductDao {
         String sql = select + from + where + groupBy + orderBy;
         Session session = sessionFactory.getCurrentSession();
 //        System.err.println(sql);
-        SQLQuery sqlQuery = session.createSQLQuery(sql);
-        countSql = "select count(distinct product.product_id) " + from + where;
+
+//        countSql = "select count(distinct product.product_id) " + from + where;
+//        updateResultsCount();
 //        System.err.println(countSql);
 //        System.err.println(((Number) sqlQuery.uniqueResult()).intValue());
+        SQLQuery sqlQuery = session.createSQLQuery(sql);
         sqlQuery.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         sqlQuery.setFirstResult(firstResult);
         sqlQuery.setMaxResults(resultSize);
@@ -107,6 +111,95 @@ public class SearchProductDaoImpl implements SearchProductDao {
     public List<Long> searchForIds(String[] searchKeys, long setOffLocationId, int firstResult, int resultSize, SearchProductOrderEnum order, int duration, double lowerLimit, double upperLimit) {
         return null;
     }
+
+    @Override
+    public Long getResultsCount(String[] searchKeys, long setoffLocationId, SearchProductOrderEnum order){
+
+        String select = "select product.product_id as pid ";
+
+        String from = "from product ";
+        String where = generateWhereStrWithLikes(searchKeys) + "and product.setoff_location_id = " + setoffLocationId + " ";
+        String groupBy = "";
+        String orderBy = "";
+
+        switch(order){
+            case DEFAULT:
+                break;
+
+            case CLICK_RATE:
+                orderBy = "order by product.click_rate desc ";
+                break;
+
+            case PRICE_UP:
+                from += "natural join  trip_price ";
+                groupBy = "group by product.product_id ";
+                orderBy = "order by avg(trip_price.price) ";
+                break;
+
+            case PRICE_DOWN:
+                from += "natural join trip_price ";
+                groupBy = "group by product.product_id ";
+                orderBy = "order by avg(trip_price.price) desc ";
+                break;
+
+            case COMMENT_COUNT:
+                from += "natural join trip_setoff ";
+                groupBy = "group by pid ";
+                orderBy = "order by sum(trip_setoff.comment_count) desc ";
+                break;
+
+            case PURCHASE_COUNT:
+                from += "natural join trip_setoff ";
+                groupBy = "group by product.product_id ";
+                orderBy = "order by sum(trip_setoff.purchase_count) desc ";
+                break;
+
+            case REMARK:
+                from += "natural join trip_setoff ";
+                groupBy = "group by product.product_id ";
+                orderBy = "order by (sum(trip_setoff.comment_count * trip_setoff.avg_remark)/sum(trip_setoff.comment_count)) desc";
+                break;
+
+        }
+
+        String sql = select + from + where + groupBy;
+
+        Long result = 1L;
+        String countSql = "select count(distinct pid) from  ( " + sql + ") as temp";
+        Session session = sessionFactory.getCurrentSession();
+        SQLQuery sqlQuery = session.createSQLQuery(countSql);
+        try{
+            System.out.println(countSql);
+            result = ((Number) sqlQuery.uniqueResult()).longValue();
+            System.out.println(result);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return result;
+
+    }
+
+//    public Long updateResultsCount() {
+//        System.out.println("get result count");
+//        Session session = sessionFactory.getCurrentSession();
+//        long result = 1L;
+//        if(countSql == null || countSql.trim() == ""){
+//            System.out.println("count sql is null");
+//            return result;
+//        }
+//        SQLQuery sqlQuery = session.createSQLQuery(countSql);
+//        System.out.println(countSql);
+//
+//        try{
+//            System.out.println(countSql);
+//            result = ((Number) sqlQuery.uniqueResult()).longValue();
+//            System.out.println(result);
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//        resultCounts = result;
+//        return result;
+//    }
 
     private String generateWhereStrWithLikes(String[] args){
         StringBuilder sb = new StringBuilder("where (");

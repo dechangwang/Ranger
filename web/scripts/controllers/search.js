@@ -8,6 +8,10 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessi
     function ($scope, $http, $uibModal, searchSessionService) {
         $scope.results = [];
 
+        $scope.page={
+            "pageSize":10,"pageNo":2,"totalCount":9
+        };
+
         $scope.setoff_location = {
             id: 11,
             name: '上海',
@@ -26,7 +30,7 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessi
             'search_str': '',
             'setoff_location_id': 0,
             'first_result': 0,
-            'result_size': 20,
+            'result_size': 10,
             'order': 0,
             'min_price': -1,
             'max_price': -1,
@@ -59,8 +63,6 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessi
 
         $scope.search = function () {
             console.log("search");
-
-
             $scope.search_condition.setoff_location_id = $scope.setoff_location.id;
             $scope.search_condition.search_str = $scope.basic_search_str;
             for (var dest_i in $scope.destinations) {
@@ -77,6 +79,13 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessi
             if ($scope.search_condition.search_str == '') {
                 return;
             }
+
+            if(!$scope.keep_current_page){
+                $scope.page.pageNo = 1;
+            }
+            $scope.search_condition.first_result = ($scope.page.pageNo - 1) * $scope.search_condition.result_size + 1;
+            $scope.keep_current_page = false;
+
             $http.post('/Ranger/api/searchproduct/list', $scope.search_condition)
                 .success(function (data) {
                     $scope.results = data;
@@ -85,6 +94,7 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessi
                 .error(function (err) {
                     alert(err);
                 });
+            $scope.get_results_count();
         };
 
         $scope.test_p = function (search_condition) {
@@ -169,7 +179,7 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessi
             });
 
             modalInstance.result.then(function (selectedItem) {
-                $scope.setoff_bar_location = selectedItem;
+                $scope.setoff_location = selectedItem;
             }, function () {
                 console.log('Modal dismissed at: ' + new Date());
             });
@@ -177,6 +187,35 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessi
 
         $scope.set_result_order = function (i) {
             $scope.search_condition.order = i;
+            $scope.search();
+        };
+        $scope.updatepages = false;
+
+        $scope.enableUpdatePages = function(){
+            $scope.updatePages = true;
+        };
+        $scope.get_results_count=function(){
+
+                var counts = 1;
+                $http.post('/Ranger/api/searchproduct/resultsCount', $scope.search_condition)
+                    .success(function (data) {
+                        // $scope.results = data;
+                        $scope.page.totalCount = data;
+                        console.log(data);
+                    })
+                    .error(function (err) {
+                        alert(err);
+                    });
+
+                console.log($scope.page);
+        };
+        $scope.keep_current_page = false;
+        $scope.to_keep_current_page = function(){
+            $scope.keep_current_page = true;
+        };
+
+        $scope.pageChanged = function(){
+            $scope.keep_current_page = true;
             $scope.search();
         };
 

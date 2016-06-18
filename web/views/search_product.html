@@ -227,42 +227,9 @@
         </div>
     </div>
     <div class="container center-block text-center">
-        <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
-                        boundary-link-numbers="true" rotate="false"></uib-pagination>
-
+        <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" max-size="page.pageSize"  ng-change="pageChanged()" class="samplePage pagination-sm" boundary-link-numbers="true">
+        </uib-pagination>
     </div>
 
     <!--add pager-->
 </div>
-
-
-<!--<div class="panel-body">-->
-<!--<table class="table">-->
-<!--<tr ng-repeat="simplep in results">-->
-<!--<td><a href="#/product_detail/{{simplep.id}}">{{simplep.name}}</a></td>-->
-<!--<td>{{simplep.summary}}</td>-->
-<!--<td>{{simplep.supplier.cname}}</td>-->
-<!--<td>出行时长:{{simplep.duration}}</td>-->
-<!--<td>点击率:{{simplep.clickRate}}</td>-->
-<!--<td>购买数: 0</td>-->
-<!--<td>评论数: 0</td>-->
-<!--<td>平均评分: 0</td>-->
-<!--<td>-->
-<!--<ul ng-repeat="setoff in simplep.tripSetoffs">-->
-<!--<li></li>-->
-<!--</ul>-->
-<!--</td>-->
-<!--<td>-->
-<!--<ul ng-repeat="price in simplep.tripPrices">-->
-<!--<li>{{price.touristType.type}}:{{price.price}}</li>-->
-
-<!--</ul>-->
-<!--</td>-->
-<!--<td>-->
-<!--<ul ng-repeat="destination in simplep.tripDestinations">-->
-<!--{{destination.location.name}}-->
-<!--</ul>-->
-<!--</td>-->
-<!--</tr>-->
-<!--</table>-->
-<!--</div>-->
