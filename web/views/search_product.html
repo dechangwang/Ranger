@@ -13,7 +13,7 @@
 
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <input class="form-control" type="text" name="name" placeholder="请输入"
-                       ng-model="search_condition.search_str">
+                       ng-model="basic_search_str">
 
             </div>
             <div class="col-xs-1 col-md-1">
@@ -23,6 +23,7 @@
 
     </div>
 
+    <!--search condition-->
     <div class="container">
         <div class="row">
             <div class="col-xs-11 col-sm-2 col-md-1">
@@ -64,6 +65,8 @@
                 </div>
             </div>
         </div>
+
+        <!--setoff date-->
         <div class="row">
 
             <div class="col-xs-11 col-sm-2 col-md-1">
@@ -100,49 +103,23 @@
                 </div>
             </div>
         </div>
+
+        <!--destination-->
         <div class="row">
             <div class="col-xs-11 col-sm-2 col-md-1">
 
-                <button class="btn btn-primary">目的地</span></button>
+                <button class="btn btn-primary" ng-click="select_destinations(lg)">目的地</span></button>
 
             </div>
 
 
             <div class="col-xs-12 col-sm-10 col-md-11">
-                <div class="col-xs-3 col-sm-2" ng-repeate="">
-                    <h5><span class="label label-info">美国</span><a><i
-                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
+                <div ng-repeat="destination in destinations">
+                    <div class="col-xs-3 col-sm-2">
+                        <h5><span class="label label-info">{{destination.name}}</span><a><i
+                                class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
 
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    <h5><span class="label label-info">美国</span><a><i
-                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
-
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    <h5><span class="label label-info">美国</span><a><i
-                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
-
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    <h5><span class="label label-info">美国</span><a><i
-                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
-
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    <h5><span class="label label-info">美国</span><a><i
-                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
-
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    <h5><span class="label label-info">美国</span><a><i
-                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
-
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    <h5><span class="label label-info">美国</span><a><i
-                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
-
+                    </div>
                 </div>
             </div>
 
@@ -156,13 +133,13 @@
 
             <div class="col-xs-12 col-sm-10 col-md-11">
                 <uib-tabset type="pills">
-                    <uib-tab heading="默认" classes="btn-sm"></uib-tab>
-                    <uib-tab heading="点击率" classes="btn-sm"></uib-tab>
-                    <uib-tab heading="价格升" classes="btn-sm"></uib-tab>
-                    <uib-tab heading="价格降" classes="btn-sm"></uib-tab>
-                    <uib-tab heading="购买量" classes="btn-sm"></uib-tab>
-                    <uib-tab heading="评论数" classes="btn-sm"></uib-tab>
-                    <uib-tab heading="评分" classes="btn-sm"></uib-tab>
+                    <uib-tab heading="默认" classes="btn-sm" ng-click="set_result_order(0)"></uib-tab>
+                    <uib-tab heading="点击率" classes="btn-sm" ng-click="set_result_order(1)"></uib-tab>
+                    <uib-tab heading="价格升" classes="btn-sm" ng-click="set_result_order(2)"></uib-tab>
+                    <uib-tab heading="价格降" classes="btn-sm" ng-click="set_result_order(3)"></uib-tab>
+                    <uib-tab heading="购买量" classes="btn-sm" ng-click="set_result_order(4)"></uib-tab>
+                    <uib-tab heading="评论数" classes="btn-sm" ng-click="set_result_order(5)"></uib-tab>
+                    <uib-tab heading="评分" classes="btn-sm" ng-click="set_result_order(6)"></uib-tab>
                 </uib-tabset>
             </div>
 
@@ -170,6 +147,7 @@
         </div>
     </div>
 
+    <!--search result-->
     <div class="container">
         <hr>
         <div ng-repeat="simplep in results">
