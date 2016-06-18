@@ -2,7 +2,7 @@
 /**
  * Created by wangdechang on 2016/6/13.
  */
-rangerApp.controller('angencyPicCtrl', ['$scope', 'fileUpload','$http','$window',function ($scope,fileUpload,$http,$window) {
+rangerApp.controller('angencyPicCtrl', ['$scope', 'fileUpload','$http','$window','$state',function ($scope,fileUpload,$http,$window,$state) {
     $scope.pictureList={
         url:''
     };
@@ -23,9 +23,10 @@ rangerApp.controller('angencyPicCtrl', ['$scope', 'fileUpload','$http','$window'
             /*  area: ['390px', '330px'],*/
             yes: function(){
                 layer.closeAll();
+                $state.go('home.login');
             }
         });
-        window.history.back();
+       // window.history.back();
     }else{
         console.log($window.sessionStorage.angencyId)
         $scope.info.angencyId = $window.sessionStorage.angencyId

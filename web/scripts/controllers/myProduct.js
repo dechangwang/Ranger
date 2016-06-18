@@ -21,6 +21,7 @@ rangerApp.controller('myProductCtrl',['$scope','$http','$state','angency','$wind
             /*  area: ['390px', '330px'],*/
             yes: function(){
                 layer.closeAll();
+                $state.go('home.login');
             }
         });
         window.history.back();
