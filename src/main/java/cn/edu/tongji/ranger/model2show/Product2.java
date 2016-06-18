@@ -32,7 +32,7 @@ public class Product2 implements Serializable{
     private Angency supplier;
 
     private Set<TripDestination2> tripDestinations;
-    private Set<TripDetail2> tripDetails;
+    private List<TripDetail2> tripDetails;
     private Set<TripTraffic2> tripTraffics;
     private Set<TripPrice2> tripPrices;
     private Set<TripPicture2> tripPictures;
@@ -175,13 +175,12 @@ public class Product2 implements Serializable{
         this.tripDestinations = tripDestinations;
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id")
-    public Set<TripDetail2> getTripDetails() {
+    @Transient
+    public List<TripDetail2> getTripDetails() {
         return tripDetails;
     }
 
-    public void setTripDetails(Set<TripDetail2> tripDetails) {
+    public void setTripDetails(List<TripDetail2> tripDetails) {
         this.tripDetails = tripDetails;
     }
 

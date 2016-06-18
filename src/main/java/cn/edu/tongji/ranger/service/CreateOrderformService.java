@@ -11,6 +11,6 @@ import org.springframework.stereotype.Service;
 
 public interface CreateOrderformService {
 
-    public void createOrderform(Orderform orderform);
+    void createOrderform(Orderform orderform);
 
 }
