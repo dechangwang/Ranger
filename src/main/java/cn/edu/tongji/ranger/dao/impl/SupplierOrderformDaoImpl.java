@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,17 +21,21 @@ import java.util.Map;
 public class SupplierOrderformDaoImpl implements SupplierOrderformDao {
     @Autowired
     SessionFactory sessionFactory;
+
     @Override
     public List<Long> getOrderformBySupplierId(Long supplierId) {
-        List<Long> result = null;
+        List<Long> result = new ArrayList<>();
         String sql = "select distinct orderform.id from product, trip_setoff, orderform " +
-                "where product.product_id = trip_setoff.product_id and orderform.trip_setoff_id = trip_setoff.id and product.supplier_id = ";
+                "where product.product_id = trip_setoff.product_id and orderform.trip_setoff_id = trip_setoff.id" +
+                " and product.supplier_id = ";
+        sql += supplierId;
+
         Session session = sessionFactory.getCurrentSession();
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         List list = sqlQuery.list();
-        for(Object o : list){
-            Map row = (Map)o;
-            Long pid = ((BigInteger)row.get("pid")).longValue();
+        for (Object o : list) {
+            Map row = (Map) o;
+            Long pid = ((BigInteger) row.get("pid")).longValue();
             result.add(pid);
         }
         return result;
