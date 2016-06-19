@@ -7,9 +7,11 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
     function ($scope, $http, $stateParams, $window, $state) {
         // var type = $stateParams.type;
         $scope.supplier_id = $window.sessionStorage.angencyId;
-        if ($scope.supplier_id == null) {
+        if ($scope.supplier_id == null || $scope.supplier_id < 0) {
             alert("请先登录！");
             $state.go('home.login');
+        }else{
+            $scope.load_orderlist();
         }
         $scope.state_to_filter = 0;
         $scope.set_state_to_filter = function(state){
@@ -79,7 +81,7 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
             return state == 12;
         };
 
-        $scope.load_orderlist();
+
 
         //$scope.orderlist=orderlist;
     }]);

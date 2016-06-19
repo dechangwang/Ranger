@@ -85,9 +85,10 @@ rangerApp.controller('loginCtrl', ['$scope', '$http', '$state', 'angency', 'Ange
                     // $state.go('home');
                 } else {
                     $scope.loginSuccess = false;
+                    alert("密码或用户名错误!");
                 }
             }, function (err) {
-                alert("登录失败  " + err);
+                alter("登录失败  " + err);
             });
         }
     }]);
