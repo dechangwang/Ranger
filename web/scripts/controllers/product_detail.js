@@ -51,6 +51,7 @@ rangerApp.controller('productDetailCtrl', ['$scope', '$http', '$stateParams','$s
             $scope.get_product(product_id);
 
         };
+        
             
         $scope.on_begin();
         console.log($scope.product);
