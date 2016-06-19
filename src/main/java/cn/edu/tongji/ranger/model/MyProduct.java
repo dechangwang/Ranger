@@ -1,12 +1,15 @@
 package cn.edu.tongji.ranger.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by wangdechang on 2016/5/10.
  */
 public class MyProduct {
     private String product_id;
     private String product_name;
-    private String setoff_time;
+    private List<String> setoff_time = new ArrayList<String>();
     private String release_time;
     private String price;
     private String state;
@@ -14,7 +17,7 @@ public class MyProduct {
     public MyProduct() {
     }
 
-    public MyProduct(String product_id, String product_name, String setoff_time,
+    public MyProduct(String product_id, String product_name, List<String> setoff_time,
                      String release_time, String price, String state) {
         this.product_id = product_id;
         this.product_name = product_name;
@@ -40,12 +43,16 @@ public class MyProduct {
         this.product_name = product_name;
     }
 
-    public String getSetoff_time() {
+    public List<String> getSetoff_time() {
         return setoff_time;
     }
 
-    public void setSetoff_time(String setoff_time) {
+    public void setSetoff_time(List<String> setoff_time) {
         this.setoff_time = setoff_time;
+    }
+
+    public void addSetOffTime(String setofftime){
+        this.setoff_time.add(setofftime);
     }
 
     public String getRelease_time() {

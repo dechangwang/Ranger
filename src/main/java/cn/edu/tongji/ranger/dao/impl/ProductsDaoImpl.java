@@ -59,8 +59,14 @@ public class ProductsDaoImpl implements ProductsDao {
             if (listSetoff.iterator().hasNext()) {
                 Object[] objectsSetoff = (Object[]) listSetoff.iterator().next();
 
-                myProduct.setSetoff_time(objectsSetoff[0] + "");
+               // myProduct.addSetOffTime(objectsSetoff[0] + "");
                 myProduct.setRelease_time(objectsSetoff[1] + "");
+                Iterator iterator1 = listSetoff.iterator();
+                while(iterator1.hasNext()){
+                    Object[] obj = (Object[]) iterator1.next();
+                    myProduct.addSetOffTime(obj[0] + "");
+                    System.out.println(obj[0]+" ");
+                }
             } else {
                 hasAllData = false;
             }

@@ -41,12 +41,12 @@ public class UploadFileController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/fileUpload")
     public void upload(@RequestParam("file") MultipartFile file,
-                                     @RequestParam("id") String id, HttpServletRequest request) throws IOException {
+                       @RequestParam("id") String id, HttpServletRequest request) throws IOException {
 
         Angency angency = angencyService.findById(Long.parseLong(id));
-        Map<String,String> map = new HashMap<>();
-        map.put("res","");
-                System.out.println("id -> " + id);
+        Map<String, String> map = new HashMap<>();
+        map.put("res", "");
+        System.out.println("id -> " + id);
         String path = "/images";
         ServletContext sc = request.getSession().getServletContext();
         dir = sc.getRealPath(path);
@@ -57,15 +57,15 @@ public class UploadFileController {
             //store file in storage
             try {
 
-               // file.transferTo(new File(id+"-"+file.getOriginalFilename()));
+                // file.transferTo(new File(id+"-"+file.getOriginalFilename()));
                 FileUtils.writeByteArrayToFile(new File(dir, file.getOriginalFilename()), bytes);
-                dir = "images" + File.separator +  file.getOriginalFilename();
+                dir = "images" + File.separator + file.getOriginalFilename();
               /*  FileUtils.writeByteArrayToFile(new File(dir, id + "-" + file.getOriginalFilename()), bytes);
                 dir = "images" + File.separator + id + "-" + file.getOriginalFilename();*/
-                String origin = angency.getCertificate()+"&"+dir;
+                String origin = angency.getCertificate() + "&" + dir;
                 angency.setCertificate(origin);
                 angencyService.updateAngency(angency);
-                map.put("res","succeed");
+                map.put("res", "succeed");
                 hasUpload = true;
                 //FileUtils.copyInputStreamToFile(file.getInputStream(), new File("/web/images/", System.currentTimeMillis() + file.getOriginalFilename()));
             } catch (IOException e) {
@@ -74,22 +74,22 @@ public class UploadFileController {
         }
         certificate = file;
         System.out.println(file.getOriginalFilename());
-       // return map;
+        // return map;
     }
 
 
-    @RequestMapping(value = "/picProductUpload",method = RequestMethod.POST)
+    @RequestMapping(value = "/picProductUpload", method = RequestMethod.POST)
     @ResponseBody
     public void uploadPictureProduct(@RequestParam("file") MultipartFile file,
                                      @RequestParam("brief") String brief,
-                                     @RequestParam("product_id")String product_id){
+                                     @RequestParam("product_id") String product_id) {
         String id = "51";
-        System.out.println(brief+file.getOriginalFilename());
+        System.out.println(brief + file.getOriginalFilename());
         try {
             byte[] bytes1 = file.getBytes();
             FileUtils.writeByteArrayToFile(new File(dir, id + "-" + file.getOriginalFilename()), bytes1);
             String path = "images" + File.separator + id + "-" + file.getOriginalFilename();
-            TripPicture tripPicture = new TripPicture(path,brief,Long.parseLong(product_id));
+            TripPicture tripPicture = new TripPicture(path, brief, Long.parseLong(product_id));
             tripPictureService.create(tripPicture);
         } catch (IOException e) {
             e.printStackTrace();
@@ -97,6 +97,7 @@ public class UploadFileController {
 
 
     }
+
     public boolean isHasUpload() {
         return hasUpload;
     }

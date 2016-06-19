@@ -80,11 +80,7 @@ public class ProductsController {
         trafficTypeBack.setType("返程");
         trafficTypeBack.setBrief(productsInfo.getBackway());*/
 
-       /* 1	火车
-        2	飞机
-        3	轮船
-        4	汽车
-        6	其他*/
+
         //TripTraffic
         Set<TripTraffic> tripTrafficSet = new HashSet<TripTraffic>();
         List<String> trafficList = productsInfo.getTraffics();
@@ -238,8 +234,14 @@ public class ProductsController {
         map.put("summary",product.getSummary());
         map.put("duration",product.getDuration()+"");
         Set<TripSetoff> setoffs = product.getTripSetoffs();
+        List<Timestamp> timestampList = new ArrayList<>();
+        for(Iterator iterator = setoffs.iterator();iterator.hasNext();){
+            TripSetoff tripSetoff = (TripSetoff) iterator.next();
+            timestampList.add(tripSetoff.getTripSetoffDate());
+        }
+
         Timestamp setoff_date = setoffs.iterator().next().getTripSetoffDate();
-        map.put("setoff_date",setoff_date+"");
+        map.put("setoff_date",timestampList+"");
         map.put("postcode",product.getPostcode());
         map.put("post_receiver",product.getPostReceiver());
         map.put("post_address",product.getPostAddress());
@@ -267,7 +269,7 @@ public class ProductsController {
         product.setPostAddress(post_address);
         product.setPostReceiver(post_receiver);
         product.setPostPhone(post_phone);
-        product.getTripSetoffs().iterator().next().setTripSetoffDate(Timestamp.valueOf(setoff_date));
+//        product.getTripSetoffs().iterator().next().setTripSetoffDate(Timestamp.valueOf(setoff_date));
         product.getTripSetoffs().iterator().next().setUpdateTime(new Timestamp(new Date().getTime()));
         productsService.update(product);
         Map<String,String> map = new HashMap<String, String>();
