@@ -9,11 +9,11 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
         $scope.supplier_id = $window.sessionStorage.angencyId;
 
         $scope.state_to_filter = 0;
-        $scope.set_state_to_filter = function(state){
+        $scope.set_state_to_filter = function (state) {
             $scope.state_to_filter = state;
         };
         $scope.orderlist = [];
-        $scope.load_orderlist = function(){
+        $scope.load_orderlist = function () {
             $http.post('/Ranger/api/supplierorderform/list', $scope.supplier_id)
                 .success(function (data) {
                     $scope.orderlist = data;
@@ -55,36 +55,78 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
         $scope.isFinished = function (state) {
             return state == 5;
         };
-        $scope.isConfirmed = function(state){
-            if(state == 12){
+        $scope.isConfirmed = function (state) {
+            if (state == 12) {
                 return true;
-            }else if(state < 11 && state >1){
+            } else if (state < 11 && state > 1) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         };
-        $scope.isReConfirmed = function(state){
+        $scope.isReConfirmed = function (state) {
             // console.log(state);
-            if(state <11 && state > 1){
+            if (state < 11 && state > 1) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         };
-        $scope.isReConfirm = function(state){
+        $scope.isReConfirm = function (state) {
             return state == 12;
         };
 
         if ($scope.supplier_id == null || $scope.supplier_id < 0) {
             alert("请先登录！");
             $state.go('home.login');
-        }else{
+        } else {
             $scope.load_orderlist();
         }
 
 
-
         //$scope.orderlist=orderlist;
     }]);
+rangerApp.controller('picUploadCtrl', ['$scope', '$http', '$window', '$state', '$uibModal', function ($scope, $http, $window, $state, $uibModal) {
+
+    $scope.Imgpath = {
+        path: ''
+    }
+    $scope.showUploadFile = function () {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/modal/uploadFile.html',
+            controller: 'uploadModalCtrl',
+            backdrop: 'static',
+            resolve: {
+                data: function () {
+                    return null;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (data) {
+            var file = data;
+            //var file = $scope.myFile;
+            console.log('file is ');
+            console.dir(file);
+            var uploadUrl = "/Ranger/files/picUploadOrd";
+            var fd = new FormData();
+            fd.append('file', file);
+            $http.post(uploadUrl, fd, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                })
+                .success(function (data) {
+                    $scope.Imgpath.path = data.path;
+                    console.log(data);
+                    console.log( $scope.Imgpath.path);
+                })
+                .error(function (err) {
+                    alert('err')
+                    return 'err';
+                });
+        });
+    };
+
+}]);
+
 

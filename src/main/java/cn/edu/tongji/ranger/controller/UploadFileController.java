@@ -82,9 +82,12 @@ public class UploadFileController {
     @ResponseBody
     public void uploadPictureProduct(@RequestParam("file") MultipartFile file,
                                      @RequestParam("brief") String brief,
-                                     @RequestParam("product_id") String product_id) {
+                                     @RequestParam("product_id") String product_id,HttpServletRequest request) {
         String id = "51";
         System.out.println(brief + file.getOriginalFilename());
+        String path1 = "/images";
+        ServletContext sc = request.getSession().getServletContext();
+        dir = sc.getRealPath(path1);
         try {
             byte[] bytes1 = file.getBytes();
             FileUtils.writeByteArrayToFile(new File(dir, id + "-" + file.getOriginalFilename()), bytes1);
@@ -96,6 +99,24 @@ public class UploadFileController {
         }
 
 
+    }
+
+    @RequestMapping(value = "/picUploadOrd")
+    @ResponseBody
+    public Map<String,String> picUploadFileOrd(@RequestParam("file")MultipartFile file,HttpServletRequest request){
+        Map<String,String> map = new HashMap<>();
+        String path1 = "/images";
+        ServletContext sc = request.getSession().getServletContext();
+        dir = sc.getRealPath(path1);
+        try {
+            byte[] bytes1 = file.getBytes();
+            FileUtils.writeByteArrayToFile(new File(dir, file.getOriginalFilename()), bytes1);
+            String path = "images" + File.separator + file.getOriginalFilename();
+            map.put("path",path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return map;
     }
 
     public boolean isHasUpload() {
