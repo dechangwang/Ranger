@@ -1,15 +1,5 @@
-<!--<div ng-controller = "myCtrl">
-    <input type="file" file-model="myFile"/>
-    <button ng-click="uploadFile()">upload me</button>
-</div>
-<input type="file" accept="image/gif, image/*">
-<div ng-controller="mulImageCtrl">
-    <img ngf-src="data.file || data.defaultImage" class="img-responsive" style="width:200px; height: 200px; max-width:500px;"/>
-    <div class="button" ngf-select="" ngf-pattern="'image/*'" ngf-multiple="true" ng-model="data.file">
-        选择文件
-    </div>
-    <button ng-click="upload()">upload</button>
-</div>-->
+
+<!--
 
 
 <style>
@@ -47,11 +37,11 @@
             </p>
         </div>
     </div>
-   <!-- <div class="row">
+   &lt;!&ndash; <div class="row">
         <div class="col-md-6">
             <label>Format: <span class="muted-text">(manual alternate <em>{{altInputFormats[0]}}</em>)</span></label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
         </div>
-    </div>-->
+    </div>&ndash;&gt;
 
     <hr />
     <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
@@ -60,42 +50,4 @@
     <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" uib-tooltip="After today restriction">Min date</button>
 </div>
 
-<!--
-<style>
-    .full button span {
-        background-color: limegreen;
-        border-radius: 32px;
-        color: black;
-    }
-    .partially button span {
-        background-color: orange;
-        border-radius: 32px;
-        color: black;
-    }
-</style>
-<div ng-controller="DatepickerDemoCtrl">
-    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
-
-    <h4>Inline</h4>
-    <div style="display:inline-block; min-height:290px;">
-        <uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></uib-datepicker>
-    </div>
-
-    <hr />
-    <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
-    <button type="button" class="btn btn-sm btn-default" ng-click="setDate(2009, 7, 24)">2009-08-24</button>
-    <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
-    <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" uib-tooltip="After today restriction">Min date</button>
-</div>
-<div>
-    <ul class="uib-datepicker-popup dropdown-menu uib-position-measure" dropdown-nested ng-if="isOpen" ng-keydown="keydown($event)" ng-click="$event.stopPropagation()">
-        <li ng-transclude></li>
-        <li ng-if="showButtonBar" class="uib-button-bar">
-      <span class="btn-group pull-left">
-        <button type="button" class="btn btn-sm btn-info uib-datepicker-current" ng-click="select('today', $event)" ng-disabled="isDisabled('today')">{{ getText('current') }}</button>
-        <button type="button" class="btn btn-sm btn-danger uib-clear" ng-click="select(null, $event)">{{ getText('clear') }}</button>
-      </span>
-            <button type="button" class="btn btn-sm btn-success pull-right uib-close" ng-click="close($event)">{{ getText('close') }}</button>
-        </li>
-    </ul>
-</div>-->
+-->
