@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="form-group">
+              <!--  <div class="form-group">
                     <label class="col-md-2 control-label">出发地：</label>
                     <div class="col-md-2">
                         <select class="form-control" name="startloc" ng-model="userInfo.startloc">
@@ -42,14 +42,49 @@
                             <option>更多</option>
                         </select>
                     </div>
-                    <label class="col-md-2 control-label">目的地：</label>
+                   &lt;!&ndash; <label class="col-md-2 control-label">目的地：</label>
                     <div class="col-md-3 ">
                         <input type="text" name="targetloc" class="form-control col-md-3" placeholder="目的地有多个时以，分隔"
                                ng-model="products.targetloc"
                                required>
-                        <!-- <p class="col-md-1">天</p>-->
+                        &lt;!&ndash; <p class="col-md-1">天</p>&ndash;&gt;
+                    </div>&ndash;&gt;
+                </div>-->
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label" ng-click="select_startLocation()"><button type="button" class="btn btn-default">出发地</button></label>
+                    <div class="col-md-2">
+                        <h4 ng-bind="products.startloc.name"></h4>
                     </div>
+
                 </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" ng-click="select_destinations(lg)"><button type="button" class="btn btn-default">目的地</button></label>
+                        <div class="col-xs-12 col-sm-10 col-md-8">
+                            <div ng-repeat="destination in destinations">
+                                <div class="col-xs-3 col-sm-2">
+                                    <h5><span class="label label-info">{{destination.name}}</span><a><i
+                                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
+
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" ng-click="select_date()"><button type="button" class="btn btn-default">出团日期</button></label>
+                        <div class="col-xs-12 col-sm-10 col-md-8">
+                            <div ng-repeat="dt in products.setoffdate">
+                                <div class="col-xs-3 col-sm-2">
+
+                                    <h5><span class="label label-info col-md-10">{{dt}}</span></h5>
+
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+
                 <br>
                 <div class="form-group">
                     <div class="col-md-2"></div>
@@ -63,11 +98,11 @@
 
 
                     </div><!--   <p class="col-md-1">天</p>-->
-                    <div class="col-md-2"></div>
+                   <!-- <div class="col-md-2"></div>
                     <div class="col-md-3">
                         <label class="control-label">出团日期</label>
                         <input type="date" name="startdate" class="form-control col-md-3" ng-model="products.startdate">
-                    </div>
+                    </div>-->
                 </div>
                 <br>
                 <div class="form-group">

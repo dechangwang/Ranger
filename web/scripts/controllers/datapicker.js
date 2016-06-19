@@ -3,7 +3,44 @@
  * Created by wangdechang on 2016/5/26.
  */
 
-rangerApp.controller('DatepickerPopupDemoCtrl', function ($scope) {
+rangerApp.controller('DatepickerPopupDemoCtrl', function ($scope,$uibModalInstance,$window,$http) {
+    $scope.data={
+        date:'',
+        guide:''
+    };
+
+    $scope.angencyID = {
+        id: ''
+    };
+
+    $scope.guideList = {
+        id: '',
+        name: '',
+        gender: '',
+        phone: '',
+        email: '',
+        address: '',
+        cname: ''
+    };
+
+    $scope.angencyID.id = $window.sessionStorage.angencyId;
+    $http({
+        url: '/Ranger/angency/guideList',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        transformRequest: function (data) {
+            return $.param(data);
+        },
+        data: $scope.angencyID
+    }).then(function (response) {
+        $scope.guideList = response.data;
+        console.log(response.data)
+    }, function (err) {
+        alert("获取失败  " + err);
+    });
+
     $scope.today = function() {
         $scope.dt = new Date();
     };
@@ -97,6 +134,13 @@ rangerApp.controller('DatepickerPopupDemoCtrl', function ($scope) {
 
         return '';
     }
+    $scope.ok = function () {
+        $uibModalInstance.close($scope.data);
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });
 /*
 rangerApp.controller('DatepickerDemoCtrl', function ($scope) {

@@ -1,6 +1,7 @@
 package cn.edu.tongji.ranger.controller;
 
 import cn.edu.tongji.ranger.model.*;
+import cn.edu.tongji.ranger.service.GuideService;
 import cn.edu.tongji.ranger.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class ProductsController {
     @Autowired
     private ProductsService productsService;
 
+    @Autowired
+    private GuideService guideService;
+
     @RequestMapping(value = "/release", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> releaseProduct(@RequestBody ProductsInfo productsInfo) {  //发布产品
@@ -26,7 +30,7 @@ public class ProductsController {
         Product product = new Product();
         product.setName(productsInfo.getName());
         product.setSearchContent(productsInfo.getBrief() + productsInfo.getBackway() + productsInfo.getDetail() + productsInfo.getName() + "" +
-                productsInfo.getHotelname() + productsInfo.getStartloc() + productsInfo.getSetoffway() + productsInfo.getStartdate() +
+                productsInfo.getHotelname() + productsInfo.getStartloc().getName() + productsInfo.getSetoffway() + productsInfo.getStartdate() +
                 productsInfo.getTag() + productsInfo.getDuration());
         product.setSummary(productsInfo.getDetail());
         product.setDuration(productsInfo.getDuration());
@@ -35,22 +39,33 @@ public class ProductsController {
         product.setPostPhone(productsInfo.getPostphone());
         product.setPostAddress(productsInfo.getPostaddress());
 
-        Angency angency = productsService.findById(9L, Angency.class);
-        Location location = new Location();
-        location.setFatherId(-1);
-        location.setName(productsInfo.getStartloc());
+        String angency_id = productsInfo.getAngency_id();
+        Angency angency = productsService.findById(Long.parseLong(angency_id), Angency.class);
+//        Location location = new Location();
+//        location.setFatherId(-1);
+//        location.setName(productsInfo.getStartloc().getName());
         //travel angency
         product.setSupplier(angency);
         //setoff location
-        product.setSetoffLocation(location);
+        product.setSetoffLocation(productsInfo.getStartloc());
 
-        TripDestination td = new TripDestination();
+        Set<TripDestination> locations = new HashSet<TripDestination>();
+        if (productsInfo.getDestinations().size() > 0)
+        for(Location location : productsInfo.getDestinations()){
+            TripDestination td = new TripDestination();
+            td.setLocation(location);
+            td.setBrief("");
+            td.setProduct(product);
+            locations.add(td);
+        }
+
+       /* TripDestination td = new TripDestination();
         Location lt = productsService.findById(2L, Location.class);
         td.setLocation(lt);
         td.setBrief("");
         td.setProduct(product);
-        Set<TripDestination> locations = new HashSet<TripDestination>();
-        locations.add(td);
+
+        locations.add(td);*/
         //destination
         product.setTripDestinations(locations);
 
@@ -143,21 +158,41 @@ public class ProductsController {
 
         product.setTripPrices(tripPriceSet);
 
-        Guide guide = productsService.findById(2L, Guide.class);
-        //TripSetoff
+        List<Guide> guideList = guideService.findByAngencyID(Long.parseLong(productsInfo.getAngency_id()));
         Set<TripSetoff> tripSetoffSet = new HashSet<TripSetoff>();
-        TripSetoff tripSetoff = new TripSetoff();
-        tripSetoff.setUpdateTime(timestamp);
-        tripSetoff.setAvgRemark(0);
-        tripSetoff.setCommentCount(0);
-        tripSetoff.setPurchaseCount(0);
-        StringTokenizer stringTokenizer = new StringTokenizer(productsInfo.getStartdate(), "T");
-        String str = stringTokenizer.nextToken() + " " + stringTokenizer.nextToken().substring(0, 10);
-        Timestamp setOffTime = Timestamp.valueOf(str);
-        tripSetoff.setTripSetoffDate(setOffTime);
-        tripSetoffSet.add(tripSetoff);
-        tripSetoff.setGuide(guide);
-        tripSetoff.setProduct(product);
+        if(productsInfo.getSetoffdate().size() > 0){
+            for(int i = 0;i<productsInfo.getSetoffdate().size();i++){
+                TripSetoff tripSetoff = new TripSetoff();
+                tripSetoff.setUpdateTime(timestamp);
+                tripSetoff.setAvgRemark(0);
+                tripSetoff.setCommentCount(0);
+                tripSetoff.setPurchaseCount(0);
+
+                StringTokenizer stringTokenizer = new StringTokenizer(productsInfo.getSetoffdate().get(i), "T");
+                String str = stringTokenizer.nextToken() + " " + stringTokenizer.nextToken().substring(0, 10);
+
+                StringTokenizer stringDate = new StringTokenizer(productsInfo.getSetoffdate().get(i), "T");
+                String dt = stringDate.nextToken();
+                String[] ss = dt.split("-");
+                String strContent = product.getSearchContent();
+                strContent = strContent + " "+ss[0]+"年"+" "+ss[1]+"月"+" "+ss[2]+"日 ";
+                product.setSearchContent(strContent);
+
+                Timestamp setOffTime = Timestamp.valueOf(str);
+                tripSetoff.setTripSetoffDate(setOffTime);
+
+                for (Guide guide : guideList){
+                    if (guide.getName().equals(productsInfo.getGuidesname().get(i))){
+                        tripSetoff.setGuide(guide);
+                        break;
+                    }
+                }
+                tripSetoff.setProduct(product);
+                tripSetoffSet.add(tripSetoff);
+            }
+        }
+
+        //TripSetoff
         product.setTripSetoffs(tripSetoffSet);
 
         long id = productsService.create(product);

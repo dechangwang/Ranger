@@ -1,13 +1,16 @@
 package cn.edu.tongji.ranger.model;
 
+import java.util.List;
+
 /**
  * Created by wangdechang on 2016/5/7.
  */
 public class ProductsInfo {
+    private String angency_id;
     private String name;
     private String brief;
     private String detail;
-    private String startloc;
+    private Location startloc;
     private String targetloc;
     private int duration;
     private String startdate;
@@ -28,16 +31,20 @@ public class ProductsInfo {
     private String receiver;
     private String postphone;
     private String postaddress;
+    private List<Location> destinations;
+    private List<String> setoffdate;
+    private List<String> guidesname;
 
     public ProductsInfo() {
     }
 
-    public ProductsInfo(String name, String brief, String detail, String startloc,
+    public ProductsInfo(String name, String brief, String detail, Location startloc,
                         String targetloc, int duration, String startdate, double adultprice,
                         double childprice, String tag, String setoffway, String backway,
                         String hotelname, String hoteldesc, String hotelname1, String hoteldesc1,
                         String hotelname2, String hoteldesc2, String hotelname3, String hoteldesc3,
-                        String postcode, String receiver, String postphone, String postaddress) {
+                        String postcode, String receiver, String postphone, String postaddress,List<Location> destinations,
+                        String angency_id,List<String> setoffdate,List<String> guidesname) {
         this.name = name;
         this.brief = brief;
         this.detail = detail;
@@ -62,6 +69,10 @@ public class ProductsInfo {
         this.receiver = receiver;
         this.postphone = postphone;
         this.postaddress = postaddress;
+        this.destinations = destinations;
+        this.angency_id = angency_id;
+        this.setoffdate = setoffdate;
+        this.guidesname = guidesname;
     }
 
     public String getName() {
@@ -88,11 +99,11 @@ public class ProductsInfo {
         this.detail = detail;
     }
 
-    public String getStartloc() {
+    public Location getStartloc() {
         return startloc;
     }
 
-    public void setStartloc(String startloc) {
+    public void setStartloc(Location startloc) {
         this.startloc = startloc;
     }
 
@@ -256,13 +267,46 @@ public class ProductsInfo {
         this.postaddress = postaddress;
     }
 
+    public List<Location> getDestinations() {
+        return destinations;
+    }
+
+    public void setDestinations(List<Location> destinations) {
+        this.destinations = destinations;
+    }
+
+    public String getAngency_id() {
+        return angency_id;
+    }
+
+    public void setAngency_id(String angency_id) {
+        this.angency_id = angency_id;
+    }
+
+    public List<String> getSetoffdate() {
+        return setoffdate;
+    }
+
+    public void setSetoffdate(List<String> setoffdate) {
+        this.setoffdate = setoffdate;
+    }
+
+    public List<String> getGuidesname() {
+        return guidesname;
+    }
+
+    public void setGuidesname(List<String> guidesname) {
+        this.guidesname = guidesname;
+    }
+
     @Override
     public String toString() {
-        return "ProductsController{" +
-                "name='" + name + '\'' +
+        return "ProductsInfo{" +
+                "angency_id='" + angency_id + '\'' +
+                ", name='" + name + '\'' +
                 ", brief='" + brief + '\'' +
                 ", detail='" + detail + '\'' +
-                ", startloc='" + startloc + '\'' +
+                ", startloc=" + startloc +
                 ", targetloc='" + targetloc + '\'' +
                 ", duration=" + duration +
                 ", startdate='" + startdate + '\'' +
@@ -283,6 +327,9 @@ public class ProductsInfo {
                 ", receiver='" + receiver + '\'' +
                 ", postphone='" + postphone + '\'' +
                 ", postaddress='" + postaddress + '\'' +
+                ", destinations=" + destinations +
+                ", setoffdate=" + setoffdate +
+                ", guidesname=" + guidesname +
                 '}';
     }
 }
