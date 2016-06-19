@@ -156,9 +156,10 @@ public class RegisterController {
 
     @RequestMapping(value = "/guideinfo", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> guideInfo() {
+    public Map<String, String> guideInfo(@RequestParam("phone")String phone,@RequestParam("angency_id")String angency_id) {
         Map<String, String> mapGuide = new HashMap<String, String>();
-        Guide guide = guideService.findById(2L);
+//        Guide guide = guideService.findById(2L);
+        Guide guide = guideService.findByPhone(phone);
         if (guide != null) {
             angencyService.findById(guide.getAngency_id());
             mapGuide.put("name", guide.getName());
@@ -173,7 +174,7 @@ public class RegisterController {
             mapGuide.put("address", guide.getAddress());
             mapGuide.put("phone", guide.getPhone());
             Angency angency = angencyService.findById(guide.getAngency_id());
-            mapGuide.put("cname", angency.getName());
+            mapGuide.put("cname", angency.getCname());
             mapGuide.put("res", "ok");
         } else {
             mapGuide.put("res", "error");

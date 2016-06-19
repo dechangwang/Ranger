@@ -73,7 +73,7 @@ rangerApp.controller('angencyInfoCtrl', ['$scope', '$http', '$window', function 
     }
 }]);
 
-rangerApp.controller('guideInfoCtrl', ['$scope', '$http','$uibModal','$window', function ($scope, $http,$uibModal,$window) {
+rangerApp.controller('guideInfoCtrl', ['$scope', '$http','$uibModal','$window','$state',function ($scope, $http,$uibModal,$window,$state) {
     $scope.guideInfo = {
         id: '',
         name: '',
@@ -127,6 +127,17 @@ rangerApp.controller('guideInfoCtrl', ['$scope', '$http','$uibModal','$window', 
                 data:$scope.data
             }).then(function (response) {
                 $scope.guideInfo = response.data;
+                if(response.data.res =='error'){
+                    layer.open({
+                        title: '信息',
+                        content: '输入的导游电话有误',
+                        btn: ['确定', '取消'],
+                        /*  area: ['390px', '330px'],*/
+                        yes: function () {
+                            layer.closeAll();
+                        }
+                    });
+                }
             }, function (err) {
                 alert("获取失败  " + err);
             });
