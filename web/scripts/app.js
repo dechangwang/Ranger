@@ -165,21 +165,6 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
             views: {
                 'main@home': {
                     templateUrl: 'views/my_product.html'
-                    /* controller:function ($scope,$http) {
-                     $scope.productList={
-                     name:'',
-                     date:''
-                     };
-                     $http({
-                     url: '/Ranger/products/lists',
-                     method: 'GET'
-                     }).then(function (response) {
-                     $scope.productList = response.data;
-                     console.log(response.data);
-                     }, function (err) {
-                     alert("获取失败  " + err);
-                     });
-                     }*/
                 }
             }
         })

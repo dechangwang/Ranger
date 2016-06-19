@@ -86,6 +86,7 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
 
         //$scope.orderlist=orderlist;
     }]);
+
 rangerApp.controller('picUploadCtrl', ['$scope', '$http', '$window', '$state', '$uibModal', function ($scope, $http, $window, $state, $uibModal) {
 
     $scope.Imgpath = {
