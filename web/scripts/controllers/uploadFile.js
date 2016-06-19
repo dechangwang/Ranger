@@ -121,6 +121,48 @@ rangerApp.controller('picCtrl', ['$scope', 'fileUpload','$http','$window','$stat
 
 
 }]);
+rangerApp.controller('picUploadCtrl', ['$scope', '$http','$window','$state','$uibModal', function ($scope,$http,$window,$state,$uibModal) {
+
+    $scope.Imgpath = {
+        path:''
+    }
+    $scope.showUploadFile = function () {
+        alert("hdsd");
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/modal/uploadFile.html',
+            controller: 'uploadModalCtrl',
+            backdrop: 'static',
+            resolve: {
+                data: function () {
+                    return null;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (data) {
+            var file = data;
+            //var file = $scope.myFile;
+            console.log('file is ');
+            console.dir(file);
+            var uploadUrl = "/Ranger/files/picUploadOrd";
+            var fd = new FormData();
+            fd.append('file', file);
+            $http.post(uploadUrl, fd,{
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                })
+                .success(function (data) {
+                    $scope.Imgpath.path = data.path;
+                    console.log(data);
+                })
+                .error(function (err) {
+                    alert('err')
+                    return 'err';
+                });
+        });
+    };
+
+}]);
 
 rangerApp.controller('AlertDemoCtrl', function ($scope) {
     $scope.alerts = [
