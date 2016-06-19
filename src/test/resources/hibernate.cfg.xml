@@ -40,6 +40,8 @@
         <mapping class="cn.edu.tongji.ranger.model2show.TripAccomodation2"/>
         <mapping class="cn.edu.tongji.ranger.model2show.TripTraffic2"/>
         <mapping class="cn.edu.tongji.ranger.model2show.TripDetail2"/>
+        <mapping class="cn.edu.tongji.ranger.model2show.Collection2"/>
+        <mapping class="cn.edu.tongji.ranger.model.Product3"/>
         <!--<mapping class="cn.edu.tongji.ranger.model2show.Trip"-->
         <mapping package="cn.edu.tongji.ranger.model"/>
     </session-factory>

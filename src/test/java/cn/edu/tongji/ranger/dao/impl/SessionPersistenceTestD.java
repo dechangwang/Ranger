@@ -3,12 +3,14 @@ package cn.edu.tongji.ranger.dao.impl;
 import cn.edu.tongji.ranger.init.HibernateUtil;
 import cn.edu.tongji.ranger.model.*;
 import cn.edu.tongji.ranger.model.Collection;
+import cn.edu.tongji.ranger.model2show.Collection2;
 import cn.edu.tongji.ranger.model2show.Product2;
 import cn.edu.tongji.ranger.model2show.SimpleProduct;
 import cn.edu.tongji.ranger.model2show.TripDetail2;
 import org.hibernate.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -24,6 +26,25 @@ public class SessionPersistenceTestD {
         sp = new SessionPersistence();
         sp.setSessionFactory(HibernateUtil.getSessionFactory());
 
+    }
+
+    @Test
+    public void testCollection2(){
+        List<Collection2> collection2s1 = sp.listAll(Collection2.class);
+        System.out.println(collection2s1.size());
+        Collection2 collection2 = new Collection2();
+        collection2.setAngencyId(7L);
+        List<Collection2> collection2s = sp.findByExample(collection2, Collection2.class);
+        System.out.println(collection2s.size());
+        Collection2 collection21 = new Collection2();
+        collection21.setAngencyId(7L);
+        Product3 product3 = sp.findById(3L, Product3.class);
+
+        collection21.setProduct(product3);
+        collection21.setCollectTime(new Timestamp(new Date().getTime()));
+        sp.attachDirty(collection21);
+        collection2s = sp.findByExample(collection2, Collection2.class);
+        System.out.println(collection2s.size());
     }
 
 //    @Test
@@ -206,14 +227,14 @@ public class SessionPersistenceTestD {
 //
 //    }
 
-    @Test
+//    @Test
     public void findById(){
         Product2 product2 = sp.findById(2L, Product2.class);
         System.out.println(product2);
 //        System.out.println(product2.getTripDetails());
     }
 
-    @Test
+//    @Test
     public void findDetailsByExample(){
         TripDetail2 tripDetail2 = new TripDetail2();
         tripDetail2.setProductId(2L);
