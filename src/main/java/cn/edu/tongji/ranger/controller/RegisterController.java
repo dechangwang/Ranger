@@ -154,7 +154,7 @@ public class RegisterController {
         return map;
     }
 
-    @RequestMapping(value = "/guideinfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/guideinfo", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> guideInfo() {
         Map<String, String> mapGuide = new HashMap<String, String>();

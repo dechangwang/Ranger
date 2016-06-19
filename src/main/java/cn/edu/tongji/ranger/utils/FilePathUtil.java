@@ -57,7 +57,12 @@ public class FilePathUtil {
             return null;
         }
         String resultPath = null;
-        resultPath = originPath.replaceAll("\\\\{1,2}|/", File.separator);
+        String replaceStr = File.separator;
+        if(replaceStr.equals("\\")){
+            replaceStr = "\\\\";
+        }
+
+        resultPath = originPath.replaceAll("\\\\{1,2}|/", replaceStr);
         return resultPath;
     }
 

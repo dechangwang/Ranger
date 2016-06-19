@@ -118,36 +118,6 @@ public class ProductsController {
             product.setTripTraffics(tripTrafficSet);
         }
 
-
-  /*      TrafficType trafficType = productsService.findById(2L, TrafficType.class);
-        TrafficType trafficTypeBack = productsService.findById(1L,TrafficType.class);
-
-
-        TripTraffic tripTraffic = new TripTraffic();
-        tripTraffic.setUpdateTime(timestamp);
-        tripTraffic.setIsExpired((byte) 1);
-        tripTraffic.setTrafficType(trafficType);
-        tripTraffic.setBrief("");
-        tripTraffic.setProduct(product);
-        tripTrafficSet.add(tripTraffic);
-        TripTraffic tripTrafficBack = new TripTraffic();
-        tripTrafficBack.setBrief("");
-        tripTrafficBack.setUpdateTime(timestamp);
-        tripTrafficBack.setIsExpired((byte) 1);
-        tripTrafficBack.setTrafficType(trafficTypeBack);
-        tripTrafficSet.add(tripTrafficBack);
-        tripTrafficBack.setProduct(product);*/
-
-        //TripPicture
-       /* Set<TripPicture> tripPictureSet = new HashSet<TripPicture>();
-        TripPicture tripPicture = new TripPicture();
-        tripPicture.setBrief("图片");
-        String path = UploadFileController.getDir();
-        tripPicture.setPicturePath(path);
-        tripPicture.setProduct(product);
-        tripPictureSet.add(tripPicture);
-        product.setTripPictures(tripPictureSet);*/
-
         //TripAccomodation
         Set<TripAccomodation> tripAccomodationSet = new HashSet<TripAccomodation>();
         TripAccomodation tripAccomodation = new TripAccomodation();
@@ -158,7 +128,6 @@ public class ProductsController {
         tripAccomodation.setProduct(product);
         tripAccomodationSet.add(tripAccomodation);
         product.setTripAccomodations(tripAccomodationSet);
-
 
         //TripPrice
         TouristType touristTypeAdult = productsService.findById(1L, TouristType.class);

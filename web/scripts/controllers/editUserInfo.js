@@ -32,7 +32,7 @@ rangerApp.controller('angencyInfoCtrl', ['$scope', '$http', '$window', function 
                 $state.go('home.login');
             }
         });
-        //window.history.back();
+        window.history.back();
     } else {
         $scope.angencyID.id = $window.sessionStorage.angencyId;
         $http({
@@ -73,7 +73,7 @@ rangerApp.controller('angencyInfoCtrl', ['$scope', '$http', '$window', function 
     }
 }]);
 
-rangerApp.controller('guideInfoCtrl', ['$scope', '$http', function ($scope, $http) {
+rangerApp.controller('guideInfoCtrl', ['$scope', '$http','$uibModal','$window', function ($scope, $http,$uibModal,$window) {
     $scope.guideInfo = {
         id: '',
         name: '',
@@ -83,14 +83,65 @@ rangerApp.controller('guideInfoCtrl', ['$scope', '$http', function ($scope, $htt
         address: '',
         cname: ''
     };
-    $http({
+
+    $scope.data={
+        phone:'',
+        angency_id:''
+    };
+    if (!$window.sessionStorage.angencyId) {
+        layer.open({
+            title: '登录信息',
+            content: '未登录，请先登录',
+            btn: ['确定', '取消'],
+            /*  area: ['390px', '330px'],*/
+            yes: function () {
+                layer.closeAll();
+                $state.go('home.login');
+            }
+        });
+        //window.history.back();
+    }else{
+        $scope.data.angency_id = $window.sessionStorage.angencyId;
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/modal/input_dialog.html',
+            controller: 'inputModalCtrl',
+            backdrop: 'static',
+            resolve: {
+                data: function () {
+                    return null;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (data) {
+            $scope.data.phone = data.phone;
+            $http({
+                url: '/Ranger/angency/guideinfo',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                transformRequest: function (data) {
+                    return $.param(data);
+                },
+                data:$scope.data
+            }).then(function (response) {
+                $scope.guideInfo = response.data;
+            }, function (err) {
+                alert("获取失败  " + err);
+            });
+        });
+    }
+
+
+    /*$http({
         url: '/Ranger/angency/guideinfo',
         method: 'GET'
     }).then(function (response) {
         $scope.guideInfo = response.data;
     }, function (err) {
         alert("获取失败  " + err);
-    });
+    });*/
 
     $scope.editGuideInfo = function (guideInfo) {
         console.log(guideInfo);

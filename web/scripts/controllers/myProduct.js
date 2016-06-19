@@ -3,7 +3,10 @@
  * Created by wangdechang on 2016/5/11.
  */
 
-rangerApp.controller('myProductCtrl',['$scope','$http','$state','angency','$window',function ($scope, $http,$state,angency,$window) {
+rangerApp.controller('myProductCtrl',['$scope','$http','$state','angency','$window','$uibModal', function ($scope, $http,$state,angency,$window,$uibModal) {
+    $scope.page={
+        "pageSize":3,"pageNo":1,"totalCount":9
+    };
     $scope.productList={
         product_id:'',
         product_name:'',

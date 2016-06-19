@@ -29,11 +29,16 @@
             </tr>
 
         </table>
-        <nav>
+        <!--<nav>
             <ul class="pager">
                 <li><a href="#">Previous</a></li>
                 <li><a href="#">Next</a></li>
             </ul>
-        </nav>
+        </nav>-->
+    </div>
+    <div class="container center-block text-center">
+        <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" max-size="page.pageSize"
+                        ng-change="pageChanged()" class="samplePage pagination-sm" boundary-link-numbers="true">
+        </uib-pagination>
     </div>
 </div>
