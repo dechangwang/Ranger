@@ -41,10 +41,6 @@ public class ProductsController {
 
         String angency_id = productsInfo.getAngency_id();
         Angency angency = productsService.findById(Long.parseLong(angency_id), Angency.class);
-//        Location location = new Location();
-//        location.setFatherId(-1);
-//        location.setName(productsInfo.getStartloc().getName());
-        //travel angency
         product.setSupplier(angency);
         //setoff location
         product.setSetoffLocation(productsInfo.getStartloc());
@@ -59,13 +55,6 @@ public class ProductsController {
             locations.add(td);
         }
 
-       /* TripDestination td = new TripDestination();
-        Location lt = productsService.findById(2L, Location.class);
-        td.setLocation(lt);
-        td.setBrief("");
-        td.setProduct(product);
-
-        locations.add(td);*/
         //destination
         product.setTripDestinations(locations);
 
@@ -90,12 +79,50 @@ public class ProductsController {
         TrafficType trafficTypeBack = new TrafficType();
         trafficTypeBack.setType("返程");
         trafficTypeBack.setBrief(productsInfo.getBackway());*/
-        TrafficType trafficType = productsService.findById(2L, TrafficType.class);
 
-        TrafficType trafficTypeBack = productsService.findById(1L,TrafficType.class);
-
+       /* 1	火车
+        2	飞机
+        3	轮船
+        4	汽车
+        6	其他*/
         //TripTraffic
         Set<TripTraffic> tripTrafficSet = new HashSet<TripTraffic>();
+        List<String> trafficList = productsInfo.getTraffics();
+        String searchCon = product.getSearchContent();
+        if(trafficList.size() > 0){
+            for(String methodTraff:trafficList){
+                if(methodTraff.equals("1")){
+                    searchCon +=" 火车";
+                   addTraffic(tripTrafficSet,1L,product);
+                }else if(methodTraff.equals("2")){
+                    searchCon +=" 飞机";
+                    addTraffic(tripTrafficSet,2L,product);
+                }else if(methodTraff.equals("3")){
+                    searchCon +=" 轮船";
+                    addTraffic(tripTrafficSet,3L,product);
+                }else if(methodTraff.equals("4")){
+                    searchCon +=" 汽车";
+                    addTraffic(tripTrafficSet,4L,product);
+                }else if(methodTraff.equals("6") && !productsInfo.getOtherway().equals("")){
+                    searchCon +=" "+productsInfo.getOtherway();
+                    TrafficType trafficType = productsService.findById(6L, TrafficType.class);
+                    TripTraffic tripTraffic = new TripTraffic();
+                    tripTraffic.setUpdateTime(timestamp);
+                    tripTraffic.setIsExpired((byte) 1);
+                    tripTraffic.setTrafficType(trafficType);
+                    tripTraffic.setBrief(productsInfo.getOtherway());
+                    tripTraffic.setProduct(product);
+                    tripTrafficSet.add(tripTraffic);
+                }
+            }
+            product.setTripTraffics(tripTrafficSet);
+        }
+
+
+  /*      TrafficType trafficType = productsService.findById(2L, TrafficType.class);
+        TrafficType trafficTypeBack = productsService.findById(1L,TrafficType.class);
+
+
         TripTraffic tripTraffic = new TripTraffic();
         tripTraffic.setUpdateTime(timestamp);
         tripTraffic.setIsExpired((byte) 1);
@@ -103,15 +130,13 @@ public class ProductsController {
         tripTraffic.setBrief("");
         tripTraffic.setProduct(product);
         tripTrafficSet.add(tripTraffic);
-
         TripTraffic tripTrafficBack = new TripTraffic();
         tripTrafficBack.setBrief("");
         tripTrafficBack.setUpdateTime(timestamp);
         tripTrafficBack.setIsExpired((byte) 1);
         tripTrafficBack.setTrafficType(trafficTypeBack);
         tripTrafficSet.add(tripTrafficBack);
-        tripTrafficBack.setProduct(product);
-        product.setTripTraffics(tripTrafficSet);
+        tripTrafficBack.setProduct(product);*/
 
         //TripPicture
        /* Set<TripPicture> tripPictureSet = new HashSet<TripPicture>();
@@ -203,6 +228,18 @@ public class ProductsController {
         map.put("res", "success");
         map.put("product_id",id+"");
         return map;
+    }
+
+    private void addTraffic(Set<TripTraffic> tripTrafficSet,long id,Product product){
+        TrafficType trafficType = productsService.findById(id, TrafficType.class);
+        TripTraffic tripTraffic = new TripTraffic();
+        Timestamp timestamp = new Timestamp(new Date().getTime());
+        tripTraffic.setUpdateTime(timestamp);
+        tripTraffic.setIsExpired((byte) 1);
+        tripTraffic.setTrafficType(trafficType);
+        tripTraffic.setBrief("");
+        tripTraffic.setProduct(product);
+        tripTrafficSet.add(tripTraffic);
     }
 
     @RequestMapping(value = "/lists", method = RequestMethod.POST)

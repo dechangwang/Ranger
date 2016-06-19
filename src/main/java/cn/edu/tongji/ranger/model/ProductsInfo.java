@@ -34,17 +34,26 @@ public class ProductsInfo {
     private List<Location> destinations;
     private List<String> setoffdate;
     private List<String> guidesname;
+    private  String  train;
+    private  String airplane;
+    private  String car;
+    private  String  ship;
+    private  String other;
+    private  String otherway;
+    private List<String> traffics;
 
     public ProductsInfo() {
     }
+
 
     public ProductsInfo(String name, String brief, String detail, Location startloc,
                         String targetloc, int duration, String startdate, double adultprice,
                         double childprice, String tag, String setoffway, String backway,
                         String hotelname, String hoteldesc, String hotelname1, String hoteldesc1,
                         String hotelname2, String hoteldesc2, String hotelname3, String hoteldesc3,
-                        String postcode, String receiver, String postphone, String postaddress,List<Location> destinations,
-                        String angency_id,List<String> setoffdate,List<String> guidesname) {
+                        String postcode, String receiver, String postphone, String postaddress, List<Location> destinations,
+                        String angency_id, List<String> setoffdate, List<String> guidesname,
+                        String otherway, String train, String airplane, String car, String ship, String other,List<String> traffics) {
         this.name = name;
         this.brief = brief;
         this.detail = detail;
@@ -73,6 +82,13 @@ public class ProductsInfo {
         this.angency_id = angency_id;
         this.setoffdate = setoffdate;
         this.guidesname = guidesname;
+        this.otherway = otherway;
+        this.train = train;
+        this.airplane = airplane;
+        this.car = car;
+        this.ship = ship;
+        this.other = other;
+        this.traffics = traffics;
     }
 
     public String getName() {
@@ -299,6 +315,62 @@ public class ProductsInfo {
         this.guidesname = guidesname;
     }
 
+    public String getTrain() {
+        return train;
+    }
+
+    public void setTrain(String train) {
+        this.train = train;
+    }
+
+    public String getAirplane() {
+        return airplane;
+    }
+
+    public void setAirplane(String airplane) {
+        this.airplane = airplane;
+    }
+
+    public String getCar() {
+        return car;
+    }
+
+    public void setCar(String car) {
+        this.car = car;
+    }
+
+    public String getShip() {
+        return ship;
+    }
+
+    public void setShip(String ship) {
+        this.ship = ship;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
+    public String getOtherway() {
+        return otherway;
+    }
+
+    public void setOtherway(String otherway) {
+        this.otherway = otherway;
+    }
+
+    public List<String> getTraffics() {
+        return traffics;
+    }
+
+    public void setTraffics(List<String> traffics) {
+        this.traffics = traffics;
+    }
+
     @Override
     public String toString() {
         return "ProductsInfo{" +
@@ -330,6 +402,13 @@ public class ProductsInfo {
                 ", destinations=" + destinations +
                 ", setoffdate=" + setoffdate +
                 ", guidesname=" + guidesname +
+                ", train='" + train + '\'' +
+                ", airplane='" + airplane + '\'' +
+                ", car='" + car + '\'' +
+                ", ship='" + ship + '\'' +
+                ", other='" + other + '\'' +
+                ", otherway='" + otherway + '\'' +
+                ", traffics=" + traffics +
                 '}';
     }
 }

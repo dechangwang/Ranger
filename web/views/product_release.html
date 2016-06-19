@@ -90,6 +90,45 @@
                     </div>
 
                 </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">出行方式：</label>
+
+                    <div class="col-xs-2 col-md-1">
+                        <div class="checkbox">
+
+                            <label><input type="checkbox" ng-model="products.train">火车</label>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-2 col-md-1">
+                        <div class="checkbox">
+
+                            <label><input type="checkbox" value=""ng-model="products.airplane">飞机</label>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-2 col-md-1">
+                        <div class="checkbox">
+
+                            <label><input type="checkbox" ng-model="products.ship">轮船</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-md-1">
+                        <div class="checkbox">
+
+                            <label><input type="checkbox" value=""  ng-model="products.car">汽车</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2">
+                        <div class="checkbox">
+
+                            <label><input type="checkbox" value="" ng-model="products.other"><input type="text" placeholder="其他" ng-model="products.otherway"
+                                                                          class="form-control"></label>
+
+                        </div>
+                    </div>
+                </div>
+
 
                 <br>
                 <div class="form-group">
@@ -248,7 +287,8 @@
 
                 </div>
                 <br>
-                <div class="form-group">
+
+          <!--      <div class="form-group">
                     <div class="col-md-2"></div>
                     <div class="col-md-4">
                         <label class="control-label">交通方式</label>
@@ -272,102 +312,7 @@
 
                         </div>
                     </div>
-                  <!--  <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">住宿</label>
-                            <div class="col-md-8">
-                                <button class="btn btn-default" type="button" data-toggle="collapse"
-                                        data-target="#collapseExample" aria-expanded="false"
-                                        aria-controls="collapseExample">
-                                    添加
-                                </button>
-                                <div class="collapse" id="collapseExample">
-                                    &lt;!&ndash;<div class="well">
-                                        ...this
-                                        <h1>hello</h1>
-                                    </div>&ndash;&gt;
-
-                                    &lt;!&ndash;hotel 1&ndash;&gt;
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">酒店：
-                                        </label>
-                                        <div class="col-md-8">
-                                            <input type="text" name="hotelname1" class="form-control"
-                                                   ng-model="products.hotelname1"
-                                                   placeholder="酒店等级">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">说明：
-                                        </label>
-                                        <div class="col-md-8">
-                                            <input type="text" name="hoteldesc1" class="form-control"
-                                                   ng-model="products.hoteldesc1"
-                                                   placeholder="酒店名字&详情">
-                                        </div>
-                                    </div>
-                                    &lt;!&ndash;hotel 2&ndash;&gt;
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">酒店：
-                                        </label>
-                                        <div class="col-md-8">
-                                            <input type="text" name="hotelname2" class="form-control"
-                                                   ng-model="products.hotelname2"
-                                                   placeholder="酒店等级">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">说明：
-                                        </label>
-                                        <div class="col-md-8">
-                                            <input type="text" name="hoteldesc2" class="form-control"
-                                                   ng-model="products.hoteldesc2"
-                                                   placeholder="详情">
-                                        </div>
-                                    </div>
-                                    &lt;!&ndash;hotel3&ndash;&gt;
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">酒店：
-                                        </label>
-                                        <div class="col-md-8">
-                                            <input type="text" name="hotelname3" class="form-control"
-                                                   ng-model="products.hotelname3"
-                                                   placeholder="酒店等级">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">说明：
-                                        </label>
-                                        <div class="col-md-8">
-                                            <input type="text" name="hoteldesc3" class="form-control"
-                                                   ng-model="products.hoteldesc3"
-                                                   placeholder="详情">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">酒店：
-                            </label>
-                            <div class="col-md-8">
-                                <input type="text" name="hotelname" class="form-control" ng-model="products.hotelname"
-                                       placeholder="酒店等级" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">说明：
-                            </label>
-                            <div class="col-md-8">
-                                <input type="text" name="hoteldesc" class="form-control" ng-model="products.hoteldesc"
-                                       placeholder="详情" required>
-                            </div>
-                        </div>
-
-                    </div>-->
-
-                </div>
+                </div>-->
                 <!--   <div class="form-group">
                        <label class="col-md-2 control-label">上传图片：
                        </label>

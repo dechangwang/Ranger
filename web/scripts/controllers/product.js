@@ -31,7 +31,14 @@ rangerApp.controller('productCtrl', ['$scope', '$http', '$state', '$window', '$u
         postaddress: '',
         destinations: [],
         setoffdate:[],
-        guidesname:[]
+        guidesname:[],
+        train:true,
+        airplane:false,
+        car:false,
+        ship:false,
+        other:false,
+        otherway:'',
+        traffics:[]
 
     };
     if (!$window.sessionStorage.angencyId) {
@@ -50,6 +57,23 @@ rangerApp.controller('productCtrl', ['$scope', '$http', '$state', '$window', '$u
         $scope.products.angency_id = $window.sessionStorage.angencyId;
     }
     $scope.releaseProduct = function (products) {
+        console.log(products);
+        if($scope.products.airplane == true){
+            $scope.products.traffics.push('2');
+        }
+         if($scope.products.ship == true){
+             $scope.products.traffics.push('3');
+        }
+         if($scope.products.train == true){
+             $scope.products.traffics.push('1');
+        }
+         if($scope.products.car == true){
+             $scope.products.traffics.push('4');
+        }
+         if($scope.products.other == true){
+             $scope.products.traffics.push('6');
+        }
+        console.log($scope.products);
         console.log(products);
         $http.post('/Ranger/products/release', products)
             .success(function (data) {
@@ -138,7 +162,8 @@ rangerApp.controller('productCtrl', ['$scope', '$http', '$state', '$window', '$u
         });
 
         modalInstance.result.then(function (selectedItem) {
-
+            $scope.products.setoffdate.push(selectedItem.date);
+            $scope.products.guidesname.push(selectedItem.guide);
             console.log(selectedItem)
         }, function () {
             console.log('Modal dismissed at: ' + new Date());
