@@ -58,11 +58,27 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
         $scope.isFinished = function (state) {
             return state == 5;
         };
-
+        $scope.isConfirmed = function(state){
+            if(state == 12){
+                return true;
+            }else if(state < 11 && state >1){
+                return true;
+            }else{
+                return false;
+            }
+        };
+        $scope.isReConfirmed = function(state){
+            // console.log(state);
+            if(state <11 && state > 1){
+                return true;
+            }else{
+                return false;
+            }
+        };
         $scope.isReConfirm = function(state){
             return state == 12;
         };
-        
+
         $scope.load_orderlist();
 
         //$scope.orderlist=orderlist;
