@@ -7,7 +7,7 @@
 rangerApp.controller('myProductCtrl', ['$scope', '$http', '$state', 'angency', '$window', '$uibModal',
     function ($scope, $http, $state, angency, $window, $uibModal) {
         $scope.page={
-            "pageSize":10, "pageNo":1, "totalCount":18
+            "pageSize":2, "pageNo":1, "totalCount":18
         };
 
         $scope.productItem = {
