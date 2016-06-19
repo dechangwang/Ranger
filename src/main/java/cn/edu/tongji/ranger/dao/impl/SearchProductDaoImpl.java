@@ -179,27 +179,7 @@ public class SearchProductDaoImpl implements SearchProductDao {
 
     }
 
-//    public Long updateResultsCount() {
-//        System.out.println("get result count");
-//        Session session = sessionFactory.getCurrentSession();
-//        long result = 1L;
-//        if(countSql == null || countSql.trim() == ""){
-//            System.out.println("count sql is null");
-//            return result;
-//        }
-//        SQLQuery sqlQuery = session.createSQLQuery(countSql);
-//        System.out.println(countSql);
-//
-//        try{
-//            System.out.println(countSql);
-//            result = ((Number) sqlQuery.uniqueResult()).longValue();
-//            System.out.println(result);
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//        resultCounts = result;
-//        return result;
-//    }
+
 
     private String generateWhereStrWithLikes(String[] args){
         StringBuilder sb = new StringBuilder("where (");

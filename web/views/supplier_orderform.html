@@ -1,0 +1,122 @@
+<style>
+    body {
+        font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        color: #4f6b72;
+        background: #E6EAE9;
+    }
+
+    a {
+        color: #3057c7;
+    }
+
+    #mytable {
+        width: 700px;
+        padding: 0;
+        margin: 0;
+    }
+
+    caption {
+        padding: 0 0 5px 0;
+        width: 700px;
+        font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        text-align: right;
+    }
+
+    th {
+        font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        color: #4f6b72;
+        border-right: 1px solid #C1DAD7;
+        border-bottom: 1px solid #C1DAD7;
+        border-top: 1px solid #C1DAD7;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: left;
+        padding: 6px 6px 6px 12px;
+        background: #CAE8EA /*url(images/bg_header.jpg)*/ no-repeat;
+    }
+
+    th.nobg {
+        border-top: 0;
+        border-left: 0;
+        border-right: 1px solid #C1DAD7;
+        background: none;
+    }
+
+    td {
+
+        border-right: 1px solid #C1DAD7;
+        border-bottom: 1px solid #C1DAD7;
+        background: #fff;
+        padding: 6px 6px 6px 12px;
+        color: #4f6b72;
+    }
+    #leftbox {
+        list-style-type: none;
+        padding: 0;
+        border: 1px solid #ddd;
+    }
+
+    #leftbox li {
+        padding: 8px 16px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #leftbox li:last-child {
+        border-bottom: none
+    }
+</style>
+
+<div ng-controller="supplierOrderCtrl">
+
+    <div class="div-inline" style="display: inline-block;margin-top:0px;vertical-align: top">
+        <ul id="leftbox">
+            <li><a ng-click="set_state_to_filter(0)">全部订单</a></li>
+            <li><a ng-click="set_state_to_filter(12)">待回执确认单</a></li>
+            <li><a ng-click="set_state_to_filter(2)">待付款订单</a></li>
+            <li><a ng-click="set_state_to_filter(4)">已付款订单</a></li>
+            <li><a ng-click="set_state_to_filter(5)">已完成订单</a></li>
+            <li><a ng-click="set_state_to_filter(6)">已评价订单</a></li>
+            <li><a ng-click="set_state_to_filter(7)">已取消订单</a></li>
+        </ul>
+    </div>
+
+    <div class="div-inline" style="display: inline-block;vertical-align: top">
+        <table id="mytable">
+            <thead>
+            <tr>
+                <th>订单号</th>
+                <th>产品简介</th>
+                <th>供应商</th>
+                <th>价格</th>
+                <th>出行时间</th>
+                <th>下单时间</th>
+                <th>订单状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="order in orderlist|orderformStateFilter: state_to_filter">
+                <td>{{order.orderform.id}}</td>
+                <td>{{order.productName}}</td>
+                <td>{{order.supplierName}}</td>
+                <td>{{order.price}}元</td>
+                <td>{{order.setOffDate |date: 'yyyy-MM-dd'}}</td>
+                <td>{{order.orderform.bookTime |date: 'yyyy-MM-dd' }}</td>
+                <td id="state"><span >{{getState(order.orderform.state)}}</span>
+                </td>
+                <td>
+                    <div><a href="#/home/orderDetail/{{order.orderform.id}}">查看详情</a></div>
+                    <!--<div> <a href="#home/addTourist/{{order.orderform.id}}" ng-show="{{isWaitConfirm(order.orderform.state)}}">提交游客信息</a>-->
+                    <!--</div>-->
+
+                    <div><a ng-click="" ng-show="{{isReConfirm(order.orderform.state)}}">上传回执</a>
+                    </div>
+                    <div><a ng-click="" ng-show="{{isConfirmed(order.orderform.state)}}">查看确认单</a></div>
+                    <div><a ng-click="" ng-show="{{isReConfirmed(order.orderform.state)}}">查看回执</a></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
