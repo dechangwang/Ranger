@@ -75,7 +75,7 @@ rangerApp.controller('myCtrl', ['$scope', 'fileUpload',function ($scope,fileUplo
 
 }]);
 
-rangerApp.controller('picCtrl', ['$scope', 'fileUpload','$http','$window',function ($scope,fileUpload,$http,$window) {
+rangerApp.controller('picCtrl', ['$scope', 'fileUpload','$http','$window','$state', function ($scope,fileUpload,$http,$window,$state) {
     $scope.picture={
         brief:''
     };

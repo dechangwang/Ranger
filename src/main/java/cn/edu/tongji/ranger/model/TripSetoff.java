@@ -22,6 +22,7 @@ public class TripSetoff {
     private Guide guide;
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public long getId() {
         return id;

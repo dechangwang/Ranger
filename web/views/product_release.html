@@ -30,65 +30,71 @@
                     </div>
                 </div>
                 <br>
-              <!--  <div class="form-group">
-                    <label class="col-md-2 control-label">出发地：</label>
-                    <div class="col-md-2">
-                        <select class="form-control" name="startloc" ng-model="userInfo.startloc">
-                            <option selected>上海</option>
-                            <option>南京</option>
-                            <option>杭州</option>
-                            <option>浙江</option>
-                            <option>安徽</option>
-                            <option>更多</option>
-                        </select>
-                    </div>
-                   &lt;!&ndash; <label class="col-md-2 control-label">目的地：</label>
-                    <div class="col-md-3 ">
-                        <input type="text" name="targetloc" class="form-control col-md-3" placeholder="目的地有多个时以，分隔"
-                               ng-model="products.targetloc"
-                               required>
-                        &lt;!&ndash; <p class="col-md-1">天</p>&ndash;&gt;
-                    </div>&ndash;&gt;
-                </div>-->
+                <!--  <div class="form-group">
+                      <label class="col-md-2 control-label">出发地：</label>
+                      <div class="col-md-2">
+                          <select class="form-control" name="startloc" ng-model="userInfo.startloc">
+                              <option selected>上海</option>
+                              <option>南京</option>
+                              <option>杭州</option>
+                              <option>浙江</option>
+                              <option>安徽</option>
+                              <option>更多</option>
+                          </select>
+                      </div>
+                     &lt;!&ndash; <label class="col-md-2 control-label">目的地：</label>
+                      <div class="col-md-3 ">
+                          <input type="text" name="targetloc" class="form-control col-md-3" placeholder="目的地有多个时以，分隔"
+                                 ng-model="products.targetloc"
+                                 required>
+                          &lt;!&ndash; <p class="col-md-1">天</p>&ndash;&gt;
+                      </div>&ndash;&gt;
+                  </div>-->
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label" ng-click="select_startLocation()"><button type="button" class="btn btn-default">出发地</button></label>
+                    <label class="col-md-2 control-label" ng-click="select_startLocation()">
+                        <button type="button" class="btn btn-primary">出发地</button>
+                    </label>
                     <div class="col-md-2">
                         <h4 ng-bind="products.startloc.name"></h4>
                     </div>
 
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label" ng-click="select_destinations(lg)"><button type="button" class="btn btn-default">目的地</button></label>
-                        <div class="col-xs-12 col-sm-10 col-md-8">
-                            <div ng-repeat="destination in destinations">
-                                <div class="col-xs-3 col-sm-2">
-                                    <h5><span class="label label-info">{{destination.name}}</span><a><i
-                                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
+                    <label class="col-md-2 control-label" ng-click="select_destinations(lg)">
+                        <button type="button" class="btn btn-primary">目的地</button>
+                    </label>
+                    <div class="col-xs-12 col-sm-10 col-md-8">
+                        <div ng-repeat="destination in destinations">
+                            <div class="col-xs-3 col-sm-2">
+                                <h5><span class="label label-info">{{destination.name}}</span><a><i
+                                        class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
 
-                                </div>
                             </div>
                         </div>
+                    </div>
 
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label" ng-click="select_date()"><button type="button" class="btn btn-default">出团日期</button></label>
-                        <div class="col-xs-12 col-sm-10 col-md-8">
-                            <div ng-repeat="dt in products.setoffdate">
-                                <div class="col-xs-3 col-sm-2">
+                    <label class="col-md-2 control-label" ng-click="select_date()">
+                        <button type="button" class="btn btn-primary">出团日期</button>
+                    </label>
+                    <div class="col-xs-12 col-sm-10 col-md-8">
+                        <div ng-repeat="dt in products.setoffdate">
+                            <div class="col-xs-3 col-sm-2">
 
-                                    <h5><span class="label label-info col-md-10">{{dt}}</span></h5>
+                                <h5><span class="label label-info col-md-10">{{dt}}</span></h5>
 
-                                </div>
                             </div>
                         </div>
+                    </div>
 
                 </div>
 
                 <br>
                 <div class="form-group">
                     <div class="col-md-2"></div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label class="control-label">时长</label>
                         <div class="input-group">
                             <input type="number" class="form-control" name="duration" placeholder="请输入天数"
@@ -97,12 +103,15 @@
                         </div>
 
 
-                    </div><!--   <p class="col-md-1">天</p>-->
-                   <!-- <div class="col-md-2"></div>
+                    </div>
+                    <div class="col-md-1"></div>
+
                     <div class="col-md-3">
-                        <label class="control-label">出团日期</label>
-                        <input type="date" name="startdate" class="form-control col-md-3" ng-model="products.startdate">
-                    </div>-->
+                        <label class="control-label">标签</label>
+                        <input type="text" name="tag" class="form-control" placeholder="标签，如：自由行"
+                               ng-model="products.tag">
+
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
@@ -134,39 +143,6 @@
 
 
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="control-label">标签</label>
-                        <input type="text" name="tag" class="form-control" placeholder="标签，如：自由行"
-                               ng-model="products.tag">
-
-                    </div>
-
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-4">
-                        <label class="control-label">交通方式</label>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">出发：</label>
-
-                            <div class="col-md-6 form-inline">
-                                <input type="text" class="form-control col-md-3" name="setoffway" placeholder="出发交通方式"
-                                       ng-model="products.setoffway">
-
-                            </div>
-
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">返回：</label>
-                            <div class="col-md-6 form-inline">
-                                <input type="text" class="form-control col-md-3" name="backway" placeholder="返回交通方式"
-                                       ng-model="products.backway">
-
-                            </div>
-
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -220,7 +196,8 @@
                                             <input type="text" name="hoteldesc2" class="form-control"
                                                    ng-model="products.hoteldesc2"
                                                    placeholder="详情">
-                                        </div>                                    </div>
+                                        </div>
+                                    </div>
                                     <!--hotel3-->
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">酒店：
@@ -262,40 +239,167 @@
                         </div>
 
                     </div>
+                    <!-- <div class="col-md-3">
+                         <label class="control-label">标签</label>
+                         <input type="text" name="tag" class="form-control" placeholder="标签，如：自由行"
+                                ng-model="products.tag">
+
+                     </div>-->
 
                 </div>
-             <!--   <div class="form-group">
-                    <label class="col-md-2 control-label">上传图片：
-                    </label>
-                    <div class="col-md-8" ng-controller="myCtrl">
-                        <input type="file" name="certificate" class="form-control" file-model="myFile"
-                               onchange="openFile(event)"
-                               placeholder="" required> &lt;!&ndash;onchange="openFile(event)"&ndash;&gt;
-                        &lt;!&ndash;onchange="angular.element(this).scope().fileNameChanged(this)"&ndash;&gt;
-                        &lt;!&ndash;  ng-file-select="onFileSelect($files)"&ndash;&gt;
-                        <img id='output' width="150px" float="left">
-                        <button ng-click="uploadFile()" id="certificate" float="left" style="display:none;">upload
-                            me
-                        </button>
-                        <script>
-                            var openFile = function (event) {
+                <br>
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <label class="control-label">交通方式</label>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">出发：</label>
 
-                                var input = event.target;
-                                var reader = new FileReader();
-                                reader.onload = function () {
-                                    var dataURL = reader.result;
-                                    var output = document.getElementById('output');
-                                    output.src = dataURL;
-                                };
-                                reader.readAsDataURL(input.files[0]);
-                                document.getElementById("certificate").style.display = "block";
-                            };
+                            <div class="col-md-6 form-inline">
+                                <input type="text" class="form-control col-md-3" name="setoffway" placeholder="出发交通方式"
+                                       ng-model="products.setoffway">
 
-                        </script>
+                            </div>
 
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">返回：</label>
+                            <div class="col-md-6 form-inline">
+                                <input type="text" class="form-control col-md-3" name="backway" placeholder="返回交通方式"
+                                       ng-model="products.backway">
+
+                            </div>
+
+                        </div>
                     </div>
-                    &lt;!&ndash; <button class="col-md-2" onclick="uploadmyfile()">上传</button>&ndash;&gt;
-                </div>-->
+                  <!--  <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">住宿</label>
+                            <div class="col-md-8">
+                                <button class="btn btn-default" type="button" data-toggle="collapse"
+                                        data-target="#collapseExample" aria-expanded="false"
+                                        aria-controls="collapseExample">
+                                    添加
+                                </button>
+                                <div class="collapse" id="collapseExample">
+                                    &lt;!&ndash;<div class="well">
+                                        ...this
+                                        <h1>hello</h1>
+                                    </div>&ndash;&gt;
+
+                                    &lt;!&ndash;hotel 1&ndash;&gt;
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">酒店：
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="hotelname1" class="form-control"
+                                                   ng-model="products.hotelname1"
+                                                   placeholder="酒店等级">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">说明：
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="hoteldesc1" class="form-control"
+                                                   ng-model="products.hoteldesc1"
+                                                   placeholder="酒店名字&详情">
+                                        </div>
+                                    </div>
+                                    &lt;!&ndash;hotel 2&ndash;&gt;
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">酒店：
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="hotelname2" class="form-control"
+                                                   ng-model="products.hotelname2"
+                                                   placeholder="酒店等级">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">说明：
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="hoteldesc2" class="form-control"
+                                                   ng-model="products.hoteldesc2"
+                                                   placeholder="详情">
+                                        </div>
+                                    </div>
+                                    &lt;!&ndash;hotel3&ndash;&gt;
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">酒店：
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="hotelname3" class="form-control"
+                                                   ng-model="products.hotelname3"
+                                                   placeholder="酒店等级">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">说明：
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="hoteldesc3" class="form-control"
+                                                   ng-model="products.hoteldesc3"
+                                                   placeholder="详情">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">酒店：
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" name="hotelname" class="form-control" ng-model="products.hotelname"
+                                       placeholder="酒店等级" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">说明：
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" name="hoteldesc" class="form-control" ng-model="products.hoteldesc"
+                                       placeholder="详情" required>
+                            </div>
+                        </div>
+
+                    </div>-->
+
+                </div>
+                <!--   <div class="form-group">
+                       <label class="col-md-2 control-label">上传图片：
+                       </label>
+                       <div class="col-md-8" ng-controller="myCtrl">
+                           <input type="file" name="certificate" class="form-control" file-model="myFile"
+                                  onchange="openFile(event)"
+                                  placeholder="" required> &lt;!&ndash;onchange="openFile(event)"&ndash;&gt;
+                           &lt;!&ndash;onchange="angular.element(this).scope().fileNameChanged(this)"&ndash;&gt;
+                           &lt;!&ndash;  ng-file-select="onFileSelect($files)"&ndash;&gt;
+                           <img id='output' width="150px" float="left">
+                           <button ng-click="uploadFile()" id="certificate" float="left" style="display:none;">upload
+                               me
+                           </button>
+                           <script>
+                               var openFile = function (event) {
+
+                                   var input = event.target;
+                                   var reader = new FileReader();
+                                   reader.onload = function () {
+                                       var dataURL = reader.result;
+                                       var output = document.getElementById('output');
+                                       output.src = dataURL;
+                                   };
+                                   reader.readAsDataURL(input.files[0]);
+                                   document.getElementById("certificate").style.display = "block";
+                               };
+
+                           </script>
+
+                       </div>
+                       &lt;!&ndash; <button class="col-md-2" onclick="uploadmyfile()">上传</button>&ndash;&gt;
+                   </div>-->
                 <div class="form-group">
                     <div class="form-group">
                         <label class="col-md-2 control-label ">邮政编码：</label>

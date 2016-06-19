@@ -168,6 +168,13 @@ public class ProductsController {
                 tripSetoff.setCommentCount(0);
                 tripSetoff.setPurchaseCount(0);
 
+                for (Guide guide : guideList){
+                    if (guide.getName().equals(productsInfo.getGuidesname().get(i))){
+                        tripSetoff.setGuide(guide);
+                        break;
+                    }
+                }
+
                 StringTokenizer stringTokenizer = new StringTokenizer(productsInfo.getSetoffdate().get(i), "T");
                 String str = stringTokenizer.nextToken() + " " + stringTokenizer.nextToken().substring(0, 10);
 
@@ -181,12 +188,7 @@ public class ProductsController {
                 Timestamp setOffTime = Timestamp.valueOf(str);
                 tripSetoff.setTripSetoffDate(setOffTime);
 
-                for (Guide guide : guideList){
-                    if (guide.getName().equals(productsInfo.getGuidesname().get(i))){
-                        tripSetoff.setGuide(guide);
-                        break;
-                    }
-                }
+
                 tripSetoff.setProduct(product);
                 tripSetoffSet.add(tripSetoff);
             }

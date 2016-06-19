@@ -138,9 +138,8 @@ rangerApp.controller('productCtrl', ['$scope', '$http', '$state', '$window', '$u
         });
 
         modalInstance.result.then(function (selectedItem) {
-            $scope.products.setoffdate.push(selectedItem.date);
-            $scope.products.guidesname.push(selectedItem.guide);
-            console.log( $scope.products)
+
+            console.log(selectedItem)
         }, function () {
             console.log('Modal dismissed at: ' + new Date());
         });
