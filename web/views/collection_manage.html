@@ -1,9 +1,40 @@
-<div class="container">
-<div class="panel-body">
-    <table class="table">
-        <tr>
+<div class="panel panel-default" ng-controller="collectionManageCtrl">
+    <div class="panel-heading">
+        <div class="panel-title">我的收藏</div>
+    </div>
+    <div class="panel-body">
+        <!-- <ul>
+             <li ng-repeat="(name,date) in productList">{{name}},{{date}}</li>
+         </ul>-->
+        <table class="table">
+            <tr>
+                <th>产品编号</th>
+                <th>产品名称</th>
+                <th>收藏时间</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="product_collection in collections">
+                <td ng-bind="product_collection.product.id"></td>
+                <td ng-bind="product_collection.product.name"></td>
+                <td ng-bind="product_collection.collectTime | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                <td>
+                    <button class="btn m-b-xs btn-sm btn-info btn-addon"
+                            ng-click="collection_delete(product_collection)">删除
+                    </button>
+                </td>
+            </tr>
 
-        </tr>
-    </table>
-</div>
+        </table>
+        <!--<nav>
+            <ul class="pager">
+                <li><a href="#">Previous</a></li>
+                <li><a href="#">Next</a></li>
+            </ul>
+        </nav>-->
+    </div>
+    <div class="container center-block text-center">
+        <uib-pagination total-items="page.totalCount" ng-model="page.currentPage" max-size="page.pageSize"
+                        ng-change="" class="samplePage pagination-sm" boundary-link-numbers="true">
+        </uib-pagination>
+    </div>
 </div>

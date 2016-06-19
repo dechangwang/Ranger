@@ -14,11 +14,10 @@ rangerApp.controller("topBarCtrl", ["$scope", "$http", "$stateParams", "$window"
         };
 
         $scope.isLogout = function(){
-            if($window.sessionStorage.angencyId && angency.id >= 0){
-                return false;
-            }else{
+            if(!$window.sessionStorage.angencyId || $window.sessionStorage.angencyId < 0){
                 return true;
             }
+            return false;
         };
 
         $scope.isLogon = function(){
