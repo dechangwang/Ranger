@@ -3,7 +3,9 @@ package cn.edu.tongji.ranger.dao.impl;
 import cn.edu.tongji.ranger.init.HibernateUtil;
 import cn.edu.tongji.ranger.model.*;
 import cn.edu.tongji.ranger.model.Collection;
+import cn.edu.tongji.ranger.model2show.Product2;
 import cn.edu.tongji.ranger.model2show.SimpleProduct;
+import cn.edu.tongji.ranger.model2show.TripDetail2;
 import org.hibernate.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +26,7 @@ public class SessionPersistenceTestD {
 
     }
 
-    @Test
+//    @Test
     public void testRemoveCollection(){
        /* Angency angency = angencyService.findById(Long.parseLong(angencyId));
         List<String> list = new ArrayList<>();
@@ -205,6 +207,20 @@ public class SessionPersistenceTestD {
 //    }
 
     @Test
+    public void findById(){
+        Product2 product2 = sp.findById(2L, Product2.class);
+        System.out.println(product2);
+//        System.out.println(product2.getTripDetails());
+    }
+
+    @Test
+    public void findDetailsByExample(){
+        TripDetail2 tripDetail2 = new TripDetail2();
+        tripDetail2.setProductId(2L);
+        List<TripDetail2> tripDetail2s= sp.findByExample(tripDetail2, TripDetail2.class);
+        System.out.println(tripDetail2s.size());
+    }
+
     public void testListAll() {
         List<Location> results = sp.listAll(Location.class);
         System.out.println(results.size());

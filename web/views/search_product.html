@@ -33,34 +33,33 @@
             <div class="col-xs-2 col-md-1">
                 <div class="checkbox">
 
-                    <label><input type="checkbox" value="">火车</label>
+                    <label><input type="checkbox" ng-model="traffic_train">火车</label>
                 </div>
             </div>
 
             <div class="col-xs-2 col-md-1">
                 <div class="checkbox">
 
-                    <label><input type="checkbox" value="">飞机</label>
+                    <label><input type="checkbox" ng-model="traffic_plane">飞机</label>
                 </div>
             </div>
 
             <div class="col-xs-2 col-md-1">
                 <div class="checkbox">
 
-                    <label><input type="checkbox" value="">轮船</label>
+                    <label><input type="checkbox" ng-model="traffic_ship">轮船</label>
                 </div>
             </div>
             <div class="col-xs-2 col-md-1">
                 <div class="checkbox">
 
-                    <label><input type="checkbox" value="">汽车</label>
+                    <label><input type="checkbox" ng-model="traffic_bus">汽车</label>
                 </div>
             </div>
-            <div class="col-xs-2 col-sm-2 col-md-2">
+            <div class="col-xs-2 col-md-1">
                 <div class="checkbox">
 
-                    <label><input type="checkbox" value=""><input type="text" placeholder="其他"
-                                                                  class="form-control"></label>
+                    <label><input type="checkbox" ng-model="traffic_other">其他</label>
 
                 </div>
             </div>
@@ -78,27 +77,27 @@
             <div class="col-xs-4 col-sm-3 col-md-3">
                 <div class="input-group">
  			<span class="input-group-addon">
-        	<input type="checkbox" aria-label="...">
+        	<input type="checkbox" aria-label="..." ng-model="setoff_year" >
       		</span>
-                    <input type="number" class="form-control" value="2016">
+                    <input type="number" class="form-control" ng-model="setoff_year_content" min="1970">
                     <span class="input-group-addon">年</span>
                 </div>
             </div>
             <div class="col-xs-4 col-sm-3 col-md-2">
                 <div class="input-group">
  			<span class="input-group-addon">
-        	<input type="checkbox" aria-label="...">
+        	<input type="checkbox" aria-label="..." ng-model="setoff_month" >
       		</span>
-                    <input type="number" class="form-control" value="1">
+                    <input type="number" class="form-control" ng-model="setoff_month_content" min="1" max="12">
                     <span class="input-group-addon">月</span>
                 </div>
             </div>
             <div class="col-xs-4 col-sm-3 col-md-2">
                 <div class="input-group">
  			<span class="input-group-addon">
-        	<input type="checkbox" aria-label="...">
+        	<input type="checkbox" aria-label="..." ng-model="setoff_day" >
       		</span>
-                    <input type="number" class="form-control" value="1">
+                    <input type="number" class="form-control" ng-model="setoff_day_content" min="1" max="31">
                     <span class="input-group-addon">日</span>
                 </div>
             </div>
@@ -116,9 +115,10 @@
             <div class="col-xs-12 col-sm-10 col-md-11">
                 <div ng-repeat="destination in destinations">
                     <div class="col-xs-3 col-sm-2">
-                        <h5><span class="label label-info">{{destination.name}}</span><a><i
-                                class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></h5>
-
+                        <h5><span class="label label-info">{{destination.name}}</span>
+                            <a ng-click="remove_destination(destination)"><i
+                                    class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -162,9 +162,11 @@
 
 
                 <div class="col-xs-4 col-md-2">
-                    <ol class="list-unstyled" ng-repeat="destination in simplep.tripDestinations">
-                        <li><label><span class="label label-default">
-                    {{setoff.location.name}}
+                    <ol class="list-unstyled">
+                        <li><label><span class="label label-primary">目的地</span></label></li>
+                        <li ng-repeat="destination in simplep.tripDestinations"><label><span
+                                class="label label-default">
+                    {{destination.location.name}}
                 </span></label></li>
                     </ol>
 
@@ -172,12 +174,12 @@
                 </div>
 
                 <div class="col-xs-4 col-md-2">
-                    <ol class="list-unstyled" ng-repeat="price in simplep.tripPrices">
-                        <li>
+                    <ol class="list-unstyled">
+                        <li ng-repeat="price in simplep.tripPrices">
                             <label><span class="label label-default">
                         {{price.touristType.type}}
                     </span></label>
-                            100
+                            {{price.price}}
                             <label><span class="label label-default">
                         元
                     </span></label>
@@ -189,16 +191,13 @@
                 </div>
 
                 <div class="col-xs-4 col-md-2">
-                    <ol class="list-unstyled" ng-repeat="setoff in simplep.tripSetoffs">
-                        <li>
-                            <button type="button" disabled="true" class="btn btn-sm btn-default">2009-08-24</button>
+                    <ol class="list-unstyled">
+                        <li ng-repeat="setoff in simplep.tripSetoffs">
+                            <button type="button" disabled="true" class="btn btn-sm btn-default">
+                                {{setoff.tripSetoffDate|date:'yyyy-MM-dd'}}
+                            </button>
                         </li>
-                        <li>
-                            <button type="button" disabled="true" class="btn btn-sm btn-default">2009-08-24</button>
-                        </li>
-                        <li>
-                            <button type="button" disabled="true" class="btn btn-sm btn-default">2009-08-24</button>
-                        </li>
+
 
                     </ol>
                 </div>
@@ -214,55 +213,23 @@
                     <label><span class="label label-default">
                     点击率:{{simplep.clickRate}}</span></label>
                 </div>
-                <div class="col-xs-6 col-md-3">
-                    <label><span class="label label-default">
-                        评论数</span></label>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <label><span class="label label-default">
-                            购买数</span></label>
-                </div>
+                <!--<div class="col-xs-6 col-md-3">-->
+                    <!--<label><span class="label label-default">-->
+                        <!--评论数</span></label>-->
+                <!--</div>-->
+                <!--<div class="col-xs-6 col-md-3">-->
+                    <!--<label><span class="label label-default">-->
+                            <!--购买数</span></label>-->
+                <!--</div>-->
             </div>
             <hr>
         </div>
     </div>
     <div class="container center-block text-center">
-        <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
-                        boundary-link-numbers="true" rotate="false"></uib-pagination>
-
+        <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" max-size="page.pageSize"
+                        ng-change="pageChanged()" class="samplePage pagination-sm" boundary-link-numbers="true">
+        </uib-pagination>
     </div>
 
     <!--add pager-->
 </div>
-
-
-<!--<div class="panel-body">-->
-<!--<table class="table">-->
-<!--<tr ng-repeat="simplep in results">-->
-<!--<td><a href="#/product_detail/{{simplep.id}}">{{simplep.name}}</a></td>-->
-<!--<td>{{simplep.summary}}</td>-->
-<!--<td>{{simplep.supplier.cname}}</td>-->
-<!--<td>出行时长:{{simplep.duration}}</td>-->
-<!--<td>点击率:{{simplep.clickRate}}</td>-->
-<!--<td>购买数: 0</td>-->
-<!--<td>评论数: 0</td>-->
-<!--<td>平均评分: 0</td>-->
-<!--<td>-->
-<!--<ul ng-repeat="setoff in simplep.tripSetoffs">-->
-<!--<li></li>-->
-<!--</ul>-->
-<!--</td>-->
-<!--<td>-->
-<!--<ul ng-repeat="price in simplep.tripPrices">-->
-<!--<li>{{price.touristType.type}}:{{price.price}}</li>-->
-
-<!--</ul>-->
-<!--</td>-->
-<!--<td>-->
-<!--<ul ng-repeat="destination in simplep.tripDestinations">-->
-<!--{{destination.location.name}}-->
-<!--</ul>-->
-<!--</td>-->
-<!--</tr>-->
-<!--</table>-->
-<!--</div>-->

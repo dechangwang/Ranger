@@ -6,7 +6,10 @@ import cn.edu.tongji.ranger.model.Location;
 import cn.edu.tongji.ranger.model.Product;
 import cn.edu.tongji.ranger.model2show.Product2;
 import cn.edu.tongji.ranger.model2show.SimpleProduct;
+import cn.edu.tongji.ranger.model2show.TripDetail2;
+import cn.edu.tongji.ranger.model2show.TripPicture2;
 import cn.edu.tongji.ranger.service.SearchProductService;
+import cn.edu.tongji.ranger.utils.FilePathUtil;
 import cn.edu.tongji.ranger.utils.SearchCondition;
 import cn.edu.tongji.ranger.utils.SearchProductOrderEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +91,37 @@ public class SearchProductServiceImpl implements SearchProductService {
     }
 
     public Product2 getProductInfor(long productId) {
-        return genericDao.findById(productId, Product2.class);
+        Product2 product2 = genericDao.findById(productId, Product2.class);
+        product2.growClickRate();
+        genericDao.saveOrUpdate(product2);
+        for(TripPicture2 tripPicture2:product2.getTripPictures()){
+            String path = FilePathUtil.convert(tripPicture2.getPicturePath());
+            tripPicture2.setPicturePath(path);
+        }
+        TripDetail2 tripDetail2 = new TripDetail2();
+        tripDetail2.setProductId(productId);
+        List<TripDetail2> tripDetail2List = genericDao.findByExample(tripDetail2, TripDetail2.class);
+        product2.setTripDetails(tripDetail2List);
+
+        return product2;
+    }
+
+    @Override
+    public Long getResultCount(SearchCondition searchCondition) {
+        StringBuilder searchStrSb = new StringBuilder(searchCondition.getSearchStr());
+        if(searchCondition.getLimits() != null){
+            for(String str : searchCondition.getLimits()){
+                searchStrSb.append(" ");
+                searchStrSb.append(str);
+            }
+        }
+
+        String[] searchKeys = searchStrSb.toString().split("\\s+");
+        long setOffLocationId = searchCondition.getSetoffLoctionId();
+
+        SearchProductOrderEnum order = searchCondition.getOrder();
+
+        return searchProductDao.getResultsCount(searchKeys, setOffLocationId, order);
     }
 
 

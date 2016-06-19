@@ -28,7 +28,8 @@ rangerApp.controller('createOrderformCtrl', ['$http', '$scope', '$stateParams', 
             }
         }else{
             alert("请先登录");
-            window.history.back();
+            $state.go('home.login');
+            // window.history.back();
         }
 
 }]);

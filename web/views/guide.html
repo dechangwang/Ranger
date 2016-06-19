@@ -1,0 +1,52 @@
+<div class="wrapper-md" ng-controller="GuideCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            导游列表
+        </div>
+        <div class="panel-body">
+<!--
+            <button class="btn m-b-xs btn-sm btn-primary btn-addon" ng-click="addGuide()"><i class="fa fa-plus"></i>添加</button>
+-->
+            <table class="table m-b-none">
+                <thead>
+                <tr>
+                    <th>
+                        导游姓名
+                    </th>
+                    <th>
+                        电话
+                    </th>
+                    <th>
+                        邮箱
+                    </th>
+                    <th>
+                        地址
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="gud in guideList">
+                    <td>{{gud.name}}</td>
+                    <td>{{gud.phone}}</td>
+                    <td>{{gud.email}}</td>
+                    <td>{{gud.address}}</td>
+                    <td>
+                        <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="editGuide(gud)" ><i class="fa fa-pencil"></i>编辑</button>
+<!--
+                        <button class="btn m-b-xs btn-sm btn-danger btn-addon" ng-click="removeGuide(gud)" ><i class="fa fa-trash-o"></i>删除</button>
+-->
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <pagination boundary-links="true" total-items="totalItemNum" ng-model="currPageNum"previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="loadData()"></pagination>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

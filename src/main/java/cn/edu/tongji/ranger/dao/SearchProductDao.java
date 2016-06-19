@@ -23,4 +23,7 @@ public interface SearchProductDao {
     List<Long> searchForIds(String[] searchKeys, long setOffLocationId, int firstResult, int resultSize,
                             SearchProductOrderEnum order, int duration,
                             double lowerLimit, double upperLimit);
+
+    Long getResultsCount(String[] searchKeys, long setoffLocationId, SearchProductOrderEnum order);
+
 }

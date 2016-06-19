@@ -35,6 +35,12 @@
         <mapping class="cn.edu.tongji.ranger.model2show.TripSetoff2"/>
         <mapping class="cn.edu.tongji.ranger.model2show.TripDestination2"/>
         <mapping class="cn.edu.tongji.ranger.model2show.TripPrice2"/>
+        <mapping class="cn.edu.tongji.ranger.model2show.Product2"/>
+        <mapping class="cn.edu.tongji.ranger.model2show.TripPicture2"/>
+        <mapping class="cn.edu.tongji.ranger.model2show.TripAccomodation2"/>
+        <mapping class="cn.edu.tongji.ranger.model2show.TripTraffic2"/>
+        <mapping class="cn.edu.tongji.ranger.model2show.TripDetail2"/>
+        <!--<mapping class="cn.edu.tongji.ranger.model2show.Trip"-->
         <mapping package="cn.edu.tongji.ranger.model"/>
     </session-factory>
 </hibernate-configuration>

@@ -81,7 +81,8 @@ rangerApp.controller('loginCtrl', ['$scope', '$http', '$state', 'angency', 'Ange
                     $window.sessionStorage.angencyId = response.data.angency.id;
                     Angency.setAngencyId(response.data.angency.id);
                     angency.id = response.data.angency.id;
-                    $state.go('home');
+                    window.history.back();
+                    // $state.go('home');
                 } else {
                     $scope.loginSuccess = false;
                 }
