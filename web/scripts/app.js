@@ -83,6 +83,16 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 }
             }
         })
+        .state('home.supplier_order',{
+            url:{
+                url:'/supplier_order',
+                views:{
+                    'main@home':{
+                        templateUrl:'views/supplier_orderform.html'
+                    }
+                }
+            }
+        })
         .state('home.detail',{
             url:'/orderDetail/:id',
             views:{
