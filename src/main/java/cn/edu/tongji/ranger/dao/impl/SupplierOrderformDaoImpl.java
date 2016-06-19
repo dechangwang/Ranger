@@ -25,7 +25,7 @@ public class SupplierOrderformDaoImpl implements SupplierOrderformDao {
     @Override
     public List<Long> getOrderformBySupplierId(Long supplierId) {
         List<Long> result = new ArrayList<>();
-        String sql = "select distinct orderform.id from product, trip_setoff, orderform " +
+        String sql = "select distinct orderform.id as oid from product, trip_setoff, orderform " +
                 "where product.product_id = trip_setoff.product_id and orderform.trip_setoff_id = trip_setoff.id" +
                 " and product.supplier_id = ";
         sql += supplierId;
@@ -34,9 +34,8 @@ public class SupplierOrderformDaoImpl implements SupplierOrderformDao {
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         List list = sqlQuery.list();
         for (Object o : list) {
-            Map row = (Map) o;
-            Long pid = ((BigInteger) row.get("pid")).longValue();
-            result.add(pid);
+            Long oid = ((BigInteger) o).longValue();
+            result.add(oid);
         }
         return result;
     }

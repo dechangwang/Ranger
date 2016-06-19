@@ -25,84 +25,9 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
                 .error(function (err) {
                     alert(err);
                 });
+            console.log($scope.orderlist);
         };
 
-        // switch (type){
-        //     case '0':
-        //         $http.get("/Ranger/order/listAll/"+buyer_id).then(
-        //             function(response){
-        //                 $scope.orderlist=response.data;
-        //             },function(errResponse)
-        //             {
-        //                 alert("error");
-        //             }
-        //         );break;
-        //     case '1':
-        //         $http.get("/Ranger/order/listToBeAck/"+buyer_id).then(
-        //             function(response){
-        //                 $scope.orderlist=response.data;
-        //             },function(errResponse)
-        //             {
-        //                 alert("error");
-        //             }
-        //         );break;
-        //     case '2':$http.get("/Ranger/order/listToPay/"+buyer_id).then(
-        //         function(response){
-        //             $scope.orderlist=response.data;
-        //         },function(errResponse)
-        //         {
-        //             alert("error");
-        //         }
-        //     );break;
-        //     case '3':$http.get("/Ranger/order/listHasPaidDeposit/"+buyer_id).then(
-        //         function(response){
-        //             $scope.orderlist=response.data;
-        //         },function(errResponse)
-        //         {
-        //             alert("error");
-        //         }
-        //     );break;
-        //     case '4':$http.get("/Ranger/order/listHasPaidAll/+"+buyer_id).then(
-        //         function(response){
-        //             $scope.orderlist=response.data;
-        //         },function(errResponse)
-        //         {
-        //             alert("error");
-        //         }
-        //     );break;
-        //     case '5':$http.get("/Ranger/order/listHasFinished/"+buyer_id).then(
-        //         function(response){
-        //             $scope.orderlist=response.data;
-        //         },function(errResponse)
-        //         {
-        //             alert("error");
-        //         }
-        //     );break;
-        //     case '6':$http.get("/Ranger/order/listHasEvaluated/+"+buyer_id).then(
-        //         function(response){
-        //             $scope.orderlist=response.data;
-        //         },function(errResponse)
-        //         {
-        //             alert("error");
-        //         }
-        //     );break;
-        //     case '7':$http.get("/Ranger/order/listHasCanceled/"+buyer_id).then(
-        //         function(response){
-        //             $scope.orderlist=response.data;
-        //         },function(errResponse)
-        //         {
-        //             alert("error");
-        //         }
-        //     );break;
-        //     default :$http.get("/Ranger/order/listAll/"+buyer_id).then(
-        //         function(response){
-        //             $scope.orderlist=response.data;
-        //         },function(errResponse)
-        //         {
-        //             alert("error");
-        //         }
-        //     );break;
-        // }
 
         $scope.getState = function (statenum) {
             //$document.getElementById("state")
@@ -133,6 +58,11 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
         $scope.isFinished = function (state) {
             return state == 5;
         };
+
+        $scope.isReConfirm = function(state){
+            return state == 12;
+        };
+        
         $scope.load_orderlist();
 
         //$scope.orderlist=orderlist;

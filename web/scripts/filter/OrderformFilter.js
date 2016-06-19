@@ -7,10 +7,12 @@ rangerApp.filter('orderformStateFilter', function(){
         if(state > 0){
             var array = [];
             for(var i = 0; i < inputArray.length; i++){
-                if(inputArray[i].state == state){
+                if(inputArray[i].orderform.state == state){
                     array.push(inputArray[i]);
                 }
             }
+            console.log(array);
+            return array;
         }else{
             return inputArray;
         }

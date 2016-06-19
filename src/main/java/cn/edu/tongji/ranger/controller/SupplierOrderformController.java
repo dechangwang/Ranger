@@ -1,5 +1,6 @@
 package cn.edu.tongji.ranger.controller;
 
+import cn.edu.tongji.ranger.model.OrderListItem;
 import cn.edu.tongji.ranger.model.Orderform;
 import cn.edu.tongji.ranger.service.SupplierOrderformService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class SupplierOrderformController {
 
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
-    public List<Orderform> getOrderformsBySupplierId(@RequestBody long supplierId){
+    public List<OrderListItem> getOrderformsBySupplierId(@RequestBody long supplierId){
         return supplierOrderformService.getOrderformsBySupplierId(supplierId);
     }
 }
