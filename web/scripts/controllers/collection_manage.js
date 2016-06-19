@@ -2,6 +2,6 @@
 
 rangerApp.controller('collectionManageCtrl', ['$http', '$scope',
     function ($http, $scope){
-
+        $scope.collections = [];
     }
 ]);
