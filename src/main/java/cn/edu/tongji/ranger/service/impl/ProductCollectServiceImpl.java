@@ -9,6 +9,7 @@ import cn.edu.tongji.ranger.service.ProductCollectService;
 import cn.edu.tongji.ranger.utils.CollectionCreateParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.xml.ws.ServiceMode;
 import java.sql.Timestamp;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 
 @Service("ProductCollectService")
+@Transactional
 public class ProductCollectServiceImpl implements ProductCollectService {
 
     @Autowired
@@ -27,10 +29,16 @@ public class ProductCollectServiceImpl implements ProductCollectService {
 
     @Override
     public List<Collection2> listCollectionsByAngencyId(Long angencyId) {
-        Collection2 example = new Collection2();
-        example.setAngencyId(angencyId);
-        List<Collection2> results = genericDao.findByExample(example, Collection2.class);
-        return results;
+        try{
+            Collection2 example = new Collection2();
+            example.setAngencyId(angencyId);
+            List<Collection2> results = genericDao.findByExample(example, Collection2.class);
+            return results;
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     @Override
