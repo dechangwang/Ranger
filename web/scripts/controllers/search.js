@@ -9,7 +9,7 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessi
         $scope.results = [];
 
         $scope.page={
-            "pageSize":10,"pageNo":2,"totalCount":9
+            "pageSize":10,"pageNo":1,"totalCount":9
         };
 
         $scope.setoff_location = {
@@ -25,6 +25,49 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessi
         // $scope.setoff_locations = [];
 
         $scope.basic_search_str = '';
+
+        // trafic
+        $scope.traffic_train = false;
+        $scope.traffic_plane = false;
+        $scope.traffic_ship = false;
+        $scope.traffic_bus = false;
+        $scope.traffic_other = false;
+
+
+        // date
+        $scope.setoff_year = false;
+        $scope.setoff_year_content = 2016;
+        $scope.setoff_month = false;
+        $scope.setoff_month_content = 1;
+        $scope.setoff_day = false;
+        $scope.setoff_day_content = 1;
+
+        $scope.process_traffic_setoff = function(){
+            if($scope.traffic_train){
+                $scope.search_condition.search_str += " 火车";
+            }
+            if($scope.traffic_plane){
+                $scope.search_condition.search_str += " 飞机";
+            }
+            if($scope.traffic_ship){
+                $scope.search_condition.search_str += " 轮船";
+            }
+            if($scope.traffic_bus){
+                $scope.search_condition.search_str += " 汽车";
+            }
+            if($scope.traffic_other){
+                $scope.search_condition.search_str += " 其他";
+            }
+            if($scope.setoff_year){
+                $scope.search_condition.search_str += " "+$scope.setoff_year_content+"年";
+            }
+            if($scope.setoff_month){
+                $scope.search_condition.search_str += " "+$scope.setoff_month_content+"月";
+            }
+            if($scope.setoff_day){
+                $scope.search_condition.search_str += " "+$scope.setoff_day_content+"日";
+            }
+        };
 
         $scope.search_condition = {
             'search_str': '',
@@ -72,6 +115,7 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessi
                 }
 
             }
+            $scope.process_traffic_setoff();
             // log search_condition
             console.log($scope.search_condition);
 
@@ -219,5 +263,11 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessi
             $scope.search();
         };
 
+        $scope.remove_destination = function(item){
+            var index = $scope.destinations.indexOf(item);
+            $scope.destinations.splice(index, 1);
+        };
+
         $scope.on_begin();
+
     }]);

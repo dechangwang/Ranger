@@ -1,70 +1,86 @@
 <div ng-controller="productDetailCtrl">
 <div class="basicDiv row">
-    <div class="col-md-1"></div>
-    <div class="col-md-1" style="border:1px pink solid;text-align: center;">
-        标签
-    </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-5" style="border: 1px pink solid;text-align: center;">
+
+
+    <div class="col-md-6 col-md-offset-3" style="border: 5px lightskyblue inset;text-align: center; font-size: large;">
         {{product.name}}
     </div>
 </div>
 
 <div class="basicDiv row">
-    <div class="col-md-1"></div>
-    <div class="col-md-3" >
-        <img  src="images/nav.jpg" width="100%">
-        <div class="row " style="margin-top: 10px;">
-            <div class="col-md-1">
-                <button><</button>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3">
-                <img src="images/nav.jpg" width="100%">
-            </div>
-            <div class="col-md-3">
-                <img src="images/nav.jpg" width="100%">
-            </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-1">
-                <button>></button>
+
+    <div class="col-md-3 col-md-offset-2 ">
+        <div class="row">
+            <div class="panel panel-default">
+                <ul>
+                    <li ng-repeat="">
+                        <img src="" alt="">
+                    </li>
+                </ul>
+
+                <img  src="images/nav.jpg" width="100%" class="img-responsive center-block img-thumbnail">
+
+                <div class="row " style="margin-top: 10px;">
+                    <div class="col-md-1">
+                        <button><</button>s
+                    </div>
+
+                    <div class="col-md-3 col-md-offset-1">
+                        <img src="images/nav.jpg" class="img-responsive">
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                        <img src="images/nav.jpg" class="img-responsive">
+                    </div>
+
+                    <div class="col-md-1 col-md-offset-2">
+                        <button>></button>
+                    </div>
+
+                </div>
             </div>
 
         </div>
+
+        <!--<div><button><</button><img src="images/nav.jpg" style="display: inline"> <img src="images/nav.jpg" style="display: inline"> <button>></button></div>-->
+
     </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-3" >
+    <div class="col-md-3 col-md-offset-2" >
         <div class="row">
             <!-- 这里需要动态绑定 -->
-            <div class="col-md-6" >目的地：<ul><li ng-repeat="destination in product.tripDestinations">{{destination.location.name}}</li></ul></div>
-            <div class="col-md-5" >交通：<ul ><li ng-repeat="traffic in product.tripTraffics">{{traffic.trafficType.type}}</li></ul></div>
-        </div>
-        <div class="row">
-            <div class="col-md-6" >价格：<ul >
-                <li ng-repeat="price in product.tripPrices">{{price.touristType.type}}:{{price.price}}</li></ul></div>
-            <div class="col-md-5" >天数:{{product.duration}}</div>
-        </div>
-        <div >
-            出发：
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    06/26出发 <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">06/26出发</a></li>
-                    <li><a href="#">06/27出发</a></li>
-                    <li><a href="#">06/28出发</a></li>
+            <div class="panel panel-default">
+                <div class="panel-heading">商品详情</div>
 
-                </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-danger"><span>目的地: </span><ul><li ng-repeat="destination in product.tripDestinations">{{destination.location.name}}</li></ul></li>
+                        <li  class="list-group-item list-group-item-success"><p>交通：</p>
+
+                                <ul style="clear: both;">
+                                    <li  ng-repeat="traffic in product.tripTraffics">{{traffic.trafficType.type}}
+                                    </li>
+                                </ul>
+                        </li>
+                        <li style="clear: both;" class="list-group-item list-group-item-info">价格：<ul ><li ng-repeat="price in product.tripPrices">{{price.touristType.type}}:{{price.price}}</li></ul></li>
+                        <li class="list-group-item list-group-item-warning">天数: <ul><li >{{product.duration}}</li></ul></li>
+                    </ul>
             </div>
         </div>
 
 
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4"><button type="button" class = "btn btn-primary" ng-click="get_product(1)">加入收藏</button></div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4"><button type="button" class = "btn btn-primary" ng-click="tocreate_orderform()">立即购买</button> </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        出发日期
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li ng-repeat="tripSetoff in product.tripSetoffs"><a href="">{{tripSetoff.tripSetoffDate|date : 'yyyy-MM-dd '}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-md-offset-2 col-sm-5"><button type="button" class = "btn btn-primary" ng-click="get_product(1)">加入收藏</button></div>
+
+            <div class="col-md-3 col-md-offset-1 col-sm-5 col-sm-offset-2"><button type="button" class = "btn btn-primary" ng-click="tocreate_orderform()">立即购买</button> </div>
         </div>
 
 
@@ -80,8 +96,8 @@
     <div class="col-md-1"></div>
     <div class="col-md-5">
         <ol class="breadcrumb">
-            <li class = "navLi"><a href="#tourMsg">行程信息</a></li>
-            <li class = "navLi"><a href="#payMsg">费用说明</a></li>
+            <li class = "navLi"><a href="#product_detail/{{product.id}}/#tourrMsg">行程信息</a></li>
+            <li class = "navLi"><a href="#product_detail/{{product.id}}/#payMsg">费用说明</a></li>
             <li class = "navLi"><a href="#visaMsg">签证信息</a></li>
             <li class = "navLi"><a href="#orderMsg">预定须知</a></li>
         </ol>
@@ -195,4 +211,7 @@
         document.getElementById('payByOneselfMsgPanel').style.display='none';
         document.getElementById(id).style.display='block';
     }
+
+
+
 </script>

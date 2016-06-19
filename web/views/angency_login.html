@@ -1,7 +1,25 @@
-<div>
-    <form name="loginForm" ng-submit="login(account)">
-        <input type="text" ng-model="account.username">
-        <input type="password" ng-model="account.password">
-        <button type="submit">登录</button>
+<!--<div>-->
+    <!--<form name="loginForm" ng-submit="login(account)">-->
+        <!--<input type="text" ng-model="account.username">-->
+        <!--<input type="password" ng-model="account.password">-->
+        <!--<button type="submit">登录</button>-->
+    <!--</form>-->
+<!--</div>-->
+
+<div class="container">
+
+    <form class="form-signin" ng-submit="login(account)">
+        <h2 class="form-signin-heading"></h2>
+        <label for="inputEmail" class="sr-only">邮箱</label>
+        <input type="email" id="inputEmail" class="form-control" ng-model="account.username" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">密码</label>
+        <input type="password" id="inputPassword" class="form-control" ng-model="account.password" placeholder="Password" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> 记住我
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
     </form>
-</div>
+
+</div> <!-- /container -->

@@ -24,7 +24,7 @@
 </nav>
 
 -->
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default" role="navigation" ng-controller="topBarCtrl">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -51,10 +51,10 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li ng-show="isLogout()">
                     <a href="#/home/login">登录</a>
                 </li>
-                <li>
+                <li ng-show="isLogon()">
                     <a ui-sref="home.order">订单</a>
                 </li>
                 <li>
@@ -89,6 +89,13 @@
                         </li>
                         <li>
                             <a ui-sref="home.guide">编辑导游信息</a>
+                        </li>
+                        <li ng-show="isLogon()">
+                            <a ui-sref="home.supplier_order">订单(供应商)</a>
+                        </li>
+
+                        <li ng-show="isLogon()">
+                            <a ng-click="logout()">退出登录</a>
                         </li>
 
 

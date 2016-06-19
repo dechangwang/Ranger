@@ -92,6 +92,8 @@ public class SearchProductServiceImpl implements SearchProductService {
 
     public Product2 getProductInfor(long productId) {
         Product2 product2 = genericDao.findById(productId, Product2.class);
+        product2.growClickRate();
+        genericDao.saveOrUpdate(product2);
         for(TripPicture2 tripPicture2:product2.getTripPictures()){
             String path = FilePathUtil.convert(tripPicture2.getPicturePath());
             tripPicture2.setPicturePath(path);
