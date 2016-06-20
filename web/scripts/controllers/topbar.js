@@ -23,6 +23,5 @@ rangerApp.controller("topBarCtrl", ["$scope", "$http", "$stateParams", "$window"
         $scope.isLogon = function(){
             return !$scope.isLogout();
         }
-
-
+        
     }]);
