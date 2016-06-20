@@ -1,26 +1,8 @@
 'use strict';
 
-rangerApp.controller('notificationCtrl', ['$scope', '$http', 'Angency', '$window',
-    function ($scope, $http, Angency, $window) {
+rangerApp.controller('notificationCtrl', ['$scope', '$http', 'Angency', '$window', '$state',
+    function ($scope, $http, Angency, $window, $state) {
 
-       /* var ceshi = {
-            orderId: 12,
-            amount: 250.00,
-            buyerId: 233,
-            payPass: 'lshsaji'
-        };
-        $http({
-            url: '/Ranger/api/trade/pay',
-            method: 'POST',
-            data: ceshi
-        }).then(function (response) {
-            console.log(response.data);
-            alert(response.data);
-        }, function (err) {
-            console.log(err.data);
-            alert(err.data);
-        });*/
-        //==========================
         $scope.pageNumber = function () {
             var angencyId = $window.sessionStorage.angencyId;
             var mUrl = '/Ranger/api/notification/pageNumber/'+angencyId+'?type='+$scope.type;
@@ -44,7 +26,9 @@ rangerApp.controller('notificationCtrl', ['$scope', '$http', 'Angency', '$window
         }).then(function (response) {
             $scope.notis = response.data;
         }, function (err) {
-            alert("获取失败  " + err);
+            if (typeof($window.sessionStorage.angencyId) == 'undefined') {
+                $state.go('home.login');
+            }
         });
         $scope.type = 'unread';
         $scope.pageNumber();
@@ -77,7 +61,9 @@ rangerApp.controller('notificationCtrl', ['$scope', '$http', 'Angency', '$window
             }).then(function (response) {
                 $scope.notis = response.data;
             }, function (err) {
-                alert("获取失败  " + err.data);
+                if (typeof($window.sessionStorage.angencyId) == 'undefined') {
+                    $state.go('home.login');
+                }
             });
         };
 
@@ -108,7 +94,9 @@ rangerApp.controller('notificationCtrl', ['$scope', '$http', 'Angency', '$window
                     $scope.maxPage = $scope.cPage;
                 }*/
             }, function (err) {
-                alert("获取失败  " + err.data);
+                if (typeof($window.sessionStorage.angencyId) == 'undefined') {
+                    $state.go('home.login');
+                }
             });
         };
 
@@ -120,11 +108,11 @@ rangerApp.controller('notificationCtrl', ['$scope', '$http', 'Angency', '$window
             }).then(function (response) {
                 var re = response.data;
             }, function (err) {
-                alert(err.data);
+                console.log(err.data);
             });
         };
 
-        $scope.unread = function (event) {
+        /*$scope.unread = function (event) {
             var x = event.currentTarget;
             var id = x.id;
             var children = $('#filter-container').children();
@@ -142,10 +130,10 @@ rangerApp.controller('notificationCtrl', ['$scope', '$http', 'Angency', '$window
                 method: 'GET'
             }).then(function (response) {
                 $scope.notis = response.data;
-                /*for (var i = 0; i < $scope.notis.length; i++) {
+                /!*for (var i = 0; i < $scope.notis.length; i++) {
                     var time = $scope.notis[i].generateTime;
                     $scope.notis[i].generateTime = new Date(time);
-                }*/
+                }*!/
             }, function (err) {
                 alert("获取失败  " + err.data);
             });
@@ -168,10 +156,10 @@ rangerApp.controller('notificationCtrl', ['$scope', '$http', 'Angency', '$window
                 method: 'GET'
             }).then(function (response) {
                 $scope.notis = response.data;
-                /*for (var i = 0; i < $scope.notis.length; i++) {
+                /!*for (var i = 0; i < $scope.notis.length; i++) {
                     var time = $scope.notis[i].generateTime;
                     $scope.notis[i].generateTime = new Date(time);
-                }*/
+                }*!/
             }, function (err) {
                 alert("获取失败  " + err.data);
             });
@@ -194,13 +182,13 @@ rangerApp.controller('notificationCtrl', ['$scope', '$http', 'Angency', '$window
                 method: 'GET'
             }).then(function (response) {
                 $scope.notis = response.data;
-                /*for (var i = 0; i < $scope.notis.length; i++) {
+                /!*for (var i = 0; i < $scope.notis.length; i++) {
                     var time = $scope.notis[i].generateTime;
                     $scope.notis[i].generateTime = new Date(time);
-                }*/
+                }*!/
             }, function (err) {
                 alert("获取失败  " + err.data);
             });
-        };
+        };*/
     }]);
 
