@@ -142,6 +142,18 @@ rangerApp.controller("orderDetailCtrl",["$scope","$http","$stateParams",function
             case 7:return '已取消';
         }
     };
+    $scope.isHasComment=function(statenum)
+    {
+        return statenum==6;
+    };
+    $scope.getTouristType=function(typeId)
+    {
+        switch(typeId){
+            case 1:return '成人';
+            case 2: return '儿童'
+        }
+
+    }
 
 }]);
 
