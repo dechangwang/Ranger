@@ -3,9 +3,7 @@
         <div class="panel-title">我的产品</div>
     </div>
     <div class="panel-body" ng-controller="myProductCtrl">
-        <!-- <ul>
-             <li ng-repeat="(name,date) in productList">{{name}},{{date}}</li>
-         </ul>-->
+
         <table class="table">
             <tr>
                 <th>产品编号</th>
@@ -16,36 +14,34 @@
                 <th>状态</th>
                 <th>操作</th>
             </tr>
-            <tr ng-repeat="product in productList">
+            <tr ng-repeat="product in productList|pagerFilter : page.pageNo : page.pageSize">
                 <td ng-bind="product.product_id"></td>
                 <td ng-bind="product.product_name"></td>
-                <td >
-                    <select name="" id="" >
+                <td>
+                    <select name="" id="">
                         <option value="" ng-repeat="date in product.setoff_time">{{date}}</option>
                     </select>
                 </td>
-<!--
-                <td ng-bind="product.setoff_time"></td>
--->
+                <!--
+                                <td ng-bind="product.setoff_time"></td>
+                -->
                 <td ng-bind="product.release_time"></td>
                 <td ng-bind="product.price"></td>
                 <td ng-bind="product.state"></td>
                 <td>
-                    <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="editProduct(product.product_id)" >编辑</button>
+                    <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="editProduct(product.product_id)">编辑
+                    </button>
                 </td>
             </tr>
 
         </table>
-        <!--<nav>
-            <ul class="pager">
-                <li><a href="#">Previous</a></li>
-                <li><a href="#">Next</a></li>
-            </ul>
-        </nav>-->
+
+        <div class="container center-block text-center">
+            <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" items-per-page="page.pageSize"
+                            class="samplePage pagination-sm" boundary-link-numbers="true">
+            </uib-pagination>
+        </div>
     </div>
-    <div class="container center-block text-center">
-        <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" max-size="page.pageSize"
-                        ng-change="pageChanged()" class="samplePage pagination-sm" boundary-link-numbers="true">
-        </uib-pagination>
-    </div>
+
+
 </div>

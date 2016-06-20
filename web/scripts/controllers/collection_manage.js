@@ -15,6 +15,7 @@ rangerApp.controller('collectionManageCtrl', ['$http', '$scope','$window','$stat
                 .success(function (data) {
                     $scope.collections = data;
                     console.log(data);
+                    $scope.page.totalCount = $scope.collections.length;
                 })
                 .error(function (err) {
                     alert(err);
@@ -30,6 +31,7 @@ rangerApp.controller('collectionManageCtrl', ['$http', '$scope','$window','$stat
                     alert("删除成功");
                     $scope.collection_delete_front($scope.select_collect);
                     $scope.select_collect = {};
+                    $scope.page.totalCount = $scope.collections.length;
                 })
                 .err(function(err){
                     alert(err);

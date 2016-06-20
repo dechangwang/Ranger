@@ -65,7 +65,7 @@ public class ProductsDaoImpl implements ProductsDao {
                 while(iterator1.hasNext()){
                     Object[] obj = (Object[]) iterator1.next();
                     myProduct.addSetOffTime(obj[0] + "");
-                    System.out.println(obj[0]+" ");
+                    //System.out.println(obj[0]+" ");
                 }
             } else {
                 hasAllData = false;

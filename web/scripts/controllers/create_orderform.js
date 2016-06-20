@@ -4,6 +4,7 @@ rangerApp.controller('createOrderformCtrl', ['$http', '$scope', '$stateParams', 
         var buyer_id = angency.id;
         if(buyer_id){
             $scope.setoff_id = parseInt($stateParams.setoff_id);
+            // $scope.create_result = false;
             $scope.booker = "";
             $scope.booker_phone = "";
             $scope.booker_address = "";
@@ -25,7 +26,17 @@ rangerApp.controller('createOrderformCtrl', ['$http', '$scope', '$stateParams', 
                     .error(function (err) {
                         alert(err);
                     });
-            }
+                
+            };
+            // $scope.increase_purchase_count = function(){
+            //     $http.post('/Ranger/api/createOrderform/increase_purchase_count', $scope.setoff_id)
+            //         .success(function (data) {
+            //             console.log(data);
+            //         })
+            //         .error(function(err){
+            //             alert(data);
+            //         });
+            // }
         }else{
             alert("请先登录");
             $state.go('home.login');

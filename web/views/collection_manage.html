@@ -13,7 +13,7 @@
                 <th>收藏时间</th>
                 <th>操作</th>
             </tr>
-            <tr ng-repeat="product_collection in collections">
+            <tr ng-repeat="product_collection in collections|pagerFilter : page.currentPage : page.pageSize">
                 <td ng-bind="product_collection.product.id"></td>
                 <td ng-bind="product_collection.product.name"></td>
                 <td ng-bind="product_collection.collectTime | date:'yyyy-MM-dd HH:mm:ss'"></td>
@@ -33,8 +33,8 @@
         </nav>-->
     </div>
     <div class="container center-block text-center">
-        <uib-pagination total-items="page.totalCount" ng-model="page.currentPage" max-size="page.pageSize"
-                        ng-change="" class="samplePage pagination-sm" boundary-link-numbers="true">
+        <uib-pagination total-items="page.totalCount" ng-model="page.currentPage" iterms-per-page="page.pageSize"
+                         class="samplePage pagination-sm" boundary-link-numbers="true">
         </uib-pagination>
     </div>
 </div>
