@@ -26,6 +26,8 @@ rangerApp.controller('productDetailCtrl', ['$scope', '$http', '$stateParams','$s
             'tripTraffics':[]
         };
 
+        $scope.setlect_setoff = {};
+
         $scope.get_product = function(product_id){
             console.log(product_id);
             $http.post('/Ranger/api/getproductdetail/id',product_id)

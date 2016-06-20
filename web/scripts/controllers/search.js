@@ -268,6 +268,14 @@ rangerApp.controller('searchCtrl', ['$scope', '$http', '$uibModal', 'searchSessi
             $scope.destinations.splice(index, 1);
         };
 
+        $scope.get_purchase_count = function(product){
+            var purchaseCount = 0;
+            for(var i = 0; i < product.tripSetoffs.length; i++){
+                purchaseCount += product.tripSetoffs[i].purchaseCount;
+            }
+            return purchaseCount;
+        };
+
         $scope.on_begin();
 
     }]);
