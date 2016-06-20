@@ -114,6 +114,7 @@ public class ProductsController {
             product.setTripTraffics(tripTrafficSet);
         }
 
+        product.setSearchContent(searchCon);
         //TripAccomodation
         Set<TripAccomodation> tripAccomodationSet = new HashSet<TripAccomodation>();
         TripAccomodation tripAccomodation = new TripAccomodation();
