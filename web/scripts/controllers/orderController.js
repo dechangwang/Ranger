@@ -170,6 +170,8 @@ rangerApp.controller("listOrderCtrl", ["$scope", "$http", "$stateParams", "$wind
                         return 'err';
                     });
             });
+
+
         };
 
         $scope.update_orderform_state = function (imagePath) {
@@ -184,6 +186,7 @@ rangerApp.controller("listOrderCtrl", ["$scope", "$http", "$stateParams", "$wind
                     console.log(data);
                     if (1 == data) {
                         $scope.up_reconfirm_order.state = 12;
+
                     }
                     // $scope.upload();
 
@@ -191,10 +194,30 @@ rangerApp.controller("listOrderCtrl", ["$scope", "$http", "$stateParams", "$wind
                 .error(function (err) {
                     alert(err);
                 });
+
         };
+        $scope.ordertoFinish={};
+        $scope.finishOrder=function(order)
+        {
+            $scope.ordertoFinish=order;
 
+            var orderid=$scope.ordertoFinish.id;
 
-        //$scope.orderlist=orderlist;
+            $http.get("/Ranger/api/trade/payToSeller/"+orderid)
+                .success(function(response){
+                alert(response.data);
+                    if(response.data=="success")
+                    $scope.ordertoFinish.state=5;
+                    else{
+                        alert(response.message);
+                    }
+                })
+                .error(function(err){
+                    alert("error happen!")
+                });
+
+        }
+
     }]);
 
 

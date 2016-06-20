@@ -48,15 +48,20 @@ public class OrderController {
     public Map<String,String> submitTourist(@PathVariable("oid") long oid,@RequestBody List<TouristForm> tourist)
     {
         Map<String,String> result=new HashMap<String, String>();
+        Boolean flag=true;
         for(int i=0;i<tourist.size();i++) {
             OrderformTourist tourist1 = new OrderformTourist(tourist.get(i));
             tourist1.setOrderformId(oid);
             //插入数据库
             if (orderService.addTourist(tourist1)) {
-                orderService.changeOrderState(oid);
                 result.put("result" + i, "success");
-            } else
-                result.put("result"+i, "fail");
+            } else {
+                result.put("result" + i, "fail");
+                flag=false;
+            }
+        }
+        if(flag){
+            orderService.changeOrderState(oid);
         }
         return result;
 

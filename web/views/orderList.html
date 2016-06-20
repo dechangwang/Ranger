@@ -115,23 +115,23 @@
                     </div>
                     <div>
                         <div>
-                            <a ng-show="{{order.orderform.state === 11}}" ng-click="upload_confirm(order.orderform)">上传确认单</a>
+                            <a ng-if="order.orderform.state === 11"  ng-click="upload_confirm(order.orderform)">上传确认单</a>
                         </div>
                         <div>
                             <a href="{{order.orderform.confirmListBuyer}}"
-                               ng-show="{{isForpay(order.orderform.state)||isForBack(order.orderform.state)}}">查看确认单</a>
+                               ng-if="isForpay(order.orderform.state)||isForBack(order.orderform.state)">查看确认单</a>
                         </div>
                         <div>
                             <a href="{{order.orderform.confirmListSupplier}}"
-                               ng-show="{{isForpay(order.orderform.state)}}">查看回执确认单</a>
+                               ng-if="isForpay(order.orderform.state)">查看回执确认单</a>
                         </div>
                         <div>
                             <a href="#home/pay/{{order.orderform.id}}"
                                ng-show="{{isForpay(order.orderform.state)}}">付款</a>
                         </div>
                     </div>
-                    <div><a href="api/trade/payToSeller/{{order.orderform.id}}"
-                            ng-show="{{isHasPaid(order.orderform.state)}}">完成订单</a></div>
+                    <div><a  ng-click="finishOrder(order.orderform)"
+                            ng-if="isHasPaid(order.orderform.state)">完成订单</a></div>
                 </td>
             </tr>
             </tbody>
