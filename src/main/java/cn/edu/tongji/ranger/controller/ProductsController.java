@@ -46,8 +46,10 @@ public class ProductsController {
         product.setSetoffLocation(productsInfo.getStartloc());
 
         Set<TripDestination> locations = new HashSet<TripDestination>();
+        String s = product.getSearchContent();
         if (productsInfo.getDestinations().size() > 0)
         for(Location location : productsInfo.getDestinations()){
+            s += " "+location.getName();
             TripDestination td = new TripDestination();
             td.setLocation(location);
             td.setBrief("");
@@ -55,6 +57,7 @@ public class ProductsController {
             locations.add(td);
         }
 
+        product.setSearchContent(s);
         //destination
         product.setTripDestinations(locations);
 
@@ -125,6 +128,7 @@ public class ProductsController {
         tripAccomodation.setProduct(product);
         tripAccomodationSet.add(tripAccomodation);
         product.setTripAccomodations(tripAccomodationSet);
+
 
         //TripPrice
         TouristType touristTypeAdult = productsService.findById(1L, TouristType.class);

@@ -1,55 +1,55 @@
 <style>
-    body {
-        font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-        color: #4f6b72;
-        background: #E6EAE9;
-    }
+    /*body {*/
+    /*font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;*/
+    /*color: #4f6b72;*/
+    /*background: #E6EAE9;*/
+    /*}*/
 
-    a {
-        color: #3057c7;
-    }
+    /*a {*/
+    /*color: #3057c7;*/
+    /*}*/
 
-    #detailTable {
-        width: 700px;
-        padding: 0;
-        margin: 0;
-    }
+    /*#detailTable {*/
+    /*width: 700px;*/
+    /*padding: 0;*/
+    /*margin: 0;*/
+    /*}*/
 
-    caption {
-        padding: 0 0 5px 0;
-        width: 700px;
-        font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-        text-align: right;
-    }
+    /*caption {*/
+    /*padding: 0 0 5px 0;*/
+    /*width: 700px;*/
+    /*font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;*/
+    /*text-align: right;*/
+    /*}*/
 
-    th {
-        font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-        color: #4f6b72;
-        border-right: 1px solid #C1DAD7;
-        border-bottom: 1px solid #C1DAD7;
-        border-top: 1px solid #C1DAD7;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        text-align: left;
-        padding: 6px 6px 6px 12px;
-        background: #CAE8EA /*url(images/bg_header.jpg)*/ no-repeat;
-    }
+    /*th {*/
+    /*font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;*/
+    /*color: #4f6b72;*/
+    /*border-right: 1px solid #C1DAD7;*/
+    /*border-bottom: 1px solid #C1DAD7;*/
+    /*border-top: 1px solid #C1DAD7;*/
+    /*letter-spacing: 2px;*/
+    /*text-transform: uppercase;*/
+    /*text-align: left;*/
+    /*padding: 6px 6px 6px 12px;*/
+    /*background: #CAE8EA !*url(images/bg_header.jpg)*! no-repeat;*/
+    /*}*/
 
-    th.nobg {
-        border-top: 0;
-        border-left: 0;
-        border-right: 1px solid #C1DAD7;
-        background: none;
-    }
+    /*th.nobg {*/
+    /*border-top: 0;*/
+    /*border-left: 0;*/
+    /*border-right: 1px solid #C1DAD7;*/
+    /*background: none;*/
+    /*}*/
 
-    td {
+    /*td {*/
 
-        border-right: 1px solid #C1DAD7;
-        border-bottom: 1px solid #C1DAD7;
-        background: #fff;
-        padding: 6px 6px 6px 12px;
-        color: #4f6b72;
-    }
+    /*border-right: 1px solid #C1DAD7;*/
+    /*border-bottom: 1px solid #C1DAD7;*/
+    /*background: #fff;*/
+    /*padding: 6px 6px 6px 12px;*/
+    /*color: #4f6b72;*/
+    /*}*/
 
     #payfail {
         color: #ff0000;
@@ -61,7 +61,7 @@
         font-weight: bold;
         border-radius: 5px;
         margin-bottom: 10px;
-        padding:0px 15px 15px 15px;
+        padding: 0px 15px 15px 15px;
         vertical-align: bottom;
     }
 
@@ -74,49 +74,73 @@
 <div>
     <!--需要支付的订单-->
     <div ng-show="orderdetails.orderform.state == 2">
+
         <!--订单详情-->
-        <div id="orderDetail">
-            <table id="detailTable">
-                <thead><tr>
+        <div id="orderDetail" >
+            <table id="detailTable" class="table">
+                <thead>
+                <tr>
                     <th>订单编号</th>
                     <th>产品名称</th>
                     <th>出团日期</th>
                     <th>出游人数</th>
                     <th>金额总计</th>
-                </tr></thead>
-                <tbody><tr>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
                     <td ng-bind="orderdetails.orderform.id"></td>
                     <td ng-bind="orderdetails.product.name"></td>
                     <td ng-bind="orderdetails.tripSetoff.tripSetoffDate | date:'yyyy-MM-dd'"></td>
                     <td ng-bind="orderdetails.tourists.length"></td>
                     <td ng-bind="orderdetails.price.total"></td>
-                </tr></tbody>
+                </tr>
+                </tbody>
             </table>
         </div>
         <br/>
-        <!--账户余额-->
-        <div id="balance">
-            <span>账户余额： </span>
-            <span ng-bind="angency.balance | number:2"></span>
+        <div class="container center-block text-center">
+            <h4><label><span class="label label-primary">账户余额</span></label>
+                <span ng-bind="angency.balance | number:2"></span></h4>
         </div>
-        <br/>
-        <!--输入密码-->
-        <div id="pay">
-            <form ng-submit="pay()">
-                <label>支付密码</label><input ng-model="payDetails.payPass" type="password" id="payPass" name="payPass">
-                <button type="submit">确认支付</button>
-            </form>
-        </div>
+
+        <form class="form-signin" ng-submit="pay()">
+
+
+            <label for="inputPassword" class="sr-only">密码</label>
+            <input type="password" id="inputPassword" class="form-control" ng-model="payDetails.payPass"
+                   placeholder="Password" required>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">支付</button>
+        </form>
+
+
+        <!--&lt;!&ndash;账户余额&ndash;&gt;-->
+        <!--<div id="balance">-->
+        <!--<span>账户余额： </span>-->
+        <!--<span ng-bind="angency.balance | number:2"></span>-->
+        <!--</div>-->
+        <!--<br/>-->
+        <!--&lt;!&ndash;输入密码&ndash;&gt;-->
+        <!--<div id="pay">-->
+        <!--<form ng-submit="pay()">-->
+        <!--<label>支付密码</label><input ng-model="payDetails.payPass" type="password" id="payPass" name="payPass">-->
+        <!--<button type="submit" >确认支付</button>-->
+        <!--</form>-->
+        <!--</div>-->
         <br/>
         <!--支付结果-->
+        <div class="container center-block text-center">
         <div id="payresult" style="display: none;">
             <div id="paysuccess" ng-show="payresult.result">
-                <span>支付成功, 将在<timer auto-start="false" interval="1000" countdown="3">{{countdown}}</timer>秒后跳转到订单详情页面</span>
+               <h4> <span>支付成功, 将在<timer auto-start="false" interval="1000"
+                                     countdown="3">{{countdown}}</timer>秒后跳转到订单详情页面</span></h4>
             </div>
             <div id="payfail" ng-show="!payresult.result">
-                <span>支付失败</span>
-                <span ng-bind="payresult.reason"></span>
+                <h4><span>支付失败</span>
+                <span ng-bind="payresult.reason"></span></h4>
             </div>
+        </div>
         </div>
     </div>
     <!--不需支付-->
