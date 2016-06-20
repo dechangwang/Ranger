@@ -3,6 +3,7 @@ package cn.edu.tongji.ranger.controller;
 import cn.edu.tongji.ranger.model.OrderListItem;
 import cn.edu.tongji.ranger.model.Orderform;
 import cn.edu.tongji.ranger.service.SupplierOrderformService;
+import cn.edu.tongji.ranger.utils.IdAndStrWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,5 +26,17 @@ public class SupplierOrderformController {
     @ResponseBody
     public List<OrderListItem> getOrderformsBySupplierId(@RequestBody long supplierId){
         return supplierOrderformService.getOrderformsBySupplierId(supplierId);
+    }
+
+    @RequestMapping(value = "/uploadconfirm", method = RequestMethod.POST)
+    @ResponseBody
+    public int uploadConfirm(@RequestBody IdAndStrWrapper idAndStrWrapper){
+        return supplierOrderformService.uploadConfirm(idAndStrWrapper);
+    }
+
+    @RequestMapping(value = "/uploadreconfirm", method = RequestMethod.POST)
+    @ResponseBody
+    public int uploadReConfirm(@RequestBody IdAndStrWrapper idAndStrWrapper){
+        return supplierOrderformService.uploadReConfirm(idAndStrWrapper);
     }
 }

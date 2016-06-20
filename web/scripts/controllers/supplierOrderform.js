@@ -3,10 +3,11 @@
  */
 'use strict';
 
-rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$window", "$state",
-    function ($scope, $http, $stateParams, $window, $state) {
+rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$window", "$state",'$uibModal',
+    function ($scope, $http, $stateParams, $window, $state,$uibModal) {
         // var type = $stateParams.type;
         $scope.supplier_id = $window.sessionStorage.angencyId;
+        $scope.reconfirm_path = '';
 
         $scope.state_to_filter = 0;
         $scope.set_state_to_filter = function (state) {
@@ -25,10 +26,8 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
             console.log($scope.orderlist);
         };
 
-        $scope.upload_reconfirm = function(){
-            alert("上传回执!");
-            // var
-        };
+        $scope.up_reconfirm_order = {};
+
         $scope.getState = function (statenum) {
             //$document.getElementById("state")
             switch (statenum) {
@@ -79,13 +78,73 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
             return state == 12;
         };
 
+        $scope.upload_reconfirm = function(order){
+            console.log("upload reconfirm");
+            $scope.up_reconfirm_order = order;
+            var modalInstance = $uibModal.open({
+                templateUrl: 'views/modal/uploadFile.html',
+                controller: 'uploadModalCtrl',
+                backdrop: 'static',
+                resolve: {
+                    data: function () {
+                        return null;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (data) {
+                var file = data;
+                //var file = $scope.myFile;
+                console.log('file is ');
+                console.dir(file);
+                var uploadUrl = "/Ranger/files/picUploadOrd";
+                var fd = new FormData();
+                fd.append('file', file);
+
+                $http.post(uploadUrl, fd, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                })
+                    .success(function (data) {
+                        $scope.reconfirm_path = data.path;
+                        console.log(data);
+                        console.log($scope.reconfirm_path);
+                        $scope.update_orderform_state($scope.reconfirm_path);
+                    })
+                    .error(function (err) {
+                        alert('err');
+                        return 'err';
+                    });
+            });
+        };
+
+        $scope.update_orderform_state = function (imagePath) {
+            console.log($scope.up_reconfirm_order);
+            var idAndWrapper = {
+                'id': $scope.up_reconfirm_order.id,
+                'content':imagePath
+            };
+
+            $http.post('/Ranger/api/supplierorderform/uploadreconfirm', idAndWrapper)
+                .success(function (data) {
+                    console.log(data);
+                    if(1==data){
+                        $scope.up_reconfirm_order.state = 2;
+                    }
+
+                })
+                .error(function(err){
+                    alert(err);
+                });
+        };
+
+
         if ($scope.supplier_id == null || $scope.supplier_id < 0) {
             alert("请先登录！");
             $state.go('home.login');
         } else {
             $scope.load_orderlist();
         }
-
 
         //$scope.orderlist=orderlist;
     }]);
@@ -94,7 +153,7 @@ rangerApp.controller('picUploadCtrl', ['$scope', '$http', '$window', '$state', '
 
     $scope.Imgpath = {
         path: ''
-    }
+    };
     $scope.showUploadFile = function () {
         var modalInstance = $uibModal.open({
             templateUrl: 'views/modal/uploadFile.html',
