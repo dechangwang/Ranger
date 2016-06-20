@@ -19,6 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by LiaoShanhe on 2016/6/7.
@@ -35,6 +39,16 @@ public class PayAndRefundServiceImpl implements PayAndRefundService {
 
     @Autowired
     private TransactionRecordService transactionRecordService;
+
+    private int payDelayDays = 7;
+
+    public int getPayDelayDays() {
+        return payDelayDays;
+    }
+
+    public void setPayDelayDays(int payDelayDays) {
+        this.payDelayDays = payDelayDays;
+    }
 
     public ReturnWrapper<String> payToSystem(PayDetails payDetails) {
         ReturnWrapper<String> returnWrapper = null;
@@ -88,12 +102,27 @@ public class PayAndRefundServiceImpl implements PayAndRefundService {
         record.setStatus(TransactionRecordServiceImpl.BUYER_PAY_TO_AGENT);
         transactionRecordService.create(record);
 
+        payDelay(payDetails.getOrderId());
+
         returnWrapper = new ReturnWrapper<>();
         returnWrapper.setStatus(ReturnStatusEnum.SUCCEED);
         returnWrapper.setCode(ReturnCodeEnum.No_Error);
         returnWrapper.setData("success");
         returnWrapper.setMessage("pay successfully");
         return returnWrapper;
+    }
+
+    public void payDelay(Long orderFormId) {
+        ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
+        long initialDelay = 0;
+        service.scheduleAtFixedRate(() -> {
+            TransactionRecord record = transactionRecordService.findByOrderFormId(orderFormId);
+            if (record.getStatus() != TransactionRecordServiceImpl.AGENT_PAY_TO_SELLER) {
+                payToSeller(orderFormId);
+            } else {
+                service.shutdown();
+            }
+        }, initialDelay, payDelayDays, TimeUnit.DAYS);
     }
 
     public ReturnWrapper<String> payToSeller(Long orderFormId) {
