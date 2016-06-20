@@ -130,6 +130,7 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
                     console.log(data);
                     if(1==data){
                         $scope.up_reconfirm_order.state = 2;
+                        $scope.up_reconfirm_order.confirmListSupplier=imagePath;
                     }
 
                 })

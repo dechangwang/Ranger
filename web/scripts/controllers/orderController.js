@@ -186,7 +186,7 @@ rangerApp.controller("listOrderCtrl", ["$scope", "$http", "$stateParams", "$wind
                     console.log(data);
                     if (1 == data) {
                         $scope.up_reconfirm_order.state = 12;
-
+                        $scope.up_reconfirm_order.confirmListBuyer=imagePath;
                     }
                     // $scope.upload();
 
