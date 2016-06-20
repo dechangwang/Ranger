@@ -205,7 +205,7 @@ rangerApp.controller("listOrderCtrl", ["$scope", "$http", "$stateParams", "$wind
 
             $http.get("/Ranger/api/trade/payToSeller/"+orderid)
                 .success(function(response){
-                alert(response.data);
+                //alert(response.data);
                     if(response.data=="success")
                     $scope.ordertoFinish.state=5;
                     else{

@@ -55,7 +55,7 @@ rangerApp.controller('payCtrl', ['$scope', '$http', '$window', '$stateParams', '
                     };
                     $timeout(function () {
                         $state.go('home.detail', {id: $scope.payDetails.orderId});
-                    }, 5000);
+                    }, 3000);
                     document.getElementById('paysuccess').getElementsByTagName('timer')[0].start();
                 } else {
                     switch (response.data.code) {

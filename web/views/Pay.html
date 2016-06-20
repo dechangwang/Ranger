@@ -111,7 +111,7 @@
         <!--支付结果-->
         <div id="payresult" style="display: none;">
             <div id="paysuccess" ng-show="payresult.result">
-                <span>支付成功, 将在<timer auto-start="false" interval="1000" countdown="5">{{countdown}}</timer>秒后跳转到订单详情页面</span>
+                <span>支付成功, 将在<timer auto-start="false" interval="1000" countdown="3">{{countdown}}</timer>秒后跳转到订单详情页面</span>
             </div>
             <div id="payfail" ng-show="!payresult.result">
                 <span>支付失败</span>

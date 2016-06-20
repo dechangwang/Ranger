@@ -126,7 +126,6 @@ public class PayAndRefundServiceImpl implements PayAndRefundService {
 
     public void payDelay(Long orderFormId) {
         ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
-        long initialDelay = 0;
         service.scheduleAtFixedRate(() -> {
             TransactionRecord record = transactionRecordService.findByOrderFormId(orderFormId);
             if (record.getStatus() != TransactionRecordServiceImpl.AGENT_PAY_TO_SELLER) {
@@ -134,7 +133,7 @@ public class PayAndRefundServiceImpl implements PayAndRefundService {
             } else {
                 service.shutdown();
             }
-        }, initialDelay, payDelayDays, TimeUnit.DAYS);
+        }, payDelayDays, payDelayDays, TimeUnit.DAYS);
     }
 
     public ReturnWrapper<String> payToSeller(Long orderFormId) {
