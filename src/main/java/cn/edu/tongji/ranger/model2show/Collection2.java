@@ -1,8 +1,12 @@
 package cn.edu.tongji.ranger.model2show;
 
 import cn.edu.tongji.ranger.model.Product3;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -40,6 +44,7 @@ public class Collection2 implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "product_id")
     public Product3 getProduct() {
         return product;
