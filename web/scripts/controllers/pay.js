@@ -1,7 +1,7 @@
 'use strict';
 
-rangerApp.controller('payCtrl', ['$scope', '$http', '$window', '$stateParams',
-    function ($scope, $http, $window, $stateParams) {
+rangerApp.controller('payCtrl', ['$scope', '$http', '$window', '$stateParams', '$state', '$timeout',
+    function ($scope, $http, $window, $stateParams, $state, $timeout) {
 
         $scope.payDetails = {
             orderId: -1,
@@ -47,26 +47,40 @@ rangerApp.controller('payCtrl', ['$scope', '$http', '$window', '$stateParams',
                 data: $scope.payDetails
             }).then(function (response) {
                 var returnWrapper = response.data;
+                console.log(returnWrapper);
                 if (returnWrapper.status == 'SUCCEED') {
                     $scope.payresult = {
-                        result: '成功',
+                        result: true,
                         reason: undefined
                     };
+                    $timeout(function () {
+                        $state.go('home.detail', {id: $scope.payDetails.orderId});
+                    }, 5000);
+                    document.getElementById('paysuccess').getElementsByTagName('timer')[0].start();
                 } else {
-                    if (response.data.code == 'CURRENT_PASSWORD_WRONG') {
-                        $scope.payresult = {
-                            result: '失败',
-                            reason: '密码错误'
-                        }
-                    } else {
-                        $scope.payresult = {
-                            result: '失败',
-                            reason: '余额不足'
-                        }
+                    switch (response.data.code) {
+                        case 'CURRENT_PASSWORD_WRONG':
+                            $scope.payresult = {
+                                result: false,
+                                reason: '密码错误'
+                            };
+                            break;
+                        case 'BALANCE_NOT_ENOUGH':
+                            $scope.payresult = {
+                                result: false,
+                                reason: '余额不足'
+                            };
+                            break;
+                        case 'DUPLICATED_OPERATION':
+                            $scope.payresult = {
+                                result: false,
+                                reason: '已付款'
+                            };
+                            break;
+                        default:
                     }
                 }
                 $('#payresult').show();
-                console.log(response.data);
             }, function (err) {
                 console.log(err.data);
             });

@@ -50,6 +50,25 @@
         padding: 6px 6px 6px 12px;
         color: #4f6b72;
     }
+
+    #payfail {
+        color: #ff0000;
+    }
+
+    #payresult {
+        align-content: center;
+        font-family: "Hiragino Sans GB", "Microsoft YaHei", STHeiti, SimSun, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
+        font-weight: bold;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        padding:0px 15px 15px 15px;
+        vertical-align: bottom;
+    }
+
+    timer {
+        color: #ff0000;
+    }
+
 </style>
 
 <div>
@@ -91,29 +110,17 @@
         <br/>
         <!--支付结果-->
         <div id="payresult" style="display: none;">
-            <span ng-bind="'支付' + payresult.result"></span>
-            <span ng-bind="payresult.reason" ng-show="!!payresult.reason"></span>
+            <div id="paysuccess" ng-show="payresult.result">
+                <span>支付成功, 将在<timer auto-start="false" interval="1000" countdown="5">{{countdown}}</timer>秒后跳转到订单详情页面</span>
+            </div>
+            <div id="payfail" ng-show="!payresult.result">
+                <span>支付失败</span>
+                <span ng-bind="payresult.reason"></span>
+            </div>
         </div>
     </div>
-
     <!--不需支付-->
     <div ng-show="orderdetails.orderform.state != 2">
         <div>当前订单不需要支付</div>
     </div>
-    <!--<span>
-        <div class="notification" ng-repeat="noti in notis">
-            <span>
-                <a ng-bind="noti.content" ng-click="setViewed(noti.id)" href="{{'#/home/orderDetail/' + noti.orderformId}}"></a>
-            </span>
-            <span>
-               {{noti.generateTime | date:'yyyy-MM-dd HH:mm'}}
-            </span>
-        </div>
-        <div id="pagefoot">
-            <span>当前页:{{cPage}}</span>
-            <button ng-click="changePage(cPage-1)" id="previous">上一页</button>
-            <button ng-click="changePage(cPage+1)" id="next">下一页</button>
-            <span>总页数：{{maxPage}}</span>
-        </div>
-    </span>-->
 </div>

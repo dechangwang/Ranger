@@ -60,6 +60,17 @@ public class PayAndRefundServiceImpl implements PayAndRefundService {
         double balance = angency.getBalance();
         String payPassWord = angency.getPassword();
 
+        //检查状态
+        if (orderform.getState() != OrderStateEnum.待付款.getValue()) {
+            returnWrapper = new ReturnWrapper<>();
+            returnWrapper.setStatus(ReturnStatusEnum.FAILED);
+            returnWrapper.setCode(ReturnCodeEnum.DUPLICATED_OPERATION);
+            returnWrapper.setData("fail");
+            returnWrapper.setMessage("order form does not need pay");
+            return returnWrapper;
+        }
+
+        //检查密码
         if (! payPassWord.equals(payDetails.getPayPass())) {
             returnWrapper = new ReturnWrapper<>();
             returnWrapper.setStatus(ReturnStatusEnum.FAILED);
@@ -69,6 +80,7 @@ public class PayAndRefundServiceImpl implements PayAndRefundService {
             return returnWrapper;
         }
 
+        //检查余额
         if (balance < payDetails.getAmount()) {
             returnWrapper = new ReturnWrapper<>();
             returnWrapper.setStatus(ReturnStatusEnum.FAILED);

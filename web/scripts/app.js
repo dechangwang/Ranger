@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var rangerApp = angular.module('rangerApp', ['ui.router', 'ngFileUpload','ngResource','ui.bootstrap']);
+var rangerApp = angular.module('rangerApp', ['ui.router', 'ngFileUpload', 'ngResource', 'ui.bootstrap', 'timer']);
 rangerApp.value('angency',{id: undefined});
 rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
@@ -20,9 +20,9 @@ rangerApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', f
                 
                 'main@home': {
 
-                            templateUrl:'views/homepage.html',
+                            templateUrl:'views/homepage.html'
 
-                    
+
                 }
             }
         })
