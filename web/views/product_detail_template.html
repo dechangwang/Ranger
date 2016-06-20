@@ -1,244 +1,227 @@
 <div ng-controller="productDetailCtrl">
-    <div class="basicDiv row">
+<div class="basicDiv row">
 
 
-        <div class="col-md-6 col-md-offset-3"
-             style="border: 5px lightskyblue inset;text-align: center; font-size: large;">
-            {{product.name}}
-        </div>
+    <div class="col-md-6 col-md-offset-3" style="border: 5px lightskyblue inset;text-align: center; font-size: large;">
+        {{product.name}}
     </div>
+</div>
 
-    <div class="basicDiv row">
+<div class="basicDiv row">
 
-        <div class="col-md-3 col-md-offset-2 col-xs-pull-0 col-md-pull-0">
-            <div class="row">
-                <div class="panel panel-default">
-                    <ul>
-                        <li ng-repeat="tripPic in tripPictures">
-                            <img src="{{tripPic.picturePath}}" alt="此处应有图片">
-                        </li>
-                    </ul>
+    <div class="col-md-3 col-md-offset-2 col-md-push-0 col-sm-3 col-sm-push-9 col-xs-3 col-xs-push-9 ">
+        <div class="row">
+            <div class="panel panel-default">
+                <ul>
+                    <li ng-repeat="tripPic in tripPictures">
+                        <img src="{{tripPic.picturePath}}" alt="此处应有图片">
+                    </li>
+                </ul>
 
-                    <img src="images/nav.jpg" width="100%" class="img-responsive center-block img-thumbnail">
+                <img  src="images/nav.jpg" width="100%" class="img-responsive center-block img-thumbnail">
 
-                    <div class="row " style="margin-top: 10px;">
-                        <div class="col-md-1">
-                            <button><</button>
-                            s
-                        </div>
-
-                        <div class="col-md-3 col-md-offset-1">
-                            <img src="images/nav.jpg" class="img-responsive">
-                        </div>
-                        <div class="col-md-3 col-md-offset-1">
-                            <img src="images/nav.jpg" class="img-responsive">
-                        </div>
-
-                        <div class="col-md-1 col-md-offset-2">
-                            <button>></button>
-                        </div>
-
+                <div class="row " style="margin-top: 10px;">
+                    <div class="col-md-1">
+                        <button><</button>s
                     </div>
-                </div>
 
+                    <div class="col-md-3 col-md-offset-1">
+                        <img src="images/nav.jpg" class="img-responsive">
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                        <img src="images/nav.jpg" class="img-responsive">
+                    </div>
+
+                    <div class="col-md-1 col-md-offset-2">
+                        <button>></button>
+                    </div>
+
+                </div>
             </div>
 
-            <!--<div><button><</button><img src="images/nav.jpg" style="display: inline"> <img src="images/nav.jpg" style="display: inline"> <button>></button></div>-->
-
         </div>
-        <div class="col-md-3 col-md-offset-2 col-xs-pull-1 col-md-pull-2">
-            <div class="row">
-                <!-- 这里需要动态绑定 -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">商品详情</div>
+
+        <!--<div><button><</button><img src="images/nav.jpg" style="display: inline"> <img src="images/nav.jpg" style="display: inline"> <button>></button></div>-->
+
+    </div>
+    <div class="col-md-3 col-md-offset-2 col-md-pull-0 col-sm-8 col-sm-pull-3 col-xs-8 col-xs-pull-3" >
+        <div class="row">
+            <!-- 这里需要动态绑定 -->
+            <div class="panel panel-default">
+                <div class="panel-heading">商品详情</div>
 
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-danger"><span>目的地: </span>
-                            <ul>
-                                <li ng-repeat="destination in product.tripDestinations">{{destination.location.name}}
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="list-group-item list-group-item-success"><p>交通：</p>
+                        <li class="list-group-item list-group-item-danger"><span>目的地: </span><ul><li ng-repeat="destination in product.tripDestinations">{{destination.location.name}}</li></ul></li>
+                        <li  class="list-group-item list-group-item-success"><p>交通：</p>
 
-                            <ul style="clear: both;">
-                                <li ng-repeat="traffic in product.tripTraffics">{{traffic.trafficType.type}}
-                                </li>
-                            </ul>
+                                <ul style="clear: both;">
+                                    <li  ng-repeat="traffic in product.tripTraffics">{{traffic.trafficType.type}}
+                                    </li>
+                                </ul>
                         </li>
-                        <li style="clear: both;" class="list-group-item list-group-item-info">价格：
-                            <ul>
-                                <li ng-repeat="price in product.tripPrices">{{price.touristType.type}}:{{price.price}}
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="list-group-item list-group-item-warning">天数:
-                            <ul>
-                                <li>{{product.duration}}</li>
-                            </ul>
-                        </li>
+                        <li style="clear: both;" class="list-group-item list-group-item-info">价格：<ul ><li ng-repeat="price in product.tripPrices">{{price.touristType.type}}:{{price.price}}</li></ul></li>
+                        <li class="list-group-item list-group-item-warning">天数: <ul><li >{{product.duration}}</li></ul></li>
                         <li class="list-group-item list-group-item-default">选择:
                             <ul>
                                 <li>{{selected_setoff.tripSetoffDate| date: 'yyyy-MM-dd'}}</li>
                             </ul>
                         </li>
                     </ul>
-                </div>
             </div>
-
-
-            <div class="row">
-                <div class="col-md-3 col-sm-12">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            出发日期
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li ng-repeat="tripSetoff in product.tripSetoffs"><a
-                                    ng-click="select_trip_setoff(tripSetoff)">{{tripSetoff.tripSetoffDate|date :
-                                'yyyy-MM-dd '}}</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-3 col-md-offset-2 col-sm-5">
-                    <button type="button" class="btn btn-primary" ng-click="to_collect()">加入收藏</button>
-                </div>
-
-                <div class="col-md-3 col-md-offset-1 col-sm-5 col-sm-offset-2">
-                    <button type="button" class="btn btn-primary" ng-click="tocreate_orderform()">立即购买</button>
-                </div>
-            </div>
-
-
         </div>
+
+
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        出发日期
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li ng-repeat="tripSetoff in product.tripSetoffs"><a ng-click="select_trip_setoff(tripSetoff)">{{tripSetoff.tripSetoffDate|date : 'yyyy-MM-dd '}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-md-offset-2 col-sm-5"><button type="button" class = "btn btn-primary" ng-click="to_collect()">加入收藏</button></div>
+
+            <div class="col-md-3 col-md-offset-1 col-sm-5 col-sm-offset-2"><button type="button" class = "btn btn-primary" ng-click="tocreate_orderform()">立即购买</button> </div>
+        </div>
+
+
     </div>
+</div>
+
+    <hr>
     <div class="container">
         <h4>商品简介</h4>
         <p>{{product.summary}}</p>
 
     </div>
 
-    <hr>
+
+
+<hr>
+<div class = "basicDiv row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+        <ol class="breadcrumb">
+            <li class = "navLi"><a href="#product_detail/{{product.id}}/#tourrMsg">行程信息</a></li>
+            <li class = "navLi"><a href="#product_detail/{{product.id}}/#payMsg">费用说明</a></li>
+            <li class = "navLi"><a href="#visaMsg">签证信息</a></li>
+            <li class = "navLi"><a href="#orderMsg">预定须知</a></li>
+        </ol>
+    </div>
+
+
+</div>
+<hr>
+<!-- 行程信息 -->
+<div class="basicDiv">
+
+    <div class="basicDiv" ><a name="tourMsg">行程信息</a></div>
+    <div class="basicDiv" >第一天</div>
     <div class="basicDiv row">
+        <div class="col-md-2"></div>
+        <div class="col-md-7">
+            <table style="border-color: pink;" border="2"  width=100%; height = "100px;">
+                <tr>
+                    <td>a</td>
+                </tr>
+                <tr>
+                    <td>a</td>
+                </tr>
+                <tr>
+                    <td>a</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="basicDiv row">
+        <div class="col-md-2"></div>
+        <div class="col-md-7">
+            <table style="border-color: pink;" border="2"  width=100%; height = "100px;">
+                <tr>
+                    <td>b</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="basicDiv row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <img src="images/nav.jpg" width="100%">
+        </div>
         <div class="col-md-1"></div>
-        <div class="col-md-5">
+        <div class="col-md-3">
+            <img src="images/nav.jpg"  width="100%">
+        </div>
+    </div>
+
+
+</div>
+<!-- 费用说明 -->
+<div class="basicDiv">
+    <div class="basicDiv"><a href="#" name = "payMsg">费用说明</a></div>
+    <div class = "basicDiv row">
+        <div class = "col-md-2"></div>
+        <div class = "col-md-6">
             <ol class="breadcrumb">
-                <li class="navLi"><a href="#product_detail/{{product.id}}/#tourrMsg">行程信息</a></li>
-                <li class="navLi"><a href="#product_detail/{{product.id}}/#payMsg">费用说明</a></li>
-                <li class="navLi"><a href="#visaMsg">签证信息</a></li>
-                <li class="navLi"><a href="#orderMsg">预定须知</a></li>
+                <li class = "navLi"><a id="basicPayMsg" onclick="changePanel('basicPayMsgPanel')">定金说明</a></li>
+                <li class = "navLi"><a id="payIncludeMsg" onclick="changePanel('payIncludeMsgPanel')">费用包含</a></li>
+                <li class = "navLi"><a id="payNotIncludeMsg" onclick="changePanel('payNotIncludeMsgPanel')">费用不包含</a></li>
+                <li class = "navLi"><a id="payByOneselfMsg" onclick="changePanel('payByOneselfMsgPanel')">自费</a></li>
             </ol>
-        </div>
 
-
-    </div>
-    <hr>
-    <!-- 行程信息 -->
-    <div class="basicDiv">
-
-        <div class="basicDiv"><a name="tourMsg">行程信息</a></div>
-        <div class="basicDiv">第一天</div>
-        <div class="basicDiv row">
-            <div class="col-md-2"></div>
-            <div class="col-md-7">
-                <table style="border-color: pink;" border="2" width=100%; height="100px;">
-                    <tr>
-                        <td>a</td>
-                    </tr>
-                    <tr>
-                        <td>a</td>
-                    </tr>
-                    <tr>
-                        <td>a</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="basicDiv row">
-            <div class="col-md-2"></div>
-            <div class="col-md-7">
-                <table style="border-color: pink;" border="2" width=100%; height="100px;">
-                    <tr>
-                        <td>b</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="basicDiv row">
-            <div class="col-md-2"></div>
-            <div class="col-md-3">
-                <img src="images/nav.jpg" width="100%">
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3">
-                <img src="images/nav.jpg" width="100%">
-            </div>
-        </div>
-
-
-    </div>
-    <!-- 费用说明 -->
-    <div class="basicDiv">
-        <div class="basicDiv"><a href="#" name="payMsg">费用说明</a></div>
-        <div class="basicDiv row">
-            <div class="col-md-2"></div>
-            <div class="col-md-6">
-                <ol class="breadcrumb">
-                    <li class="navLi"><a id="basicPayMsg" onclick="changePanel('basicPayMsgPanel')">定金说明</a></li>
-                    <li class="navLi"><a id="payIncludeMsg" onclick="changePanel('payIncludeMsgPanel')">费用包含</a></li>
-                    <li class="navLi"><a id="payNotIncludeMsg" onclick="changePanel('payNotIncludeMsgPanel')">费用不包含</a>
-                    </li>
-                    <li class="navLi"><a id="payByOneselfMsg" onclick="changePanel('payByOneselfMsgPanel')">自费</a></li>
-                </ol>
-
-            </div>
-        </div>
-        <div class="basicDiv row">
-            <div class="col-md-2"></div>
-            <div class="col-md-6">
-                <div id="basicPayMsgPanel">g</div>
-                <div id="payIncludeMsgPanel" style="display: none;">j</div>
-                <div id="payNotIncludeMsgPanel" style="display: none;">a</div>
-                <div id="payByOneselfMsgPanel" style="display: none;">b</div>
-                <div></div>
-            </div>
         </div>
     </div>
-    <!-- 签证信息 -->
-    <div class="basicDiv">
-        <div class="basicDiv"><a href="#" name="visaMsg">签证信息</a></div>
-        <div class="basicDiv row">
-            <div class="col-md-2"></div>
-            <div class="col-md-6">
-                预定须知
-            </div>
+    <div class="basicDiv row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+            <div id="basicPayMsgPanel">g</div>
+            <div id="payIncludeMsgPanel" style="display: none;">j</div>
+            <div id ="payNotIncludeMsgPanel" style="display: none;">a</div>
+            <div id ="payByOneselfMsgPanel" style="display: none;">b</div>
+            <div></div>
         </div>
     </div>
-
-    <!-- 预订须知 -->
-
-    <div class="basicDiv">
-        <div class="basicDiv"><a href="#" name="orderMsg">预订须知</a></div>
-        <div class="basicDiv row">
-            <div class="col-md-2"></div>
-            <div class="col-md-6">
-                预定须知
-            </div>
+</div>
+<!-- 签证信息 -->
+<div class="basicDiv">
+    <div class="basicDiv"><a href="#" name = "visaMsg">签证信息</a></div>
+    <div class="basicDiv row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+            预定须知
         </div>
     </div>
 </div>
 
+<!-- 预订须知 -->
+
+<div class="basicDiv">
+    <div class="basicDiv"><a href="#" name = "orderMsg">预订须知</a></div>
+    <div class="basicDiv row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+            预定须知
+        </div>
+    </div>
+</div>
+</div>
+
+
+
 
 <script type="text/javascript">
     function changePanel(id) {
-        document.getElementById('basicPayMsgPanel').style.display = 'none';
-        document.getElementById('payIncludeMsgPanel').style.display = 'none';
-        document.getElementById('payNotIncludeMsgPanel').style.display = 'none';
-        document.getElementById('payByOneselfMsgPanel').style.display = 'none';
-        document.getElementById(id).style.display = 'block';
+        document.getElementById('basicPayMsgPanel').style.display='none';
+        document.getElementById('payIncludeMsgPanel').style.display='none';
+        document.getElementById('payNotIncludeMsgPanel').style.display='none';
+        document.getElementById('payByOneselfMsgPanel').style.display='none';
+        document.getElementById(id).style.display='block';
     }
+
 
 
 </script>
