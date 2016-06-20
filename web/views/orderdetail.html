@@ -1,4 +1,9 @@
 <style>
+    body {
+        font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        color: #4f6b72;
+        background: #E6EAE9;
+    }
     #orderinfo{
         border: 1px solid black;
         margin-bottom: 10px;
@@ -11,6 +16,39 @@
     #multiInfo{
         border: 1px solid black;
         margin-bottom: 10px;
+    }
+    #comment{
+        border: 1px solid black;
+        margin-bottom: 10px;
+    }
+
+    th {
+        font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        color: #4f6b72;
+        border-right: 1px solid #C1DAD7;
+        border-bottom: 1px solid #C1DAD7;
+        border-top: 1px solid #C1DAD7;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: left;
+        padding: 6px 6px 6px 12px;
+        background: #fff
+    }
+
+    th.nobg {
+        border-top: 0;
+        border-left: 0;
+        border-right: 1px solid #C1DAD7;
+        background: none;
+    }
+
+    td {
+
+        border-right: 1px solid #C1DAD7;
+        border-bottom: 1px solid #C1DAD7;
+        background: #fff;
+        padding: 6px 6px 6px 12px;
+        color: #4f6b72;
     }
 </style>
 <div ng-controller="orderDetailCtrl">
@@ -36,9 +74,6 @@
         </div>
         </div>
 
-        <div>
-            出团通知书&合同
-        </div>
         <div>
             签证材料寄送地址
             <div>
@@ -85,7 +120,7 @@
         </div>
     </div>
     <div>
-        游客信息；
+        游客信息:
         <table>
             <thead>
             <tr>
@@ -96,25 +131,33 @@
                 <th>证件号码</th>
                 <th>性别</th>
                 <th>出生日期</th>
-                <th>备注信息</th>
-                <th>状态</th>
+                <th>备注信息</th><!--
+                <th>状态</th>-->
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="tourist in orderdetail.tourists">
                 <td>{{tourist.name}}</td>
                 <td>{{tourist.phone}}</td>
-                <td>{{tourist.touristTypeId}}</td>
+                <td><span> {{getTouristType(tourist.touristTypeId
+                    )}}</span></td>
                 <td>{{tourist.certifateType}}</td>
                 <td>{{tourist.certifateNumber}}</td>
-                <td><span></span>{{tourist.gender}}</td>
+                <td>
+                    <span ng-show="tourist.gender">男</span>
+                    <span ng-show="!tourist.gender">女</span>
+                </td>
                 <td>{{tourist.birthDate|date: 'yyyy-MM-dd'}}</td>
-                <td>{{tourist.remark}}</td>
-                <td>{{tourist.state}}</td>
+                <td>{{tourist.remark}}</td><!--
+                <td>{{tourist.state}}</td>-->
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-
+<div id="comment" ng-show="isHasComment(orderdetail.orderform.state)">
+    <h1>订单评价</h1>
+    <div>评价：{{orderdetail.orderform.comment}}</div>
+    <div>评分：{{orderdetail.orderform.remark}}</div>
+</div>
 </div>

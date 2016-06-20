@@ -37,11 +37,12 @@ public class OrderServiceImpl implements OrderService{
 
     private List<OrderListItem> allorder= new ArrayList<OrderListItem>();
 
-    public boolean comment(long oid,String content)
+    public boolean comment(long oid,CommentForm comment)
     {
 
       Orderform order= orderformDao.findByOrderId(oid);
-        order.setComment(content);
+        order.setComment(comment.getContent());
+        order.setRemark(comment.getRemark());
         return orderformDao.updateOrder(order);
 
     }

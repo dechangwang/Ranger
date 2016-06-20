@@ -34,7 +34,7 @@ public class OrderController {
     public Map<String,String> comment(@PathVariable("oid") long oid,@RequestBody CommentForm commentForm)
     {
         Map<String,String> result=new HashMap<String, String>();
-        if(orderService.comment(oid,commentForm.getContent()))
+        if(orderService.comment(oid,commentForm))
         { orderService.changeOrderState(oid);
             result.put("result","success");}
         else

@@ -1,9 +1,6 @@
 package cn.edu.tongji.ranger.service;
 
-import cn.edu.tongji.ranger.model.OrderDetail;
-import cn.edu.tongji.ranger.model.OrderListItem;
-import cn.edu.tongji.ranger.model.Orderform;
-import cn.edu.tongji.ranger.model.OrderformTourist;
+import cn.edu.tongji.ranger.model.*;
 
 import java.util.List;
 
@@ -23,7 +20,7 @@ public interface OrderService {
     public OrderDetail getOrderDetail(long orderId);
     public boolean addTourist(OrderformTourist tourist);
     public boolean changeOrderState(long orderid);
-    public boolean comment(long orderid,String content);
+    public boolean comment(long orderid,CommentForm comment);
 
     public Long findSupplierId(Long orderId);
     public boolean updateOrderForm(Orderform orderform);

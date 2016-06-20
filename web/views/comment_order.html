@@ -1,8 +1,43 @@
+<style>
+    .radiobutton{
+        display: inline-block;
+    }
+</style>
 <div ng-controller="commentCtrl">
-    <div>
-        {{orderdetail.product.searchContent}}
-    </div>
+
     <form ng-if="!hasComment">
+        <div>
+        <label>评分</label>
+        <div  class="radiobutton">
+            <label>
+                <input type="radio" ng-model="remark" value="1">
+                1
+            </label>
+        </div>
+        <div class="radiobutton">
+            <label>
+            <input type="radio" ng-model="remark" value="2">
+            2
+        </label></div>
+        <div class="radiobutton">
+            <label>
+                <input type="radio" ng-model="remark" value="3">
+                3
+            </label>
+        </div>
+        <div class="radiobutton">
+            <label>
+                <input type="radio" ng-model="remark" value="4">
+                4
+            </label>
+        </div>
+        <div class="radiobutton">
+            <label>
+                <input type="radio" ng-model="remark" value="5">
+                5
+            </label>
+        </div>
+        </div>
         <label>评价内容：<textarea id="content" class="text" cols="20" rows ="5" name="content"></textarea></label>
         <input type="submit" ng-click="submit()">
     </form>

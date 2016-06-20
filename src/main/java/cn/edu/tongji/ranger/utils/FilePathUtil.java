@@ -62,7 +62,7 @@ public class FilePathUtil {
             replaceStr = "\\\\";
         }
 
-        resultPath = originPath.replaceAll("\\\\{1,2}|/", replaceStr);
+        resultPath = originPath.replaceAll("\\\\{1,2}|/", "/");
         return resultPath;
     }
 

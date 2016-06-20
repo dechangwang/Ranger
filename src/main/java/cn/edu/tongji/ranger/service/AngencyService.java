@@ -15,4 +15,6 @@ public interface AngencyService extends BaseService<Angency> {
     public Angency findByPhone(String phone);
 
     public Angency findByEmail(String email);
+
+    public Angency getSystemAccoount();
 }
