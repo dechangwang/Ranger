@@ -5,7 +5,9 @@ public enum ReturnCodeEnum {
     Unknown_Error("Unknown Error", 1),
     SESSION_NOT_EXIST("Session not exist", 2),
     CURRENT_PASSWORD_WRONG("Current password wrong", 3),
-    BALANCE_NOT_ENOUGH("Balance not enough", 4);
+    BALANCE_NOT_ENOUGH("Balance not enough", 4),
+    DUPLICATED_OPERATION("duplicated operation", 5),
+    RESOURCE_NOT_EXIST("resource not exist", 6);
 
     private String content;
     private Integer code;

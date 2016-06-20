@@ -49,4 +49,8 @@ public class AngencyServiceImpl implements AngencyService {
     public Angency findByEmail(String email) {
         return angencyDao.findByEmail(email);
     }
+
+    public Angency getSystemAccoount() {
+        return angencyDao.findById(0);
+    }
 }

@@ -5,15 +5,15 @@ import cn.edu.tongji.ranger.model.Guide;
 import cn.edu.tongji.ranger.model.GuideInfo;
 import cn.edu.tongji.ranger.service.AngencyService;
 import cn.edu.tongji.ranger.service.GuideService;
-import com.sun.xml.internal.ws.encoding.HasEncoding;
+import cn.edu.tongji.ranger.utils.ReturnCodeEnum;
+import cn.edu.tongji.ranger.utils.ReturnStatusEnum;
+import cn.edu.tongji.ranger.utils.ReturnWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartFile;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,6 +34,28 @@ public class RegisterController {
     @Autowired
     private GuideService guideService;
 
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnWrapper<Long> loginAngencyId() {
+        ReturnWrapper<Long> returnWrapper;
+        Angency angency = (Angency) getSession().getAttribute("angency");
+        if (angency == null) {
+            returnWrapper = new ReturnWrapper<>();
+            returnWrapper.setStatus(ReturnStatusEnum.FAILED);
+            returnWrapper.setCode(ReturnCodeEnum.SESSION_NOT_EXIST);
+            returnWrapper.setData(null);
+            returnWrapper.setMessage("not login");
+            return returnWrapper;
+        } else {
+            returnWrapper = new ReturnWrapper<>();
+            returnWrapper.setStatus(ReturnStatusEnum.SUCCEED);
+            returnWrapper.setCode(ReturnCodeEnum.No_Error);
+            returnWrapper.setData(angency.getId());
+            returnWrapper.setMessage("already login");
+            return returnWrapper;
+        }
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> login(
@@ -41,7 +63,7 @@ public class RegisterController {
 
         System.out.println("用户名" + username + "密码" + password);
 
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         Angency angency = null;
         angency = angencyService.findByPhone(username);
         if (angency != null) {

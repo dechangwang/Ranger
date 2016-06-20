@@ -11,4 +11,6 @@ public interface TransactionRecordService extends BaseService<TransactionRecord>
 
     public boolean changeRecordStatus(Long id, String status);
 
+    public TransactionRecord findByOrderFormId(Long orderFormId);
+
 }

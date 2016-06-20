@@ -51,4 +51,8 @@ public class TransactionRecordServiceImpl implements TransactionRecordService {
         update(transactionRecord);
         return true;
     }
+
+    public TransactionRecord findByOrderFormId(Long orderFormId) {
+        return transactionRecordDao.findByOrderFormId(orderFormId);
+    }
 }

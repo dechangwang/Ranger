@@ -6,4 +6,6 @@ public interface TransactionRecordDao extends BaseDao<TransactionRecord> {
 
     public TransactionRecord findById(Long id);
 
+    public TransactionRecord findByOrderFormId(Long orderFormId);
+
 }
