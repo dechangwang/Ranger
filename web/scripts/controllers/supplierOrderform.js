@@ -25,7 +25,10 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
             console.log($scope.orderlist);
         };
 
-
+        $scope.upload_reconfirm = function(){
+            alert("上传回执!");
+            // var
+        };
         $scope.getState = function (statenum) {
             //$document.getElementById("state")
             switch (statenum) {

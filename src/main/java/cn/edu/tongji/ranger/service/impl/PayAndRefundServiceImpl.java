@@ -36,7 +36,7 @@ public class PayAndRefundServiceImpl implements PayAndRefundService {
     @Autowired
     private TransactionRecordService transactionRecordService;
 
-    public ReturnWrapper<String> pay(PayDetails payDetails) {
+    public ReturnWrapper<String> payToSystem(PayDetails payDetails) {
         ReturnWrapper<String> returnWrapper = null;
 
         OrderDetail orderDetail = orderService.getOrderDetail(payDetails.getOrderId());
@@ -64,9 +64,13 @@ public class PayAndRefundServiceImpl implements PayAndRefundService {
             return returnWrapper;
         }
 
-        //更新angency余额
+        //更新angency余额(angency余额 减少)
         angency.setBalance(balance - payDetails.getAmount());
         angencyService.update(angency);
+
+        //转账到系统中间账户(system余额 增加)
+        Angency systemAngency = angencyService.getSystemAccoount();
+        systemAngency.setBalance(systemAngency.getBalance() + payDetails.getAmount());
 
         //更新订单状态
         orderform.setState(OrderStateEnum.已付款.getValue());
@@ -90,5 +94,59 @@ public class PayAndRefundServiceImpl implements PayAndRefundService {
         returnWrapper.setData("success");
         returnWrapper.setMessage("pay successfully");
         return returnWrapper;
+    }
+
+    public ReturnWrapper<String> payToSeller(Long orderFormId) {
+        ReturnWrapper<String> returnWrapper;
+        TransactionRecord record = transactionRecordService.findByOrderFormId(orderFormId);
+        if (record == null) {
+            returnWrapper = new ReturnWrapper<>();
+            returnWrapper.setStatus(ReturnStatusEnum.FAILED);
+            returnWrapper.setCode(ReturnCodeEnum.RESOURCE_NOT_EXIST);
+            returnWrapper.setData("fail");
+            returnWrapper.setMessage("order has no payment record");
+            return returnWrapper;
+        }
+        //先检查是否已经是 AGENT_PAY_TO_SELLER 状态
+        if (record.getStatus() == TransactionRecordServiceImpl.AGENT_PAY_TO_SELLER) {
+            returnWrapper = new ReturnWrapper<>();
+            returnWrapper.setStatus(ReturnStatusEnum.FAILED);
+            returnWrapper.setCode(ReturnCodeEnum.DUPLICATED_OPERATION);
+            returnWrapper.setData("fail");
+            returnWrapper.setMessage("fund has been transferred to seller");
+            return returnWrapper;
+        }
+
+        double totalPrice = orderService.getOrderDetail(orderFormId).getPrice().getTotal();
+        Long supplierId = record.getToId();
+        //从系统中间账户转出
+        Angency system = angencyService.getSystemAccoount();
+        system.setBalance(system.getBalance() - totalPrice);
+        //转入到卖家账户
+        Angency seller = angencyService.findById(supplierId);
+        seller.setBalance(seller.getBalance() + totalPrice);
+        //更新交易记录状态为 AGENT_PAY_TO_SELLER
+        if (transactionRecordService.changeRecordStatus(record.getId(), "AGENT_PAY_TO_SELLER")) {
+            //更新成功
+            //更改订单状态
+            Orderform orderform = orderService.getOrderDetail(orderFormId).getOrderform();
+            orderform.setState(OrderStateEnum.已完成.getValue());
+            orderService.updateOrderForm(orderform);
+            //返回成功
+            returnWrapper = new ReturnWrapper<>();
+            returnWrapper.setStatus(ReturnStatusEnum.SUCCEED);
+            returnWrapper.setCode(ReturnCodeEnum.No_Error);
+            returnWrapper.setData("success");
+            returnWrapper.setMessage("transfer to seller successfully");
+            return returnWrapper;
+        } else {
+            //更新失败
+            returnWrapper = new ReturnWrapper<>();
+            returnWrapper.setStatus(ReturnStatusEnum.FAILED);
+            returnWrapper.setCode(ReturnCodeEnum.Unknown_Error);
+            returnWrapper.setData("fail");
+            returnWrapper.setMessage("fail to transfer to seller");
+            return returnWrapper;
+        }
     }
 }

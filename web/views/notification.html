@@ -1,8 +1,70 @@
-<!--<script type="text/css">
-    .filter-item {
-        cursor:pointer
+<style>
+    body {
+        font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        color: #4f6b72;
+        background: #E6EAE9;
     }
-</script>-->
+
+    a {
+        color: #3057c7;
+    }
+
+    #notitable {
+        width: 700px;
+        padding: 0;
+        margin: 0;
+    }
+
+    caption {
+        padding: 0 0 5px 0;
+        width: 700px;
+        font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        text-align: right;
+    }
+
+    th {
+        font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        color: #4f6b72;
+        border-right: 1px solid #C1DAD7;
+        border-bottom: 1px solid #C1DAD7;
+        border-top: 1px solid #C1DAD7;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: left;
+        padding: 6px 6px 6px 12px;
+        background: #CAE8EA /*url(images/bg_header.jpg)*/ no-repeat;
+    }
+
+    th.nobg {
+        border-top: 0;
+        border-left: 0;
+        border-right: 1px solid #C1DAD7;
+        background: none;
+    }
+
+    td {
+
+        border-right: 1px solid #C1DAD7;
+        border-bottom: 1px solid #C1DAD7;
+        background: #fff;
+        padding: 6px 6px 6px 12px;
+        color: #4f6b72;
+    }
+    #filter-container {
+        list-style-type: none;
+        padding: 0;
+        border: 1px solid #ddd;
+    }
+
+    /*#leftbox li {
+        padding: 8px 16px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #leftbox li:last-child {
+        border-bottom: none
+    }*/
+</style>
 
 <div>
     <span id="filter-container">
@@ -11,12 +73,21 @@
         <button ng-click="changeType($event)" id="all" class="filter-item">全部消息</button>
     </span>
     <span>
-        <div class="notification" ng-repeat="noti in notis">
-            <span>
-                <a ng-bind="noti.content" ng-click="setViewed(noti.id)" href="{{'#/home/orderDetail/' + noti.orderformId}}"></a>
-            </span>
-            <span ng-bind="noti.generateTime | date:'yyyy-MM-dd HH:mm'">
-            </span>
+        <div class="notification">
+            <table id="notitable">
+            <thead>
+            <tr>
+                <th>通知</th>
+                <th>时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="noti in notis">
+                <td><a ng-bind="noti.content" ng-click="setViewed(noti.id)" href="{{'#/home/orderDetail/' + noti.orderformId}}"></a></td>
+                <td ng-bind="noti.generateTime | date:'yyyy-MM-dd HH:mm'"></td>
+            </tr>
+            </tbody>
+        </table>
         </div>
         <div id="pagefoot">
             <span>当前页:{{cPage}}</span>
@@ -24,17 +95,5 @@
             <button ng-click="changePage(cPage+1)" id="next">下一页</button>
             <span>总页数：{{maxPage}}</span>
         </div>
-        <!--<table border="2">
-            <thead>
-            <tr>
-                <th>id</th>
-                <th>orderformId</th>
-                <th>content</th>
-                <th>generateTime</th>
-                <th>isViewed</th>
-                <th>receiverId</th>
-            </tr>
-            </thead>
-            </table>-->
     </span>
 </div>

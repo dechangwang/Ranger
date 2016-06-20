@@ -9,12 +9,12 @@
 
 <div class="basicDiv row">
 
-    <div class="col-md-3 col-md-offset-2 ">
+    <div class="col-md-3 col-md-offset-2 col-md-push-0 col-sm-3 col-sm-push-9 col-xs-3 col-xs-push-9 ">
         <div class="row">
             <div class="panel panel-default">
                 <ul>
-                    <li ng-repeat="">
-                        <img src="" alt="">
+                    <li ng-repeat="tripPic in tripPictures">
+                        <img src="{{tripPic.picturePath}}" alt="此处应有图片">
                     </li>
                 </ul>
 
@@ -44,7 +44,7 @@
         <!--<div><button><</button><img src="images/nav.jpg" style="display: inline"> <img src="images/nav.jpg" style="display: inline"> <button>></button></div>-->
 
     </div>
-    <div class="col-md-3 col-md-offset-2" >
+    <div class="col-md-3 col-md-offset-2 col-md-pull-0 col-sm-8 col-sm-pull-3 col-xs-8 col-xs-pull-3" >
         <div class="row">
             <!-- 这里需要动态绑定 -->
             <div class="panel panel-default">
@@ -61,6 +61,11 @@
                         </li>
                         <li style="clear: both;" class="list-group-item list-group-item-info">价格：<ul ><li ng-repeat="price in product.tripPrices">{{price.touristType.type}}:{{price.price}}</li></ul></li>
                         <li class="list-group-item list-group-item-warning">天数: <ul><li >{{product.duration}}</li></ul></li>
+                        <li class="list-group-item list-group-item-default">选择:
+                            <ul>
+                                <li>{{selected_setoff.tripSetoffDate| date: 'yyyy-MM-dd'}}</li>
+                            </ul>
+                        </li>
                     </ul>
             </div>
         </div>
@@ -74,11 +79,11 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li ng-repeat="tripSetoff in product.tripSetoffs"><a href="">{{tripSetoff.tripSetoffDate|date : 'yyyy-MM-dd '}}</a></li>
+                        <li ng-repeat="tripSetoff in product.tripSetoffs"><a ng-click="select_trip_setoff(tripSetoff)">{{tripSetoff.tripSetoffDate|date : 'yyyy-MM-dd '}}</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-3 col-md-offset-2 col-sm-5"><button type="button" class = "btn btn-primary" ng-click="get_product(1)">加入收藏</button></div>
+            <div class="col-md-3 col-md-offset-2 col-sm-5"><button type="button" class = "btn btn-primary" ng-click="to_collect()">加入收藏</button></div>
 
             <div class="col-md-3 col-md-offset-1 col-sm-5 col-sm-offset-2"><button type="button" class = "btn btn-primary" ng-click="tocreate_orderform()">立即购买</button> </div>
         </div>
@@ -87,7 +92,12 @@
     </div>
 </div>
 
+    <hr>
+    <div class="container">
+        <h4>商品简介</h4>
+        <p>{{product.summary}}</p>
 
+    </div>
 
 
 
