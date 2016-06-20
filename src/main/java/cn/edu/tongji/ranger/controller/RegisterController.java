@@ -34,6 +34,31 @@ public class RegisterController {
     @Autowired
     private GuideService guideService;
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnWrapper<String> logout() {
+        ReturnWrapper<String> returnWrapper;
+        try {
+            HttpSession httpSession = getSession();
+            if (httpSession != null) {
+                httpSession.removeAttribute("angency");
+            }
+        } catch (Exception e) {
+            returnWrapper = new ReturnWrapper<>();
+            returnWrapper.setStatus(ReturnStatusEnum.FAILED);
+            returnWrapper.setCode(ReturnCodeEnum.Unknown_Error);
+            returnWrapper.setData("fail");
+            returnWrapper.setMessage("logout failed");
+            return returnWrapper;
+        }
+        returnWrapper = new ReturnWrapper<>();
+        returnWrapper.setStatus(ReturnStatusEnum.SUCCEED);
+        returnWrapper.setCode(ReturnCodeEnum.No_Error);
+        returnWrapper.setData("success");
+        returnWrapper.setMessage("logout successfully");
+        return returnWrapper;
+    }
+
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     @ResponseBody
     public ReturnWrapper<Long> loginAngencyId() {

@@ -9,10 +9,18 @@ rangerApp.controller("topBarCtrl", ["$scope", "$http", "$stateParams", "$window"
             $window.sessionStorage.angencyId = -1;
             angency.id = -1;
             Angency.setAngencyId(-1);
-            console.log("退出登录");
+            $http({
+                url: '/Ranger/angency/logout',
+                method: 'GET'
+            }).then(function (response) {
+                console.log(response);
+                console.log("退出登录");
+            }, function (err) {
+                console.log(err);
+            });
             $state.reload();
         };
-
+        
         $scope.isLogout = function(){
             if(!$window.sessionStorage.angencyId || $window.sessionStorage.angencyId < 0){
                 return true;

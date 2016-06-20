@@ -2,8 +2,10 @@
  * Created by daidongyang on 5/16/16.
  */
 
-rangerApp.controller('productDetailCtrl', ['$scope', '$http', '$stateParams','$state','$window',
-    function($scope, $http, $stateParams, $state, $window){
+
+rangerApp.controller('productDetailCtrl', ['$scope', '$http', '$stateParams','$state','$window','$interval',
+    function($scope, $http, $stateParams, $state, $window,$interval){
+
 
         $scope.product = {
             'id':0,
@@ -97,8 +99,39 @@ rangerApp.controller('productDetailCtrl', ['$scope', '$http', '$stateParams','$s
             $scope.get_product(product_id);
 
         };
-        
+
+
+        var timeInterval = 2000;
+        var currentIndex = 0;
+        // setInterval($scope.changeImg,timeInterval);
+
+        console.log($scope.product);
+        var stop=$interval(function () {
+            if(currentIndex == $scope.product.tripPictures.length -1){
+                currentIndex = 0;
+            }
+            else{
+                // console.log(currentIndex);
+                currentIndex += 1;
+            }
+            console.log(currentIndex+"pic:");
+            console.log($scope.product.tripPictures[currentIndex].picturePath);
+            $scope.trafficImg =$scope.product.tripPictures[currentIndex].picturePath;
+        },timeInterval);
+        // $scope.changeImg=function (){
+        //
+        //
+        //     if(currentIndex == $scope.product.tripPictures.length -1){
+        //         currentIndex = 0;
+        //     }
+        //     else{
+        //         currentIndex += 1;
+        //     }
+        //     $scope.trafficImg =$scope.product.tripPictures[currentIndex].picturePath;
+        // }
+            
 
         $scope.on_begin();
+        console.log("lalalaala");
         console.log($scope.product);
     }]);

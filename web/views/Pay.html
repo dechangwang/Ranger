@@ -1,37 +1,102 @@
+<style>
+    body {
+        font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        color: #4f6b72;
+        background: #E6EAE9;
+    }
+
+    a {
+        color: #3057c7;
+    }
+
+    #detailTable {
+        width: 700px;
+        padding: 0;
+        margin: 0;
+    }
+
+    caption {
+        padding: 0 0 5px 0;
+        width: 700px;
+        font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        text-align: right;
+    }
+
+    th {
+        font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        color: #4f6b72;
+        border-right: 1px solid #C1DAD7;
+        border-bottom: 1px solid #C1DAD7;
+        border-top: 1px solid #C1DAD7;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: left;
+        padding: 6px 6px 6px 12px;
+        background: #CAE8EA /*url(images/bg_header.jpg)*/ no-repeat;
+    }
+
+    th.nobg {
+        border-top: 0;
+        border-left: 0;
+        border-right: 1px solid #C1DAD7;
+        background: none;
+    }
+
+    td {
+
+        border-right: 1px solid #C1DAD7;
+        border-bottom: 1px solid #C1DAD7;
+        background: #fff;
+        padding: 6px 6px 6px 12px;
+        color: #4f6b72;
+    }
+</style>
+
 <div>
+    <!--需要支付的订单-->
     <div ng-show="orderdetails.orderform.state == 2">
+        <!--订单详情-->
         <div id="orderDetail">
-            <table>
+            <table id="detailTable">
                 <thead><tr>
-                    <td align="center">订单编号</td>
-                    <td align="center">产品名称</td>
-                    <td align="center">出团日期</td>
-                    <td align="center">出游人数</td>
-                    <td align="center">金额总计</td>
+                    <th>订单编号</th>
+                    <th>产品名称</th>
+                    <th>出团日期</th>
+                    <th>出游人数</th>
+                    <th>金额总计</th>
                 </tr></thead>
                 <tbody><tr>
-                    <td ng-bind="orderdetails.orderform.id" align="center"></td>
-                    <td ng-bind="orderdetails.product.name" align="center"></td>
-                    <td ng-bind="orderdetails.tripSetoff.tripSetoffDate | date:'yyyy-MM-dd'" align="center"></td>
-                    <td ng-bind="orderdetails.tourists.length" align="center"></td>
-                    <td ng-bind="orderdetails.price.total" align="center"></td>
+                    <td ng-bind="orderdetails.orderform.id"></td>
+                    <td ng-bind="orderdetails.product.name"></td>
+                    <td ng-bind="orderdetails.tripSetoff.tripSetoffDate | date:'yyyy-MM-dd'"></td>
+                    <td ng-bind="orderdetails.tourists.length"></td>
+                    <td ng-bind="orderdetails.price.total"></td>
                 </tr></tbody>
             </table>
         </div>
+        <br/>
+        <!--账户余额-->
         <div id="balance">
+            <span>账户余额： </span>
             <span ng-bind="angency.balance | number:2"></span>
         </div>
+        <br/>
+        <!--输入密码-->
         <div id="pay">
             <form ng-submit="pay()">
                 <label>支付密码</label><input ng-model="payDetails.payPass" type="password" id="payPass" name="payPass">
                 <button type="submit">确认支付</button>
             </form>
         </div>
+        <br/>
+        <!--支付结果-->
         <div id="payresult" style="display: none;">
             <span ng-bind="'支付' + payresult.result"></span>
             <span ng-bind="payresult.reason" ng-show="!!payresult.reason"></span>
         </div>
     </div>
+
+    <!--不需支付-->
     <div ng-show="orderdetails.orderform.state != 2">
         <div>当前订单不需要支付</div>
     </div>
