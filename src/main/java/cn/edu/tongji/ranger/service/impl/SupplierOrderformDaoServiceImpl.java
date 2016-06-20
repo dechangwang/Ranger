@@ -88,6 +88,12 @@ public class SupplierOrderformDaoServiceImpl implements SupplierOrderformService
             Orderform orderform = genericDao.findById(id, Orderform.class);
             orderform.setState(12);
             orderform.setConfirmListBuyer(content);
+            OrderformTrack orderformTrack = new OrderformTrack();
+            orderformTrack.setOrderformId(orderform.getId());
+            String trackStr = "购买方上传了确认单";
+            orderformTrack.setTrackItem(trackStr);
+            orderformTrack.setUpdateTime(new Timestamp(new Date().getTime()));
+            genericDao.saveOrUpdate(orderformTrack);
             genericDao.saveOrUpdate(orderform);
             return 1;
         }catch(RuntimeException e){
@@ -103,6 +109,22 @@ public class SupplierOrderformDaoServiceImpl implements SupplierOrderformService
         try{
             Orderform orderform = genericDao.findById(id, Orderform.class);
             orderform.setState(2);
+            long buyerId = orderform.getBuyerId();
+            Timestamp updateTime = new Timestamp(new Date().getTime());
+            String notiStr = "id 为" + orderform.getId() +"的订单已经被供应商上传回执确认单";
+            Notification notification = new Notification();
+            notification.setReceiverId(buyerId);
+            notification.setOrderformId(orderform.getId());
+            notification.setContent(notiStr);
+            notification.setGenerateTime(updateTime);
+            byte isViewd = (byte)0;
+            notification.setIsViewed(isViewd);
+            genericDao.saveOrUpdate(notification);
+            OrderformTrack orderformTrack = new OrderformTrack();
+            orderformTrack.setUpdateTime(updateTime);
+            orderformTrack.setTrackItem("供应商上传了回执确认单");
+            orderformTrack.setOrderformId(orderform.getId());
+            genericDao.saveOrUpdate(orderformTrack);
             orderform.setConfirmListSupplier(content);
             genericDao.saveOrUpdate(orderform);
             return 1;
