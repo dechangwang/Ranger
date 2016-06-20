@@ -109,7 +109,7 @@
                     <!--<div> <a href="#home/addTourist/{{order.orderform.id}}" ng-show="{{isWaitConfirm(order.orderform.state)}}">提交游客信息</a>-->
                     <!--</div>-->
 
-                    <div><a ng-click="" ng-show="{{isReConfirm(order.orderform.state)}}">上传回执</a>
+                    <div><a ng-click="upload_reconfirm(order.orderform)" ng-show="{{isReConfirm(order.orderform.state)}}">上传回执</a>
                     </div>
                     <div><a ng-click="" ng-show="{{isConfirmed(order.orderform.state)}}">查看确认单</a></div>
                     <div><a ng-click="" ng-show="{{isReConfirmed(order.orderform.state)}}">查看回执</a></div>

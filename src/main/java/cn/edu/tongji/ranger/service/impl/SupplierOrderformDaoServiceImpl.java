@@ -7,6 +7,7 @@ import cn.edu.tongji.ranger.dao.TripPriceDao;
 import cn.edu.tongji.ranger.model.*;
 import cn.edu.tongji.ranger.model2show.TripSetoff2;
 import cn.edu.tongji.ranger.service.SupplierOrderformService;
+import cn.edu.tongji.ranger.utils.IdAndStrWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,6 +78,38 @@ public class SupplierOrderformDaoServiceImpl implements SupplierOrderformService
         });
 
         return orderListItems;
+    }
+
+    @Override
+    public int uploadConfirm(IdAndStrWrapper idAndStrWrapper) {
+        long id = idAndStrWrapper.getId();
+        String content = idAndStrWrapper.getContent();
+        try{
+            Orderform orderform = genericDao.findById(id, Orderform.class);
+            orderform.setState(12);
+            orderform.setConfirmListBuyer(content);
+            genericDao.saveOrUpdate(orderform);
+            return 1;
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public int uploadReConfirm(IdAndStrWrapper idAndStrWrapper) {
+        long id = idAndStrWrapper.getId();
+        String content = idAndStrWrapper.getContent();
+        try{
+            Orderform orderform = genericDao.findById(id, Orderform.class);
+            orderform.setState(2);
+            orderform.setConfirmListSupplier(content);
+            genericDao.saveOrUpdate(orderform);
+            return 1;
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     public List<OrderListItem> getOrderformsBySupplierId2(Long supplierId) {
