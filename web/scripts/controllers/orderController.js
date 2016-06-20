@@ -104,7 +104,15 @@ rangerApp.controller("listOrderCtrl",["$scope","$http","$stateParams","$window",
     $scope.isFinished=function(state){
         return state==5;
     };
-
+    $scope.isForpay=function(state){
+        return state==2;
+    };
+    $scope.isHasPaid=function(state){
+        return state==4;
+    };
+    $scope.isForBack=function(state){
+        return state==12;
+    };
 
     //$scope.orderlist=orderlist;
 }]);
@@ -294,8 +302,9 @@ rangerApp.controller("commentCtrl",["$scope","$http","$stateParams", function ($
 
      $scope.submit= function () {
 
+         $scope.remark=null;
          var content=document.getElementById("content").value;
-         var commentform={"content":content};
+         var commentform={"content":content,"remark":$scope.remark};
         $http.post("/Ranger/order/comment/"+orderid,commentform).then
         (
             function(response){

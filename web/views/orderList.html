@@ -72,8 +72,8 @@
         <ul id="leftbox">
             <li><a href="#/home/orderList/0">全部订单</a></li>
             <li><a href="#/home/orderList/1">待确认订单</a></li>
-            <li><a href="#/home/orderList/2">代付款订单</a></li>
-            <li><a href="#/home/orderList/3">已付订金订单</a></li>
+            <li><a href="#/home/orderList/2">待付款订单</a></li><!--
+            <li><a href="#/home/orderList/3">已付订金订单</a></li>-->
             <li><a href="#/home/orderList/4">已付款订单</a></li>
             <li><a href="#/home/orderList/5">已完成订单</a></li>
             <li><a href="#/home/orderList/6">已评价订单</a></li>
@@ -111,6 +111,18 @@
                 </div>
                 <div><a href="#home/comment/{{order.orderform.id}}" ng-show="{{isFinished(order.orderform.state)}}">评价</a>
                 </div>
+                <div>
+                    <div>
+                        <a href="{{order.orderform.confirmListBuyer}}" ng-show="{{isForpay(order.orderform.state)||isForBack(order.orderform.state)}}">查看确认单</a>
+                    </div>
+                    <div>
+                        <a href="{{order.orderform.confirmListSupplier}}" ng-show="{{isForpay(order.orderform.state)}}">查看回执确认单</a>
+                    </div>
+                    <div>
+                        <a href="#home/pay/{{order.orderform.id}}" ng-show="{{isForpay(order.orderform.state)}}">付款</a>
+                    </div>
+                     </div>
+                <div><a href="api/trade/payToSeller/{{order.orderform.id}}" ng-show="{{isHasPaid(order.orderform.state)}}">完成订单</a> </div>
             </td>
         </tr>
         </tbody>
