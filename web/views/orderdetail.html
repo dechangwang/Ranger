@@ -1,4 +1,9 @@
 <style>
+    body {
+        font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        color: #4f6b72;
+        background: #E6EAE9;
+    }
     #orderinfo{
         border: 1px solid black;
         margin-bottom: 10px;
@@ -9,6 +14,10 @@
         margin-bottom: 10px;
     }
     #multiInfo{
+        border: 1px solid black;
+        margin-bottom: 10px;
+    }
+    #comment{
         border: 1px solid black;
         margin-bottom: 10px;
     }
@@ -23,7 +32,7 @@
         text-transform: uppercase;
         text-align: left;
         padding: 6px 6px 6px 12px;
-        /*background: #CAE8EA *//*url(images/bg_header.jpg)*//* no-repeat;*/
+        background: #fff
     }
 
     th.nobg {
@@ -122,15 +131,16 @@
                 <th>证件号码</th>
                 <th>性别</th>
                 <th>出生日期</th>
-                <th>备注信息</th>
-                <th>状态</th>
+                <th>备注信息</th><!--
+                <th>状态</th>-->
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="tourist in orderdetail.tourists">
                 <td>{{tourist.name}}</td>
                 <td>{{tourist.phone}}</td>
-                <td>{{tourist.touristTypeId}}</td>
+                <td><span> {{getTouristType(tourist.touristTypeId
+                    )}}</span></td>
                 <td>{{tourist.certifateType}}</td>
                 <td>{{tourist.certifateNumber}}</td>
                 <td>
@@ -138,15 +148,15 @@
                     <span ng-show="!tourist.gender">女</span>
                 </td>
                 <td>{{tourist.birthDate|date: 'yyyy-MM-dd'}}</td>
-                <td>{{tourist.remark}}</td>
-                <td>{{tourist.state}}</td>
+                <td>{{tourist.remark}}</td><!--
+                <td>{{tourist.state}}</td>-->
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-<div>
-    <div>订单评价</div>
+<div id="comment" ng-show="isHasComment(orderdetail.orderform.state)">
+    <h1>订单评价</h1>
     <div>评价：{{orderdetail.orderform.comment}}</div>
     <div>评分：{{orderdetail.orderform.remark}}</div>
 </div>
