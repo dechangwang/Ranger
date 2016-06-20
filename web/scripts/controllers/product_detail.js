@@ -2,8 +2,8 @@
  * Created by daidongyang on 5/16/16.
  */
 
-rangerApp.controller('productDetailCtrl', ['$scope', '$http', '$stateParams','$state',
-    function($scope, $http, $stateParams, $state){
+rangerApp.controller('productDetailCtrl', ['$scope', '$http', '$stateParams','$state','$window',
+    function($scope, $http, $stateParams, $state, $window){
 
         $scope.product = {
             'id':0,
@@ -25,6 +25,7 @@ rangerApp.controller('productDetailCtrl', ['$scope', '$http', '$stateParams','$s
             'tripSetoffs':[],
             'tripTraffics':[]
         };
+
 
         $scope.selected_setoff = {};
 
@@ -62,7 +63,29 @@ rangerApp.controller('productDetailCtrl', ['$scope', '$http', '$stateParams','$s
         };
         $scope.to_collect = function(){
             console.log("to collect");
-            alert("收藏成功");
+            var angency_id = $window.sessionStorage.angencyId;
+            if(!angency_id || angency_id<0){
+                alert("没有登录,无法收藏!");
+                return;
+            }
+            var param = {
+                'product_id':$scope.product.id,
+                'angency_id': angency_id
+            };
+            $http.post('/Ranger/api/getproductdetail/collection',param)
+                .success(function(data){
+                    console.log(data);
+                    if(1 == data || '1' == data){
+                        alert("收藏成功");
+                    }else{
+                        alert("收藏失败,可能已收藏该产品");
+                    }
+                })
+                .error(function(err){
+                    console.log(err);
+                    alert(err);
+                });
+
         };
         $scope.select_trip_setoff = function(tripSetoff){
             $scope.selected_setoff = tripSetoff;

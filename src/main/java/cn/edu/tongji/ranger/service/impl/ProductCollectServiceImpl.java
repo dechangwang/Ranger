@@ -29,12 +29,12 @@ public class ProductCollectServiceImpl implements ProductCollectService {
 
     @Override
     public List<Collection2> listCollectionsByAngencyId(Long angencyId) {
-        try{
+        try {
             Collection2 example = new Collection2();
             example.setAngencyId(angencyId);
             List<Collection2> results = genericDao.findByExample(example, Collection2.class);
             return results;
-        }catch(RuntimeException e){
+        } catch (RuntimeException e) {
             e.printStackTrace();
             return null;
         }
@@ -56,15 +56,14 @@ public class ProductCollectServiceImpl implements ProductCollectService {
     public void createCollection(CollectionCreateParam collectionCreateParam) {
         long productId = collectionCreateParam.getProductId();
         long angencyId = collectionCreateParam.getAngencyId();
-        try{
-            Collection2 collection2 = new Collection2();
-            Product3 product = genericDao.findById(productId, Product3.class);
-            collection2.setProduct(product);
-            collection2.setAngencyId(angencyId);
-            collection2.setCollectTime(new Timestamp(new Date().getTime()));
-            genericDao.saveOrUpdate(collection2);
-        }catch(RuntimeException e){
-            e.printStackTrace();
-        }
+        
+        Collection2 collection2 = new Collection2();
+        Product3 product = genericDao.findById(productId, Product3.class);
+        collection2.setProduct(product);
+        collection2.setAngencyId(angencyId);
+        collection2.setCollectTime(new Timestamp(new Date().getTime()));
+        genericDao.saveOrUpdate(collection2);
+
+
     }
 }
