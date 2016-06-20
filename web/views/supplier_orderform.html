@@ -111,8 +111,8 @@
 
                     <div><a ng-click="upload_reconfirm(order.orderform)" ng-show="{{isReConfirm(order.orderform.state)}}">上传回执</a>
                     </div>
-                    <div><a ng-click="" ng-show="{{isConfirmed(order.orderform.state)}}">查看确认单</a></div>
-                    <div><a ng-click="" ng-show="{{isReConfirmed(order.orderform.state)}}">查看回执</a></div>
+                    <div><a href="{{order.orderform.confirmListBuyer}}" ng-show="{{isConfirmed(order.orderform.state)}}">查看确认单</a></div>
+                    <div><a href="{{order.orderform.confirmListSupplier}}" ng-show="{{isReConfirmed(order.orderform.state)}}">查看回执</a></div>
                 </td>
             </tr>
             </tbody>
