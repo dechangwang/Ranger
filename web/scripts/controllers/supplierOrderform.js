@@ -97,7 +97,7 @@ rangerApp.controller("supplierOrderCtrl", ["$scope", "$http", "$stateParams", "$
                 //var file = $scope.myFile;
                 console.log('file is ');
                 console.dir(file);
-                var uploadUrl = "/Ranger/files/picUploadOrd";
+                var uploadUrl = "/Ranger/files/docUploadOrd";
                 var fd = new FormData();
                 fd.append('file', file);
 

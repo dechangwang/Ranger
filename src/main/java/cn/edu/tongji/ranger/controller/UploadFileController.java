@@ -111,7 +111,25 @@ public class UploadFileController {
         try {
             byte[] bytes1 = file.getBytes();
             FileUtils.writeByteArrayToFile(new File(dir, file.getOriginalFilename()), bytes1);
-            String path = "images" + File.separator + file.getOriginalFilename();
+            String path = "images" + "/"+ file.getOriginalFilename();
+            map.put("path",path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/docUploadOrd")
+    @ResponseBody
+    public Map<String,String> docUploadFileOrd(@RequestParam("file")MultipartFile file,HttpServletRequest request){
+        Map<String,String> map = new HashMap<>();
+        String path1 = "/documents";
+        ServletContext sc = request.getSession().getServletContext();
+        dir = sc.getRealPath(path1);
+        try {
+            byte[] bytes1 = file.getBytes();
+            FileUtils.writeByteArrayToFile(new File(dir, file.getOriginalFilename()), bytes1);
+            String path = "documents" + "/" + file.getOriginalFilename();
             map.put("path",path);
         } catch (IOException e) {
             e.printStackTrace();
