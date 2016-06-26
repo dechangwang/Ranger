@@ -20,4 +20,4 @@ relativeImagePath = ...//从数据库里取出来的路径
 String imagePath = FilePathUtil.getInstance().getRealImagesPath(relativeImagePath);
 ```
 
-4. 如果数据库里直接存的是相对于web文件夹的路径,只调用FilePathUtil.convert()函数将路径中的文件分隔符转换为适合本机的即可。(由于目测数据库中存的都是images/XX),所以以上两条基本没什么用。
+4. 如果数据库里直接存的是相对于web文件夹的路径,调用FilePathUtil.convert()函数将路径中的文件分隔符转换为适合本机的即可。(由于目测数据库中存的都是images/XX),所以以上两条基本没什么用。
