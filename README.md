@@ -1,9 +1,8 @@
 # Ranger
 + AngularJs, Spring, Hibernate
 + B2B旅游网站
-<hr>
-<hr>
-订单状态：
+
+###订单状态：
 + 1 待确认（待提交游客信息）
 + 11 待提交确认单
 + 12 待回执确认单
@@ -14,7 +13,7 @@
 + 6 已评价
 + 7 已取消
 
-##FilePathUtil
+###FilePathUtil
 1. FilePathUtil.convert()函数可以将路径中的文件分隔符转换为适合本机的。
 2. resources目录下imageroot.cfg文件中的数据是所有图片的根目录(web目录下images下)
 3. 如果数据库里面存的是相对于该根目录的路径,调用getRealImagesPath()得到图片在web文件夹下的路径。
